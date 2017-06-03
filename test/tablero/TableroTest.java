@@ -11,7 +11,7 @@ public class TableroTest {
 	}
 
 	@Test
-	public void testAlCrearConsultoSiUnLugarEstaVacioDevuelveTrue() throws DimensionDeTableroInvalidoException, PosicionInvalidaException{
+	public void testAlCrearConsultoSiUnLugarEstaVacioDevuelveTrue() throws DimensionDeTableroInvalidoException{
 		Tablero tablero = new Tablero(10,10);
 		Posicion posicion = new Posicion(3,4);
 		Assert.assertTrue(tablero.estaVacioEn(posicion));	

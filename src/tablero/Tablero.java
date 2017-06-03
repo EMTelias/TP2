@@ -2,6 +2,8 @@ package tablero;
 
 import java.util.HashMap;
 
+import direccion.Direccion;
+import direccion.NoHayDireccionPosibleException;
 import personaje.Personaje;
 
 public class Tablero {
@@ -15,12 +17,9 @@ public class Tablero {
 				
 		for (int i=1; i<=dimensionX; i++){
 			for (int j=1; j<=dimensionY; j++){
-				try {
 					Posicion posicion = new Posicion(i,j);
-					Casillero casillero = new Casillero(posicion);
-					tablero.put(posicion, casillero); 				
-					
-				} catch (PosicionInvalidaException e){};	
+					Casillero casillero = new Casillero(posicion,this);
+					tablero.put(posicion, casillero); 					
 			}
 		}		
 	}
@@ -37,6 +36,18 @@ public class Tablero {
 
 	public Casillero getCasillero(Posicion posicion) {
 		return tablero.get(posicion);
+	}
+
+	public boolean caminoDespejadoDesdeHasta(Posicion posicionInicial, Posicion posicionFinal) throws NoHayDireccionPosibleException {
+		Direccion direccion = Direccion.getDireccion( posicionInicial,posicionFinal);
+		boolean caminoDespejado = true;
+		Posicion posicion = posicionInicial;
+		
+		while ( (caminoDespejado) && (!posicion.equals(posicionFinal))) {
+			posicion = posicion.siguientePosicionEnDireccion(direccion);
+			caminoDespejado = caminoDespejado && tablero.get(posicion).estaVacio();
+		}
+		return caminoDespejado;
 	}
 	
 	

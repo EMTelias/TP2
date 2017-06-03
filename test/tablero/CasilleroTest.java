@@ -10,14 +10,14 @@ import personaje.Personaje;
 public class CasilleroTest {
 
 	@Test
-	public void testAlCrearCasilleroEstaVacio() throws PosicionInvalidaException{
+	public void testAlCrearCasilleroEstaVacio(){
 		Posicion posicion = new Posicion(2,3);
 		Casillero casillero = new Casillero(posicion);
 		Assert.assertTrue(casillero.estaVacio());	
 	}
 
 	@Test
-	public void testAgregoUnPersonajeEstaVacioDevuelveFalse() throws PosicionInvalidaException, CasilleroOcupadoException{
+	public void testAgregoUnPersonajeEstaVacioDevuelveFalse() throws CasilleroOcupadoException{
 		Posicion posicion = new Posicion(2,3);
 		Casillero casillero = new Casillero(posicion);
 		Personaje goku = new Goku();
@@ -28,7 +28,7 @@ public class CasilleroTest {
 	}
 	
 	@Test(expected = CasilleroOcupadoException.class)
-	public void testQuieroAgregarDosPersonajesAlMismoCasilleroDevuelveCasilleroOcupadoException() throws PosicionInvalidaException, CasilleroOcupadoException{
+	public void testQuieroAgregarDosPersonajesAlMismoCasilleroDevuelveCasilleroOcupadoException() throws CasilleroOcupadoException{
 		Posicion posicion = new Posicion(2,3);
 		Casillero casillero = new Casillero(posicion);
 		Personaje goku = new Goku();

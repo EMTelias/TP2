@@ -1,5 +1,6 @@
 package personaje;
 
+import direccion.NoHayDireccionPosibleException;
 import estado.Estado;
 import tablero.Casillero;
 import tablero.CasilleroOcupadoException;
@@ -15,9 +16,11 @@ public abstract class Personaje {
 	}
 
 
-	public void moverA(Casillero casilleroDestino) throws NoPuedeMoverAEsaDistanciaException {
+	public void moverA(Casillero casilleroDestino) throws NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, NoHayDireccionPosibleException {
 		
 		if (casillero.distanciaHasta(casilleroDestino) > estado.getVelocidad() ) throw new NoPuedeMoverAEsaDistanciaException();
+		
+		if (!casillero.caminoDespejadoHasta(casilleroDestino)) throw new NoPuedeMoverCaminoObstruidoException();
 		
 		casillero.quitar();
 		try {

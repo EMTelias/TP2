@@ -1,14 +1,23 @@
 package tablero;
 
+import direccion.NoHayDireccionPosibleException;
 import personaje.Personaje;
 
 public class Casillero {
 
+	
 	private Personaje personaje;
 	private Posicion posicion;
+	private Tablero tablero;
 	
+	public Casillero(Posicion unaPosicion,Tablero unTablero) {
+		posicion = unaPosicion;
+		personaje = null;
+		tablero = unTablero;
+	}
 	
-	public Casillero(Posicion unaPosicion) {
+	//constructor para tests:
+	public Casillero(Posicion unaPosicion){
 		posicion = unaPosicion;
 		personaje = null;
 	}
@@ -29,6 +38,10 @@ public class Casillero {
 
 	public int distanciaHasta(Casillero otroCasillero) {
 		return posicion.distanciaHasta(otroCasillero.posicion);
+	}
+
+	public boolean caminoDespejadoHasta(Casillero otroCasillero) throws NoHayDireccionPosibleException {
+		return tablero.caminoDespejadoDesdeHasta(posicion, otroCasillero.posicion);
 	}
 
 }

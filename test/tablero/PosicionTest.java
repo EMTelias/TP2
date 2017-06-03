@@ -4,36 +4,32 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import tablero.Posicion;
-import tablero.PosicionInvalidaException;
 
 public class PosicionTest {
 
-	@Test(expected=PosicionInvalidaException.class)
-	public void testCreoPosicionConValorNegativoEnXDevuelvePosicionInvalidaException() throws PosicionInvalidaException{
-		new Posicion(-2,3);
-	}
-	
-	@Test(expected=PosicionInvalidaException.class)
-	public void testCreoPosicionConValorNegativoEnYDevuelvePosicionInvalidaException() throws PosicionInvalidaException{
-		new Posicion(3,-2);
+
+	public void testCreoPosicionDevuelveValoresXeYCorrectos(){
+		Posicion posicion = new Posicion(2,4);
+		Assert.assertEquals(posicion.getPosicionX(), 2);
+		Assert.assertEquals(posicion.getPosicionY(), 4);
 	}
 	
 	@Test
-	public void testComparoDosPosicionesIgualesLaComparacionDevuelveTrue() throws PosicionInvalidaException{
+	public void testComparoDosPosicionesIgualesLaComparacionDevuelveTrue(){
 		Posicion posicion1 = new Posicion(2,3);
 		Posicion posicion2 = new Posicion(2,3);
 		Assert.assertEquals(posicion1, posicion2);
 	}
 	
 	@Test
-	public void testComparoDosPosicionesDistintasLaComparacionDevuelveFalse() throws PosicionInvalidaException{
+	public void testComparoDosPosicionesDistintasLaComparacionDevuelveFalse(){
 		Posicion posicion1 = new Posicion(2,3);
 		Posicion posicion2 = new Posicion(4,5);
 		Assert.assertNotEquals(posicion1, posicion2);
 	}
 	
 	@Test
-	public void testVerificaDistancias() throws PosicionInvalidaException{
+	public void testVerificaDistancias(){
 		Posicion posicion11 = new Posicion(1,1);
 		Posicion posicion22 = new Posicion(2,2);
 		Posicion posicion33 = new Posicion(3,3);
