@@ -1,4 +1,4 @@
-package posicion;
+package tablero;
 
 public class PosicionInvalidaException extends Exception {
 
