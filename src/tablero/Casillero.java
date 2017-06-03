@@ -4,8 +4,8 @@ import personaje.Personaje;
 
 public class Casillero {
 
-	private Posicion posicion;
 	private Personaje personaje;
+	private Posicion posicion;
 	
 	
 	public Casillero(Posicion unaPosicion) {
@@ -14,13 +14,17 @@ public class Casillero {
 	}
 
 	public boolean estaVacio() {
-		return ( personaje==null );
+		return ( personaje == null );
 	}
 
 	public void colocar(Personaje unPersonaje) throws CasilleroOcupadoException {
 		if (personaje != null) throw new CasilleroOcupadoException();
 		personaje = unPersonaje;
-		
+		personaje.ubicarEn(this);
+	}
+
+	public void quitar() {
+		personaje = null;
 	}
 
 }

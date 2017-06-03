@@ -20,5 +20,11 @@ public class Posicion {
 		 else
 			 return false;
 	 } 
-	
+
+	 public int hashCode(){
+		 //para que funcione como clave en el hashMap
+			return ((posicionX*100)+posicionY);
+		}
+	 
+	 
 }
