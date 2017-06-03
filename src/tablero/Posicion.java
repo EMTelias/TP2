@@ -25,6 +25,11 @@ public class Posicion {
 		 //para que funcione como clave en el hashMap
 			return ((posicionX*100)+posicionY);
 		}
-	 
-	 
+
+	public int distanciaHasta(Posicion posicion) {
+		int distanciaEnX = Math.abs(posicionX - posicion.posicionX);
+		int distanciaEnY = Math.abs(posicionY - posicion.posicionY);
+		return (Math.max(distanciaEnX, distanciaEnY));
+	}
+	
 }

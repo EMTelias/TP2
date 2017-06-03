@@ -32,6 +32,17 @@ public class PosicionTest {
 		Assert.assertNotEquals(posicion1, posicion2);
 	}
 	
-	
+	@Test
+	public void testVerificaDistancias() throws PosicionInvalidaException{
+		Posicion posicion11 = new Posicion(1,1);
+		Posicion posicion22 = new Posicion(2,2);
+		Posicion posicion33 = new Posicion(3,3);
+		Posicion posicion17 = new Posicion(1,7);
+		
+		Assert.assertTrue( posicion11.distanciaHasta(posicion22) == 1);
+		Assert.assertTrue( posicion11.distanciaHasta(posicion33) == 2);	
+		Assert.assertTrue( posicion11.distanciaHasta(posicion17) == 6);	
+		
+	}
 	
 }
