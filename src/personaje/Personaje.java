@@ -15,14 +15,14 @@ public abstract class Personaje {
 	}
 
 
-	public void moverA(Casillero casilleroDestino) {
-		//int velocidad = estado.getVelocidad();
+	public void moverA(Casillero casilleroDestino) throws NoPuedeMoverAEsaDistanciaException {
+		
+		if (casillero.distanciaHasta(casilleroDestino) > estado.getVelocidad() ) throw new NoPuedeMoverAEsaDistanciaException();
+		
 		casillero.quitar();
 		try {
 			casilleroDestino.colocar(this);
 		} catch (CasilleroOcupadoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
 	}

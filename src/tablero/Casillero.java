@@ -27,4 +27,8 @@ public class Casillero {
 		personaje = null;
 	}
 
+	public int distanciaHasta(Casillero otroCasillero) {
+		return posicion.distanciaHasta(otroCasillero.posicion);
+	}
+
 }
