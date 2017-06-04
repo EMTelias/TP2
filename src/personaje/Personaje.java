@@ -35,7 +35,7 @@ public abstract class Personaje {
 			casilleroDestino.colocar(this);
 		} catch (CasilleroOcupadoException e) {
 		}
-		
+
 	}
 
 	public void transformar() throws NoPuedeCambiarDeEstadoKiInsuficienteException, EstadoNoTieneProximoException{

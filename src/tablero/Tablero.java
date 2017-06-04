@@ -7,6 +7,7 @@ import excepciones.tablero.DimensionDeTableroInvalidoException;
 import personaje.Personaje;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class Tablero {
 
@@ -52,6 +53,18 @@ public class Tablero {
 		return caminoDespejado;
 	}
 	
-	
-	
+	/* Agrego metodo para agregar los personajes al inicio de la partida */
+	public void initDePersonajes(List<Personaje> guerrerosZ, List<Personaje> enemigos) throws CasilleroOcupadoException {
+		int i = 1, j = 1;
+		for (Personaje personaje: guerrerosZ){
+			Posicion pos = new Posicion(i,1);
+			this.colocar(personaje,pos);
+			i++;
+		}
+		for (Personaje personaje: guerrerosZ){
+			Posicion pos = new Posicion(j,10);
+			this.colocar(personaje,pos);
+			j++;
+		}
+	}
 }
