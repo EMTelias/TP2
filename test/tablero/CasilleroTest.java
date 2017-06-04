@@ -1,8 +1,8 @@
 package tablero;
 
+import excepciones.tablero.CasilleroOcupadoException;
 import org.junit.Assert;
 import org.junit.Test;
-
 import personaje.Gohan;
 import personaje.Goku;
 import personaje.Personaje;

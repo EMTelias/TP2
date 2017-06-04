@@ -1,6 +1,8 @@
 package estado;
 
 
+import excepciones.estado.EstadoNoTieneProximoException;
+
 public interface Estado {
 
 	int getVelocidad();

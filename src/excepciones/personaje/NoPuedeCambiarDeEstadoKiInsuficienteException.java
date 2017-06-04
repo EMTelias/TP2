@@ -1,4 +1,4 @@
-package personaje;
+package excepciones.personaje;
 
 public class NoPuedeCambiarDeEstadoKiInsuficienteException extends Exception {
     /**

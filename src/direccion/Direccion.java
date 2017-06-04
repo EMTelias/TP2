@@ -1,5 +1,6 @@
 package direccion;
 
+import excepciones.direccion.NoHayDireccionPosibleException;
 import tablero.Posicion;
 
 public abstract class Direccion {
@@ -12,7 +13,7 @@ public abstract class Direccion {
 		direccionY = valorY;
 	}
 
-	public static Direccion getDireccion(Posicion posicionInicial, Posicion posicionFinal) throws NoHayDireccionPosibleException{
+	public static Direccion getDireccion(Posicion posicionInicial, Posicion posicionFinal) throws NoHayDireccionPosibleException {
 		
 		if (posicionInicial.equals(posicionFinal)) throw new NoHayDireccionPosibleException();
 		

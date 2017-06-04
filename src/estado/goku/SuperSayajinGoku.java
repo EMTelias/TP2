@@ -1,4 +1,7 @@
-package estado;
+package estado.goku;
+
+import estado.Estado;
+import excepciones.estado.EstadoNoTieneProximoException;
 
 public class SuperSayajinGoku implements EstadoGoku {
 	

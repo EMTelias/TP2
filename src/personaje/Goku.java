@@ -1,8 +1,6 @@
 package personaje;
 
-import estado.EstadoGoku;
-import estado.NormalGoku;
-import tablero.Posicion;
+import estado.goku.NormalGoku;
 
 public class Goku extends Personaje {
 

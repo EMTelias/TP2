@@ -1,25 +1,24 @@
 package personaje;
 
-import estado.Estado;
-import estado.EstadoNoTieneProximoException;
-import estado.KaioKenGoku;
-import estado.SuperSayajinGoku;
-import org.junit.Test;
-
-import direccion.NoHayDireccionPosibleException;
-
+import estado.goku.KaioKenGoku;
+import estado.goku.SuperSayajinGoku;
+import excepciones.direccion.NoHayDireccionPosibleException;
+import excepciones.estado.EstadoNoTieneProximoException;
+import excepciones.personaje.NoPuedeCambiarDeEstadoKiInsuficienteException;
+import excepciones.personaje.NoPuedeMoverAEsaDistanciaException;
+import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
+import excepciones.tablero.CasilleroOcupadoException;
+import excepciones.tablero.DimensionDeTableroInvalidoException;
 import org.junit.Assert;
-
+import org.junit.Test;
 import tablero.Casillero;
-import tablero.CasilleroOcupadoException;
-import tablero.DimensionDeTableroInvalidoException;
 import tablero.Posicion;
 import tablero.Tablero;
 
 public class PersonajeTest {
 
 	@Test
-	public void testColocoUnGokuYMuevoEnModoNormal() throws DimensionDeTableroInvalidoException, CasilleroOcupadoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, NoHayDireccionPosibleException{		
+	public void testColocoUnGokuYMuevoEnModoNormal() throws DimensionDeTableroInvalidoException, CasilleroOcupadoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, NoHayDireccionPosibleException{
 		Tablero tablero = new Tablero(10,10);
 		Personaje goku = new Goku();
 		Posicion posicionInicial= new Posicion(2,3);

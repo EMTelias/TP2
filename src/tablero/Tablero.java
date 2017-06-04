@@ -1,17 +1,19 @@
 package tablero;
 
-import java.util.HashMap;
-
 import direccion.Direccion;
-import direccion.NoHayDireccionPosibleException;
+import excepciones.direccion.NoHayDireccionPosibleException;
+import excepciones.tablero.CasilleroOcupadoException;
+import excepciones.tablero.DimensionDeTableroInvalidoException;
 import personaje.Personaje;
+
+import java.util.HashMap;
 
 public class Tablero {
 
 	private HashMap<Posicion,Casillero> tablero;	
 	
 	
-	public Tablero(int dimensionX, int dimensionY) throws DimensionDeTableroInvalidoException{
+	public Tablero(int dimensionX, int dimensionY) throws DimensionDeTableroInvalidoException {
 		if ((dimensionX <= 0) || (dimensionY <= 0) ) throw new DimensionDeTableroInvalidoException();
 		tablero = new HashMap<Posicion,Casillero>();
 				

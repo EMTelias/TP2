@@ -1,4 +1,4 @@
-package estado;
+package excepciones.estado;
 
 public class EstadoNoTieneProximoException extends Exception{
     /**

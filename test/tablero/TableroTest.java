@@ -1,5 +1,6 @@
 package tablero;
 
+import excepciones.tablero.DimensionDeTableroInvalidoException;
 import org.junit.Test;
 import org.junit.Assert;
 

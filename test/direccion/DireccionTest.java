@@ -1,5 +1,6 @@
 package direccion;
 
+import excepciones.direccion.NoHayDireccionPosibleException;
 import org.junit.Assert;
 import org.junit.Test;
 

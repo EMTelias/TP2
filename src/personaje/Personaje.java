@@ -1,10 +1,13 @@
 package personaje;
 
-import direccion.NoHayDireccionPosibleException;
+import excepciones.direccion.NoHayDireccionPosibleException;
 import estado.Estado;
-import estado.EstadoNoTieneProximoException;
+import excepciones.estado.EstadoNoTieneProximoException;
+import excepciones.personaje.NoPuedeCambiarDeEstadoKiInsuficienteException;
+import excepciones.personaje.NoPuedeMoverAEsaDistanciaException;
+import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
 import tablero.Casillero;
-import tablero.CasilleroOcupadoException;
+import excepciones.tablero.CasilleroOcupadoException;
 
 public abstract class Personaje {
 

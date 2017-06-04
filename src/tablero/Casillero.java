@@ -1,6 +1,7 @@
 package tablero;
 
-import direccion.NoHayDireccionPosibleException;
+import excepciones.direccion.NoHayDireccionPosibleException;
+import excepciones.tablero.CasilleroOcupadoException;
 import personaje.Personaje;
 
 public class Casillero {

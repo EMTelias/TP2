@@ -1,10 +1,12 @@
-package estado;
+package estado.goku;
 
-public class KaioKenGoku implements EstadoGoku {
+import estado.Estado;
+
+public class NormalGoku implements EstadoGoku {
 	
-	final int VELOCIDAD = 3;
-	Estado proximoEstado = new SuperSayajinGoku();
-	final int kiNecesarioParaEvolucionar = 50;
+	final int VELOCIDAD = 2;
+	Estado proximoEstado = new KaioKenGoku();
+	final int kiNecesarioParaEvolucionar = 20;
 	
 	@Override
 	public int getVelocidad() {
@@ -16,5 +18,4 @@ public class KaioKenGoku implements EstadoGoku {
 
 	@Override
 	public int getKiNecesarioParaTransformar() {return kiNecesarioParaEvolucionar;}
-
 }
