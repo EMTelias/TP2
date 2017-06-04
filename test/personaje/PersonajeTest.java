@@ -1,5 +1,9 @@
 package personaje;
 
+import estado.Estado;
+import estado.EstadoNoTieneProximoException;
+import estado.KaioKenGoku;
+import estado.SuperSayajinGoku;
 import org.junit.Test;
 
 import direccion.NoHayDireccionPosibleException;
@@ -63,8 +67,48 @@ public class PersonajeTest {
 		
 		goku.moverA(casillero);
 	}
-	
-	
-	
-	
+
+	@Test(expected = NoPuedeCambiarDeEstadoKiInsuficienteException.class)
+	public void testTransformoAGokuCon0KiDevuelveNopuedeCambiarDeEstadoKiInsuficienteException() throws NoPuedeCambiarDeEstadoKiInsuficienteException, EstadoNoTieneProximoException {
+		Personaje goku = new Goku();
+		goku.transformar();
+	}
+
+	@Test(expected = EstadoNoTieneProximoException.class)
+	public void testTransformoAGokuSuperSayajinDevuelveEstadoNoTieneProximoException() throws NoPuedeCambiarDeEstadoKiInsuficienteException, EstadoNoTieneProximoException {
+		Personaje goku = new Goku();
+		goku.estado = new SuperSayajinGoku();
+		goku.transformar();
+	}
+
+	@Test public void testTransformoAGokuNormalYRevisoQueTengaEstadoKaioKen() throws NoPuedeCambiarDeEstadoKiInsuficienteException, EstadoNoTieneProximoException {
+		Personaje goku = new Goku();
+		goku.aumentarKi(20);
+		goku.transformar();
+		Assert.assertTrue(goku.estado.getClass() == KaioKenGoku.class);
+	}
+
+	@Test public void testTransformoAGokuCon80DeKiYSuKiTieneQueBajarA60() throws NoPuedeCambiarDeEstadoKiInsuficienteException, EstadoNoTieneProximoException {
+		Personaje goku = new Goku();
+		goku.aumentarKi(80);
+		goku.transformar();
+		Assert.assertTrue(goku.ki == 60);
+	}
+
+	@Test public void testTransformoAGokuNormal2VecesYVerificoQueSuKiPaseDe100A30() throws NoPuedeCambiarDeEstadoKiInsuficienteException, EstadoNoTieneProximoException {
+		Personaje goku = new Goku();
+		goku.aumentarKi(100);
+		goku.transformar();
+		goku.transformar();
+		Assert.assertTrue(goku.ki == 30);
+	}
+
+	@Test public void testTransformoAGokuNormal2VecesYVerificoQueTengaEstadoSuperSayajin() throws NoPuedeCambiarDeEstadoKiInsuficienteException, EstadoNoTieneProximoException {
+		Personaje goku = new Goku();
+		goku.aumentarKi(100);
+		goku.transformar();
+		goku.transformar();
+		Assert.assertTrue(goku.estado.getClass() == SuperSayajinGoku.class);
+	}
+
 }

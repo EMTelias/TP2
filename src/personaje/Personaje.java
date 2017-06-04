@@ -2,6 +2,7 @@ package personaje;
 
 import direccion.NoHayDireccionPosibleException;
 import estado.Estado;
+import estado.EstadoNoTieneProximoException;
 import tablero.Casillero;
 import tablero.CasilleroOcupadoException;
 
@@ -9,7 +10,11 @@ public abstract class Personaje {
 
 	protected Casillero casillero;
 	protected Estado estado;
-	
+	protected int ki;
+
+	public Personaje(){
+		ki = 0;
+	}
 
 	public void ubicarEn(Casillero unCasillero) {
 		casillero = unCasillero;
@@ -29,5 +34,19 @@ public abstract class Personaje {
 		}
 		
 	}
+
+	public void transformar() throws NoPuedeCambiarDeEstadoKiInsuficienteException, EstadoNoTieneProximoException{
+		if (ki < estado.getKiNecesarioParaTransformar()) throw new NoPuedeCambiarDeEstadoKiInsuficienteException();
+			ki-=estado.getKiNecesarioParaTransformar();
+			estado = estado.getProximoEstado();
+
+
+	}
+
+	public void aumentarKi(int aumento){
+		ki+=aumento;
+	}
+
+
 
 }
