@@ -5,7 +5,7 @@ import personaje.Personaje;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Jugador {
+public abstract class Jugador {
 
     protected String nombreDeJugador;
     protected List<Personaje> personajes = new ArrayList<>();

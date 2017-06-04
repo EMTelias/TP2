@@ -7,8 +7,8 @@ import tablero.Tablero;
 
 
 public class Partida {
-    private static final int DIM_ALTO = 10;
-    private static final int DIM_ANCHO = 10;
+    private static final int DIM_ALTO = 20;
+    private static final int DIM_ANCHO = 20;
 
     private Tablero tablero;
 
@@ -25,6 +25,10 @@ public class Partida {
         this.turno = new Turno(guerrerosZ,enemigos);
         this.estadoDePartida = true;
 
+    }
+
+    public Tablero getTablero() {
+        return tablero;
     }
 
 

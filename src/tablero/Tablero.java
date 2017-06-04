@@ -11,7 +11,9 @@ import java.util.List;
 
 public class Tablero {
 
-	private HashMap<Posicion,Casillero> tablero;	
+	private HashMap<Posicion,Casillero> tablero;
+	private int dimensionX;
+	private int dimensionY;
 	
 	
 	public Tablero(int dimensionX, int dimensionY) throws DimensionDeTableroInvalidoException {
@@ -24,7 +26,9 @@ public class Tablero {
 					Casillero casillero = new Casillero(posicion,this);
 					tablero.put(posicion, casillero); 					
 			}
-		}		
+		}
+		this.dimensionX = dimensionX;
+		this.dimensionY = dimensionY;
 	}
 
 	public boolean estaVacioEn(Posicion posicion) {
@@ -55,16 +59,16 @@ public class Tablero {
 	
 	/* Agrego metodo para agregar los personajes al inicio de la partida */
 	public void initDePersonajes(List<Personaje> guerrerosZ, List<Personaje> enemigos) throws CasilleroOcupadoException {
-		int i = 1, j = 1;
+		int i = 1, j = this.dimensionY;
 		for (Personaje personaje: guerrerosZ){
 			Posicion pos = new Posicion(i,1);
 			this.colocar(personaje,pos);
 			i++;
 		}
-		for (Personaje personaje: guerrerosZ){
-			Posicion pos = new Posicion(j,10);
+		for (Personaje personaje: enemigos){
+			Posicion pos = new Posicion(20,j);
 			this.colocar(personaje,pos);
-			j++;
+			j--;
 		}
 	}
 }
