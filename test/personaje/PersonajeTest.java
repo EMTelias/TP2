@@ -17,6 +17,8 @@ import tablero.Tablero;
 
 public class PersonajeTest {
 
+	
+	// --------- Tests de movimiento ----------------
 	@Test
 	public void testColocoUnGokuYMuevoEnModoNormal() throws DimensionDeTableroInvalidoException, CasilleroOcupadoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, NoHayDireccionPosibleException{
 		Tablero tablero = new Tablero(10,10);
@@ -67,6 +69,53 @@ public class PersonajeTest {
 		goku.moverA(casillero);
 	}
 
+	@Test 
+	public void testGokuEnModoNormalPuedeMover2PosicionesYEnPrimeraTransformacionPuedeMover3Posiciones() throws NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, NoHayDireccionPosibleException, CasilleroOcupadoException, DimensionDeTableroInvalidoException, NoPuedeCambiarDeEstadoKiInsuficienteException, EstadoNoTieneProximoException{
+		Tablero tablero = new Tablero(10,10);
+		Personaje goku = new Goku();
+		Posicion posicion11= new Posicion(1,1);
+		Posicion posicion31= new Posicion(3,1);
+		Posicion posicion41= new Posicion(4,1);
+		Posicion posicion61= new Posicion(6,1);
+		Posicion posicion71= new Posicion(7,1);
+		
+		tablero.colocar(goku,posicion11);
+		
+		Casillero casillero41 = tablero.getCasillero(posicion41);
+		try{	
+			goku.moverA(casillero41);
+			Assert.assertTrue(false);
+		}catch(NoPuedeMoverAEsaDistanciaException e){
+			Assert.assertTrue(true);
+		}
+		
+		Casillero casillero31 = tablero.getCasillero(posicion31);
+		goku.moverA(casillero31);
+		Assert.assertFalse(tablero.estaVacioEn(posicion31));
+		Assert.assertTrue(tablero.estaVacioEn(posicion11));
+		
+		goku.aumentarKi(20);
+		goku.transformar();
+		
+		Casillero casillero71 = tablero.getCasillero(posicion71);
+		try{	
+			goku.moverA(casillero71);
+			Assert.assertTrue(false);
+		}catch(NoPuedeMoverAEsaDistanciaException e){
+			Assert.assertTrue(true);
+		}
+		
+		Casillero casillero61 = tablero.getCasillero(posicion61);
+		goku.moverA(casillero61);
+		Assert.assertFalse(tablero.estaVacioEn(posicion61));
+		Assert.assertTrue(tablero.estaVacioEn(posicion31));
+		
+		
+		
+	}
+	
+	
+	// --------------- Test de transformacion --------------
 	@Test(expected = NoPuedeCambiarDeEstadoKiInsuficienteException.class)
 	public void testTransformoAGokuCon0KiDevuelveNopuedeCambiarDeEstadoKiInsuficienteException() throws NoPuedeCambiarDeEstadoKiInsuficienteException, EstadoNoTieneProximoException {
 		Personaje goku = new Goku();
