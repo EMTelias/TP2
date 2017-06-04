@@ -26,9 +26,9 @@ public abstract class Personaje {
 
 	public void moverA(Casillero casilleroDestino) throws NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, NoHayDireccionPosibleException {
 		
-		if (casillero.distanciaHasta(casilleroDestino) > estado.getVelocidad() ) throw new NoPuedeMoverAEsaDistanciaException();
-		
 		if (!casillero.caminoDespejadoHasta(casilleroDestino)) throw new NoPuedeMoverCaminoObstruidoException();
+		
+		if (casillero.distanciaHasta(casilleroDestino) > estado.getVelocidad() ) throw new NoPuedeMoverAEsaDistanciaException();
 		
 		casillero.quitar();
 		try {

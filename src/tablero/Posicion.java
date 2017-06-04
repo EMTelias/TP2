@@ -24,6 +24,7 @@ public class Posicion {
 		 //para que funcione como clave en el hashMap
 			return ((posicionX*100)+posicionY);
 		}
+	
 
 	public int distanciaHasta(Posicion posicion) {
 		int distanciaEnX = Math.abs(posicionX - posicion.posicionX);
@@ -32,7 +33,9 @@ public class Posicion {
 	}
 
 
-	public Posicion siguientePosicionEnDireccion(Direccion direccion) {
+		public
+	 
+	 Posicion siguientePosicionEnDireccion(Direccion direccion) {
 		return new Posicion(posicionX + direccion.getDireccionX(), posicionY + direccion.getDireccionY());
 	}
 
