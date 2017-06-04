@@ -7,7 +7,7 @@ import tablero.Posicion;
 
 public class PosicionTest {
 
-
+	@Test
 	public void testCreoPosicionDevuelveValoresXeYCorrectos(){
 		Posicion posicion = new Posicion(2,4);
 		Assert.assertEquals(posicion.getPosicionX(), 2);
