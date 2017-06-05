@@ -4,6 +4,7 @@ import estado.Estado;
 
 public class BooMaloMajinBoo implements EstadoMajinBoo {
 
+    final int distanciaDeAtaque = 2;
     final int poderDePelea = 50;
     final int VELOCIDAD = 3;
     Estado proximoEstado = new BooOriginalMajinBoo();
@@ -23,4 +24,6 @@ public class BooMaloMajinBoo implements EstadoMajinBoo {
     @Override
     public int getPoderDePelea(){return poderDePelea;}
 
+    @Override
+    public int getDistanciaDeAtaque() {return distanciaDeAtaque;}
 }

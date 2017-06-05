@@ -4,6 +4,7 @@ import estado.Estado;
 
 public class SemiPerfectoCell implements EstadoCell {
 
+    final int distanciaDeAtaque = 4;
     final int poderDePelea = 40;
     final int VELOCIDAD = 3;
     Estado proximoEstado = new PerfectoCell();
@@ -23,5 +24,7 @@ public class SemiPerfectoCell implements EstadoCell {
     @Override
     public int getPoderDePelea(){return poderDePelea;}
 
+    @Override
+    public int getDistanciaDeAtaque() {return distanciaDeAtaque;}
 
 }

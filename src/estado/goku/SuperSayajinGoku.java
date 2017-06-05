@@ -5,6 +5,7 @@ import excepciones.estado.EstadoNoTieneProximoException;
 
 public class SuperSayajinGoku implements EstadoGoku {
 
+	final int distanciaDeAtaque = 4;
 	int vidaMaxima = 500;
 	final int poderDePelea = 60;
 	final int VELOCIDAD = 5;
@@ -23,5 +24,8 @@ public class SuperSayajinGoku implements EstadoGoku {
 
 	@Override
 	public int getPoderDePelea(){return poderDePelea;}
+
+	@Override
+	public int getDistanciaDeAtaque() {return distanciaDeAtaque;}
 
 }

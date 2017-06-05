@@ -9,4 +9,5 @@ public interface Estado {
 	Estado getProximoEstado()throws EstadoNoTieneProximoException;
 	int getKiNecesarioParaTransformar();
 	int getPoderDePelea();
+	int getDistanciaDeAtaque();
 }

@@ -4,6 +4,7 @@ import estado.Estado;
 
 public class FortalecidoPiccolo implements EstadoPiccolo {
 
+    final int distanciaDeAtaque = 4;
     final int poderDePelea = 40;
     final int VELOCIDAD = 3;
     Estado proximoEstado = new ProtectorPiccolo();
@@ -23,4 +24,6 @@ public class FortalecidoPiccolo implements EstadoPiccolo {
     @Override
     public int getPoderDePelea(){return poderDePelea;}
 
+    @Override
+    public int getDistanciaDeAtaque() {return distanciaDeAtaque;}
 }

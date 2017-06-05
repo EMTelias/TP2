@@ -5,6 +5,7 @@ import excepciones.estado.EstadoNoTieneProximoException;
 
 public class DefinitivoFreezer implements EstadoFreezer {
 
+    final int distanciaDeAtaque = 3;
     final int poderDePelea = 50;
     final int VELOCIDAD = 6;
     int kiNecesarioParaEvolucionar = 0;
@@ -22,5 +23,8 @@ public class DefinitivoFreezer implements EstadoFreezer {
 
     @Override
     public int getPoderDePelea(){return poderDePelea;}
+
+    @Override
+    public int getDistanciaDeAtaque() {return distanciaDeAtaque;}
 
 }

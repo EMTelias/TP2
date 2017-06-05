@@ -4,6 +4,7 @@ import estado.Estado;
 
 public class NormalFreezer implements EstadoFreezer {
 
+    final int distanciaDeAtaque = 2;
     final int poderDePelea = 20;
     final int VELOCIDAD = 4;
     Estado proximoEstado = new SegundaFormaFreezer();
@@ -22,5 +23,8 @@ public class NormalFreezer implements EstadoFreezer {
 
     @Override
     public int getPoderDePelea(){return poderDePelea;}
+
+    @Override
+    public int getDistanciaDeAtaque() {return distanciaDeAtaque;}
 
 }

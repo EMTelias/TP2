@@ -6,6 +6,7 @@ import estado.goku.EstadoGoku;
 import excepciones.direccion.NoHayDireccionPosibleException;
 import estado.Estado;
 import excepciones.estado.EstadoNoTieneProximoException;
+import excepciones.personaje.NoPuedeAtacarAEsaDistanciaException;
 import excepciones.personaje.NoPuedeCambiarDeEstadoKiInsuficienteException;
 import excepciones.personaje.NoPuedeMoverAEsaDistanciaException;
 import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
@@ -60,9 +61,14 @@ public abstract class Personaje {
 		return false;
 	}
 
-	public void ataqueBasicoA(Personaje objetivo){
+	public int distanciaA(Personaje unPersonaje){
+		return (this.casillero.distanciaHasta(unPersonaje.casillero));
+	}
+
+	public void ataqueBasicoA(Personaje objetivo)throws NoPuedeAtacarAEsaDistanciaException{
 		//Segun tenga la "Esfera del Dragon (+25%dmg)" y/o ataque a un enemigo de mayor poder (-20%dmg)
 		//Ej: si tengo la esfera y ataco a alguien mas debil que yo, tendria un aumento del 25% => dañoFinal=(poderDeAtaque * 1,25)
+		if(this.distanciaA(objetivo)>= estado.getDistanciaDeAtaque())throw new NoPuedeAtacarAEsaDistanciaException();
 		float multiplicadorDeDaño = 1;
 		if(this.tieneElConsumible(new EsferaDelDragon())) {multiplicadorDeDaño+=0.25;}
 		System.out.println(multiplicadorDeDaño);
@@ -71,4 +77,6 @@ public abstract class Personaje {
 		System.out.println(multiplicadorDeDaño);
 		objetivo.reducirVida((int)dañoFinal);
 	}
+
+
 }

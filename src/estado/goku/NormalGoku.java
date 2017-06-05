@@ -4,6 +4,7 @@ import estado.Estado;
 
 public class NormalGoku implements EstadoGoku {
 
+	final int distanciaDeAtaque = 2;
 	final int vidaMaxima = 500;
 	final int poderDePelea = 20;
 	final int VELOCIDAD = 2;
@@ -24,4 +25,6 @@ public class NormalGoku implements EstadoGoku {
 	@Override
 	public int getPoderDePelea() {return poderDePelea;}
 
+	@Override
+	public int getDistanciaDeAtaque() {return distanciaDeAtaque;}
 }

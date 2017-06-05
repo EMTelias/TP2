@@ -4,6 +4,7 @@ import estado.goku.KaioKenGoku;
 import estado.goku.SuperSayajinGoku;
 import excepciones.direccion.NoHayDireccionPosibleException;
 import excepciones.estado.EstadoNoTieneProximoException;
+import excepciones.personaje.NoPuedeAtacarAEsaDistanciaException;
 import excepciones.personaje.NoPuedeCambiarDeEstadoKiInsuficienteException;
 import excepciones.personaje.NoPuedeMoverAEsaDistanciaException;
 import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
@@ -164,27 +165,63 @@ public class PersonajeTest {
 		Assert.assertTrue(goku.vida == 500);
 	}
 
-	@Test public void testGokuNormalAtacaConElAtaqueNormalAOtroGokuYLeDejaLaVidaEn480(){
+	@Test public void testGokuNormalAtacaConElAtaqueNormalAOtroGokuYLeDejaLaVidaEn480() throws NoPuedeAtacarAEsaDistanciaException, DimensionDeTableroInvalidoException, CasilleroOcupadoException {
+		Posicion posicion1 = new Posicion(2,3);
+		Posicion posicion2 = new Posicion(2,4);
 		Personaje goku1 = new Goku();
 		Personaje goku2 = new Goku();
+
+		Tablero tablero = new Tablero(10,10);
+		tablero.colocar(goku1,posicion1);
+		tablero.colocar(goku2,posicion2);
+
 		goku1.ataqueBasicoA(goku2);
 		Assert.assertTrue(goku2.vida == 480);
 	}
 
-	@Test public void testGohanNormalAtacaAGokuDañando20PorcientoMenosDejandoloEn488(){
+	@Test public void testGohanNormalAtacaAGokuDañando20PorcientoMenosDejandoloEn488() throws NoPuedeAtacarAEsaDistanciaException, CasilleroOcupadoException, DimensionDeTableroInvalidoException {
 		//Poder de ataque de gohan: 15 / Poder de ataque de goku: 20 => gohan daña 20% menos(12dmg)
+		Posicion posicion1 = new Posicion(2,3);
+		Posicion posicion2 = new Posicion(2,4);
 		Personaje goku = new Goku();
 		Personaje gohan = new Gohan();
+
+		Tablero tablero = new Tablero(10,10);
+		tablero.colocar(goku,posicion1);
+		tablero.colocar(gohan,posicion2);
+
 		gohan.ataqueBasicoA(goku);
 		Assert.assertTrue(goku.vida == 488);
 
 	}
 
-	@Test public void testGokuNormalAtacaAGohanNormalDejandoloEn280(){
+	@Test public void testGokuNormalAtacaAGohanNormalDejandoloEn280() throws NoPuedeAtacarAEsaDistanciaException, DimensionDeTableroInvalidoException, CasilleroOcupadoException {
+		Posicion posicion1 = new Posicion(2,3);
+		Posicion posicion2 = new Posicion(2,4);
 		Personaje goku = new Goku();
 		Personaje gohan = new Gohan();
+
+		Tablero tablero = new Tablero(10,10);
+		tablero.colocar(goku,posicion1);
+		tablero.colocar(gohan,posicion2);
+
 		goku.ataqueBasicoA(gohan);
 		Assert.assertTrue(gohan.vida == 280);
+	}
+
+	@Test (expected = NoPuedeAtacarAEsaDistanciaException.class)
+	public void testGokuAtacaAGohanEstandoADistancia3EsperoRecibirNoPuedeAtacarAEsaDistanciaException() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException, NoPuedeAtacarAEsaDistanciaException {
+		Posicion posicion1 = new Posicion(2,1);
+		Posicion posicion2 = new Posicion(2,4);
+		Personaje goku = new Goku();
+		Personaje gohan = new Gohan();
+
+		Tablero tablero = new Tablero(10,10);
+		tablero.colocar(goku,posicion1);
+		tablero.colocar(gohan,posicion2);
+
+		goku.ataqueBasicoA(gohan);
+
 	}
 
 }
