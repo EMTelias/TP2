@@ -9,11 +9,18 @@ public class Turno {
     public Turno(Jugador jugador1,Jugador jugador2){
         this.jugadorEnMovimiento = jugador1;
         this.jugadorEnEspera = jugador2;
+        jugador1.setTurno(true);
+        jugador2.setTurno(false);
     }
     public Jugador getJugadorActivo(){
-        Jugador jugador = jugadorEnMovimiento;
-        jugadorEnMovimiento = jugadorEnEspera;
-        jugadorEnEspera = jugador;
-        return jugador;
+        return this.jugadorEnMovimiento;
+    }
+
+    public void pasar() {
+        Jugador jugador = this.jugadorEnMovimiento;
+        this.jugadorEnMovimiento = this.jugadorEnEspera;
+        this.jugadorEnEspera = jugador;
+        this.jugadorEnMovimiento.setTurno(true);
+        this.jugadorEnEspera.setTurno(false);
     }
 }

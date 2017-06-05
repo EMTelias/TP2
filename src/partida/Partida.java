@@ -26,6 +26,14 @@ public class Partida {
         this.estadoDePartida = true;
 
     }
+    public void pasar() {
+
+        this.turno.pasar();
+    }
+
+    public Jugador turnoActual() {
+        return this.turno.getJugadorActivo();
+    }
 
     public Tablero getTablero() {
         return tablero;
