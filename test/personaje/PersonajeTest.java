@@ -181,7 +181,7 @@ public class PersonajeTest {
 		Assert.assertTrue(goku2.vida == 480);
 	}
 
-	@Test public void testGohanNormalAtacaAGokuDañando20PorcientoMenosDejandoloEn488() throws NoPuedeAtacarAEsaDistanciaException, CasilleroOcupadoException, DimensionDeTableroInvalidoException {
+	@Test public void testGohanNormalAtacaAGokuDaniando20PorcientoMenosDejandoloEn488() throws NoPuedeAtacarAEsaDistanciaException, CasilleroOcupadoException, DimensionDeTableroInvalidoException {
 		//Poder de ataque de gohan: 15 / Poder de ataque de goku: 20 => gohan daña 20% menos(12dmg)
 		Posicion posicion1 = new Posicion(2,3);
 		Posicion posicion2 = new Posicion(2,4);

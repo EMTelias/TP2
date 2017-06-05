@@ -69,13 +69,13 @@ public abstract class Personaje {
 		//Segun tenga la "Esfera del Dragon (+25%dmg)" y/o ataque a un enemigo de mayor poder (-20%dmg)
 		//Ej: si tengo la esfera y ataco a alguien mas debil que yo, tendria un aumento del 25% => dañoFinal=(poderDeAtaque * 1,25)
 		if(this.distanciaA(objetivo)> estado.getDistanciaDeAtaque())throw new NoPuedeAtacarAEsaDistanciaException();
-		float multiplicadorDeDaño = 1;
-		if(this.tieneElConsumible(new EsferaDelDragon())) {multiplicadorDeDaño+=0.25;}
-		System.out.println(multiplicadorDeDaño);
-		if(objetivo.estado.getPoderDePelea() > this.estado.getPoderDePelea()) {multiplicadorDeDaño-=0.2;}
-		float dañoFinal = (estado.getPoderDePelea() * multiplicadorDeDaño);
-		System.out.println(multiplicadorDeDaño);
-		objetivo.reducirVida((int)dañoFinal);
+		float multiplicadorDeDanio = 1;
+		if(this.tieneElConsumible(new EsferaDelDragon())) {multiplicadorDeDanio+=0.25;}
+		System.out.println(multiplicadorDeDanio);
+		if(objetivo.estado.getPoderDePelea() > this.estado.getPoderDePelea()) {multiplicadorDeDanio-=0.2;}
+		float danioFinal = (estado.getPoderDePelea() * multiplicadorDeDanio);
+		System.out.println(multiplicadorDeDanio);
+		objetivo.reducirVida((int)danioFinal);
 	}
 
 
