@@ -71,10 +71,8 @@ public abstract class Personaje {
 		if(this.distanciaA(objetivo)> estado.getDistanciaDeAtaque())throw new NoPuedeAtacarAEsaDistanciaException();
 		float multiplicadorDeDanio = 1;
 		if(this.tieneElConsumible(new EsferaDelDragon())) {multiplicadorDeDanio+=0.25;}
-		System.out.println(multiplicadorDeDanio);
 		if(objetivo.estado.getPoderDePelea() > this.estado.getPoderDePelea()) {multiplicadorDeDanio-=0.2;}
 		float danioFinal = (estado.getPoderDePelea() * multiplicadorDeDanio);
-		System.out.println(multiplicadorDeDanio);
 		objetivo.reducirVida((int)danioFinal);
 	}
 
