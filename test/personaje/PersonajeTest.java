@@ -1,5 +1,7 @@
 package personaje;
 
+import estado.freezer.DefinitivoFreezer;
+import estado.gohan.SuperSayajin2Gohan;
 import estado.goku.KaioKenGoku;
 import estado.goku.SuperSayajinGoku;
 import excepciones.direccion.NoHayDireccionPosibleException;
@@ -223,5 +225,68 @@ public class PersonajeTest {
 		goku.ataqueBasicoA(gohan);
 
 	}
+
+	@Test
+	public void testCreoUnTablero20x20ColocoAGokuNormalEn44YFreezerNormalEn66YHaceAtaqueBasicoDejandoloEn380() throws DimensionDeTableroInvalidoException, CasilleroOcupadoException, NoPuedeAtacarAEsaDistanciaException {
+		Tablero tablero = new Tablero(20,20);
+		Personaje goku = new Goku();
+		Personaje freezer = new Freezer();
+		Posicion posicionGoku = new Posicion(4,4);
+		Posicion posicionFreezer = new Posicion(6,6);
+		tablero.colocar(goku, posicionGoku);
+		tablero.colocar(freezer, posicionFreezer);
+
+		goku.ataqueBasicoA(freezer);
+		Assert.assertTrue(freezer.vida == 380);
+	}
+
+	@Test
+	public void testCreoUnTablero20x20ColocoAGokuNormalEn44YFreezerDefinitivoEn66YHaceAtaqueBasicoDejandoloEn384() throws DimensionDeTableroInvalidoException, CasilleroOcupadoException, NoPuedeAtacarAEsaDistanciaException {
+		// Poder de pelea de Goku: 20. Poder de pelea de Freezer definitivo: 50. -20%dmg (16)
+		Tablero tablero = new Tablero(20,20);
+		Personaje goku = new Goku();
+		Personaje freezer = new Freezer();
+		freezer.estado = new DefinitivoFreezer();
+		Posicion posicionGoku = new Posicion(4,4);
+		Posicion posicionFreezer = new Posicion(6,6);
+		tablero.colocar(goku, posicionGoku);
+		tablero.colocar(freezer, posicionFreezer);
+
+		goku.ataqueBasicoA(freezer);
+		Assert.assertTrue(freezer.vida == 384);
+	}
+
+	@Test
+	public void testCreoUnTablero20x20ColocoAGohanSS2En33YFreezerNormalEn66YHaceAtaqueBasicoDejandoloEn300() throws DimensionDeTableroInvalidoException, CasilleroOcupadoException, NoPuedeAtacarAEsaDistanciaException {
+		// Poder de pelea de Gohan SS2: 100. Poder de pelea de Freezer normal: 50.
+		Tablero tablero = new Tablero(20,20);
+		Personaje gohan = new Gohan();
+		Personaje freezer = new Freezer();
+		gohan.estado = new SuperSayajin2Gohan();
+		Posicion posicionGohan = new Posicion(3,3);
+		Posicion posicionFreezer = new Posicion(6,6);
+		tablero.colocar(gohan, posicionGohan);
+		tablero.colocar(freezer, posicionFreezer);
+
+		gohan.ataqueBasicoA(freezer);
+		Assert.assertTrue(freezer.vida == 300);
+	}
+
+	@Test(expected = NoPuedeAtacarAEsaDistanciaException.class)
+	public void testCreoUnTablero20x20ColocoAGohanSS2En33YFreezerNormalEn1010YHaceAtaqueBasicoLanzandoExcepcionNoPuedeAtacar() throws DimensionDeTableroInvalidoException, CasilleroOcupadoException, NoPuedeAtacarAEsaDistanciaException {
+		// Poder de pelea de Gohan SS2: 100. Poder de pelea de Freezer normal: 50.
+		Tablero tablero = new Tablero(20,20);
+		Personaje gohan = new Gohan();
+		Personaje freezer = new Freezer();
+		gohan.estado = new SuperSayajin2Gohan();
+		Posicion posicionGohan = new Posicion(3,3);
+		Posicion posicionFreezer = new Posicion(10,10);
+		tablero.colocar(gohan, posicionGohan);
+		tablero.colocar(freezer, posicionFreezer);
+
+		gohan.ataqueBasicoA(freezer);
+		Assert.assertTrue(freezer.vida == 400);
+	}
+
 
 }
