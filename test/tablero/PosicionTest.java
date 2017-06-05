@@ -29,16 +29,24 @@ public class PosicionTest {
 	}
 	
 	@Test
-	public void testVerificaDistancias(){
+	public void testVerificaDistanciasAlineadas(){
 		Posicion posicion11 = new Posicion(1,1);
-		Posicion posicion22 = new Posicion(2,2);
-		Posicion posicion33 = new Posicion(3,3);
-		Posicion posicion17 = new Posicion(1,7);
+		Posicion posicion31 = new Posicion(3,1);
+		Posicion posicion14 = new Posicion(1,4);
+		Posicion posicion66 = new Posicion(6,6);
 		
-		Assert.assertTrue( posicion11.distanciaHasta(posicion22) == 1);
-		Assert.assertTrue( posicion11.distanciaHasta(posicion33) == 2);	
-		Assert.assertTrue( posicion11.distanciaHasta(posicion17) == 6);	
-		
+		Assert.assertTrue( posicion11.distanciaHasta(posicion31) == 2);
+		Assert.assertTrue( posicion11.distanciaHasta(posicion14) == 3);	
+		Assert.assertTrue( posicion11.distanciaHasta(posicion66) == 5);	
 	}
 	
+	@Test
+	public  void testVerificaDistanciaNoAlineada(){
+		Posicion posicion11 = new Posicion(1,1);
+		Posicion posicion32 = new Posicion(3,2);
+		Posicion posicion24 = new Posicion(2,4);
+		
+		Assert.assertTrue( posicion11.distanciaHasta(posicion32) == 2);
+		Assert.assertTrue( posicion11.distanciaHasta(posicion24) == 3);
+	}
 }
