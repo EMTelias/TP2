@@ -3,7 +3,9 @@ package estado.goku;
 import estado.Estado;
 
 public class KaioKenGoku implements EstadoGoku {
-	
+
+	final int vidaMaxima = 500;
+	final int poderDePelea = 40;
 	final int VELOCIDAD = 3;
 	Estado proximoEstado = new SuperSayajinGoku();
 	final int kiNecesarioParaEvolucionar = 50;
@@ -18,5 +20,8 @@ public class KaioKenGoku implements EstadoGoku {
 
 	@Override
 	public int getKiNecesarioParaTransformar() {return kiNecesarioParaEvolucionar;}
+
+	@Override
+	public int getPoderDePelea() {return poderDePelea;}
 
 }

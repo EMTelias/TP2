@@ -4,5 +4,4 @@ import estado.Estado;
 
 public interface EstadoGohan extends Estado {
 
-
 }

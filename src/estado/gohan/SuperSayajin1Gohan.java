@@ -4,7 +4,7 @@ import estado.Estado;
 
 public class SuperSayajin1Gohan implements EstadoGohan {
 
-
+    final int poderDePelea = 30;
     final int VELOCIDAD = 2;
     Estado proximoEstado = new SuperSayajin2Gohan();
     final int kiNecesarioParaEvolucionar = 30; //necesita algo mas tambien, ver luego
@@ -19,4 +19,8 @@ public class SuperSayajin1Gohan implements EstadoGohan {
 
     @Override
     public int getKiNecesarioParaTransformar() {return kiNecesarioParaEvolucionar;}
+
+    @Override
+    public int getPoderDePelea(){return poderDePelea;}
+
 }

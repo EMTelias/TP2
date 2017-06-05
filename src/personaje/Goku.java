@@ -7,6 +7,7 @@ public class Goku extends Personaje {
 	
 	public Goku(){
 		estado = new NormalGoku();
+		vida = 500;
 	}
 
 	

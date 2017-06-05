@@ -4,6 +4,7 @@ import estado.Estado;
 
 public class NormalPiccolo implements EstadoPiccolo {
 
+    final int poderDePelea = 20;
     final int VELOCIDAD = 2;
     Estado proximoEstado = new FortalecidoPiccolo();
     final int kiNecesarioParaEvolucionar = 20;
@@ -18,4 +19,8 @@ public class NormalPiccolo implements EstadoPiccolo {
 
     @Override
     public int getKiNecesarioParaTransformar() {return kiNecesarioParaEvolucionar;}
+
+    @Override
+    public int getPoderDePelea(){return poderDePelea;}
+
 }

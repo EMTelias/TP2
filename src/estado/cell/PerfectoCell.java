@@ -5,6 +5,7 @@ import excepciones.estado.EstadoNoTieneProximoException;
 
 public class PerfectoCell implements EstadoCell {
 
+    final int poderDePelea = 80;
     final int VELOCIDAD = 4;
     int kiNecesarioParaEvolucionar = 0;
 
@@ -18,4 +19,8 @@ public class PerfectoCell implements EstadoCell {
 
     @Override
     public int getKiNecesarioParaTransformar() {return kiNecesarioParaEvolucionar;}
+
+    @Override
+    public int getPoderDePelea(){return poderDePelea;}
+
 }

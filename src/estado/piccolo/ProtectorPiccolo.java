@@ -5,6 +5,7 @@ import excepciones.estado.EstadoNoTieneProximoException;
 
 public class ProtectorPiccolo implements EstadoPiccolo {
 
+    final int poderDePelea = 60;
     final int VELOCIDAD = 4;
     int kiNecesarioParaEvolucionar = 0;
 
@@ -18,4 +19,8 @@ public class ProtectorPiccolo implements EstadoPiccolo {
 
     @Override
     public int getKiNecesarioParaTransformar() {return kiNecesarioParaEvolucionar;}
+
+    @Override
+    public int getPoderDePelea(){return poderDePelea;}
+
 }

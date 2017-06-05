@@ -7,6 +7,7 @@ public class Freezer extends Personaje {
 
     public Freezer(){
         estado = new NormalFreezer();
+        vida = 400;
     }
 
 

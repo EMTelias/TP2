@@ -4,6 +4,7 @@ import estado.Estado;
 
 public class NormalFreezer implements EstadoFreezer {
 
+    final int poderDePelea = 20;
     final int VELOCIDAD = 4;
     Estado proximoEstado = new SegundaFormaFreezer();
     final int kiNecesarioParaEvolucionar = 20;
@@ -18,4 +19,8 @@ public class NormalFreezer implements EstadoFreezer {
 
     @Override
     public int getKiNecesarioParaTransformar() {return kiNecesarioParaEvolucionar;}
+
+    @Override
+    public int getPoderDePelea(){return poderDePelea;}
+
 }

@@ -159,4 +159,32 @@ public class PersonajeTest {
 		Assert.assertTrue(goku.estado.getClass() == SuperSayajinGoku.class);
 	}
 
+	@Test public void testCreoAGokuYTiene500PuntosDeVida(){
+		Personaje goku = new Goku();
+		Assert.assertTrue(goku.vida == 500);
+	}
+
+	@Test public void testGokuNormalAtacaConElAtaqueNormalAOtroGokuYLeDejaLaVidaEn480(){
+		Personaje goku1 = new Goku();
+		Personaje goku2 = new Goku();
+		goku1.ataqueBasicoA(goku2);
+		Assert.assertTrue(goku2.vida == 480);
+	}
+
+	@Test public void testGohanNormalAtacaAGokuDañando20PorcientoMenosDejandoloEn488(){
+		//Poder de ataque de gohan: 15 / Poder de ataque de goku: 20 => gohan daña 20% menos(12dmg)
+		Personaje goku = new Goku();
+		Personaje gohan = new Gohan();
+		gohan.ataqueBasicoA(goku);
+		Assert.assertTrue(goku.vida == 488);
+
+	}
+
+	@Test public void testGokuNormalAtacaAGohanNormalDejandoloEn280(){
+		Personaje goku = new Goku();
+		Personaje gohan = new Gohan();
+		goku.ataqueBasicoA(gohan);
+		Assert.assertTrue(gohan.vida == 280);
+	}
+
 }

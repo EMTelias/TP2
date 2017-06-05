@@ -5,6 +5,7 @@ import excepciones.estado.EstadoNoTieneProximoException;
 
 public class SuperSayajin2Gohan implements EstadoGohan {
 
+    final int poderDePelea = 100;
     final int VELOCIDAD = 3;
     int kiNecesarioParaEvolucionar = 0;
 
@@ -18,4 +19,8 @@ public class SuperSayajin2Gohan implements EstadoGohan {
 
     @Override
     public int getKiNecesarioParaTransformar() {return kiNecesarioParaEvolucionar;}
+
+    @Override
+    public int getPoderDePelea(){return poderDePelea;}
+
 }

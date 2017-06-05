@@ -7,6 +7,7 @@ public class MajinBoo extends Personaje {
 
     public MajinBoo(){
         estado = new NormalMajinBoo();
+        vida = 300;
     }
 
 

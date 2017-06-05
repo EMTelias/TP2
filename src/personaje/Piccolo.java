@@ -7,6 +7,7 @@ public class Piccolo extends Personaje {
 
     public Piccolo(){
         estado = new NormalPiccolo();
+        vida = 500;
     }
 
 
