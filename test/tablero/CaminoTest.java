@@ -6,10 +6,12 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
+import excepciones.tablero.CaminoInvalidoException;
+
 public class CaminoTest {
 
 	@Test
-	public void testCreoCaminoCon2CasillerosDistanciaDeCaminoDevuelve1(){
+	public void testCreoCaminoCon2CasillerosDistanciaDeCaminoDevuelve1() throws CaminoInvalidoException{
 		List<Casillero> casilleros = new ArrayList<Casillero>();
 		Casillero casillero1 = new Casillero(new Posicion(1,1));
 		Casillero casillero2 = new Casillero(new Posicion(2,2));
@@ -22,7 +24,19 @@ public class CaminoTest {
 		Assert.assertEquals(camino.distancia(),1);	
 	}
 	
-	//El camino al crearse tiene que tener al menos 2 casilleros sino excepcion (hacer test y codearlo (recordatorio para mi: Alexis))
+	@Test (expected = CaminoInvalidoException.class)
+	public void testCreoCaminoCon0CasilleroDevuelveCaminoInvalidoException() throws CaminoInvalidoException{
+		List<Casillero> casilleros = new ArrayList<Casillero>();
+		new Camino(casilleros);
+			
+	}
 	
+	@Test (expected = CaminoInvalidoException.class)
+	public void testCreoCaminoCon1CasilleroDevuelveCaminoInvalidoException() throws CaminoInvalidoException{
+		List<Casillero> casilleros = new ArrayList<Casillero>();
+		Casillero casillero = new Casillero(new Posicion(1,1));
+		casilleros.add(casillero);
+		new Camino(casilleros);
+	}
 	
 }

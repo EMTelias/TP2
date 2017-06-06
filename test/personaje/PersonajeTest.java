@@ -9,6 +9,7 @@ import excepciones.personaje.NoPuedeAtacarAEsaDistanciaException;
 import excepciones.personaje.NoPuedeCambiarDeEstadoKiInsuficienteException;
 import excepciones.personaje.NoPuedeMoverAEsaDistanciaException;
 import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
+import excepciones.tablero.CaminoInvalidoException;
 import excepciones.tablero.CasilleroOcupadoException;
 import excepciones.tablero.DimensionDeTableroInvalidoException;
 
@@ -26,7 +27,7 @@ public class PersonajeTest {
 	
 	// --------- Tests de movimiento ----------------
 	@Test
-	public void testGokuSeMueveEnUnCaminoDespejadoNoDevuelveExcepcion() throws DimensionDeTableroInvalidoException, CasilleroOcupadoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException{
+	public void testGokuSeMueveEnUnCaminoDespejadoNoDevuelveExcepcion() throws DimensionDeTableroInvalidoException, CasilleroOcupadoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, CaminoInvalidoException{
 		Casillero casillero1 = new Casillero(new Posicion(1,1));
 		Casillero casillero2 = new Casillero(new Posicion(1,2));
 		Casillero casillero3 = new Casillero(new Posicion(1,3));
@@ -40,10 +41,11 @@ public class PersonajeTest {
 		Camino camino = new Camino(casilleros);
 		
 		goku.mover(camino);
+		Assert.assertFalse(casillero3.estaVacio());
 	}
 	
 	@Test(expected = NoPuedeMoverCaminoObstruidoException.class)
-	public void testGokuQuiereMoverPeroEstaGohanEnMedioDelCaminoDevuelveNoPuedeMoverCaminoObstruidoException() throws CasilleroOcupadoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException{
+	public void testGokuQuiereMoverPeroEstaGohanEnMedioDelCaminoDevuelveNoPuedeMoverCaminoObstruidoException() throws CasilleroOcupadoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, CaminoInvalidoException{
 		Casillero casillero1 = new Casillero(new Posicion(1,1));
 		Casillero casillero2 = new Casillero(new Posicion(1,2));
 		Casillero casillero3 = new Casillero(new Posicion(1,3));
@@ -61,7 +63,7 @@ public class PersonajeTest {
 	}
 	
 	@Test(expected = NoPuedeMoverAEsaDistanciaException.class)
-	public void testGokuQuiereMoverEnModoNormalExcediendoVelocidadDevuelveNoPuedeMoverAEsaDistanciaException() throws DimensionDeTableroInvalidoException, CasilleroOcupadoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException{
+	public void testGokuQuiereMoverEnModoNormalExcediendoVelocidadDevuelveNoPuedeMoverAEsaDistanciaException() throws DimensionDeTableroInvalidoException, CasilleroOcupadoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, CaminoInvalidoException{
 		Casillero casillero1 = new Casillero(new Posicion(1,1));
 		Casillero casillero2 = new Casillero(new Posicion(1,2));
 		Casillero casillero3 = new Casillero(new Posicion(1,3));

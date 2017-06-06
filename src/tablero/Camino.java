@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
+import excepciones.tablero.CaminoInvalidoException;
 import excepciones.tablero.CasilleroOcupadoException;
 import personaje.Personaje;
 
@@ -12,7 +13,10 @@ public class Camino {
 
 	List<Casillero> casillerosDelCamino;
 	
-	public Camino(List<Casillero> casilleros){
+	public Camino(List<Casillero> casilleros) throws CaminoInvalidoException{
+		if (  (casilleros.isEmpty())  ||  (casilleros.size() == 1) ){
+			throw new CaminoInvalidoException();
+		}
 		casillerosDelCamino = new ArrayList<Casillero>();
 		casillerosDelCamino.addAll(casilleros);
 	}
@@ -25,8 +29,8 @@ public class Camino {
 		boolean puedeMover = true;
 		
 		Iterator<Casillero> iterator = casillerosDelCamino.iterator();
-		Casillero casilleroOrigen = iterator.next();
-		Casillero unCasillero = casilleroOrigen; // la asignacion es solo porque me pide inicializarlo
+		Casillero unCasillero = iterator.next();
+		Casillero casilleroOrigen = unCasillero;
 		
 		while (iterator.hasNext()){
 			unCasillero = iterator.next();
