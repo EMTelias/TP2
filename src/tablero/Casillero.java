@@ -1,6 +1,5 @@
 package tablero;
 
-import excepciones.direccion.NoHayDireccionPosibleException;
 import excepciones.tablero.CasilleroOcupadoException;
 import personaje.Personaje;
 
@@ -9,20 +8,12 @@ public class Casillero {
 	
 	private Personaje personaje;
 	private Posicion posicion;
-	private Tablero tablero;
 	
-	public Casillero(Posicion unaPosicion,Tablero unTablero) {
-		posicion = unaPosicion;
-		personaje = null;
-		tablero = unTablero;
-	}
-	
-	//constructor para tests:
-	public Casillero(Posicion unaPosicion){
+	public Casillero(Posicion unaPosicion) {
 		posicion = unaPosicion;
 		personaje = null;
 	}
-
+	
 	public boolean estaVacio() {
 		return ( personaje == null );
 	}
@@ -30,10 +21,9 @@ public class Casillero {
 	public void colocar(Personaje unPersonaje) throws CasilleroOcupadoException {
 		if (personaje != null) throw new CasilleroOcupadoException();
 		personaje = unPersonaje;
-		personaje.ubicarEn(this);
 	}
 
-	public void quitar() {
+	public void vaciar() {
 		personaje = null;
 	}
 
@@ -41,8 +31,9 @@ public class Casillero {
 		return posicion.distanciaHasta(otroCasillero.posicion);
 	}
 
-	public boolean caminoDespejadoHasta(Casillero otroCasillero) throws NoHayDireccionPosibleException {
-		return tablero.caminoDespejadoDesdeHasta(posicion, otroCasillero.posicion);
+	public Personaje getPersonaje() {
+		return personaje;
 	}
+
 
 }

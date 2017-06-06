@@ -1,6 +1,8 @@
 package estado.cell;
 
 import estado.Estado;
+import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
+import tablero.Camino;
 
 public class NormalCell implements EstadoCell {
 
@@ -11,8 +13,8 @@ public class NormalCell implements EstadoCell {
     final int kiNecesarioParaEvolucionar = 0;
 
     @Override
-    public int getVelocidad() {
-        return VELOCIDAD;
+    public void mover(Camino camino) throws NoPuedeMoverCaminoObstruidoException {
+    	camino.recorrer();
     }
 
     @Override

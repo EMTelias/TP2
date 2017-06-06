@@ -3,13 +3,13 @@ package personaje;
 import Consumibles.Consumible;
 import Consumibles.EsferaDelDragon;
 import estado.goku.EstadoGoku;
-import excepciones.direccion.NoHayDireccionPosibleException;
 import estado.Estado;
 import excepciones.estado.EstadoNoTieneProximoException;
 import excepciones.personaje.NoPuedeAtacarAEsaDistanciaException;
 import excepciones.personaje.NoPuedeCambiarDeEstadoKiInsuficienteException;
 import excepciones.personaje.NoPuedeMoverAEsaDistanciaException;
 import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
+import tablero.Camino;
 import tablero.Casillero;
 import excepciones.tablero.CasilleroOcupadoException;
 
@@ -20,28 +20,11 @@ public abstract class Personaje {
 	protected int ki;
 	protected int vida;
 
+	
 	public Personaje(){
 		ki = 0;
 	}
 
-	public void ubicarEn(Casillero unCasillero) {
-		casillero = unCasillero;
-	}
-
-
-	public void moverA(Casillero casilleroDestino) throws NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, NoHayDireccionPosibleException {
-		
-		if (!casillero.caminoDespejadoHasta(casilleroDestino)) throw new NoPuedeMoverCaminoObstruidoException();
-		
-		if (casillero.distanciaHasta(casilleroDestino) > estado.getVelocidad() ) throw new NoPuedeMoverAEsaDistanciaException();
-		
-		casillero.quitar();
-		try {
-			casilleroDestino.colocar(this);
-		} catch (CasilleroOcupadoException e) {
-		}
-
-	}
 
 	public void transformar() throws NoPuedeCambiarDeEstadoKiInsuficienteException, EstadoNoTieneProximoException{
 		if (ki < estado.getKiNecesarioParaTransformar()) throw new NoPuedeCambiarDeEstadoKiInsuficienteException();
@@ -74,6 +57,11 @@ public abstract class Personaje {
 		if(objetivo.estado.getPoderDePelea() > this.estado.getPoderDePelea()) {multiplicadorDeDanio-=0.2;}
 		float danioFinal = (estado.getPoderDePelea() * multiplicadorDeDanio);
 		objetivo.reducirVida((int)danioFinal);
+	}
+
+	public void mover(Camino camino) throws NoPuedeMoverCaminoObstruidoException, NoPuedeMoverAEsaDistanciaException {
+		
+		estado.mover(camino);		
 	}
 
 

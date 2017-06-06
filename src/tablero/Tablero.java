@@ -1,7 +1,6 @@
 package tablero;
 
-import direccion.Direccion;
-import excepciones.direccion.NoHayDireccionPosibleException;
+
 import excepciones.tablero.CasilleroOcupadoException;
 import excepciones.tablero.DimensionDeTableroInvalidoException;
 import personaje.Personaje;
@@ -23,7 +22,7 @@ public class Tablero {
 		for (int i=1; i<=dimensionX; i++){
 			for (int j=1; j<=dimensionY; j++){
 					Posicion posicion = new Posicion(i,j);
-					Casillero casillero = new Casillero(posicion,this);
+					Casillero casillero = new Casillero(posicion);
 					tablero.put(posicion, casillero); 					
 			}
 		}
@@ -45,18 +44,9 @@ public class Tablero {
 		return tablero.get(posicion);
 	}
 
-	public boolean caminoDespejadoDesdeHasta(Posicion posicionInicial, Posicion posicionFinal) throws NoHayDireccionPosibleException {
-		Direccion direccion = Direccion.getDireccion( posicionInicial,posicionFinal);
-		boolean caminoDespejado = true;
-		Posicion posicion = posicionInicial;
-		
-		while ( (caminoDespejado) && (!posicion.equals(posicionFinal))) {
-			posicion = posicion.siguientePosicionEnDireccion(direccion);
-			caminoDespejado = caminoDespejado && tablero.get(posicion).estaVacio();
-		}
-		return caminoDespejado;
-	}
 	
+
+	//La colocacion de los personajes sera distinto con las modificaciones que hay que hacer
 	/* Agrego metodo para agregar los personajes al inicio de la partida */
 	public void initDePersonajes(List<Personaje> guerrerosZ, List<Personaje> enemigos) throws CasilleroOcupadoException {
 		int i = 1, j = this.dimensionY;

@@ -1,6 +1,8 @@
 package estado.piccolo;
 
 import estado.Estado;
+import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
+import tablero.Camino;
 
 public class FortalecidoPiccolo implements EstadoPiccolo {
 
@@ -11,9 +13,9 @@ public class FortalecidoPiccolo implements EstadoPiccolo {
     int kiNecesarioParaEvolucionar = 0; //no necesita ki, necesita de gohan. Modificar luego
 
     @Override
-    public int getVelocidad() {
-        return VELOCIDAD;
-    }
+	public void mover(Camino camino) throws NoPuedeMoverCaminoObstruidoException {
+		camino.recorrer();
+	}
 
     @Override
     public Estado getProximoEstado() { return proximoEstado; }

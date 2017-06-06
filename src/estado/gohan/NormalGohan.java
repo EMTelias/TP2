@@ -1,6 +1,8 @@
 package estado.gohan;
 
 import estado.Estado;
+import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
+import tablero.Camino;
 
 public class NormalGohan implements EstadoGohan {
 
@@ -11,8 +13,8 @@ public class NormalGohan implements EstadoGohan {
     final int kiNecesarioParaEvolucionar = 10;
 
     @Override
-    public int getVelocidad() {
-        return VELOCIDAD;
+    public void mover(Camino camino) throws NoPuedeMoverCaminoObstruidoException {
+    	camino.recorrer();
     }
 
     @Override

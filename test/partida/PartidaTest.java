@@ -12,7 +12,7 @@ import tablero.Tablero;
 
 public class PartidaTest {
 
-    @Test
+ /*   @Test
     public void testCreoUnaPartidaConDosJugadoresCadaUnoConSus3PersonajesEntoncesLosPersonajesEstanInicializadosEnLosExtremos() throws DimensionDeTableroInvalidoException, CasilleroOcupadoException {
 
         JugadorGuerreroZ jugador1 = new JugadorGuerreroZ("jugador1");
@@ -27,6 +27,7 @@ public class PartidaTest {
         Assert.assertFalse(tablero.estaVacioEn(new Posicion(20,19)));
         Assert.assertFalse(tablero.estaVacioEn(new Posicion(20,20)));
     }
+*/
 
     @Test
     public void testCreoUnaPartidaConDosJugadoresEntoncesEsElTurnoDeGuerrerosZ() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {

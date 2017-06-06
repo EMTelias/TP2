@@ -1,7 +1,5 @@
 package tablero;
 
-import direccion.Direccion;
-
 public class Posicion {
 
 	private int posicionX;
@@ -32,12 +30,6 @@ public class Posicion {
 		return (Math.max(distanciaEnX, distanciaEnY));
 	}
 
-
-		public
-	 
-	 Posicion siguientePosicionEnDireccion(Direccion direccion) {
-		return new Posicion(posicionX + direccion.getDireccionX(), posicionY + direccion.getDireccionY());
-	}
 
 	public int getPosicionX() {
 		return posicionX;

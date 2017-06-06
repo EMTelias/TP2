@@ -2,6 +2,8 @@ package estado.majinboo;
 
 import estado.Estado;
 import excepciones.estado.EstadoNoTieneProximoException;
+import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
+import tablero.Camino;
 
 public class BooOriginalMajinBoo implements EstadoMajinBoo {
 
@@ -11,10 +13,9 @@ public class BooOriginalMajinBoo implements EstadoMajinBoo {
     int kiNecesarioParaEvolucionar = 0;
 
     @Override
-    public int getVelocidad() {
-        return VELOCIDAD;
-    }
-
+	public void mover(Camino camino) throws NoPuedeMoverCaminoObstruidoException {
+		camino.recorrer();
+	}
     @Override
     public Estado getProximoEstado() throws EstadoNoTieneProximoException { throw new EstadoNoTieneProximoException(); }
 

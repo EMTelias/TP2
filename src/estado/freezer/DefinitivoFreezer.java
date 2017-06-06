@@ -2,6 +2,8 @@ package estado.freezer;
 
 import estado.Estado;
 import excepciones.estado.EstadoNoTieneProximoException;
+import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
+import tablero.Camino;
 
 public class DefinitivoFreezer implements EstadoFreezer {
 
@@ -11,10 +13,9 @@ public class DefinitivoFreezer implements EstadoFreezer {
     int kiNecesarioParaEvolucionar = 0;
 
     @Override
-    public int getVelocidad() {
-        return VELOCIDAD;
+    public void mover(Camino camino) throws NoPuedeMoverCaminoObstruidoException {
+    	camino.recorrer();
     }
-
     @Override
     public Estado getProximoEstado() throws EstadoNoTieneProximoException { throw new EstadoNoTieneProximoException(); }
 

@@ -17,27 +17,17 @@ public class CasilleroTest {
 	}
 
 	@Test
-	public void testAgregoUnPersonajeEstaVacioDevuelveFalse() throws CasilleroOcupadoException{
-		Posicion posicion = new Posicion(2,3);
-		Casillero casillero = new Casillero(posicion);
-		Personaje goku = new Goku();
-		
-		Assert.assertTrue(casillero.estaVacio());
-		casillero.colocar(goku);
+	public void testCreoAGokuEnUnCasilleroEstaVacioDevuelveFalse() throws CasilleroOcupadoException{
+		Casillero casillero = new Casillero(new Posicion(1,1));
+		Personaje goku = new Goku(casillero);
 		Assert.assertFalse(casillero.estaVacio());
 	}
 	
 	@Test(expected = CasilleroOcupadoException.class)
-	public void testQuieroAgregarDosPersonajesAlMismoCasilleroDevuelveCasilleroOcupadoException() throws CasilleroOcupadoException{
-		Posicion posicion = new Posicion(2,3);
-		Casillero casillero = new Casillero(posicion);
-		Personaje goku = new Goku();
-		Personaje gohan = new Gohan();
-		
-		Assert.assertTrue(casillero.estaVacio());
-		casillero.colocar(goku);
-		Assert.assertFalse(casillero.estaVacio());
-		casillero.colocar(gohan);
+	public void testSeCreanGokuYGohanEnElMismoCasilleroDevuelveCasilleroOcupadoException() throws CasilleroOcupadoException{
+		Casillero casillero = new Casillero(new Posicion(1,1));
+		Personaje goku = new Goku(casillero);
+		Personaje gohan = new Gohan(casillero);
 	}
 	
 

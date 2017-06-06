@@ -4,7 +4,6 @@ import estado.freezer.DefinitivoFreezer;
 import estado.gohan.SuperSayajin2Gohan;
 import estado.goku.KaioKenGoku;
 import estado.goku.SuperSayajinGoku;
-import excepciones.direccion.NoHayDireccionPosibleException;
 import excepciones.estado.EstadoNoTieneProximoException;
 import excepciones.personaje.NoPuedeAtacarAEsaDistanciaException;
 import excepciones.personaje.NoPuedeCambiarDeEstadoKiInsuficienteException;
@@ -12,68 +11,80 @@ import excepciones.personaje.NoPuedeMoverAEsaDistanciaException;
 import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
 import excepciones.tablero.CasilleroOcupadoException;
 import excepciones.tablero.DimensionDeTableroInvalidoException;
+
+import java.util.ArrayList;
+
 import org.junit.Assert;
 import org.junit.Test;
+
+import tablero.Camino;
 import tablero.Casillero;
 import tablero.Posicion;
-import tablero.Tablero;
 
 public class PersonajeTest {
 
 	
 	// --------- Tests de movimiento ----------------
 	@Test
-	public void testColocoUnGokuYMuevoEnModoNormal() throws DimensionDeTableroInvalidoException, CasilleroOcupadoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, NoHayDireccionPosibleException{
-		Tablero tablero = new Tablero(10,10);
-		Personaje goku = new Goku();
-		Posicion posicionInicial= new Posicion(2,3);
-		Posicion posicionFinal= new Posicion(3,3);
-		Casillero casillero = tablero.getCasillero(posicionFinal);
+	public void testGokuSeMueveEnUnCaminoDespejadoNoDevuelveExcepcion() throws DimensionDeTableroInvalidoException, CasilleroOcupadoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException{
+		Casillero casillero1 = new Casillero(new Posicion(1,1));
+		Casillero casillero2 = new Casillero(new Posicion(1,2));
+		Casillero casillero3 = new Casillero(new Posicion(1,3));
 		
+		ArrayList<Casillero> casilleros = new ArrayList<Casillero>();
+		casilleros.add(casillero1);
+		casilleros.add(casillero2);
+		casilleros.add(casillero3);
 		
-		Assert.assertTrue( tablero.estaVacioEn(posicionInicial));
-		Assert.assertTrue( tablero.estaVacioEn(posicionFinal));
+		Personaje goku = new Goku(casillero1);
+		Camino camino = new Camino(casilleros);
 		
-		tablero.colocar(goku,posicionInicial);
-		Assert.assertFalse( tablero.estaVacioEn(posicionInicial));
-		Assert.assertTrue( tablero.estaVacioEn(posicionFinal));
-				
-		goku.moverA(casillero);
-		Assert.assertTrue( tablero.estaVacioEn(posicionInicial));
-		Assert.assertFalse( tablero.estaVacioEn(posicionFinal));
-	}
-	
-	@Test(expected = NoPuedeMoverAEsaDistanciaException.class)
-	public void testMuevoGokuEnModoNormalExcediendoVelocidadDevuelveNoPuedeMoverAEsaDistanciaException() throws DimensionDeTableroInvalidoException, CasilleroOcupadoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, NoHayDireccionPosibleException{
-		Tablero tablero = new Tablero(10,10);
-		Personaje goku = new Goku();
-		Posicion posicionInicial= new Posicion(2,3);
-		Posicion posicionFinal= new Posicion(5,3);
-		Casillero casillero = tablero.getCasillero(posicionFinal);
-		
-		tablero.colocar(goku,posicionInicial);
-		goku.moverA(casillero);
+		goku.mover(camino);
 	}
 	
 	@Test(expected = NoPuedeMoverCaminoObstruidoException.class)
-	public void testQuieroMoverAGokuConOtroPersonajeEnElMedioDevuelveNoPuedeMoverCaminoObstruidoException() throws DimensionDeTableroInvalidoException, CasilleroOcupadoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, NoHayDireccionPosibleException{
-		Tablero tablero = new Tablero(10,10);
-		Personaje goku = new Goku();
-		Personaje gohan = new Gohan();
-		Posicion posicionInicialGoku = new Posicion(2,3);
-		Posicion posicionInicialGohan = new Posicion(3,3);
-		Posicion posicionFinal= new Posicion(4,3);
+	public void testGokuQuiereMoverPeroEstaGohanEnMedioDelCaminoDevuelveNoPuedeMoverCaminoObstruidoException() throws CasilleroOcupadoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException{
+		Casillero casillero1 = new Casillero(new Posicion(1,1));
+		Casillero casillero2 = new Casillero(new Posicion(1,2));
+		Casillero casillero3 = new Casillero(new Posicion(1,3));
 		
-		Casillero casillero = tablero.getCasillero(posicionFinal);
+		ArrayList<Casillero> casilleros = new ArrayList<Casillero>();
+		casilleros.add(casillero1);
+		casilleros.add(casillero2);
+		casilleros.add(casillero3);
 		
-		tablero.colocar(goku,posicionInicialGoku);
-		tablero.colocar(gohan, posicionInicialGohan);
+		Personaje goku = new Goku(casillero1);
+		Personaje gohan = new Gohan(casillero2);
+		Camino camino = new Camino(casilleros);
 		
-		goku.moverA(casillero);
+		goku.mover(camino);
 	}
+	
+	@Test(expected = NoPuedeMoverAEsaDistanciaException.class)
+	public void testGokuQuiereMoverEnModoNormalExcediendoVelocidadDevuelveNoPuedeMoverAEsaDistanciaException() throws DimensionDeTableroInvalidoException, CasilleroOcupadoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException{
+		Casillero casillero1 = new Casillero(new Posicion(1,1));
+		Casillero casillero2 = new Casillero(new Posicion(1,2));
+		Casillero casillero3 = new Casillero(new Posicion(1,3));
+		Casillero casillero4 = new Casillero(new Posicion(1,4));
+		
+		ArrayList<Casillero> casilleros = new ArrayList<Casillero>();
+		casilleros.add(casillero1);
+		casilleros.add(casillero2);
+		casilleros.add(casillero3);
+		casilleros.add(casillero4);
+		
+		Personaje goku = new Goku(casillero1);
+		Camino camino = new Camino(casilleros);
+		
+		goku.mover(camino);
+	}
+	
+	
+	
+/*		
 
 	@Test 
-	public void testGokuEnModoNormalPuedeMover2PosicionesYEnPrimeraTransformacionPuedeMover3Posiciones() throws NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, NoHayDireccionPosibleException, CasilleroOcupadoException, DimensionDeTableroInvalidoException, NoPuedeCambiarDeEstadoKiInsuficienteException, EstadoNoTieneProximoException{
+	public void testGokuEnModoNormalPuedeMover2PosicionesYEnPrimeraTransformacionPuedeMover3Posiciones() throws NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, CasilleroOcupadoException, DimensionDeTableroInvalidoException, NoPuedeCambiarDeEstadoKiInsuficienteException, EstadoNoTieneProximoException{
 		Tablero tablero = new Tablero(10,10);
 		Personaje goku = new Goku();
 		Posicion posicion11= new Posicion(1,1);
@@ -288,5 +299,5 @@ public class PersonajeTest {
 		Assert.assertTrue(freezer.vida == 400);
 	}
 
-
+*/
 }

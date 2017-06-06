@@ -1,6 +1,8 @@
 package estado.goku;
 
 import estado.Estado;
+import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
+import tablero.Camino;
 
 public class KaioKenGoku implements EstadoGoku {
 
@@ -12,8 +14,8 @@ public class KaioKenGoku implements EstadoGoku {
 	final int kiNecesarioParaEvolucionar = 50;
 	
 	@Override
-	public int getVelocidad() {
-		return VELOCIDAD;
+	public void mover(Camino camino) throws NoPuedeMoverCaminoObstruidoException {
+		camino.recorrer();
 	}
 
 	@Override

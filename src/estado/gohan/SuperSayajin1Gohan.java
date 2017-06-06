@@ -1,6 +1,8 @@
 package estado.gohan;
 
 import estado.Estado;
+import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
+import tablero.Camino;
 
 public class SuperSayajin1Gohan implements EstadoGohan {
 
@@ -11,8 +13,8 @@ public class SuperSayajin1Gohan implements EstadoGohan {
     final int kiNecesarioParaEvolucionar = 30; //necesita algo mas tambien, ver luego
 
     @Override
-    public int getVelocidad() {
-        return VELOCIDAD;
+    public void mover(Camino camino) throws NoPuedeMoverCaminoObstruidoException {
+    	camino.recorrer();
     }
 
     @Override

@@ -1,6 +1,8 @@
 package estado.freezer;
 
 import estado.Estado;
+import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
+import tablero.Camino;
 
 public class NormalFreezer implements EstadoFreezer {
 
@@ -11,8 +13,8 @@ public class NormalFreezer implements EstadoFreezer {
     final int kiNecesarioParaEvolucionar = 20;
 
     @Override
-    public int getVelocidad() {
-        return VELOCIDAD;
+    public void mover(Camino camino) throws NoPuedeMoverCaminoObstruidoException {
+    	camino.recorrer();
     }
 
     @Override
