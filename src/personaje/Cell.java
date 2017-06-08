@@ -1,12 +1,12 @@
 package personaje;
 
-import estado.cell.NormalCell;
+import transformacion.cell.NormalCell;
 
 public class Cell extends Personaje {
 
 
     public Cell(){
-        estado = new NormalCell();
+        transformacion = new NormalCell();
         vida = 500;
     }
 

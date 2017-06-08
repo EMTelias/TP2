@@ -1,6 +1,6 @@
 package personaje;
 
-import estado.gohan.NormalGohan;
+import transformacion.gohan.NormalGohan;
 import excepciones.tablero.CasilleroOcupadoException;
 import tablero.Casillero;
 
@@ -11,7 +11,7 @@ public class Gohan extends Personaje {
     	unCasillero.colocar(this);
     	casillero = unCasillero;
     	
-        estado = new NormalGohan();
+        transformacion = new NormalGohan();
         vida = 300;
     }
 

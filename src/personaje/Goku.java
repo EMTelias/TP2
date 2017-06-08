@@ -1,6 +1,6 @@
 package personaje;
 
-import estado.goku.NormalGoku;
+import transformacion.goku.NormalGoku;
 import excepciones.tablero.CasilleroOcupadoException;
 import tablero.Casillero;
 
@@ -13,7 +13,7 @@ public class Goku extends Personaje {
 		
 		
 		
-		estado = new NormalGoku();
+		transformacion = new NormalGoku();
 		vida = 500;
 	}
 

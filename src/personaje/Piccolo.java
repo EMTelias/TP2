@@ -1,12 +1,12 @@
 package personaje;
 
-import estado.piccolo.NormalPiccolo;
+import transformacion.piccolo.NormalPiccolo;
 
 public class Piccolo extends Personaje {
 
 
     public Piccolo(){
-        estado = new NormalPiccolo();
+        transformacion = new NormalPiccolo();
         vida = 500;
     }
 

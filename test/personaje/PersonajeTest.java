@@ -1,9 +1,9 @@
 package personaje;
 
 import estado.freezer.DefinitivoFreezer;
-import estado.gohan.SuperSayajin2Gohan;
 import estado.goku.KaioKenGoku;
-import estado.goku.SuperSayajinGoku;
+import transformacion.goku.SuperSayajinGoku;
+import transformacion.gohan.SuperSayajin2Gohan;
 import excepciones.estado.EstadoNoTieneProximoException;
 import excepciones.personaje.NoPuedeAtacarAEsaDistanciaException;
 import excepciones.personaje.NoPuedeCambiarDeEstadoKiInsuficienteException;
@@ -15,6 +15,8 @@ import excepciones.tablero.DimensionDeTableroInvalidoException;
 
 import java.util.ArrayList;
 
+import excepciones.transformacion.NoHayProximaTransformacionException;
+import excepciones.transformacion.NoPuedeTransformarKiInsuficienteException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -80,8 +82,81 @@ public class PersonajeTest {
 		
 		goku.mover(camino);
 	}
-	
-	
+
+	//Tests de transformacion por ki de los personajes
+
+	@Test
+	public void testCreoUnGokuNormalYLoTransformoEnKaioKenGokuEntoncesSuKiDisminuye20() throws CasilleroOcupadoException, NoHayProximaTransformacionException, NoPuedeTransformarKiInsuficienteException {
+		Personaje goku = new Goku(new Casillero(new Posicion(1, 1)));
+		goku.aumentarKi(20);
+
+		goku.transformar();
+		Assert.assertTrue(goku.getKi() == 0);
+	}
+
+	@Test
+	public void testCreoUnGokuNormalYLoTransformoEnKaioKenGokuEntoncesSuTransformacionEsKaioKenGoku() throws CasilleroOcupadoException, NoHayProximaTransformacionException, NoPuedeTransformarKiInsuficienteException {
+		Personaje goku = new Goku(new Casillero(new Posicion(1, 1)));
+		goku.aumentarKi(20);
+
+		goku.transformar();
+		Assert.assertTrue(goku.transformacion.getClass() == transformacion.goku.KaioKenGoku.class);
+	}
+
+	@Test(expected = NoPuedeTransformarKiInsuficienteException.class)
+	public void testCreoUnGokuNormalYLoTransformoEnKaioKenGokuSinKiSuficienteEntoncesLanzaNoPuedeTransformarKiInsuficiente() throws NoPuedeTransformarKiInsuficienteException, NoHayProximaTransformacionException, CasilleroOcupadoException {
+		Personaje goku = new Goku(new Casillero(new Posicion(1,1)));
+		goku.transformar();
+	}
+
+	@Test(expected = NoPuedeTransformarKiInsuficienteException.class)
+	public void testCreoUnGohanNormalYLoTransformoEnSuperSayajinGohanSinKiSuficienteEntoncesLanzaNoPuedeTransformarKiInsuficiente() throws NoPuedeTransformarKiInsuficienteException, NoHayProximaTransformacionException, CasilleroOcupadoException {
+		Personaje gohan = new Gohan(new Casillero(new Posicion(1,1)));
+		gohan.transformar();
+	}
+
+
+	@Test(expected = NoHayProximaTransformacionException.class)
+	public void testCreoUnGokuSuperSayajinYLoTransformoSinTenerProximaTransformacionEntoncesLanzaNoHayProximaTransformacion() throws CasilleroOcupadoException, NoHayProximaTransformacionException, NoPuedeTransformarKiInsuficienteException {
+		Personaje goku = new Goku(new Casillero(new Posicion(1,1)));
+		goku.transformacion = new SuperSayajinGoku();
+		goku.transformar();
+	}
+
+
+	@Test(expected = NoHayProximaTransformacionException.class)
+	public void testCreoUnGohanSuperSayajin2YLoTransformoSinTenerProximaTransformacionEntoncesLanzaNoHayProximaTransformacion() throws CasilleroOcupadoException, NoHayProximaTransformacionException, NoPuedeTransformarKiInsuficienteException {
+		Personaje gohan = new Gohan(new Casillero(new Posicion(1,1)));
+		gohan.transformacion = new SuperSayajin2Gohan();
+		gohan.transformar();
+	}
+
+	@Test
+	public void testTransformoAGokuCon80DeKiYSuKiTieneQueBajarA60() throws NoPuedeCambiarDeEstadoKiInsuficienteException, EstadoNoTieneProximoException, NoHayProximaTransformacionException, NoPuedeTransformarKiInsuficienteException, CasilleroOcupadoException {
+		Personaje goku = new Goku(new Casillero(new Posicion(1,1)));
+		goku.aumentarKi(80);
+		goku.transformar();
+		Assert.assertTrue(goku.getKi() == 60);
+	}
+
+
+	@Test
+	public void testTransformoAGokuNormal2VecesYVerificoQueSuKiPaseDe100A30() throws NoPuedeCambiarDeEstadoKiInsuficienteException, EstadoNoTieneProximoException, CasilleroOcupadoException, NoHayProximaTransformacionException, NoPuedeTransformarKiInsuficienteException {
+		Personaje goku = new Goku(new Casillero(new Posicion(1,1)));
+		goku.aumentarKi(100);
+		goku.transformar();
+		goku.transformar();
+		Assert.assertTrue(goku.getKi() == 30);
+	}
+
+	@Test
+	public void testTransformoAGokuNormal2VecesYVerificoQueSuTransformacionSeaSuperSayajinGoku() throws NoPuedeCambiarDeEstadoKiInsuficienteException, EstadoNoTieneProximoException, CasilleroOcupadoException, NoHayProximaTransformacionException, NoPuedeTransformarKiInsuficienteException {
+		Personaje goku = new Goku(new Casillero(new Posicion(1,1)));
+		goku.aumentarKi(100);
+		goku.transformar();
+		goku.transformar();
+		Assert.assertTrue(goku.transformacion.getClass() == SuperSayajinGoku.class);
+	}
 	
 /*		
 
@@ -125,55 +200,9 @@ public class PersonajeTest {
 		goku.moverA(casillero61);
 		Assert.assertFalse(tablero.estaVacioEn(posicion61));
 		Assert.assertTrue(tablero.estaVacioEn(posicion31));
-		
-		
-		
-	}
-	
-	
-	// --------------- Test de transformacion --------------
-	@Test(expected = NoPuedeCambiarDeEstadoKiInsuficienteException.class)
-	public void testTransformoAGokuCon0KiDevuelveNopuedeCambiarDeEstadoKiInsuficienteException() throws NoPuedeCambiarDeEstadoKiInsuficienteException, EstadoNoTieneProximoException {
-		Personaje goku = new Goku();
-		goku.transformar();
+
 	}
 
-	@Test(expected = EstadoNoTieneProximoException.class)
-	public void testTransformoAGokuSuperSayajinDevuelveEstadoNoTieneProximoException() throws NoPuedeCambiarDeEstadoKiInsuficienteException, EstadoNoTieneProximoException {
-		Personaje goku = new Goku();
-		goku.estado = new SuperSayajinGoku();
-		goku.transformar();
-	}
-
-	@Test public void testTransformoAGokuNormalYRevisoQueTengaEstadoKaioKen() throws NoPuedeCambiarDeEstadoKiInsuficienteException, EstadoNoTieneProximoException {
-		Personaje goku = new Goku();
-		goku.aumentarKi(20);
-		goku.transformar();
-		Assert.assertTrue(goku.estado.getClass() == KaioKenGoku.class);
-	}
-
-	@Test public void testTransformoAGokuCon80DeKiYSuKiTieneQueBajarA60() throws NoPuedeCambiarDeEstadoKiInsuficienteException, EstadoNoTieneProximoException {
-		Personaje goku = new Goku();
-		goku.aumentarKi(80);
-		goku.transformar();
-		Assert.assertTrue(goku.ki == 60);
-	}
-
-	@Test public void testTransformoAGokuNormal2VecesYVerificoQueSuKiPaseDe100A30() throws NoPuedeCambiarDeEstadoKiInsuficienteException, EstadoNoTieneProximoException {
-		Personaje goku = new Goku();
-		goku.aumentarKi(100);
-		goku.transformar();
-		goku.transformar();
-		Assert.assertTrue(goku.ki == 30);
-	}
-
-	@Test public void testTransformoAGokuNormal2VecesYVerificoQueTengaEstadoSuperSayajin() throws NoPuedeCambiarDeEstadoKiInsuficienteException, EstadoNoTieneProximoException {
-		Personaje goku = new Goku();
-		goku.aumentarKi(100);
-		goku.transformar();
-		goku.transformar();
-		Assert.assertTrue(goku.estado.getClass() == SuperSayajinGoku.class);
-	}
 
 	@Test public void testCreoAGokuYTiene500PuntosDeVida(){
 		Personaje goku = new Goku();

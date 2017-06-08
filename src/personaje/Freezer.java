@@ -1,12 +1,12 @@
 package personaje;
 
-import estado.freezer.NormalFreezer;
+import transformacion.freezer.NormalFreezer;
 
 public class Freezer extends Personaje {
 
 
     public Freezer(){
-        estado = new NormalFreezer();
+        transformacion = new NormalFreezer();
         vida = 400;
     }
 
