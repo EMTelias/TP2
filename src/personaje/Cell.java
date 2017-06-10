@@ -40,11 +40,21 @@ public class Cell extends Personaje {
         if (!tieneSuficienteKi(kiAtaqueEspecial)) {
             throw new KiInsuficienteException();
         }
+        int vidaAntesAtaque = otroPersonaje.getVida();
         Ataque ataque = new Ataque(this, otroPersonaje, 1);
         ataque.execute();
         reducirKi(kiAtaqueEspecial);
+        int vidaDespuesAtaque = otroPersonaje.getVida();
+        this.absorber(vidaAntesAtaque - vidaDespuesAtaque);
+    }
+
+    private void absorber(int danioProducido) {
         this.absorber += 1;
-        //falta sumarle la vida que absorbe, implementar luego
+        this.aumentarVida(danioProducido);
+    }
+
+    public int getAbsorber() {
+        return this.absorber;
     }
 
 

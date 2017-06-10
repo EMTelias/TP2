@@ -24,11 +24,11 @@ public abstract class Transformacion {
     }
 
 
-    public Transformacion transformar(Personaje unPersonaje) throws NoHayProximaTransformacionException, NoPuedeTransformarKiInsuficienteException {
+    public Transformacion transformar(Personaje unPersonaje) throws NoHayProximaTransformacionException, NoPuedeTransformarException, KiInsuficienteException {
         int kiActual = unPersonaje.getKi();
 
         if (kiActual < this.kiNecesarioTransformar) {
-            throw new NoPuedeTransformarKiInsuficienteException();
+            throw new KiInsuficienteException();
         }
 
         unPersonaje.setKi(kiActual - this.kiNecesarioTransformar);

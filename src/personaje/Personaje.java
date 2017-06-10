@@ -7,14 +7,12 @@ import acciones.AtaqueEspecialHandler;
 import estado.goku.EstadoGoku;
 import estado.Estado;
 import excepciones.acciones.NoPuedeAtacarMismoEquipoException;
-import excepciones.estado.EstadoNoTieneProximoException;
 import excepciones.personaje.NoPuedeAtacarAEsaDistanciaException;
-import excepciones.personaje.NoPuedeCambiarDeEstadoKiInsuficienteException;
 import excepciones.personaje.NoPuedeMoverAEsaDistanciaException;
 import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
 import excepciones.transformacion.KiInsuficienteException;
 import excepciones.transformacion.NoHayProximaTransformacionException;
-import excepciones.transformacion.NoPuedeTransformarKiInsuficienteException;
+import excepciones.transformacion.NoPuedeTransformarException;
 import tablero.Camino;
 import tablero.Casillero;
 import excepciones.tablero.CasilleroOcupadoException;
@@ -39,7 +37,7 @@ public abstract class Personaje {
 	}
 
 
-	public void transformar() throws NoHayProximaTransformacionException, NoPuedeTransformarKiInsuficienteException {
+	public void transformar() throws NoHayProximaTransformacionException, KiInsuficienteException, NoPuedeTransformarException {
 		this.transformacion = transformacion.transformar(this);
 	}
 
@@ -63,8 +61,16 @@ public abstract class Personaje {
 		this.ki = nuevoKi;
 	}
 
+	public void aumentarVida(int cantidad) {
+		this.vida += cantidad;
+	}
+
 	public void reducirVida(int cantidad){
-		vida-=cantidad;
+		this.vida-=cantidad;
+	}
+
+	public int getVida() {
+		return this.vida;
 	}
 
 	public boolean tieneElConsumible(Consumible unConsumible){
