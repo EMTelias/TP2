@@ -2,19 +2,25 @@ package personaje;
 
 import Consumibles.Consumible;
 import Consumibles.EsferaDelDragon;
+import acciones.Ataque;
+import acciones.AtaqueEspecialHandler;
 import estado.goku.EstadoGoku;
 import estado.Estado;
+import excepciones.acciones.NoPuedeAtacarMismoEquipoException;
 import excepciones.estado.EstadoNoTieneProximoException;
 import excepciones.personaje.NoPuedeAtacarAEsaDistanciaException;
 import excepciones.personaje.NoPuedeCambiarDeEstadoKiInsuficienteException;
 import excepciones.personaje.NoPuedeMoverAEsaDistanciaException;
 import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
+import excepciones.transformacion.KiInsuficienteException;
 import excepciones.transformacion.NoHayProximaTransformacionException;
 import excepciones.transformacion.NoPuedeTransformarKiInsuficienteException;
 import tablero.Camino;
 import tablero.Casillero;
 import excepciones.tablero.CasilleroOcupadoException;
 import transformacion.Transformacion;
+
+import java.util.HashMap;
 
 public abstract class Personaje {
 
@@ -23,10 +29,13 @@ public abstract class Personaje {
 	protected int ki;
 	protected int vida;
 	protected Transformacion transformacion;
+	protected HashMap<Class, AtaqueEspecialHandler> ataqueEspecialMap;
 
+	protected abstract void initAtaqueEspecialMap();
 	
 	public Personaje(){
 		ki = 0;
+		this.initAtaqueEspecialMap();
 	}
 
 
@@ -35,7 +44,15 @@ public abstract class Personaje {
 	}
 
 	public void aumentarKi(int aumento){
-		ki+=aumento;
+		this.ki+=aumento;
+	}
+
+	public void reducirKi (int reduccion) {
+		this.ki -= reduccion;
+	}
+
+	public boolean tieneSuficienteKi(int kiMinimo) {
+		return (this.ki >= kiMinimo);
 	}
 
 	public int getKi() {
@@ -58,9 +75,9 @@ public abstract class Personaje {
 		return (this.casillero.distanciaHasta(unPersonaje.casillero));
 	}
 
-	public void ataqueBasicoA(Personaje objetivo)throws NoPuedeAtacarAEsaDistanciaException{
+	/*public void ataqueBasicoA(Personaje objetivo)throws NoPuedeAtacarAEsaDistanciaException{
 		//Segun tenga la "Esfera del Dragon (+25%dmg)" y/o ataque a un enemigo de mayor poder (-20%dmg)
-		//Ej: si tengo la esfera y ataco a alguien mas debil que yo, tendria un aumento del 25% => dañoFinal=(poderDeAtaque * 1,25)
+		//Ej: si tengo la esfera y ataco a alguien mas debil que yo, tendria un aumento del 25% => danioFinal=(poderDeAtaque * 1,25)
 		if (this.distanciaA(objetivo) > estado.getDistanciaDeAtaque()) {
 			throw new NoPuedeAtacarAEsaDistanciaException();
 		}
@@ -73,7 +90,30 @@ public abstract class Personaje {
 		}
 		float danioFinal = (estado.getPoderDePelea() * multiplicadorDeDanio);
 		objetivo.reducirVida((int)danioFinal);
+	}*/
+
+	public void atacarA(Personaje otroPersonaje) throws NoPuedeAtacarAEsaDistanciaException {
+		Ataque ataque = new Ataque(this, otroPersonaje, 1);
+		ataque.execute();
 	}
+
+	public void ataqueEspecialA(Personaje otroPersonaje) throws NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, KiInsuficienteException {
+		AtaqueEspecialHandler handler = this.ataqueEspecialMap.get(otroPersonaje.getClass());
+		handler.ataqueEspecialA(otroPersonaje);
+	}
+
+	public int getVelocidad() {
+		return transformacion.getVelocidad();
+	}
+
+	public int getDistanciaAtaque() {
+		return transformacion.getDistanciaAtaque();
+	}
+
+	public int getPoderDePelea() {
+		return transformacion.getPoderDePelea();
+	}
+
 
 	public void mover(Camino camino) throws NoPuedeMoverCaminoObstruidoException, NoPuedeMoverAEsaDistanciaException {
 		

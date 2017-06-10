@@ -44,4 +44,17 @@ public abstract class Transformacion {
 
         camino.recorrer();
     }
+
+    public int getVelocidad() {
+        return this.velocidad;
+    }
+
+    public int getPoderDePelea() {
+        return this.poderDePelea;
+    }
+
+    public int getDistanciaAtaque() {
+        return this.distanciaAtaque;
+    }
+
 }

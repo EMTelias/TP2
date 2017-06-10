@@ -11,8 +11,8 @@ public class JugadorEnemigo extends Jugador{
 
     public JugadorEnemigo(String nombreDeJugador){
         this.nombreDeJugador = nombreDeJugador;
-        this.personajes.add(new Freezer());
-        this.personajes.add(new Cell());
-        this.personajes.add(new MajinBoo());
+        //this.personajes.add(new Freezer());
+        //this.personajes.add(new Cell());
+        //this.personajes.add(new MajinBoo());
     }
 }

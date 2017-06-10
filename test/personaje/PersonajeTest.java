@@ -1,7 +1,8 @@
 package personaje;
 
-import estado.freezer.DefinitivoFreezer;
-import estado.goku.KaioKenGoku;
+import excepciones.acciones.NoPuedeAtacarMismoEquipoException;
+import excepciones.transformacion.KiInsuficienteException;
+import transformacion.freezer.SegundaFormaFreezer;
 import transformacion.goku.SuperSayajinGoku;
 import transformacion.gohan.SuperSayajin2Gohan;
 import excepciones.estado.EstadoNoTieneProximoException;
@@ -83,6 +84,8 @@ public class PersonajeTest {
 		goku.mover(camino);
 	}
 
+
+
 	//Tests de transformacion por ki de los personajes
 
 	@Test
@@ -96,7 +99,7 @@ public class PersonajeTest {
 
 	@Test
 	public void testCreoUnGokuNormalYLoTransformoEnKaioKenGokuEntoncesSuTransformacionEsKaioKenGoku() throws CasilleroOcupadoException, NoHayProximaTransformacionException, NoPuedeTransformarKiInsuficienteException {
-		Personaje goku = new Goku(new Casillero(new Posicion(1, 1)));
+		Goku goku = new Goku(new Casillero(new Posicion(1, 1)));
 		goku.aumentarKi(20);
 
 		goku.transformar();
@@ -157,10 +160,114 @@ public class PersonajeTest {
 		goku.transformar();
 		Assert.assertTrue(goku.transformacion.getClass() == SuperSayajinGoku.class);
 	}
-	
-/*		
 
-	@Test 
+	// Tests de ataques basicos entre personajes
+	@Test
+	public void testGokuNormalAtacaConElAtaqueBasicoAFreezerNormalYLeDejaLaVidaEn380() throws NoPuedeAtacarAEsaDistanciaException, CasilleroOcupadoException {
+		Personaje goku = new Goku(new Casillero(new Posicion(2,2)));
+		Personaje freezer = new Freezer(new Casillero(new Posicion(2,3)));
+
+		goku.atacarA(freezer);
+
+		Assert.assertTrue(freezer.vida == 380);
+	}
+
+
+	@Test
+	public void testGokuNormalAtacaConElAtaqueBasicoAFreezerSegundaFormaYLeDejaLaVidaEn380() throws NoPuedeAtacarAEsaDistanciaException, CasilleroOcupadoException {
+		Personaje goku = new Goku(new Casillero(new Posicion(2,2)));
+		Personaje freezer = new Freezer(new Casillero(new Posicion(2,3)));
+		freezer.transformacion = new SegundaFormaFreezer();
+
+		goku.atacarA(freezer);
+
+		Assert.assertTrue(freezer.vida == 384);
+	}
+
+	@Test (expected = NoPuedeAtacarAEsaDistanciaException.class)
+	public void testGokuNormalAtacaAFreezerNormalEstandoADistancia3LanzaNoPuedeAtacarAEsaDistanciaException() throws NoPuedeAtacarAEsaDistanciaException, CasilleroOcupadoException {
+		Personaje goku = new Goku(new Casillero(new Posicion(2,2)));
+		Personaje freezer = new Freezer(new Casillero(new Posicion(2,5)));
+		goku.atacarA(freezer);
+
+	}
+
+	@Test
+	public void testColocoAGohanSS2En33YFreezerNormalEn66YHaceAtaqueBasicoDejandoloEn300() throws NoPuedeAtacarAEsaDistanciaException, CasilleroOcupadoException {
+		// Poder de pelea de Gohan SS2: 100. Poder de pelea de Freezer normal: 20.
+		Personaje gohan = new Gohan(new Casillero(new Posicion(3,3)));
+		Personaje freezer = new Freezer(new Casillero(new Posicion(6,6)));
+		gohan.transformacion = new SuperSayajin2Gohan();
+
+		gohan.atacarA(freezer);
+		Assert.assertTrue(freezer.vida == 300);
+	}
+
+
+	// Tests ataques especiales
+
+	@Test(expected = NoPuedeAtacarMismoEquipoException.class)
+	public void testGokuNormalHaceAtaqueEspecialASuEquipoDebeLanzarNoPuedeAtacarMismoEquipoException() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException {
+		Personaje goku = new Goku(new Casillero(new Posicion(1,1)));
+		Personaje gohan = new Gohan(new Casillero(new Posicion(2,2)));
+
+		goku.ataqueEspecialA(gohan);
+	}
+
+	@Test(expected = NoPuedeAtacarAEsaDistanciaException.class)
+	public void testGokuNormalHaceAtaqueEspecialAFreezerADistancia3DebeLanzarNoPuedeAtacarAEsaDistanciaException() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException {
+		Personaje goku = new Goku(new Casillero(new Posicion(1,1)));
+		Personaje freezer = new Freezer(new Casillero(new Posicion(4,1)));
+		goku.aumentarKi(20);
+		goku.ataqueEspecialA(freezer);
+	}
+
+	@Test
+	public void testGokuNormalHaceAtaqueEspecialAFreezerNormalLeDebeSacar30DeVidaDejandoloEn370() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException {
+		//Poder ataque goku= 20 .. Poder ataque freezer 20. Ataque especial hace 50% mas danio que 20 --> 30
+		Personaje goku = new Goku(new Casillero(new Posicion(1,1)));
+		Personaje freezer = new Freezer(new Casillero(new Posicion(3,1)));
+		goku.aumentarKi(20);
+		goku.ataqueEspecialA(freezer);
+
+		Assert.assertTrue(freezer.vida == 370);
+	}
+
+	@Test
+	public void testGokuNormalHaceAtaqueEspecialAMajinBooNormalLeDebeSacar24DeVidaDejandoloEn276() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException {
+		//Poder ataque goku= 20 .. Poder ataque majin boo 30.(-20% danio) Ataque especial hace 50% mas danio que 20*0.8=16 --> 24
+		Personaje goku = new Goku(new Casillero(new Posicion(1,1)));
+		Personaje majinBoo = new MajinBoo(new Casillero(new Posicion(3,1)));
+		goku.aumentarKi(20);
+		goku.ataqueEspecialA(majinBoo);
+
+		Assert.assertTrue(majinBoo.vida == 276);
+	}
+
+	@Test
+	public void testFreezerSegundaFormaHaceAtaqueEspecialAPiccoloNormalLeDebeSacar24DeVidaDejandoloEn276() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException, NoHayProximaTransformacionException, NoPuedeTransformarKiInsuficienteException {
+		//Poder ataque freezer 2daforma= 40 .. Poder ataque piccolo 20. Ataque especial hace 50% mas danio que 40 --> 60
+		Personaje freezer = new Freezer(new Casillero(new Posicion(1,1)));
+		Personaje piccolo = new Piccolo(new Casillero(new Posicion(3,1)));
+		freezer.aumentarKi(40);
+		freezer.transformar();
+		freezer.ataqueEspecialA(piccolo);
+
+		Assert.assertTrue(piccolo.vida == 440);
+	}
+
+	@Test(expected = NoPuedeAtacarMismoEquipoException.class)
+	public void testFreezerNormalHaceAtaqueEspecialASuEquipoDebeLanzarNoPuedeAtacarMismoEquipoException() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException {
+		Personaje freezer = new Freezer(new Casillero(new Posicion(1,1)));
+		Personaje cell = new Cell(new Casillero(new Posicion(2,2)));
+
+		freezer.ataqueEspecialA(cell);
+	}
+
+
+/*
+
+	@Test
 	public void testGokuEnModoNormalPuedeMover2PosicionesYEnPrimeraTransformacionPuedeMover3Posiciones() throws NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, CasilleroOcupadoException, DimensionDeTableroInvalidoException, NoPuedeCambiarDeEstadoKiInsuficienteException, EstadoNoTieneProximoException{
 		Tablero tablero = new Tablero(10,10);
 		Personaje goku = new Goku();
@@ -169,33 +276,33 @@ public class PersonajeTest {
 		Posicion posicion41= new Posicion(4,1);
 		Posicion posicion61= new Posicion(6,1);
 		Posicion posicion71= new Posicion(7,1);
-		
+
 		tablero.colocar(goku,posicion11);
-		
+
 		Casillero casillero41 = tablero.getCasillero(posicion41);
-		try{	
+		try{
 			goku.moverA(casillero41);
 			Assert.assertTrue(false);
 		}catch(NoPuedeMoverAEsaDistanciaException e){
 			Assert.assertTrue(true);
 		}
-		
+
 		Casillero casillero31 = tablero.getCasillero(posicion31);
 		goku.moverA(casillero31);
 		Assert.assertFalse(tablero.estaVacioEn(posicion31));
 		Assert.assertTrue(tablero.estaVacioEn(posicion11));
-		
+
 		goku.aumentarKi(20);
 		goku.transformar();
-		
+
 		Casillero casillero71 = tablero.getCasillero(posicion71);
-		try{	
+		try{
 			goku.moverA(casillero71);
 			Assert.assertTrue(false);
 		}catch(NoPuedeMoverAEsaDistanciaException e){
 			Assert.assertTrue(true);
 		}
-		
+
 		Casillero casillero61 = tablero.getCasillero(posicion61);
 		goku.moverA(casillero61);
 		Assert.assertFalse(tablero.estaVacioEn(posicion61));
@@ -209,19 +316,7 @@ public class PersonajeTest {
 		Assert.assertTrue(goku.vida == 500);
 	}
 
-	@Test public void testGokuNormalAtacaConElAtaqueNormalAOtroGokuYLeDejaLaVidaEn480() throws NoPuedeAtacarAEsaDistanciaException, DimensionDeTableroInvalidoException, CasilleroOcupadoException {
-		Posicion posicion1 = new Posicion(2,3);
-		Posicion posicion2 = new Posicion(2,4);
-		Personaje goku1 = new Goku();
-		Personaje goku2 = new Goku();
 
-		Tablero tablero = new Tablero(10,10);
-		tablero.colocar(goku1,posicion1);
-		tablero.colocar(goku2,posicion2);
-
-		goku1.ataqueBasicoA(goku2);
-		Assert.assertTrue(goku2.vida == 480);
-	}
 
 	@Test public void testGohanNormalAtacaAGokuDaniando20PorcientoMenosDejandoloEn488() throws NoPuedeAtacarAEsaDistanciaException, CasilleroOcupadoException, DimensionDeTableroInvalidoException {
 		//Poder de ataque de gohan: 15 / Poder de ataque de goku: 20 => gohan daña 20% menos(12dmg)
@@ -253,21 +348,6 @@ public class PersonajeTest {
 		Assert.assertTrue(gohan.vida == 280);
 	}
 
-	@Test (expected = NoPuedeAtacarAEsaDistanciaException.class)
-	public void testGokuAtacaAGohanEstandoADistancia3EsperoRecibirNoPuedeAtacarAEsaDistanciaException() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException, NoPuedeAtacarAEsaDistanciaException {
-		Posicion posicion1 = new Posicion(2,1);
-		Posicion posicion2 = new Posicion(2,4);
-		Personaje goku = new Goku();
-		Personaje gohan = new Gohan();
-
-		Tablero tablero = new Tablero(10,10);
-		tablero.colocar(goku,posicion1);
-		tablero.colocar(gohan,posicion2);
-
-		goku.ataqueBasicoA(gohan);
-
-	}
-
 	@Test
 	public void testCreoUnTablero20x20ColocoAGokuNormalEn44YFreezerNormalEn66YHaceAtaqueBasicoDejandoloEn380() throws DimensionDeTableroInvalidoException, CasilleroOcupadoException, NoPuedeAtacarAEsaDistanciaException {
 		Tablero tablero = new Tablero(20,20);
@@ -280,38 +360,6 @@ public class PersonajeTest {
 
 		goku.ataqueBasicoA(freezer);
 		Assert.assertTrue(freezer.vida == 380);
-	}
-
-	@Test
-	public void testCreoUnTablero20x20ColocoAGokuNormalEn44YFreezerDefinitivoEn66YHaceAtaqueBasicoDejandoloEn384() throws DimensionDeTableroInvalidoException, CasilleroOcupadoException, NoPuedeAtacarAEsaDistanciaException {
-		// Poder de pelea de Goku: 20. Poder de pelea de Freezer definitivo: 50. -20%dmg (16)
-		Tablero tablero = new Tablero(20,20);
-		Personaje goku = new Goku();
-		Personaje freezer = new Freezer();
-		freezer.estado = new DefinitivoFreezer();
-		Posicion posicionGoku = new Posicion(4,4);
-		Posicion posicionFreezer = new Posicion(6,6);
-		tablero.colocar(goku, posicionGoku);
-		tablero.colocar(freezer, posicionFreezer);
-
-		goku.ataqueBasicoA(freezer);
-		Assert.assertTrue(freezer.vida == 384);
-	}
-
-	@Test
-	public void testCreoUnTablero20x20ColocoAGohanSS2En33YFreezerNormalEn66YHaceAtaqueBasicoDejandoloEn300() throws DimensionDeTableroInvalidoException, CasilleroOcupadoException, NoPuedeAtacarAEsaDistanciaException {
-		// Poder de pelea de Gohan SS2: 100. Poder de pelea de Freezer normal: 50.
-		Tablero tablero = new Tablero(20,20);
-		Personaje gohan = new Gohan();
-		Personaje freezer = new Freezer();
-		gohan.estado = new SuperSayajin2Gohan();
-		Posicion posicionGohan = new Posicion(3,3);
-		Posicion posicionFreezer = new Posicion(6,6);
-		tablero.colocar(gohan, posicionGohan);
-		tablero.colocar(freezer, posicionFreezer);
-
-		gohan.ataqueBasicoA(freezer);
-		Assert.assertTrue(freezer.vida == 300);
 	}
 
 	@Test(expected = NoPuedeAtacarAEsaDistanciaException.class)
