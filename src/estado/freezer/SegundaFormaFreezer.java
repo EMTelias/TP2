@@ -2,6 +2,7 @@ package estado.freezer;
 
 import estado.Estado;
 import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
+import excepciones.tablero.NoHayQuienRecorraException;
 import tablero.Camino;
 
 public class SegundaFormaFreezer implements EstadoFreezer {
@@ -13,7 +14,7 @@ public class SegundaFormaFreezer implements EstadoFreezer {
     final int kiNecesarioParaEvolucionar = 50;
 
     @Override
-    public void mover(Camino camino) throws NoPuedeMoverCaminoObstruidoException {
+    public void mover(Camino camino) throws NoPuedeMoverCaminoObstruidoException, NoHayQuienRecorraException {
     	camino.recorrer();
     }
 

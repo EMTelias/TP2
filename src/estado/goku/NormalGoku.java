@@ -3,6 +3,7 @@ package estado.goku;
 import estado.Estado;
 import excepciones.personaje.NoPuedeMoverAEsaDistanciaException;
 import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
+import excepciones.tablero.NoHayQuienRecorraException;
 import tablero.Camino;
 
 public class NormalGoku implements EstadoGoku {
@@ -15,7 +16,7 @@ public class NormalGoku implements EstadoGoku {
 	final int kiNecesarioParaEvolucionar = 20;
 	
 	@Override
-	public void mover(Camino camino) throws NoPuedeMoverCaminoObstruidoException, NoPuedeMoverAEsaDistanciaException {
+	public void mover(Camino camino) throws NoPuedeMoverCaminoObstruidoException, NoPuedeMoverAEsaDistanciaException, NoHayQuienRecorraException {
 		
 		if (camino.distancia() > VELOCIDAD ){
 			throw new NoPuedeMoverAEsaDistanciaException();

@@ -2,6 +2,7 @@ package estado.cell;
 
 import estado.Estado;
 import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
+import excepciones.tablero.NoHayQuienRecorraException;
 import tablero.Camino;
 
 public class SemiPerfectoCell implements EstadoCell {
@@ -13,7 +14,7 @@ public class SemiPerfectoCell implements EstadoCell {
     final int kiNecesarioParaEvolucionar = 0;
 
     @Override
-    public void mover(Camino camino) throws NoPuedeMoverCaminoObstruidoException {
+    public void mover(Camino camino) throws NoPuedeMoverCaminoObstruidoException, NoHayQuienRecorraException {
     	camino.recorrer();
     }
 

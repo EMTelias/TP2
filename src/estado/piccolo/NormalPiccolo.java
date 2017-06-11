@@ -2,6 +2,7 @@ package estado.piccolo;
 
 import estado.Estado;
 import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
+import excepciones.tablero.NoHayQuienRecorraException;
 import tablero.Camino;
 
 public class NormalPiccolo implements EstadoPiccolo {
@@ -13,7 +14,7 @@ public class NormalPiccolo implements EstadoPiccolo {
     final int kiNecesarioParaEvolucionar = 20;
 
     @Override
-	public void mover(Camino camino) throws NoPuedeMoverCaminoObstruidoException {
+	public void mover(Camino camino) throws NoPuedeMoverCaminoObstruidoException, NoHayQuienRecorraException {
 		camino.recorrer();
 	}
 

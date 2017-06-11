@@ -2,6 +2,7 @@ package estado.majinboo;
 
 import estado.Estado;
 import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
+import excepciones.tablero.NoHayQuienRecorraException;
 import tablero.Camino;
 
 public class BooMaloMajinBoo implements EstadoMajinBoo {
@@ -13,7 +14,7 @@ public class BooMaloMajinBoo implements EstadoMajinBoo {
     final int kiNecesarioParaEvolucionar = 50;
 
     @Override
-	public void mover(Camino camino) throws NoPuedeMoverCaminoObstruidoException {
+	public void mover(Camino camino) throws NoPuedeMoverCaminoObstruidoException, NoHayQuienRecorraException {
 		camino.recorrer();
 	}
 

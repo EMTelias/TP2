@@ -2,6 +2,7 @@ package estado.piccolo;
 
 import estado.Estado;
 import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
+import excepciones.tablero.NoHayQuienRecorraException;
 import tablero.Camino;
 
 public class FortalecidoPiccolo implements EstadoPiccolo {
@@ -13,7 +14,7 @@ public class FortalecidoPiccolo implements EstadoPiccolo {
     int kiNecesarioParaEvolucionar = 0; //no necesita ki, necesita de gohan. Modificar luego
 
     @Override
-	public void mover(Camino camino) throws NoPuedeMoverCaminoObstruidoException {
+	public void mover(Camino camino) throws NoPuedeMoverCaminoObstruidoException, NoHayQuienRecorraException {
 		camino.recorrer();
 	}
 

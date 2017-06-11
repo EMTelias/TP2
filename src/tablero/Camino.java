@@ -7,6 +7,7 @@ import java.util.List;
 import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
 import excepciones.tablero.CaminoInvalidoException;
 import excepciones.tablero.CasilleroOcupadoException;
+import excepciones.tablero.NoHayQuienRecorraException;
 import personaje.Personaje;
 
 public class Camino {
@@ -25,12 +26,14 @@ public class Camino {
 		return casillerosDelCamino.size()-1;
 	}
 
-	public void recorrer() throws NoPuedeMoverCaminoObstruidoException {
+	public void recorrer() throws NoPuedeMoverCaminoObstruidoException, NoHayQuienRecorraException {
 		boolean puedeMover = true;
 		
 		Iterator<Casillero> iterator = casillerosDelCamino.iterator();
 		Casillero unCasillero = iterator.next();
 		Casillero casilleroOrigen = unCasillero;
+		
+		if (casilleroOrigen.estaVacio()) throw new NoHayQuienRecorraException();
 		
 		while (iterator.hasNext()){
 			unCasillero = iterator.next();

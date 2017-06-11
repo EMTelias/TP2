@@ -16,6 +16,7 @@ import excepciones.transformacion.NoPuedeTransformarException;
 import tablero.Camino;
 import tablero.Casillero;
 import excepciones.tablero.CasilleroOcupadoException;
+import excepciones.tablero.NoHayQuienRecorraException;
 import transformacion.Transformacion;
 
 import java.util.HashMap;
@@ -121,7 +122,7 @@ public abstract class Personaje {
 	}
 
 
-	public void mover(Camino camino) throws NoPuedeMoverCaminoObstruidoException, NoPuedeMoverAEsaDistanciaException {
+	public void mover(Camino camino) throws NoPuedeMoverCaminoObstruidoException, NoPuedeMoverAEsaDistanciaException, NoHayQuienRecorraException {
 		
 		transformacion.mover(camino);
 	}

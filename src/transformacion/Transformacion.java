@@ -3,6 +3,7 @@ package transformacion;
 
 import excepciones.personaje.NoPuedeMoverAEsaDistanciaException;
 import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
+import excepciones.tablero.NoHayQuienRecorraException;
 import excepciones.transformacion.*;
 import personaje.Personaje;
 import tablero.Camino;
@@ -36,7 +37,7 @@ public abstract class Transformacion {
     }
 
 
-    public void mover(Camino camino) throws NoPuedeMoverCaminoObstruidoException, NoPuedeMoverAEsaDistanciaException {
+    public void mover(Camino camino) throws NoPuedeMoverCaminoObstruidoException, NoPuedeMoverAEsaDistanciaException, NoHayQuienRecorraException {
 
         if (camino.distancia() > this.velocidad ){
             throw new NoPuedeMoverAEsaDistanciaException();
