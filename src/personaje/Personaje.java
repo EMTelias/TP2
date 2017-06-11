@@ -4,8 +4,6 @@ import Consumibles.Consumible;
 import Consumibles.EsferaDelDragon;
 import acciones.Ataque;
 import acciones.AtaqueEspecialHandler;
-import estado.goku.EstadoGoku;
-import estado.Estado;
 import excepciones.acciones.NoPuedeAtacarMismoEquipoException;
 import excepciones.personaje.NoPuedeAtacarAEsaDistanciaException;
 import excepciones.personaje.NoPuedeMoverAEsaDistanciaException;
@@ -16,7 +14,6 @@ import excepciones.transformacion.NoPuedeTransformarException;
 import tablero.Camino;
 import tablero.Casillero;
 import excepciones.tablero.CasilleroOcupadoException;
-import excepciones.tablero.NoHayQuienRecorraException;
 import transformacion.Transformacion;
 
 import java.util.HashMap;
@@ -24,7 +21,6 @@ import java.util.HashMap;
 public abstract class Personaje {
 
 	protected Casillero casillero;
-	protected Estado estado;
 	protected int ki;
 	protected int vida;
 	protected Transformacion transformacion;
@@ -122,10 +118,10 @@ public abstract class Personaje {
 	}
 
 
-	public void mover(Camino camino) throws NoPuedeMoverCaminoObstruidoException, NoPuedeMoverAEsaDistanciaException, NoHayQuienRecorraException {
-		
-		transformacion.mover(camino);
+	public void mover(Camino camino) throws NoPuedeMoverCaminoObstruidoException, NoPuedeMoverAEsaDistanciaException {
+		Casillero casilleroDestino = transformacion.mover(this,camino);
+		casillero.vaciar();
+		casillero = casilleroDestino;
 	}
-
 
 }

@@ -7,7 +7,6 @@ import java.util.List;
 import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
 import excepciones.tablero.CaminoInvalidoException;
 import excepciones.tablero.CasilleroOcupadoException;
-import excepciones.tablero.NoHayQuienRecorraException;
 import personaje.Personaje;
 
 public class Camino {
@@ -15,45 +14,52 @@ public class Camino {
 	List<Casillero> casillerosDelCamino;
 	
 	public Camino(List<Casillero> casilleros) throws CaminoInvalidoException{
-		if (  (casilleros.isEmpty())  ||  (casilleros.size() == 1) ){
-			throw new CaminoInvalidoException();
-		}
+		if (casilleros.isEmpty()) throw new CaminoInvalidoException();
 		casillerosDelCamino = new ArrayList<Casillero>();
 		casillerosDelCamino.addAll(casilleros);
 	}
 
 	public int distancia() {
-		return casillerosDelCamino.size()-1;
+		return casillerosDelCamino.size();
 	}
 
-	public void recorrer() throws NoPuedeMoverCaminoObstruidoException, NoHayQuienRecorraException {
+	public Casillero recorrerCon(Personaje unPersonaje) throws NoPuedeMoverCaminoObstruidoException {
+		
+		Casillero casilleroDestino = this.getCasilleroDestino();
+		
+		if (this.puedeMover()){
+			try {
+				casilleroDestino.colocar(unPersonaje);
+			}catch (CasilleroOcupadoException e) {
+				// si puedeMover es true => nunca lanza CasilleroOcupadoException
+			}
+		}else{
+			throw new NoPuedeMoverCaminoObstruidoException();
+		}
+		
+		return casilleroDestino;
+	} 
+		
+	private boolean puedeMover(){
 		boolean puedeMover = true;
 		
 		Iterator<Casillero> iterator = casillerosDelCamino.iterator();
-		Casillero unCasillero = iterator.next();
-		Casillero casilleroOrigen = unCasillero;
-		
-		if (casilleroOrigen.estaVacio()) throw new NoHayQuienRecorraException();
 		
 		while (iterator.hasNext()){
-			unCasillero = iterator.next();
+			Casillero unCasillero = iterator.next();
 			puedeMover = puedeMover && unCasillero.estaVacio();
 		}
 		
-		if (puedeMover){
-			Casillero casilleroDestino = unCasillero;
-			Personaje personajeQueRecorre = casilleroOrigen.getPersonaje();
-			
-			casilleroOrigen.vaciar();
-			try {
-				casilleroDestino.colocar(personajeQueRecorre);
-				} catch (CasilleroOcupadoException e) {
-				// si puedeMover es true => nunca lanza CasilleroOcupadoException
-				}
-			}
-		else{
-			throw new NoPuedeMoverCaminoObstruidoException();
+		return puedeMover;
+	}
+	
+	private Casillero getCasilleroDestino(){
+		Iterator<Casillero> iterator = casillerosDelCamino.iterator();
+		Casillero casilleroDestino =  iterator.next();	
+		while (iterator.hasNext()){
+			casilleroDestino = iterator.next();
 		}
-	} 
-		
+		return casilleroDestino;
+	}
+
 }
