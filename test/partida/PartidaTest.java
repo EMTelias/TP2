@@ -7,6 +7,10 @@ import jugador.JugadorEnemigo;
 import jugador.JugadorGuerreroZ;
 import org.junit.Test;
 import org.junit.Assert;
+import personaje.Gohan;
+import personaje.Goku;
+import personaje.MajinBoo;
+import personaje.Personaje;
 import tablero.Posicion;
 import tablero.Tablero;
 
@@ -62,4 +66,36 @@ public class PartidaTest {
         Assert.assertTrue(debeJugarAhora.getTurno());
 
     }
+
+    @Test
+    public void testCreoUnaPartidaConDosJugadoresYVerificoQueGohanEsteEnLaPosicionx2y1() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
+        JugadorGuerreroZ jugador1 = new JugadorGuerreroZ("jugador1");
+        JugadorEnemigo jugador2 = new JugadorEnemigo("jugador2");
+        Partida partida = new Partida(jugador1, jugador2);
+
+        Personaje personajeBuscado = partida.personajeEnPosicion(new Posicion(2,1));
+        Assert.assertTrue(personajeBuscado.getClass() == Gohan.class);
+
+    }
+
+    @Test
+    public void testCreoUnaPartidaConDosJugadoresYVerificoQueMajinBooEsteEnLaPosicionx20y19() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
+        JugadorGuerreroZ jugador1 = new JugadorGuerreroZ("jugador1");
+        JugadorEnemigo jugador2 = new JugadorEnemigo("jugador2");
+        Partida partida = new Partida(jugador1, jugador2);
+
+        Personaje personajeBuscado = partida.personajeEnPosicion(new Posicion(20,19));
+        Assert.assertTrue(personajeBuscado.getClass() == MajinBoo.class);
+
+    }
+
+    /*@Test
+    public void testCreoUnaPartidaYMuevoAGoku2HaciaAbajo() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
+        JugadorGuerreroZ jugador1 = new JugadorGuerreroZ("jugador1");
+        JugadorEnemigo jugador2 = new JugadorEnemigo("jugador2");
+        Partida partida = new Partida(jugador1, jugador2);
+        partida.moverPersonaje();
+        Assert.assertTrue(personajeBuscado.getClass() == MajinBoo.class);
+
+    }*/
 }

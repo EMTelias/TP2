@@ -3,6 +3,9 @@ package partida;
 import excepciones.tablero.CasilleroOcupadoException;
 import excepciones.tablero.DimensionDeTableroInvalidoException;
 import jugador.Jugador;
+import personaje.Personaje;
+import tablero.Casillero;
+import tablero.Posicion;
 import tablero.Tablero;
 
 
@@ -17,12 +20,13 @@ public class Partida {
     private Turno turno;
 
 
-    public Partida(Jugador guerrerosZ,Jugador enemigos) throws DimensionDeTableroInvalidoException, CasilleroOcupadoException {
+    public Partida(Jugador jugadorGuerreroZ,Jugador jugadorEnemigo) throws DimensionDeTableroInvalidoException, CasilleroOcupadoException {
 
         this.tablero = new Tablero(DIM_ANCHO,DIM_ALTO);
-        this.tablero.initDePersonajes(guerrerosZ.getPersonajes(),enemigos.getPersonajes());
+        this.tablero.initDeGuerrerosZ(jugadorGuerreroZ);
+        this.tablero.initDeEnemigos(jugadorEnemigo);
 
-        this.turno = new Turno(guerrerosZ,enemigos);
+        this.turno = new Turno(jugadorGuerreroZ,jugadorEnemigo);
         this.estadoDePartida = true;
 
     }
@@ -39,7 +43,8 @@ public class Partida {
         return tablero;
     }
 
-
-
+    public Personaje personajeEnPosicion(Posicion posicion) {
+        return tablero.getCasillero(posicion).getPersonaje();
+    }
 }
 

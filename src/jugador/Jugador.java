@@ -25,4 +25,8 @@ public abstract class Jugador {
     public boolean getTurno() {
         return this.suTurno;
     }
+
+    public void agregarPersonaje(Personaje unPersonaje){
+        personajes.add(unPersonaje);
+    }
 }
