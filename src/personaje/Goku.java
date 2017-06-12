@@ -13,12 +13,13 @@ import java.util.HashMap;
 public class Goku extends Personaje {
 
 	protected final int kiAtaqueEspecial = 20;
+	protected final int vidaMaxima = 500;
 	
 	public Goku(Casillero unCasillero) throws CasilleroOcupadoException{
 		unCasillero.colocar(this);
 		casillero = unCasillero;
 		transformacion = new NormalGoku();
-		vida = 500;
+		vida = vidaMaxima;
 	}
 
 	@Override
@@ -43,6 +44,13 @@ public class Goku extends Personaje {
 		ataque.execute();
 		reducirKi(kiAtaqueEspecial);
 
+	}
+
+	public int getPoderDePelea() {
+		if (this.vida < vidaMaxima*0.3) {
+			return (int)(transformacion.getPoderDePelea() * 1.2 );
+		}
+		return transformacion.getPoderDePelea();
 	}
 	
 	

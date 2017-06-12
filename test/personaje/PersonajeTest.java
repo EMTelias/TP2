@@ -230,7 +230,7 @@ public class PersonajeTest {
 
 		goku.atacarA(freezer);
 
-		Assert.assertTrue(freezer.vida == 380);
+		Assert.assertTrue(freezer.getVida() == 380);
 	}
 
 
@@ -242,7 +242,7 @@ public class PersonajeTest {
 
 		goku.atacarA(freezer);
 
-		Assert.assertTrue(freezer.vida == 384);
+		Assert.assertTrue(freezer.getVida() == 384);
 	}
 
 	@Test (expected = NoPuedeAtacarAEsaDistanciaException.class)
@@ -261,7 +261,17 @@ public class PersonajeTest {
 		gohan.transformacion = new SuperSayajin2Gohan();
 
 		gohan.atacarA(freezer);
-		Assert.assertTrue(freezer.vida == 300);
+		Assert.assertTrue(freezer.getVida() == 300);
+	}
+
+	@Test
+	public void testGokuTieneMenosDel30PorcientoDeVidaEntoncesSuDanioAumenta20Porciento() throws CasilleroOcupadoException, NoPuedeAtacarAEsaDistanciaException {
+		Personaje goku = new Goku(new Casillero(new Posicion(1,1))); //danio 20
+		Personaje freezer = new Freezer(new Casillero(new Posicion(2,2))); //danio 20
+		goku.reducirVida(400); //baja mas de 30 porciento entonces su danio es 20*1.2 -> 24
+		goku.atacarA(freezer); //24 es mayor a 20 entonces el saca 24
+
+		Assert.assertEquals(376 ,freezer.getVida());
 	}
 
 	// Tests de transformaciones especiales
@@ -336,7 +346,7 @@ public class PersonajeTest {
 		goku.aumentarKi(20);
 		goku.ataqueEspecialA(freezer);
 
-		Assert.assertTrue(freezer.vida == 370);
+		Assert.assertTrue(freezer.getVida() == 370);
 	}
 
 	@Test
@@ -347,7 +357,7 @@ public class PersonajeTest {
 		goku.aumentarKi(20);
 		goku.ataqueEspecialA(majinBoo);
 
-		Assert.assertTrue(majinBoo.vida == 276);
+		Assert.assertTrue(majinBoo.getVida() == 276);
 	}
 
 	@Test
@@ -359,7 +369,7 @@ public class PersonajeTest {
 		freezer.transformar();
 		freezer.ataqueEspecialA(piccolo);
 
-		Assert.assertTrue(piccolo.vida == 440);
+		Assert.assertTrue(piccolo.getVida() == 440);
 	}
 
 	@Test

@@ -70,30 +70,14 @@ public abstract class Personaje {
 		return this.vida;
 	}
 
-	public boolean tieneElConsumible(Consumible unConsumible){
+	/*public boolean tieneElConsumible(Consumible unConsumible){
 		return false;
-	}
+	}*/
 
 	public int distanciaA(Personaje unPersonaje){
 		return (this.casillero.distanciaHasta(unPersonaje.casillero));
 	}
 
-	/*public void ataqueBasicoA(Personaje objetivo)throws NoPuedeAtacarAEsaDistanciaException{
-		//Segun tenga la "Esfera del Dragon (+25%dmg)" y/o ataque a un enemigo de mayor poder (-20%dmg)
-		//Ej: si tengo la esfera y ataco a alguien mas debil que yo, tendria un aumento del 25% => danioFinal=(poderDeAtaque * 1,25)
-		if (this.distanciaA(objetivo) > estado.getDistanciaDeAtaque()) {
-			throw new NoPuedeAtacarAEsaDistanciaException();
-		}
-		float multiplicadorDeDanio = 1;
-		if (this.tieneElConsumible( new EsferaDelDragon() )) {
-			multiplicadorDeDanio += 0.25;
-		}
-		if (objetivo.estado.getPoderDePelea() > this.estado.getPoderDePelea()) {
-			multiplicadorDeDanio -= 0.2;
-		}
-		float danioFinal = (estado.getPoderDePelea() * multiplicadorDeDanio);
-		objetivo.reducirVida((int)danioFinal);
-	}*/
 
 	public void atacarA(Personaje otroPersonaje) throws NoPuedeAtacarAEsaDistanciaException {
 		Ataque ataque = new Ataque(this, otroPersonaje, 1);
