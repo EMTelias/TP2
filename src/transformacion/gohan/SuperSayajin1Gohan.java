@@ -8,7 +8,7 @@ public class SuperSayajin1Gohan extends Transformacion{
     protected static final int distanciaAtaque = 2;
     protected static final int velocidad = 2;
     protected static final Transformacion proximaTransformacion = new SuperSayajin2Gohan();
-    protected static final int kiNecesarioTransformar = 10;
+    protected static final int kiNecesarioTransformar = 30;
 
     public SuperSayajin1Gohan() {
         super(poderDePelea, distanciaAtaque, velocidad, proximaTransformacion, kiNecesarioTransformar);
