@@ -1,29 +1,29 @@
 package personaje;
 
+import equipo.EstadoGuerrerosZ;
 import excepciones.acciones.NoPuedeAtacarMismoEquipoException;
-import excepciones.transformacion.KiInsuficienteException;
-import excepciones.transformacion.NoPuedeTransformarException;
-import transformacion.cell.PerfectoCell;
-import transformacion.cell.SemiPerfectoCell;
-import transformacion.freezer.SegundaFormaFreezer;
-import transformacion.goku.SuperSayajinGoku;
-import transformacion.gohan.SuperSayajin2Gohan;
 import excepciones.personaje.NoPuedeAtacarAEsaDistanciaException;
 import excepciones.personaje.NoPuedeMoverAEsaDistanciaException;
 import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
 import excepciones.tablero.CaminoInvalidoException;
 import excepciones.tablero.CasilleroOcupadoException;
 import excepciones.tablero.DimensionDeTableroInvalidoException;
-
-import java.util.ArrayList;
-
+import excepciones.transformacion.KiInsuficienteException;
 import excepciones.transformacion.NoHayProximaTransformacionException;
+import excepciones.transformacion.NoPuedeTransformarException;
 import org.junit.Assert;
 import org.junit.Test;
-
 import tablero.Camino;
 import tablero.Casillero;
 import tablero.Posicion;
+import transformacion.cell.PerfectoCell;
+import transformacion.cell.SemiPerfectoCell;
+import transformacion.freezer.SegundaFormaFreezer;
+import transformacion.gohan.SuperSayajin2Gohan;
+import transformacion.goku.SuperSayajinGoku;
+import transformacion.piccolo.ProtectorPiccolo;
+
+import java.util.ArrayList;
 
 public class PersonajeTest {
 
@@ -321,8 +321,63 @@ public class PersonajeTest {
 		freezer.ataqueEspecialA(cell);
 	}
 
+	@Test(expected = NoPuedeTransformarException.class)
+	public void testGohanIntentaTransformarseASuperSayajin2ConVidaDeEquipoAlMaximo() throws CasilleroOcupadoException, NoPuedeTransformarException, KiInsuficienteException, NoHayProximaTransformacionException {
+        Goku goku = new Goku(new Casillero(new Posicion(1,1)));
+        Piccolo piccolo = new Piccolo(new Casillero(new Posicion(1,1)));
+        Gohan gohan = new Gohan(new Casillero(new Posicion(1,1)));
+        EstadoGuerrerosZ estado = new EstadoGuerrerosZ(goku,gohan,piccolo);
 
-/*
+        gohan.aumentarKi(40);
+        gohan.transformar(estado);
+        gohan.transformar(estado);
+	}
+    @Test
+    public void testGohanSeTransformaASuperSayajin2ConVidaDeEquipoMenorAUnVeinticincoPorCiento() throws CasilleroOcupadoException, NoPuedeTransformarException, KiInsuficienteException, NoHayProximaTransformacionException {
+        Goku goku = new Goku(new Casillero(new Posicion(1,1)));
+        Piccolo piccolo = new Piccolo(new Casillero(new Posicion(1,1)));
+        Gohan gohan = new Gohan(new Casillero(new Posicion(1,1)));
+
+        EstadoGuerrerosZ estado = new EstadoGuerrerosZ(goku,gohan,piccolo);
+
+        piccolo.reducirVida(450);
+        goku.reducirVida(450);
+
+        gohan.aumentarKi(40);
+        gohan.transformar(estado);
+        gohan.transformar(estado);
+        Assert.assertEquals(SuperSayajin2Gohan.class,gohan.transformacion.getClass());
+    }
+    @Test(expected = NoPuedeTransformarException.class)
+    public void testPiccoloIntentaTransformarseAProtectorConVidaDeGohanAlMaximo() throws CasilleroOcupadoException, NoPuedeTransformarException, KiInsuficienteException, NoHayProximaTransformacionException {
+        Goku goku = new Goku(new Casillero(new Posicion(1,1)));
+        Piccolo piccolo = new Piccolo(new Casillero(new Posicion(1,1)));
+        Gohan gohan = new Gohan(new Casillero(new Posicion(1,1)));
+        EstadoGuerrerosZ estado = new EstadoGuerrerosZ(goku,gohan,piccolo);
+
+        piccolo.aumentarKi(40);
+        piccolo.transformar(estado);
+        piccolo.transformar(estado);
+    }
+    @Test
+    public void testPiccoloSeTransformaAProtectorConVidaDeGohanMenorAUnTreintaPorCiento() throws CasilleroOcupadoException, NoPuedeTransformarException, KiInsuficienteException, NoHayProximaTransformacionException {
+        Goku goku = new Goku(new Casillero(new Posicion(1,1)));
+        Piccolo piccolo = new Piccolo(new Casillero(new Posicion(1,1)));
+        Gohan gohan = new Gohan(new Casillero(new Posicion(1,1)));
+
+        EstadoGuerrerosZ estado = new EstadoGuerrerosZ(goku,gohan,piccolo);
+
+        gohan.reducirVida(250);
+
+        piccolo.aumentarKi(40);
+        piccolo.transformar(estado);
+        piccolo.transformar(estado);
+        Assert.assertEquals(ProtectorPiccolo.class,piccolo.transformacion.getClass());
+    }
+
+
+
+    /*
 
 	@Test
 	public void testGokuEnModoNormalPuedeMover2PosicionesYEnPrimeraTransformacionPuedeMover3Posiciones() throws NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, CasilleroOcupadoException, DimensionDeTableroInvalidoException, NoPuedeCambiarDeEstadoKiInsuficienteException, EstadoNoTieneProximoException{

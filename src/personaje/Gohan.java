@@ -1,12 +1,15 @@
 package personaje;
 
 import acciones.Ataque;
+import equipo.EstadoGuerrerosZ;
 import excepciones.acciones.NoPuedeAtacarMismoEquipoException;
 import excepciones.personaje.NoPuedeAtacarAEsaDistanciaException;
-import excepciones.transformacion.KiInsuficienteException;
-import transformacion.gohan.NormalGohan;
 import excepciones.tablero.CasilleroOcupadoException;
+import excepciones.transformacion.KiInsuficienteException;
+import excepciones.transformacion.NoHayProximaTransformacionException;
+import excepciones.transformacion.NoPuedeTransformarException;
 import tablero.Casillero;
+import transformacion.gohan.NormalGohan;
 
 import java.util.HashMap;
 
@@ -42,7 +45,16 @@ public class Gohan extends Personaje {
         Ataque ataque = new Ataque(this, otroPersonaje, 1.25);
         ataque.execute();
         reducirKi(kiAtaqueEspecial);
-
     }
-
+    public void transformar(EstadoGuerrerosZ estado) throws NoPuedeTransformarException, NoHayProximaTransformacionException, KiInsuficienteException {
+        if (estado.puedeTransformar(this)){
+            this.transformacion = transformacion.transformar(this);
+        }else{
+            throw new NoPuedeTransformarException();
+        }
+    }
+    public boolean primeraTransformacion(){
+        if (this.transformacion.getClass() == NormalGohan.class){ return true; }
+        else { return false; }
+    }
 }
