@@ -6,6 +6,7 @@ import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
 import excepciones.transformacion.*;
 import personaje.Personaje;
 import tablero.Camino;
+import tablero.Casillero;
 
 public abstract class Transformacion {
 
@@ -36,13 +37,13 @@ public abstract class Transformacion {
     }
 
 
-    public void mover(Camino camino) throws NoPuedeMoverCaminoObstruidoException, NoPuedeMoverAEsaDistanciaException {
+    public Casillero mover(Personaje unPersonaje, Camino camino) throws NoPuedeMoverCaminoObstruidoException, NoPuedeMoverAEsaDistanciaException {
 
         if (camino.distancia() > this.velocidad ){
             throw new NoPuedeMoverAEsaDistanciaException();
         }
 
-        camino.recorrer();
+        return camino.recorrerCon(unPersonaje);
     }
 
     public int getVelocidad() {
