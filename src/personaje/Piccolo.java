@@ -1,10 +1,13 @@
 package personaje;
 
 import acciones.Ataque;
+import equipo.EstadoGuerrerosZ;
 import excepciones.acciones.NoPuedeAtacarMismoEquipoException;
 import excepciones.personaje.NoPuedeAtacarAEsaDistanciaException;
 import excepciones.tablero.CasilleroOcupadoException;
 import excepciones.transformacion.KiInsuficienteException;
+import excepciones.transformacion.NoHayProximaTransformacionException;
+import excepciones.transformacion.NoPuedeTransformarException;
 import tablero.Casillero;
 import transformacion.piccolo.NormalPiccolo;
 
@@ -44,7 +47,19 @@ public class Piccolo extends Personaje {
         reducirKi(kiAtaqueEspecial);
 
     }
-
-
+    public void transformar(EstadoGuerrerosZ estado) throws NoPuedeTransformarException, NoHayProximaTransformacionException, KiInsuficienteException {
+        if (estado.puedeTransformar(this)){
+            this.transformacion = transformacion.transformar(this);
+        }else{
+            throw new NoPuedeTransformarException();
+        }
+    }
+    public boolean primeraTransformacion() {
+        if (this.transformacion.getClass() == NormalPiccolo.class) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }
