@@ -54,10 +54,6 @@ public abstract class Personaje {
 		return this.ki;
 	}
 
-	public void setKi(int nuevoKi){
-		this.ki = nuevoKi;
-	}
-
 	public void aumentarVida(int cantidad) {
 		this.vida += cantidad;
 	}

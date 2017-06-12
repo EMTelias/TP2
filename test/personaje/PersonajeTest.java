@@ -405,8 +405,8 @@ public class PersonajeTest {
 	@Test
 	public void testPiccoloSeTransformaAProtectorConVidaDeGohanMenorAUnTreintaPorCiento() throws CasilleroOcupadoException, NoPuedeTransformarException, KiInsuficienteException, NoHayProximaTransformacionException {
 		Goku goku = new Goku(new Casillero(new Posicion(1,1)));
-		Piccolo piccolo = new Piccolo(new Casillero(new Posicion(1,1)));
-		Gohan gohan = new Gohan(new Casillero(new Posicion(1,1)));
+		Piccolo piccolo = new Piccolo(new Casillero(new Posicion(2,1)));
+		Gohan gohan = new Gohan(new Casillero(new Posicion(3,1)));
 
 		EstadoGuerrerosZ estado = new EstadoGuerrerosZ(goku,gohan,piccolo);
 
@@ -417,94 +417,4 @@ public class PersonajeTest {
 		piccolo.transformar(estado);
 		Assert.assertEquals(ProtectorPiccolo.class,piccolo.transformacion.getClass());
 	}
- /*
-	@Test
-	public void testGokuEnModoNormalPuedeMover2PosicionesYEnPrimeraTransformacionPuedeMover3Posiciones() throws NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, CasilleroOcupadoException, DimensionDeTableroInvalidoException, NoPuedeCambiarDeEstadoKiInsuficienteException, EstadoNoTieneProximoException{
-		Tablero tablero = new Tablero(10,10);
-		Personaje goku = new Goku();
-		Posicion posicion11= new Posicion(1,1);
-		Posicion posicion31= new Posicion(3,1);
-		Posicion posicion41= new Posicion(4,1);
-		Posicion posicion61= new Posicion(6,1);
-		Posicion posicion71= new Posicion(7,1);
-		tablero.colocar(goku,posicion11);
-		Casillero casillero41 = tablero.getCasillero(posicion41);
-		try{
-			goku.moverA(casillero41);
-			Assert.assertTrue(false);
-		}catch(NoPuedeMoverAEsaDistanciaException e){
-			Assert.assertTrue(true);
-		}
-		Casillero casillero31 = tablero.getCasillero(posicion31);
-		goku.moverA(casillero31);
-		Assert.assertFalse(tablero.estaVacioEn(posicion31));
-		Assert.assertTrue(tablero.estaVacioEn(posicion11));
-		goku.aumentarKi(20);
-		goku.transformar();
-		Casillero casillero71 = tablero.getCasillero(posicion71);
-		try{
-			goku.moverA(casillero71);
-			Assert.assertTrue(false);
-		}catch(NoPuedeMoverAEsaDistanciaException e){
-			Assert.assertTrue(true);
-		}
-		Casillero casillero61 = tablero.getCasillero(posicion61);
-		goku.moverA(casillero61);
-		Assert.assertFalse(tablero.estaVacioEn(posicion61));
-		Assert.assertTrue(tablero.estaVacioEn(posicion31));
-	}
-	@Test public void testCreoAGokuYTiene500PuntosDeVida(){
-		Personaje goku = new Goku();
-		Assert.assertTrue(goku.vida == 500);
-	}
-	@Test public void testGohanNormalAtacaAGokuDaniando20PorcientoMenosDejandoloEn488() throws NoPuedeAtacarAEsaDistanciaException, CasilleroOcupadoException, DimensionDeTableroInvalidoException {
-		//Poder de ataque de gohan: 15 / Poder de ataque de goku: 20 => gohan daña 20% menos(12dmg)
-		Posicion posicion1 = new Posicion(2,3);
-		Posicion posicion2 = new Posicion(2,4);
-		Personaje goku = new Goku();
-		Personaje gohan = new Gohan();
-		Tablero tablero = new Tablero(10,10);
-		tablero.colocar(goku,posicion1);
-		tablero.colocar(gohan,posicion2);
-		gohan.ataqueBasicoA(goku);
-		Assert.assertTrue(goku.vida == 488);
-	}
-	@Test public void testGokuNormalAtacaAGohanNormalDejandoloEn280() throws NoPuedeAtacarAEsaDistanciaException, DimensionDeTableroInvalidoException, CasilleroOcupadoException {
-		Posicion posicion1 = new Posicion(2,3);
-		Posicion posicion2 = new Posicion(2,4);
-		Personaje goku = new Goku();
-		Personaje gohan = new Gohan();
-		Tablero tablero = new Tablero(10,10);
-		tablero.colocar(goku,posicion1);
-		tablero.colocar(gohan,posicion2);
-		goku.ataqueBasicoA(gohan);
-		Assert.assertTrue(gohan.vida == 280);
-	}
-	@Test
-	public void testCreoUnTablero20x20ColocoAGokuNormalEn44YFreezerNormalEn66YHaceAtaqueBasicoDejandoloEn380() throws DimensionDeTableroInvalidoException, CasilleroOcupadoException, NoPuedeAtacarAEsaDistanciaException {
-		Tablero tablero = new Tablero(20,20);
-		Personaje goku = new Goku();
-		Personaje freezer = new Freezer();
-		Posicion posicionGoku = new Posicion(4,4);
-		Posicion posicionFreezer = new Posicion(6,6);
-		tablero.colocar(goku, posicionGoku);
-		tablero.colocar(freezer, posicionFreezer);
-		goku.ataqueBasicoA(freezer);
-		Assert.assertTrue(freezer.vida == 380);
-	}
-	@Test(expected = NoPuedeAtacarAEsaDistanciaException.class)
-	public void testCreoUnTablero20x20ColocoAGohanSS2En33YFreezerNormalEn1010YHaceAtaqueBasicoLanzandoExcepcionNoPuedeAtacar() throws DimensionDeTableroInvalidoException, CasilleroOcupadoException, NoPuedeAtacarAEsaDistanciaException {
-		// Poder de pelea de Gohan SS2: 100. Poder de pelea de Freezer normal: 50.
-		Tablero tablero = new Tablero(20,20);
-		Personaje gohan = new Gohan();
-		Personaje freezer = new Freezer();
-		gohan.estado = new SuperSayajin2Gohan();
-		Posicion posicionGohan = new Posicion(3,3);
-		Posicion posicionFreezer = new Posicion(10,10);
-		tablero.colocar(gohan, posicionGohan);
-		tablero.colocar(freezer, posicionFreezer);
-		gohan.ataqueBasicoA(freezer);
-		Assert.assertTrue(freezer.vida == 400);
-	}
-*/
 }

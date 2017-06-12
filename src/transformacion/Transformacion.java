@@ -32,7 +32,7 @@ public abstract class Transformacion {
             throw new KiInsuficienteException();
         }
 
-        unPersonaje.setKi(kiActual - this.kiNecesarioTransformar);
+        unPersonaje.reducirKi(this.kiNecesarioTransformar);
         return this.proximaTransformacion;
     }
 
