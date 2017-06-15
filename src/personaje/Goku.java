@@ -14,7 +14,8 @@ public class Goku extends Personaje {
 
 	protected final int kiAtaqueEspecial = 20;
 	protected final int vidaMaxima = 500;
-	
+	private final double multMinVidaParaAyudaGohan = 0.3;
+
 	public Goku(Casillero unCasillero) throws CasilleroOcupadoException{
 		unCasillero.colocar(this);
 		casillero = unCasillero;
@@ -52,6 +53,9 @@ public class Goku extends Personaje {
 		}
 		return transformacion.getPoderDePelea();
 	}
-	
-	
+
+
+	public boolean necesitaAyudaDeGohan() {
+		return this.getVida() < (vidaMaxima*multMinVidaParaAyudaGohan);
+	}
 }

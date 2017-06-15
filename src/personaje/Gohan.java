@@ -1,7 +1,6 @@
 package personaje;
 
 import acciones.Ataque;
-import equipo.EstadoGuerrerosZ;
 import excepciones.acciones.NoPuedeAtacarMismoEquipoException;
 import excepciones.personaje.NoPuedeAtacarAEsaDistanciaException;
 import excepciones.tablero.CasilleroOcupadoException;
@@ -16,6 +15,8 @@ import java.util.HashMap;
 public class Gohan extends Personaje {
 
 	protected final int kiAtaqueEspecial = 10;
+	protected final int vidaMaxima = 300;
+	protected final double multMinVidaParaAyudaPiccolo = 0.2;
 
     public Gohan(Casillero unCasillero) throws CasilleroOcupadoException{
     	unCasillero.colocar(this);
@@ -46,7 +47,7 @@ public class Gohan extends Personaje {
         ataque.execute();
         reducirKi(kiAtaqueEspecial);
     }
-    public void transformar(EstadoGuerrerosZ estado) throws NoPuedeTransformarException, NoHayProximaTransformacionException, KiInsuficienteException {
+    /*public void transformar(EstadoGuerrerosZ estado) throws NoPuedeTransformarException, NoHayProximaTransformacionException, KiInsuficienteException {
         if (estado.puedeTransformar(this)){
             this.transformacion = transformacion.transformar(this);
         }else{
@@ -56,5 +57,9 @@ public class Gohan extends Personaje {
     public boolean primeraTransformacion(){
         if (this.transformacion.getClass() == NormalGohan.class){ return true; }
         else { return false; }
+    }*/
+
+    public boolean necesitaAyudaDePiccolo() {
+        return this.getVida() < (vidaMaxima*multMinVidaParaAyudaPiccolo);
     }
 }

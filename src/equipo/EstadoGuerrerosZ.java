@@ -1,4 +1,4 @@
-package equipo;
+/*package equipo;
 
 import excepciones.tablero.CasilleroOcupadoException;
 import personaje.Gohan;
@@ -31,4 +31,4 @@ public class EstadoGuerrerosZ {
         else{ return false; }
     }
 
-}
+}*/

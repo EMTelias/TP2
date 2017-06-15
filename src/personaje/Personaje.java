@@ -4,6 +4,7 @@ import Consumibles.Consumible;
 import Consumibles.EsferaDelDragon;
 import acciones.Ataque;
 import acciones.AtaqueEspecialHandler;
+import equipo.Equipo;
 import excepciones.acciones.NoPuedeAtacarMismoEquipoException;
 import excepciones.personaje.NoPuedeAtacarAEsaDistanciaException;
 import excepciones.personaje.NoPuedeMoverAEsaDistanciaException;
@@ -25,12 +26,18 @@ public abstract class Personaje {
 	protected int vida;
 	protected Transformacion transformacion;
 	protected HashMap<Class, AtaqueEspecialHandler> ataqueEspecialMap;
+	private Equipo equipo;
 
 	protected abstract void initAtaqueEspecialMap();
 	
 	public Personaje(){
 		ki = 0;
 		this.initAtaqueEspecialMap();
+	}
+
+	public void unirse(Equipo unEquipo) {
+		unEquipo.agregarPersonaje(this);
+		this.equipo = unEquipo;
 	}
 
 
@@ -75,7 +82,7 @@ public abstract class Personaje {
 	}
 
 
-	public void atacarA(Personaje otroPersonaje) throws NoPuedeAtacarAEsaDistanciaException {
+	public void atacarA(Personaje otroPersonaje) throws NoPuedeAtacarAEsaDistanciaException, NoPuedeAtacarMismoEquipoException {
 		Ataque ataque = new Ataque(this, otroPersonaje, 1);
 		ataque.execute();
 	}
@@ -104,4 +111,7 @@ public abstract class Personaje {
 		casillero = casilleroDestino;
 	}
 
+	public Equipo getEquipo() {
+		return this.equipo;
+	}
 }
