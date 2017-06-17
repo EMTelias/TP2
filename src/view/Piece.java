@@ -24,7 +24,7 @@ public class Piece extends StackPane {
 
         Image imageCharacter = new Image(imgDir);
         ImageView imageView = new ImageView();
-        imageView.setFitHeight(40);
+        imageView.setFitHeight(Tile.TILE_SIZE);
         imageView.setPreserveRatio(true);
         imageView.setImage(imageCharacter);
 
@@ -37,8 +37,8 @@ public class Piece extends StackPane {
     }
 
     public void move(int x, int y) {
-        oldX = x * 40;
-        oldY = y * 40;
+        oldX = x * Tile.TILE_SIZE;
+        oldY = y * Tile.TILE_SIZE;
         relocate(oldX, oldY);
     }
 

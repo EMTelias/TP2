@@ -6,7 +6,7 @@ import javafx.scene.shape.Rectangle;
 
 public class Tile extends Rectangle {
     private int x, y;
-    private final int TILE_SIZE = 40;
+    protected static final int TILE_SIZE = 40;
     private Piece piece;
     private boolean pressed = false;
 

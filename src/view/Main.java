@@ -14,6 +14,8 @@ import java.nio.file.Paths;
 
 public class Main extends Application {
 
+    private static final int WIDTH = 800;
+    private static final int HEIGH = 600;
     private static final int Y_TILES = 15;
     private static final int X_TILES = 15;
     private Tile[][] grid = new Tile[X_TILES][Y_TILES];
@@ -38,6 +40,15 @@ public class Main extends Application {
                 tileGroup.getChildren().add(tile);
             }
         }
+        addFightersToGrid();
+
+        VBox vbox = new VBox();
+        root.getChildren().add(addButtonsToVBox(vbox));
+
+        return root;
+    }
+
+    private void addFightersToGrid() {
         Path path = Paths.get(IMG_DIR);
         String imageDirectory = path.toAbsolutePath().toUri().toString();
         Piece goku = new Piece(imageDirectory + "Goku" + IMG_EXT, 0,0);
@@ -54,40 +65,39 @@ public class Main extends Application {
         grid[14][14].setPiece(freezer);
         grid[14][0].setPiece(majinBoo);
         pieceGroup.getChildren().addAll(goku, gohan, piccolo, cell, freezer, majinBoo);
+    }
 
-        VBox vbox = new VBox();
-
-        vbox.setPrefSize(200, 160);
-        vbox.setTranslateX(600);
-        vbox.setTranslateY(440);
+    private VBox addButtonsToVBox(VBox vbox) {
+        int tamXboton = WIDTH - Tile.TILE_SIZE * X_TILES;
+        int tamYboton = Tile.TILE_SIZE;
+        vbox.setPrefSize(tamXboton, 4 * tamYboton);
+        vbox.setTranslateX(Tile.TILE_SIZE * X_TILES);
+        vbox.setTranslateY(Tile.TILE_SIZE * (Y_TILES - 4)); // los 4 botones a agregar
 
 
         Button attackB = new Button("Ataque basico");
         attackB.setStyle("-fx-font: 20 arial; -fx-base: #ee2211;");
-        attackB.setPrefSize(200,40);
-        attackB.setMinHeight(40);
+        attackB.setPrefSize(tamXboton,tamYboton);
+        attackB.setMinHeight(tamYboton);
         Button attackS = new Button("Ataque especial");
         attackS.setStyle("-fx-font: 20 arial; -fx-base: #ee2211;");
-        attackS.setPrefSize(200,40);
-        attackS.setMinHeight(40);
+        attackS.setPrefSize(tamXboton,tamYboton);
+        attackS.setMinHeight(tamYboton);
         Button move = new Button("Mover");
         move.setStyle("-fx-font: 20 arial; -fx-base: #ee2211;");
-        move.setPrefSize(200,40);
-        move.setMinHeight(40);
+        move.setPrefSize(tamXboton,tamYboton);
+        move.setMinHeight(tamYboton);
         Button transform = new Button("Transformar");
         transform.setStyle("-fx-font: 20 arial; -fx-base: #ee2211;");
-        transform.setPrefSize(200,40);
-        transform.setMinHeight(40);
+        transform.setPrefSize(tamXboton,tamYboton);
+        transform.setMinHeight(tamYboton);
 
         vbox.getChildren().addAll(attackB, attackS, move, transform);
-        root.getChildren().add(vbox);
-
-        return root;
+        return vbox;
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        /*Parent root = FXMLLoader.load(getClass().getResource("ui.fxml"));*/
         scene = new Scene(createContent());
 
         primaryStage.setTitle("Dragon AlgoBall");
