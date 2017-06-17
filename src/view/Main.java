@@ -15,7 +15,7 @@ import java.nio.file.Paths;
 public class Main extends Application {
 
     private static final int WIDTH = 800;
-    private static final int HEIGH = 600;
+    private static final int HEIGHT = 600;
     private static final int Y_TILES = 15;
     private static final int X_TILES = 15;
     private Tile[][] grid = new Tile[X_TILES][Y_TILES];
@@ -30,7 +30,7 @@ public class Main extends Application {
 
     private Parent createContent() {
         Pane root = new Pane();
-        root.setPrefSize(800,600);
+        root.setPrefSize(WIDTH,HEIGHT);
         root.getChildren().addAll(tileGroup, pieceGroup);
 
         for (int y = 0; y < Y_TILES; y++) {
