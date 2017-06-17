@@ -39,10 +39,8 @@ public class MajinBoo extends Personaje {
         if (!tieneSuficienteKi(kiAtaqueEspecial)) {
             throw new KiInsuficienteException();
         }
-        Ataque ataque = new Ataque(this, otroPersonaje, 1.50);
-        ataque.execute();
         reducirKi(kiAtaqueEspecial);
-        //falta implementar la inutilizacion del oponente por 3 turnos
+        otroPersonaje.convertirseEnChocolate();
 
     }
 

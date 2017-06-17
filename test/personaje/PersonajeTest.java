@@ -519,6 +519,64 @@ public class PersonajeTest {
 		Assert.assertEquals(20, cell.getVida() - vidaPreviaCell);
 	}
 
+	@Test
+	public void testMajinBooHaceAtaqueEspecialAPiccoloNormalYLoTransformaEnChocolate() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException, NoHayProximaTransformacionException, NoPuedeTransformarException {
+		//Poder ataque freezer 2daforma= 40 .. Poder ataque piccolo 20. Ataque especial hace 50% mas danio que 40 --> 60
+		Personaje majinBoo = new MajinBoo(new Casillero(new Posicion(1, 1)));
+		Personaje piccolo = new Piccolo(new Casillero(new Posicion(3, 1)));
+		majinBoo.aumentarKi(40);
+		majinBoo.ataqueEspecialA(piccolo);
+
+		Assert.assertEquals(Chocolate.class, piccolo.transformacion.getClass());
+	}
+
+	@Test(expected = NoPuedeMoverseSiendoChocolateException.class)
+	public void testMajinBooHaceAtaqueEspecialAGokuNormalYLoTransformaEnChocolateEntoncesGokuNoSePuedeMover() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException, NoHayProximaTransformacionException, NoPuedeTransformarException, CaminoInvalidoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException {
+		//Poder ataque freezer 2daforma= 40 .. Poder ataque piccolo 20. Ataque especial hace 50% mas danio que 40 --> 60
+		Casillero casillero31 = new Casillero(new Posicion(3, 1));
+		Personaje majinBoo = new MajinBoo(new Casillero(new Posicion(1, 1)));
+		Personaje goku = new Goku(casillero31);
+		majinBoo.aumentarKi(40);
+		majinBoo.ataqueEspecialA(goku);
+
+		Casillero casillero41 = new Casillero(new Posicion(4,1));
+		ArrayList<Casillero> casilleros = new ArrayList<>();
+		casilleros.add(casillero31);
+		casilleros.add(casillero41);
+		Camino camino = new Camino(casilleros);
+		goku.mover(camino);
+	}
+
+	@Test(expected = NoPuedeAtacarSiendoChocolateException.class)
+	public void testMajinBooHaceAtaqueEspecialAGohanNormalYLoTransformaEnChocolateEntoncesGohanNoPuedeAtacar() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException, NoHayProximaTransformacionException, NoPuedeTransformarException, CaminoInvalidoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException {
+		Personaje majinBoo = new MajinBoo(new Casillero(new Posicion(1, 1)));
+		Personaje gohan = new Gohan(new Casillero(new Posicion(3, 1)));
+		majinBoo.aumentarKi(40);
+		majinBoo.ataqueEspecialA(gohan);
+
+		gohan.atacarA(majinBoo);
+	}
+
+	@Test(expected = NoPuedeUsarAtaqueEspecialSiendoChocolateException.class)
+	public void testMajinBooHaceAtaqueEspecialAGohanNormalYLoTransformaEnChocolateEntoncesGohanNoPuedeUsarAtaqueEspecial() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException, NoHayProximaTransformacionException, NoPuedeTransformarException, CaminoInvalidoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException {
+		Personaje majinBoo = new MajinBoo(new Casillero(new Posicion(1, 1)));
+		Personaje gohan = new Gohan(new Casillero(new Posicion(3, 1)));
+		majinBoo.aumentarKi(40);
+		majinBoo.ataqueEspecialA(gohan);
+
+		gohan.ataqueEspecialA(majinBoo);
+	}
+
+	@Test(expected = NoPuedeTransformarseSiendoChocolateException.class)
+	public void testMajinBooHaceAtaqueEspecialAGohanNormalYLoTransformaEnChocolateEntoncesGohanNoPuedeTransformarse() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException, NoHayProximaTransformacionException, NoPuedeTransformarException, CaminoInvalidoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException {
+		Personaje majinBoo = new MajinBoo(new Casillero(new Posicion(1, 1)));
+		Personaje gohan = new Gohan(new Casillero(new Posicion(3, 1)));
+		majinBoo.aumentarKi(40);
+		majinBoo.ataqueEspecialA(gohan);
+
+		gohan.transformar();
+	}
+
 	@Test(expected = NoPuedeAtacarMismoEquipoException.class)
 	public void testFreezerNormalHaceAtaqueEspecialASuEquipoDebeLanzarNoPuedeAtacarMismoEquipoException() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException {
 		Personaje freezer = new Freezer(new Casillero(new Posicion(1, 1)));
