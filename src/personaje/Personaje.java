@@ -15,6 +15,7 @@ import excepciones.transformacion.NoPuedeTransformarException;
 import tablero.Camino;
 import tablero.Casillero;
 import excepciones.tablero.CasilleroOcupadoException;
+import transformacion.Chocolate;
 import transformacion.Transformacion;
 
 import java.util.HashMap;
@@ -83,13 +84,23 @@ public abstract class Personaje {
 
 
 	public void atacarA(Personaje otroPersonaje) throws NoPuedeAtacarAEsaDistanciaException, NoPuedeAtacarMismoEquipoException {
+		transformacion.atacarA(this,otroPersonaje);
+		/*
 		Ataque ataque = new Ataque(this, otroPersonaje, 1);
 		ataque.execute();
+		*/
+	}
+
+	public AtaqueEspecialHandler getAtaqueEspecialHandlerContra(Personaje unPersonaje){
+		return this.ataqueEspecialMap.get(unPersonaje.getClass());
 	}
 
 	public void ataqueEspecialA(Personaje otroPersonaje) throws NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, KiInsuficienteException {
+		transformacion.ataqueEspecialA(this,otroPersonaje);
+		/*
 		AtaqueEspecialHandler handler = this.ataqueEspecialMap.get(otroPersonaje.getClass());
 		handler.ataqueEspecialA(otroPersonaje);
+		*/
 	}
 
 	public int getVelocidad() {
@@ -104,14 +115,30 @@ public abstract class Personaje {
 		return transformacion.getPoderDePelea();
 	}
 
+	public void setCasillero(Casillero unCasillero){
+		casillero.vaciar();
+		casillero = unCasillero;
+	}
 
 	public void mover(Camino camino) throws NoPuedeMoverCaminoObstruidoException, NoPuedeMoverAEsaDistanciaException {
+		transformacion.mover(this,camino);
+
+		/*
 		Casillero casilleroDestino = transformacion.mover(this,camino);
 		casillero.vaciar();
 		casillero = casilleroDestino;
+		*/
+	}
+
+	public void convertirseEnChocolate(){
+		transformacion = new Chocolate(transformacion);//le paso la original
 	}
 
 	public Equipo getEquipo() {
 		return this.equipo;
+	}
+
+	public void dejarDeSerChocolate(){
+		transformacion = transformacion.transformacionOriginal();
 	}
 }

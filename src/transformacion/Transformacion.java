@@ -1,6 +1,10 @@
 package transformacion;
 
 
+import acciones.Ataque;
+import acciones.AtaqueEspecialHandler;
+import excepciones.acciones.NoPuedeAtacarMismoEquipoException;
+import excepciones.personaje.NoPuedeAtacarAEsaDistanciaException;
 import excepciones.personaje.NoPuedeMoverAEsaDistanciaException;
 import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
 import excepciones.transformacion.*;
@@ -24,6 +28,9 @@ public abstract class Transformacion {
         this.kiNecesarioTransformar = kiTransformar;
     }
 
+    protected Transformacion() {
+    }
+
 
     public Transformacion transformar(Personaje unPersonaje) throws NoHayProximaTransformacionException, NoPuedeTransformarException, KiInsuficienteException {
         int kiActual = unPersonaje.getKi();
@@ -36,14 +43,13 @@ public abstract class Transformacion {
         return this.proximaTransformacion;
     }
 
-
-    public Casillero mover(Personaje unPersonaje, Camino camino) throws NoPuedeMoverCaminoObstruidoException, NoPuedeMoverAEsaDistanciaException {
+    public void mover(Personaje unPersonaje, Camino camino) throws NoPuedeMoverCaminoObstruidoException, NoPuedeMoverAEsaDistanciaException {
 
         if (camino.distancia() > this.velocidad ){
             throw new NoPuedeMoverAEsaDistanciaException();
         }
-
-        return camino.recorrerCon(unPersonaje);
+        Casillero casilleroDestino = camino.recorrerCon(unPersonaje);
+        unPersonaje.setCasillero(casilleroDestino);
     }
 
     public int getVelocidad() {
@@ -58,4 +64,17 @@ public abstract class Transformacion {
         return this.distanciaAtaque;
     }
 
+    public void atacarA(Personaje personajeAtacante, Personaje personajeAtacado) throws NoPuedeAtacarAEsaDistanciaException {
+        Ataque ataque = new Ataque(personajeAtacante, personajeAtacado, 1);
+        ataque.execute();
+    }
+
+    public Transformacion transformacionOriginal() {
+        return null;
+    }
+
+    public void ataqueEspecialA(Personaje personajeAtacante, Personaje personajeAtacado) throws NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException {
+        AtaqueEspecialHandler handler = personajeAtacante.getAtaqueEspecialHandlerContra(personajeAtacado);
+        handler.ataqueEspecialA(personajeAtacado);
+    }
 }

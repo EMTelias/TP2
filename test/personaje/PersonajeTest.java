@@ -1,7 +1,7 @@
 package personaje;
 
 import equipo.Equipo;
-import excepciones.acciones.NoPuedeAtacarMismoEquipoException;
+import excepciones.acciones.*;
 import excepciones.personaje.NoPuedeAtacarAEsaDistanciaException;
 import excepciones.personaje.NoPuedeMoverAEsaDistanciaException;
 import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
@@ -16,10 +16,12 @@ import org.junit.Test;
 import tablero.Camino;
 import tablero.Casillero;
 import tablero.Posicion;
+import transformacion.Chocolate;
 import transformacion.cell.PerfectoCell;
 import transformacion.cell.SemiPerfectoCell;
 import transformacion.freezer.SegundaFormaFreezer;
 import transformacion.gohan.SuperSayajin2Gohan;
+import transformacion.goku.NormalGoku;
 import transformacion.goku.SuperSayajinGoku;
 import transformacion.piccolo.ProtectorPiccolo;
 
@@ -581,5 +583,59 @@ public class PersonajeTest {
 
 		goku.ataqueEspecialA(gohan);
 	}
+
+	@Test(expected = NoPuedeAtacarSiendoChocolateException.class)
+	public void testConviertoAGokuEnChocolateYAtacaRecibiendoExcepcion() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException {
+		Personaje goku = new Goku(new Casillero(new Posicion(1,1)));
+		Personaje gohan = new Gohan(new Casillero(new Posicion(1,1)));
+		goku.convertirseEnChocolate();
+		goku.atacarA(gohan);
+	}
+
+	@Test
+	public void testConviertoAGokuEnChocolateYRevisoQueSeTransformo() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException {
+		Personaje goku = new Goku(new Casillero(new Posicion(1,1)));
+		goku.convertirseEnChocolate();
+		Assert.assertTrue(goku.transformacion.getClass() == Chocolate.class);
+	}
+
+	@Test
+	public void testConviertoAGokuEnChocolateLuegoLoDeConviertoYRevisoQueSuTransformacionEstaBien() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException {
+		Personaje goku = new Goku(new Casillero(new Posicion(1,1)));
+		Personaje gohan = new Gohan(new Casillero(new Posicion(1,1)));
+		goku.convertirseEnChocolate();
+		goku.dejarDeSerChocolate();
+		Assert.assertTrue(goku.transformacion.getClass() == NormalGoku.class);
+	}
+
+	@Test(expected = NoPuedeUsarAtaqueEspecialSiendoChocolateException.class)
+	public void testConviertoAGokuEnChocolaYUsaAtaqueEspecialACellRecibeExcepcion() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, KiInsuficienteException {
+		Personaje goku = new Goku(new Casillero(new Posicion(1,1)));
+		Personaje cell = new Cell(new Casillero(new Posicion(1,1)));
+		goku.convertirseEnChocolate();
+		goku.ataqueEspecialA(cell);
+	}
+
+	@Test(expected = NoPuedeTransformarseSiendoChocolateException.class)
+	public void testConviertoAGokuEnChocolateYloTransformoReciboExcepcion() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, KiInsuficienteException, NoHayProximaTransformacionException, NoPuedeTransformarException {
+		Personaje goku = new Goku(new Casillero(new Posicion(1,1)));
+		goku.convertirseEnChocolate();
+		goku.transformar();
+	}
+
+	@Test(expected = NoPuedeMoverseSiendoChocolateException.class)
+	public void testConviertoAGokuEnChocolateYLoMuevoReciboExcepcion() throws CaminoInvalidoException, CasilleroOcupadoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, NoPuedeTransformarException, KiInsuficienteException, NoHayProximaTransformacionException {
+		Personaje goku = new Goku(new Casillero(new Posicion(1,1)));
+		goku.convertirseEnChocolate();
+		Casillero casillero1 = new Casillero(new Posicion(2, 1));
+		Casillero casillero2 = new Casillero(new Posicion(3, 1));
+		ArrayList<Casillero> casilleros = new ArrayList<Casillero>();
+		casilleros.add(casillero1);
+		casilleros.add(casillero2);
+		Camino camino = new Camino(casilleros);
+		goku.mover(camino);
+
+	}
+
 
 }
