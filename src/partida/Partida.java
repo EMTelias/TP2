@@ -63,21 +63,37 @@ public class Partida {
        return p;
     }
 
+    private void revisarFinDelTurno(){
+        if(turno.yaAtaco() && turno.yaMovio()){
+            this.pasar();
+        }
+    }
+
     public void atacarEnPosicion(Posicion posAtacante, Posicion posAtacado) throws NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException {
+        turno.yaAtaco();
         Personaje atacante = this.personajeEnPosicion(posAtacante);
         Personaje atacado = this.personajeEnPosicion(posAtacado);
         atacante.atacarA(atacado);
+
+        turno.atacar();
+        revisarFinDelTurno();
     }
 
     public void ataqueEspecialEnPosicion(Posicion posAtacante, Posicion posAtacado) throws NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, KiInsuficienteException {
         Personaje atacante = this.personajeEnPosicion(posAtacante);
         Personaje atacado = this.personajeEnPosicion(posAtacado);
         atacante.ataqueEspecialA(atacado);
+
+        turno.atacar();
+        revisarFinDelTurno();
     }
 
     public void moverEnCamino(Posicion posPersonaje, Camino camino) throws NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, CaminoInvalidoException {
         Personaje personaje = this.personajeEnPosicion(posPersonaje);
         personaje.mover(camino);
+
+        turno.mover();
+        revisarFinDelTurno();
     }
 
     public void transformarPersonaje(Posicion posPersonaje) throws NoPuedeTransformarException, KiInsuficienteException, NoHayProximaTransformacionException {
@@ -115,5 +131,6 @@ public class Partida {
         freezer.unirse(this.equipoEnemigos);
 
     }
+
 }
 
