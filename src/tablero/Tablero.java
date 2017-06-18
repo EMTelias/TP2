@@ -1,15 +1,12 @@
 package tablero;
 
 
+import equipo.Equipo;
 import excepciones.tablero.CasilleroOcupadoException;
 import excepciones.tablero.DimensionDeTableroInvalidoException;
-import jugador.Jugador;
-import jugador.JugadorEnemigo;
-import jugador.JugadorGuerreroZ;
 import personaje.*;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class Tablero {
 
@@ -22,8 +19,8 @@ public class Tablero {
 		if ((dimensionX <= 0) || (dimensionY <= 0) ) throw new DimensionDeTableroInvalidoException();
 		tablero = new HashMap<Posicion,Casillero>();
 				
-		for (int i=1; i<=dimensionX; i++){
-			for (int j=1; j<=dimensionY; j++){
+		for (int i=0; i<=dimensionX; i++){
+			for (int j=0; j<=dimensionY; j++){
 					Posicion posicion = new Posicion(i,j);
 					Casillero casillero = new Casillero(posicion);
 					tablero.put(posicion, casillero); 					
@@ -47,22 +44,7 @@ public class Tablero {
 		return tablero.get(posicion);
 	}
 
-	//La colocacion de los personajes sera distinto con las modificaciones que hay que hacer
-	/* Agrego metodo para agregar los personajes al inicio de la partida */
-	/*public void initDePersonajes(List<Personaje> guerrerosZ, List<Personaje> enemigos) throws CasilleroOcupadoException {
-		int i = 1, j = this.dimensionY;
-		for (Personaje personaje: guerrerosZ){
-			Posicion pos = new Posicion(i,1);
-			this.colocar(personaje,pos);
-			i++;
-		}
-		for (Personaje personaje: enemigos){
-			Posicion pos = new Posicion(20,j);
-			this.colocar(personaje,pos);
-			j--;
-		}*/
-
-	public void initDeGuerrerosZ(Jugador guerreroZ) throws CasilleroOcupadoException {
+	public void initDeGuerrerosZ(Equipo guerrerosZ) throws CasilleroOcupadoException {
 		//Creo los guerreros Z
 		Posicion pos1 = new Posicion(1,1);
 		Posicion pos2 = new Posicion(2,1);
@@ -72,17 +54,12 @@ public class Tablero {
 		Personaje gohan = new Gohan(this.getCasillero(pos2));
 		Personaje piccolo = new Piccolo(this.getCasillero(pos3));
 
-		//this.colocar(goku,pos1);
-		//this.colocar(gohan,pos2);
-		//this.colocar(piccolo,pos3);
-
-		guerreroZ.agregarPersonaje(goku);
-		guerreroZ.agregarPersonaje(gohan);
-		guerreroZ.agregarPersonaje(piccolo);
-
+		goku.unirse(guerrerosZ);
+		gohan.unirse(guerrerosZ);
+		piccolo.unirse(guerrerosZ);
 	}
 
-	public void initDeEnemigos(Jugador enemigo) throws CasilleroOcupadoException {
+	public void initDeEnemigos(Equipo enemigos) throws CasilleroOcupadoException {
 		//Creo los enemigos
 		Posicion pos1 = new Posicion(20,this.dimensionY);
 		Posicion pos2 = new Posicion(20,this.dimensionY-1);
@@ -92,13 +69,9 @@ public class Tablero {
 		Personaje majinBoo = new MajinBoo(this.getCasillero(pos2));
 		Personaje freezer = new Freezer(this.getCasillero(pos3));
 
-		//this.colocar(cell,pos1);
-		//this.colocar(majinBoo,pos2);
-		//this.colocar(freezer,pos3);
-
-		enemigo.agregarPersonaje(cell);
-		enemigo.agregarPersonaje(majinBoo);
-		enemigo.agregarPersonaje(freezer);
+		enemigos.agregarPersonaje(cell);
+		enemigos.agregarPersonaje(majinBoo);
+		enemigos.agregarPersonaje(freezer);
 
 	}
 }

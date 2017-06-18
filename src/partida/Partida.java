@@ -1,10 +1,18 @@
 package partida;
 
+import equipo.Equipo;
+import excepciones.acciones.NoPuedeAtacarMismoEquipoException;
+import excepciones.personaje.CasillaSinPersonajeException;
+import excepciones.personaje.NoPuedeAtacarAEsaDistanciaException;
+import excepciones.personaje.NoPuedeMoverAEsaDistanciaException;
+import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
 import excepciones.tablero.CasilleroOcupadoException;
 import excepciones.tablero.DimensionDeTableroInvalidoException;
-import jugador.Jugador;
+import excepciones.transformacion.KiInsuficienteException;
+import excepciones.transformacion.NoHayProximaTransformacionException;
+import excepciones.transformacion.NoPuedeTransformarException;
 import personaje.Personaje;
-import tablero.Casillero;
+import tablero.Camino;
 import tablero.Posicion;
 import tablero.Tablero;
 
@@ -20,23 +28,22 @@ public class Partida {
     private Turno turno;
 
 
-    public Partida(Jugador jugadorGuerreroZ,Jugador jugadorEnemigo) throws DimensionDeTableroInvalidoException, CasilleroOcupadoException {
+    public Partida(Equipo equipoGuerrerosZ, Equipo equipoEnemigo) throws DimensionDeTableroInvalidoException, CasilleroOcupadoException {
 
         this.tablero = new Tablero(DIM_ANCHO,DIM_ALTO);
-        this.tablero.initDeGuerrerosZ(jugadorGuerreroZ);
-        this.tablero.initDeEnemigos(jugadorEnemigo);
+        this.tablero.initDeGuerrerosZ(equipoGuerrerosZ);
+        this.tablero.initDeEnemigos(equipoEnemigo);
 
-        this.turno = new Turno(jugadorGuerreroZ,jugadorEnemigo);
+        this.turno = new Turno(equipoGuerrerosZ,equipoEnemigo);
         this.estadoDePartida = true;
 
     }
     public void pasar() {
-
         this.turno.pasar();
     }
 
-    public Jugador turnoActual() {
-        return this.turno.getJugadorActivo();
+    public Equipo turnoActual() {
+        return this.turno.getEquipoActivo();
     }
 
     public Tablero getTablero() {
@@ -44,7 +51,27 @@ public class Partida {
     }
 
     public Personaje personajeEnPosicion(Posicion posicion) {
-        return tablero.getCasillero(posicion).getPersonaje();
+       Personaje p =  tablero.getCasillero(posicion).getPersonaje();
+       if (p == null){
+           throw new CasillaSinPersonajeException();
+       }else{
+           return p;
+       }
     }
+
+    public void atacarEnPosicion(Posicion posAtacante, Posicion posAtacado) throws NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException {
+        Personaje atacante = this.personajeEnPosicion(posAtacante);
+        Personaje atacado = this.personajeEnPosicion(posAtacado);
+        atacante.atacarA(atacado);
+    }
+    public void moverEnCamino(Posicion posPersonaje, Camino camino) throws NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException {
+        Personaje personaje = this.personajeEnPosicion(posPersonaje);
+        personaje.mover(camino);
+    }
+    public void transformarPersonaje(Posicion posPersonaje) throws NoPuedeTransformarException, KiInsuficienteException, NoHayProximaTransformacionException {
+        Personaje personaje = this.personajeEnPosicion(posPersonaje);
+        personaje.transformar();
+    }
+
 }
 

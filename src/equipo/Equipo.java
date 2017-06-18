@@ -8,6 +8,8 @@ import java.util.ArrayList;
 public class Equipo {
     private final String nombre;
     private ArrayList<Personaje> personajes;
+    protected boolean suTurno;
+
 
     public Equipo(String nombre) {
         this.nombre = nombre;
@@ -24,5 +26,13 @@ public class Equipo {
 
     public ArrayList<Personaje> getPersonajes() {
         return this.personajes;
+    }
+
+    public void setTurno(boolean esSuTurno) {
+        this.suTurno = esSuTurno;
+    }
+
+    public boolean getTurno() {
+        return this.suTurno;
     }
 }

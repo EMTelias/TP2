@@ -1,26 +1,26 @@
 package partida;
 
-import jugador.Jugador;
+import equipo.Equipo;
 
 public class Turno {
-    private Jugador jugadorEnMovimiento;
-    private Jugador jugadorEnEspera;
+    private Equipo equipoEnMovimiento;
+    private Equipo equipoEnEspera;
 
-    public Turno(Jugador jugador1,Jugador jugador2){
-        this.jugadorEnMovimiento = jugador1;
-        this.jugadorEnEspera = jugador2;
-        jugador1.setTurno(true);
-        jugador2.setTurno(false);
+    public Turno(Equipo equipo1,Equipo equipo2){
+        this.equipoEnMovimiento = equipo1;
+        this.equipoEnEspera = equipo2;
+        equipo1.setTurno(true);
+        equipo2.setTurno(false);
     }
-    public Jugador getJugadorActivo(){
-        return this.jugadorEnMovimiento;
+    public Equipo getEquipoActivo(){
+        return this.equipoEnMovimiento;
     }
 
     public void pasar() {
-        Jugador jugador = this.jugadorEnMovimiento;
-        this.jugadorEnMovimiento = this.jugadorEnEspera;
-        this.jugadorEnEspera = jugador;
-        this.jugadorEnMovimiento.setTurno(true);
-        this.jugadorEnEspera.setTurno(false);
+        Equipo equipo = this.equipoEnMovimiento;
+        this.equipoEnMovimiento = this.equipoEnEspera;
+        this.equipoEnEspera = equipo;
+        this.equipoEnMovimiento.setTurno(true);
+        this.equipoEnEspera.setTurno(false);
     }
 }
