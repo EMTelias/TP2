@@ -22,5 +22,7 @@ public class Turno {
         this.equipoEnEspera = equipo;
         this.equipoEnMovimiento.setTurno(true);
         this.equipoEnEspera.setTurno(false);
+
+        equipo.revisarTransformadosEnChocolate();
     }
 }

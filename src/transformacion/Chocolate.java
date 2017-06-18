@@ -10,8 +10,10 @@ import tablero.Camino;
 public class Chocolate extends Transformacion {
 
     Transformacion transformacionOriginal;
+    int turnosTransformado;
 
     public Chocolate(Transformacion transformacionActual) {
+        turnosTransformado = 0;
         transformacionOriginal = transformacionActual;
     }
 
@@ -40,4 +42,16 @@ public class Chocolate extends Transformacion {
         throw new NoPuedeMoverseSiendoChocolateException();
     }
 
+    @Override
+    public Transformacion revisarTransformacionChocolate(){
+        if(turnosTransformado > 1){
+            return transformacionOriginal;
+        }else{
+            turnosTransformado++;
+            return this;
+        }
+    }
+
+    @Override
+    public boolean esChocolate(){return true;}
 }

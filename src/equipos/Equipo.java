@@ -35,4 +35,10 @@ public class Equipo {
     public boolean getTurno() {
         return this.suTurno;
     }
+
+    public void revisarTransformadosEnChocolate() {
+        for (Personaje unPersonaje : personajes) {
+            unPersonaje.revisarTransformacionChocolate();
+        }
+    }
 }

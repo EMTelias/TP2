@@ -13,6 +13,7 @@ import excepciones.transformacion.NoHayProximaTransformacionException;
 import excepciones.transformacion.NoPuedeTransformarException;
 import org.junit.Assert;
 import org.junit.Test;
+import partida.Partida;
 import tablero.Camino;
 import tablero.Casillero;
 import tablero.Posicion;
@@ -693,6 +694,40 @@ public class PersonajeTest {
 		Camino camino = new Camino(casilleros);
 		goku.mover(camino);
 
+	}
+
+	@Test
+	public void testConviertoEnChocolateAGokuYEn2TurnosMiosSigueSiendoChocolate() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
+		Equipo guerreroZ = new Equipo("GuerrerosZ");
+		Equipo enemigos = new Equipo("Enemigos");
+		Partida partida = new Partida(guerreroZ,enemigos);
+
+		Personaje goku = partida.personajeEnPosicion(new Posicion(1,1));
+		goku.convertirseEnChocolate();
+		int turno=0;
+		for(int i=0;i<4;i++){
+			System.out.println("turno: "+turno+" - "+goku.transformacion);
+			partida.pasar();
+			turno++;
+		}
+		Assert.assertTrue(goku.transformacion.getClass() == Chocolate.class);
+	}
+
+	@Test
+	public void testConviertoEnChocolateAGokuYEn3TurnosMiosDespierta() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
+		Equipo guerreroZ = new Equipo("GuerrerosZ");
+		Equipo enemigos = new Equipo("Enemigos");
+		Partida partida = new Partida(guerreroZ,enemigos);
+
+		Personaje goku = partida.personajeEnPosicion(new Posicion(1,1));
+		goku.convertirseEnChocolate();
+		int turno=0;
+		for(int i=0;i<6;i++){
+			System.out.println("turno: "+turno+" - "+goku.transformacion);
+			partida.pasar();
+			turno++;
+		}
+		Assert.assertTrue(goku.transformacion.getClass() == NormalGoku.class);
 	}
 
 

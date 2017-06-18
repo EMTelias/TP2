@@ -76,4 +76,8 @@ public abstract class Transformacion {
         AtaqueEspecialHandler handler = personajeAtacante.getAtaqueEspecialHandlerContra(personajeAtacado);
         handler.ataqueEspecialA(personajeAtacado);
     }
+
+    public Transformacion revisarTransformacionChocolate(){return null;}
+
+    public boolean esChocolate(){return false;}
 }

@@ -139,4 +139,14 @@ public abstract class Personaje {
 	public Casillero getCasillero() {
 		return casillero;
 	}
+
+	private boolean esChocolate(){
+		return (transformacion.esChocolate());
+	}
+
+    public void revisarTransformacionChocolate(){
+		if(this.esChocolate()){
+			transformacion = transformacion.revisarTransformacionChocolate();
+		}
+	}
 }
