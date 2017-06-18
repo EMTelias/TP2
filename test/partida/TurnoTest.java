@@ -49,7 +49,8 @@ public class TurnoTest {
         Partida partida = new Partida();
         Tablero tablero = partida.getTablero();
         ArrayList<Casillero> casilleros = new ArrayList<>();
-        for(int i = 2; i <= 13; i++) {
+        // Goku se mueve en forma diagonal hasta Pos(13,13) si DIM tablero es 15x15
+        for(int i = 2; i <= (Partida.DIM_ALTO-2); i++) {
             casilleros.add(tablero.getCasillero(new Posicion(i,i)));
             partida.moverEnCamino(new Posicion(i-1, i-1), new Camino(casilleros));
             partida.pasar();
@@ -59,13 +60,13 @@ public class TurnoTest {
 
         Assert.assertEquals("GuerrerosZ",partida.turnoActual().getNombre());
 
-        //Aca tengo a goku en el 13,13 y a cell en el 15,15
-        partida.atacarEnPosicion(new Posicion(13,13), new Posicion(15,15));
+        Posicion nuevaPosGoku = new Posicion(Partida.DIM_ANCHO - 2,Partida.DIM_ALTO - 2);
+        partida.atacarEnPosicion(nuevaPosGoku, Partida.POS_I_CELL);
 
         Assert.assertEquals("GuerrerosZ",partida.turnoActual().getNombre());
 
-        casilleros.add(tablero.getCasillero(new Posicion(14,14)));
-        partida.moverEnCamino(new Posicion(13, 13), new Camino(casilleros));
+        casilleros.add(tablero.getCasillero(new Posicion(Partida.DIM_ANCHO - 1,Partida.DIM_ALTO - 1)));
+        partida.moverEnCamino(nuevaPosGoku, new Camino(casilleros));
 
         Assert.assertEquals("Enemigos",partida.turnoActual().getNombre());
 
@@ -77,7 +78,8 @@ public class TurnoTest {
         Partida partida = new Partida();
         Tablero tablero = partida.getTablero();
         ArrayList<Casillero> casilleros = new ArrayList<>();
-        for(int i = 2; i <= 13; i++) {
+        // Goku se mueve en forma diagonal hasta Pos(13,13) si DIM tablero es 15x15
+        for(int i = 2; i <= (Partida.DIM_ALTO-2); i++) {
             casilleros.add(tablero.getCasillero(new Posicion(i,i)));
             partida.moverEnCamino(new Posicion(i-1, i-1), new Camino(casilleros));
             partida.pasar();
@@ -85,9 +87,9 @@ public class TurnoTest {
             casilleros.clear();
         }
 
-        //Aca tengo a goku en el 13,13 y a cell en el 15,15
-        partida.atacarEnPosicion(new Posicion(13,13), new Posicion(15,15));
-        partida.atacarEnPosicion(new Posicion(13,13), new Posicion(15,15));
+        Posicion nuevaPosGoku = new Posicion(Partida.DIM_ANCHO - 2,Partida.DIM_ALTO - 2);
+        partida.atacarEnPosicion(nuevaPosGoku, Partida.POS_I_CELL);
+        partida.atacarEnPosicion(nuevaPosGoku, Partida.POS_I_CELL);
 
     }
 
@@ -98,12 +100,14 @@ public class TurnoTest {
         Tablero tablero = partida.getTablero();
         ArrayList<Casillero> casilleros = new ArrayList<>();
 
-        casilleros.add(tablero.getCasillero(new Posicion(1,2)));
-        partida.moverEnCamino(new Posicion(1, 1), new Camino(casilleros));
+        Posicion nuevaPosGoku = new Posicion(2,2);
+        casilleros.add(tablero.getCasillero(nuevaPosGoku));
+        partida.moverEnCamino(Partida.POS_I_GOKU, new Camino(casilleros));
         casilleros.clear();
 
-        casilleros.add(tablero.getCasillero(new Posicion(1,3)));
-        partida.moverEnCamino(new Posicion(1, 2), new Camino(casilleros));
+        // Intento mover de nuevo a goku en diagonal
+        casilleros.add(tablero.getCasillero(new Posicion(3,3)));
+        partida.moverEnCamino(nuevaPosGoku, new Camino(casilleros));
 
     }
 }
