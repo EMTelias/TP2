@@ -46,9 +46,9 @@ public class Equipo {
         }
     }
 
-    public void aumentarKi() {
+    public void aumentarKi(int aumento) {
         for (Personaje unPersonaje : personajes) {
-            unPersonaje.aumentarKi(5);
+            unPersonaje.aumentarKi(aumento);
         }
     }
 }

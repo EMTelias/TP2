@@ -1,10 +1,13 @@
 package partida;
 
+import excepciones.acciones.NoPuedeAtacarMismoEquipoException;
+import excepciones.personaje.NoPuedeAtacarAEsaDistanciaException;
 import excepciones.personaje.NoPuedeMoverAEsaDistanciaException;
 import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
 import excepciones.tablero.CaminoInvalidoException;
 import excepciones.tablero.CasilleroOcupadoException;
 import excepciones.tablero.DimensionDeTableroInvalidoException;
+import excepciones.transformacion.KiInsuficienteException;
 import org.junit.Assert;
 import org.junit.Test;
 import personaje.Gohan;
@@ -65,7 +68,7 @@ public class PartidaTest {
     public void testCreoUnaPartidaConDosJugadoresYVerificoQueMajinBooEsteEnLaPosicionx20y19() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
         Partida partida = new Partida();
 
-        Personaje personajeBuscado = partida.personajeEnPosicion(new Posicion(20,19));
+        Personaje personajeBuscado = partida.personajeEnPosicion(new Posicion(15,14));
         Assert.assertTrue(personajeBuscado.getClass() == MajinBoo.class);
 
     }
@@ -73,12 +76,50 @@ public class PartidaTest {
     public void testCreoUnaPartidaYMuevoAGohanUnaPosicion() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException, CaminoInvalidoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException {
         Partida partida = new Partida();
         Tablero tablero = partida.getTablero();
-        ArrayList<Casillero> listaC = new ArrayList();
+        ArrayList<Casillero> listaC = new ArrayList<>();
         listaC.add(tablero.getCasillero(new Posicion(1,2)));
         Camino camino = new Camino(listaC);
         partida.moverEnCamino(new Posicion(1,1),camino);
 
         Assert.assertTrue(Goku.class == partida.personajeEnPosicion(new Posicion(1,2)).getClass());
+    }
+
+    @Test
+    public void testCreoUnaPartidaYGokuSeMueveEnDireccionDiagonalHastaEstarCercaDeEnemigosYAtaca() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException, CaminoInvalidoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException {
+        Partida partida = new Partida();
+        Tablero tablero = partida.getTablero();
+        ArrayList<Casillero> casilleros = new ArrayList<>();
+        for(int i = 2; i <= 13; i++) {
+            casilleros.add(tablero.getCasillero(new Posicion(i,i)));
+            partida.moverEnCamino(new Posicion(i-1, i-1), new Camino(casilleros));
+            partida.pasar();
+            partida.pasar();
+            casilleros.clear();
+        }
+        partida.atacarEnPosicion(new Posicion(13,13), new Posicion(15,15));
+        //goku ataca a cell y le genera 20 de danio
+        Personaje cell = tablero.getCasillero(new Posicion(15,15)).getPersonaje();
+        Assert.assertEquals(480, cell.getVida());
+
+    }
+
+    @Test
+    public void testCreoUnaPartidaYGokuSeMueveEnDireccionDiagonalHastaEstarCercaDeEnemigosYUsaAtaqueEspecial() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException, CaminoInvalidoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, KiInsuficienteException {
+        Partida partida = new Partida();
+        Tablero tablero = partida.getTablero();
+        ArrayList<Casillero> casilleros = new ArrayList<>();
+        for(int i = 2; i <= 13; i++) {
+            casilleros.add(tablero.getCasillero(new Posicion(i,i)));
+            partida.moverEnCamino(new Posicion(i-1, i-1), new Camino(casilleros));
+            partida.pasar();
+            partida.pasar();
+            casilleros.clear();
+        }
+        partida.ataqueEspecialEnPosicion(new Posicion(13,13), new Posicion(15,15));
+        //goku usa ataque especial a cell y le genera 20*1.5 de danio
+        Personaje cell = tablero.getCasillero(new Posicion(15,15)).getPersonaje();
+        Assert.assertEquals(470, cell.getVida());
+
     }
 
 
