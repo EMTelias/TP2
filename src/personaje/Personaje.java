@@ -69,7 +69,7 @@ public abstract class Personaje {
 	public void reducirVida(int cantidad){
 		this.vida-=cantidad;
 
-		if(vida < 0){
+		if(vida <= 0){
 			equipo.eliminarPersonaje(this);
 			casillero.vaciar();
 		}

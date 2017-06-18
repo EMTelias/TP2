@@ -27,22 +27,6 @@ import java.util.ArrayList;
 
 public class PartidaTest {
 
- /*   @Test
-    public void testCreoUnaPartidaConDosJugadoresCadaUnoConSus3PersonajesEntoncesLosPersonajesEstanInicializadosEnLosExtremos() throws DimensionDeTableroInvalidoException, CasilleroOcupadoException {
-
-        JugadorGuerreroZ jugador1 = new JugadorGuerreroZ("jugador1");
-        JugadorEnemigo jugador2 = new JugadorEnemigo("jugador2");
-        Partida partida = new Partida(jugador1, jugador2);
-        Tablero tablero = partida.getTablero();
-
-        Assert.assertFalse(tablero.estaVacioEn(new Posicion(1,1)));
-        Assert.assertFalse(tablero.estaVacioEn(new Posicion(2,1)));
-        Assert.assertFalse(tablero.estaVacioEn(new Posicion(3,1)));
-        Assert.assertFalse(tablero.estaVacioEn(new Posicion(20,18)));
-        Assert.assertFalse(tablero.estaVacioEn(new Posicion(20,19)));
-        Assert.assertFalse(tablero.estaVacioEn(new Posicion(20,20)));
-    }
-*/
 
     @Test
     public void testCreoUnaPartidaConDosEquiposEntoncesEsElTurnoDeGuerrerosZ() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
@@ -62,17 +46,17 @@ public class PartidaTest {
     @Test
     public void testCreoUnaPartidaConDosJugadoresYVerificoQueGohanEsteEnLaPosicionx2y1() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
         Partida partida = new Partida();
-        Personaje personajeBuscado = partida.personajeEnPosicion(new Posicion(2,1));
+        Personaje personajeBuscado = partida.personajeEnPosicion(Partida.POS_I_GOHAN);
 
         Assert.assertTrue(personajeBuscado.getClass() == Gohan.class);
 
     }
 
     @Test
-    public void testCreoUnaPartidaConDosJugadoresYVerificoQueMajinBooEsteEnLaPosicionx15y14() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
+    public void testCreoUnaPartidaConDosJugadoresYVerificoQueMajinBooEsteEnLaPosicionx14y15() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
         Partida partida = new Partida();
 
-        Personaje personajeBuscado = partida.personajeEnPosicion(new Posicion(15,14));
+        Personaje personajeBuscado = partida.personajeEnPosicion(Partida.POS_I_MAJINBOO);
         Assert.assertTrue(personajeBuscado.getClass() == MajinBoo.class);
 
     }
@@ -86,15 +70,17 @@ public class PartidaTest {
     }
 
     @Test
-    public void testCreoUnaPartidaYMuevoAGohanUnaPosicion() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException, CaminoInvalidoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException {
+    public void testCreoUnaPartidaYMuevoAGokuUnaPosicion() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException, CaminoInvalidoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException {
         Partida partida = new Partida();
         Tablero tablero = partida.getTablero();
         ArrayList<Casillero> listaC = new ArrayList<>();
-        listaC.add(tablero.getCasillero(new Posicion(1,2)));
+        // Goku esta en Posicion(1,1). Lo muevo a Posicion(2,2)
+        Posicion nuevaPosGoku = new Posicion(2,2);
+        listaC.add(tablero.getCasillero(nuevaPosGoku));
         Camino camino = new Camino(listaC);
-        partida.moverEnCamino(new Posicion(1,1),camino);
+        partida.moverEnCamino(Partida.POS_I_GOKU,camino);
 
-        Assert.assertTrue(Goku.class == partida.personajeEnPosicion(new Posicion(1,2)).getClass());
+        Assert.assertTrue(Goku.class == partida.personajeEnPosicion(nuevaPosGoku).getClass());
     }
 
     @Test
@@ -102,16 +88,18 @@ public class PartidaTest {
         Partida partida = new Partida();
         Tablero tablero = partida.getTablero();
         ArrayList<Casillero> casilleros = new ArrayList<>();
-        for(int i = 2; i <= 13; i++) {
+        // Goku se mueve en forma diagonal hasta Pos(13,13) si DIM tablero es 15x15
+        for(int i = 2; i <= (Partida.DIM_ALTO-2); i++) {
             casilleros.add(tablero.getCasillero(new Posicion(i,i)));
             partida.moverEnCamino(new Posicion(i-1, i-1), new Camino(casilleros));
             partida.pasar();
             partida.pasar();
             casilleros.clear();
         }
-        partida.atacarEnPosicion(new Posicion(13,13), new Posicion(15,15));
+        Posicion nuevaPosGoku = new Posicion(Partida.DIM_ANCHO - 2,Partida.DIM_ALTO - 2);
+        partida.atacarEnPosicion(nuevaPosGoku, Partida.POS_I_CELL);
         //goku ataca a cell y le genera 20 de danio
-        Personaje cell = tablero.getCasillero(new Posicion(15,15)).getPersonaje();
+        Personaje cell = tablero.getCasillero(Partida.POS_I_CELL).getPersonaje();
         Assert.assertEquals(480, cell.getVida());
 
     }
@@ -121,16 +109,18 @@ public class PartidaTest {
         Partida partida = new Partida();
         Tablero tablero = partida.getTablero();
         ArrayList<Casillero> casilleros = new ArrayList<>();
-        for(int i = 2; i <= 13; i++) {
+        // Goku se mueve en forma diagonal hasta Pos(13,13) si DIM tablero es 15x15
+        for(int i = 2; i <= (Partida.DIM_ALTO-2); i++) {
             casilleros.add(tablero.getCasillero(new Posicion(i,i)));
             partida.moverEnCamino(new Posicion(i-1, i-1), new Camino(casilleros));
             partida.pasar();
             partida.pasar();
             casilleros.clear();
         }
-        partida.ataqueEspecialEnPosicion(new Posicion(13,13), new Posicion(15,15));
+        Posicion nuevaPosGoku = new Posicion(Partida.DIM_ANCHO - 2,Partida.DIM_ALTO - 2);
+        partida.ataqueEspecialEnPosicion(nuevaPosGoku, Partida.POS_I_CELL);
         //goku usa ataque especial a cell y le genera 20*1.5 de danio
-        Personaje cell = tablero.getCasillero(new Posicion(15,15)).getPersonaje();
+        Personaje cell = tablero.getCasillero(Partida.POS_I_CELL).getPersonaje();
         Assert.assertEquals(470, cell.getVida());
 
     }
@@ -142,9 +132,9 @@ public class PartidaTest {
             partida.pasar(); // paso mi turno
             partida.pasar(); // mi oponente pasa su turno
         }
-        Personaje goku = partida.getTablero().getCasillero(new Posicion(1,1)).getPersonaje();
+        Personaje goku = partida.getTablero().getCasillero(Partida.POS_I_GOKU).getPersonaje();
         int velocidadPrevia = goku.getVelocidad();
-        partida.transformarPersonaje(new Posicion(1,1));
+        partida.transformarPersonaje(Partida.POS_I_GOKU);
         Assert.assertEquals(1, goku.getVelocidad() - velocidadPrevia);
     }
 
@@ -155,7 +145,7 @@ public class PartidaTest {
             partida.pasar(); // paso mi turno
             partida.pasar(); // mi oponente pasa su turno
         }
-        partida.transformarPersonaje(new Posicion(1,1));
+        partida.transformarPersonaje(Partida.POS_I_GOKU);
 
     }
 
@@ -165,31 +155,22 @@ public class PartidaTest {
         Partida partida = new Partida();
         Tablero tablero = partida.getTablero();
         ArrayList<Casillero> casilleros = new ArrayList<>();
-        for (int i = 2; i <= 13; i++) {
+        // Goku se mueve en forma diagonal hasta Pos(13,13) si DIM tablero es 15x15
+        for(int i = 2; i <= (Partida.DIM_ALTO-2); i++) {
             casilleros.add(tablero.getCasillero(new Posicion(i, i)));
             partida.moverEnCamino(new Posicion(i - 1, i - 1), new Camino(casilleros));
             partida.pasar();
             partida.pasar();
             casilleros.clear();
         }
-
+        Posicion nuevaPosGoku = new Posicion(Partida.DIM_ANCHO - 2,Partida.DIM_ALTO - 2);
         //Mato a los otros 2 enemigos y dejo a cell en 1 de vida(15,15)
-        partida.personajeEnPosicion(new Posicion(15, 15)).reducirVida(499);
-        partida.personajeEnPosicion(new Posicion(15, 14)).reducirVida(500);
-        partida.personajeEnPosicion(new Posicion(15, 13)).reducirVida(500);
+        partida.personajeEnPosicion(Partida.POS_I_CELL).reducirVida(499);
+        partida.personajeEnPosicion(Partida.POS_I_MAJINBOO).reducirVida(300);
+        partida.personajeEnPosicion(Partida.POS_I_FREEZER).reducirVida(400);
 
-        partida.atacarEnPosicion(new Posicion(13, 13),new Posicion(15, 15));
+        partida.atacarEnPosicion(nuevaPosGoku, Partida.POS_I_CELL);
  
     }
-
-    /*@Test
-    public void testCreoUnaPartidaYMuevoAGoku2HaciaAbajo() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
-        JugadorGuerreroZ jugador1 = new JugadorGuerreroZ("jugador1");
-        JugadorEnemigo jugador2 = new JugadorEnemigo("jugador2");
-        Partida partida = new Partida(jugador1, jugador2);
-        partida.moverPersonaje();
-        Assert.assertTrue(personajeBuscado.getClass() == MajinBoo.class);
-
-    }*/
 
 }
