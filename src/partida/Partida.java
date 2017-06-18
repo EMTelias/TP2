@@ -26,8 +26,8 @@ import java.util.Random;
 
 
 public class Partida {
-    private static final int DIM_ALTO = 15;
-    private static final int DIM_ANCHO = 15;
+    protected static final int DIM_ALTO = 15;
+    protected static final int DIM_ANCHO = 15;
     private static final int AUMENTO_KI = 5;
 
     private Tablero tablero;
@@ -36,6 +36,13 @@ public class Partida {
     private boolean estadoDePartida;
 
     private Turno turno;
+
+    protected static Posicion POS_I_GOKU = new Posicion(1,1);
+    protected static Posicion POS_I_GOHAN = new Posicion(2,1);
+    protected static Posicion POS_I_PICCOLO = new Posicion(1,2);
+    protected static Posicion POS_I_CELL = new Posicion(DIM_ANCHO,DIM_ALTO);
+    protected static Posicion POS_I_FREEZER = new Posicion(DIM_ANCHO,DIM_ALTO-1);
+    protected static Posicion POS_I_MAJINBOO = new Posicion(DIM_ANCHO-1,DIM_ALTO);
 
 
     public Partida() throws DimensionDeTableroInvalidoException, CasilleroOcupadoException {
@@ -134,13 +141,13 @@ public class Partida {
 
     private void initDeGuerrerosZ() throws CasilleroOcupadoException {
         //Creo los guerreros Z
-        Posicion pos1 = new Posicion(1,1);
+        /*Posicion pos1 = new Posicion(1,1);
         Posicion pos2 = new Posicion(2,1);
-        Posicion pos3 = new Posicion(3,1);
+        Posicion pos3 = new Posicion(3,1);*/
 
-        Personaje goku = new Goku(this.tablero.getCasillero(pos1));
-        Personaje gohan = new Gohan(this.tablero.getCasillero(pos2));
-        Personaje piccolo = new Piccolo(this.tablero.getCasillero(pos3));
+        Personaje goku = new Goku(this.tablero.getCasillero(POS_I_GOKU));
+        Personaje gohan = new Gohan(this.tablero.getCasillero(POS_I_GOHAN));
+        Personaje piccolo = new Piccolo(this.tablero.getCasillero(POS_I_PICCOLO));
 
         goku.unirse(this.equipoGuerrerrosZ);
         gohan.unirse(this.equipoGuerrerrosZ);
@@ -149,13 +156,13 @@ public class Partida {
 
     private void initDeEnemigos() throws CasilleroOcupadoException {
         //Creo los enemigos
-        Posicion pos1 = new Posicion(DIM_ANCHO,this.DIM_ALTO);
+        /*Posicion pos1 = new Posicion(DIM_ANCHO,this.DIM_ALTO);
         Posicion pos2 = new Posicion(DIM_ANCHO,this.DIM_ALTO-1);
-        Posicion pos3 = new Posicion(DIM_ANCHO,this.DIM_ALTO-2);
+        Posicion pos3 = new Posicion(DIM_ANCHO,this.DIM_ALTO-2);*/
 
-        Personaje cell = new Cell(this.tablero.getCasillero(pos1));
-        Personaje majinBoo = new MajinBoo(this.tablero.getCasillero(pos2));
-        Personaje freezer = new Freezer(this.tablero.getCasillero(pos3));
+        Personaje cell = new Cell(this.tablero.getCasillero(POS_I_CELL));
+        Personaje majinBoo = new MajinBoo(this.tablero.getCasillero(POS_I_MAJINBOO));
+        Personaje freezer = new Freezer(this.tablero.getCasillero(POS_I_FREEZER));
 
         cell.unirse(this.equipoEnemigos);
         majinBoo.unirse(this.equipoEnemigos);
