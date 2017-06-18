@@ -44,12 +44,11 @@ public abstract class Transformacion {
     }
 
     public void mover(Personaje unPersonaje, Camino camino) throws NoPuedeMoverCaminoObstruidoException, NoPuedeMoverAEsaDistanciaException {
-
-        if (camino.distancia() > this.velocidad ){
-            throw new NoPuedeMoverAEsaDistanciaException();
-        }
-        Casillero casilleroDestino = camino.recorrerCon(unPersonaje);
-        unPersonaje.setCasillero(casilleroDestino);
+    	try {
+			camino.siDistanciaEsMayor( this.velocidad, NoPuedeMoverAEsaDistanciaException.class );
+		} catch (InstantiationException | IllegalAccessException e) {}
+		
+        camino.recorrerCon(unPersonaje);
     }
 
     public int getVelocidad() {

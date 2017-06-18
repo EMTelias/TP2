@@ -1,7 +1,7 @@
 package transformacion.piccolo;
 
 
-import equipo.Equipo;
+import equipos.Equipo;
 import excepciones.transformacion.NoPuedeTransformarException;
 import personaje.Gohan;
 import personaje.Personaje;

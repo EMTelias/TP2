@@ -4,7 +4,7 @@ import Consumibles.Consumible;
 import Consumibles.EsferaDelDragon;
 import acciones.Ataque;
 import acciones.AtaqueEspecialHandler;
-import equipo.Equipo;
+import equipos.Equipo;
 import excepciones.acciones.NoPuedeAtacarMismoEquipoException;
 import excepciones.personaje.NoPuedeAtacarAEsaDistanciaException;
 import excepciones.personaje.NoPuedeMoverAEsaDistanciaException;
@@ -74,10 +74,6 @@ public abstract class Personaje {
 		return this.vida;
 	}
 
-	/*public boolean tieneElConsumible(Consumible unConsumible){
-		return false;
-	}*/
-
 	public int distanciaA(Personaje unPersonaje){
 		return (this.casillero.distanciaHasta(unPersonaje.casillero));
 	}
@@ -115,19 +111,9 @@ public abstract class Personaje {
 		return transformacion.getPoderDePelea();
 	}
 
-	public void setCasillero(Casillero unCasillero){
-		casillero.vaciar();
-		casillero = unCasillero;
-	}
 
 	public void mover(Camino camino) throws NoPuedeMoverCaminoObstruidoException, NoPuedeMoverAEsaDistanciaException {
 		transformacion.mover(this,camino);
-
-		/*
-		Casillero casilleroDestino = transformacion.mover(this,camino);
-		casillero.vaciar();
-		casillero = casilleroDestino;
-		*/
 	}
 
 	public void convertirseEnChocolate(){
@@ -140,5 +126,20 @@ public abstract class Personaje {
 
 	public void dejarDeSerChocolate(){
 		transformacion = transformacion.transformacionOriginal();
+	}
+
+
+	public void sacarDeSuCasillero(){
+		casillero.vaciar();
+		casillero = null;
+	}
+	
+	public void colocarEnCasillero(Casillero unCasillero) throws CasilleroOcupadoException{
+		casillero = unCasillero;
+		casillero.colocar(this);
+	}
+
+	public Casillero getCasillero() {
+		return casillero;
 	}
 }

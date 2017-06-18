@@ -15,8 +15,7 @@ public class Freezer extends Personaje {
     protected final int kiAtaqueEspecial = 20;
 
     public Freezer(Casillero unCasillero) throws CasilleroOcupadoException {
-        unCasillero.colocar(this);
-        casillero = unCasillero;
+    	this.colocarEnCasillero(unCasillero);
         transformacion = new NormalFreezer();
         vida = 400;
     }

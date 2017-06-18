@@ -19,8 +19,7 @@ public class Gohan extends Personaje {
 	protected final double multMinVidaParaAyudaPiccolo = 0.2;
 
     public Gohan(Casillero unCasillero) throws CasilleroOcupadoException{
-    	unCasillero.colocar(this);
-    	casillero = unCasillero;
+    	this.colocarEnCasillero(unCasillero);
         transformacion = new NormalGohan();
         vida = 300;
     }

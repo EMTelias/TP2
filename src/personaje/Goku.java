@@ -17,8 +17,7 @@ public class Goku extends Personaje {
 	private final double multMinVidaParaAyudaGohan = 0.3;
 
 	public Goku(Casillero unCasillero) throws CasilleroOcupadoException{
-		unCasillero.colocar(this);
-		casillero = unCasillero;
+		this.colocarEnCasillero(unCasillero);
 		transformacion = new NormalGoku();
 		vida = vidaMaxima;
 	}

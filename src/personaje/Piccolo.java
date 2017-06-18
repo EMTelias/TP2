@@ -19,8 +19,7 @@ public class Piccolo extends Personaje {
     protected final double multMinVidaParaAyudaGohan = 0.3;
 
     public Piccolo(Casillero unCasillero) throws CasilleroOcupadoException {
-        unCasillero.colocar(this);
-        casillero = unCasillero;
+    	this.colocarEnCasillero(unCasillero);
         transformacion = new NormalPiccolo();
         vida = vidaMaxima;
     }

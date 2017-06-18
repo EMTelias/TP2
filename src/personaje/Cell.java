@@ -16,8 +16,7 @@ public class Cell extends Personaje {
     protected final int kiAtaqueEspecial = 5;
 
     public Cell(Casillero unCasillero) throws CasilleroOcupadoException {
-        unCasillero.colocar(this);
-        casillero = unCasillero;
+    	this.colocarEnCasillero(unCasillero);
         transformacion = new NormalCell();
         vida = 500;
     }
