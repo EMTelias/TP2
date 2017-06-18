@@ -1,10 +1,9 @@
 package tablero;
 
 
-import equipos.Equipo;
 import excepciones.tablero.CasilleroOcupadoException;
 import excepciones.tablero.DimensionDeTableroInvalidoException;
-import personaje.*;
+import personaje.Personaje;
 
 import java.util.HashMap;
 
@@ -44,34 +43,5 @@ public class Tablero {
 		return tablero.get(posicion);
 	}
 
-	public void initDeGuerrerosZ(Equipo guerrerosZ) throws CasilleroOcupadoException {
-		//Creo los guerreros Z
-		Posicion pos1 = new Posicion(1,1);
-		Posicion pos2 = new Posicion(2,1);
-		Posicion pos3 = new Posicion(3,1);
 
-		Personaje goku = new Goku(this.getCasillero(pos1));
-		Personaje gohan = new Gohan(this.getCasillero(pos2));
-		Personaje piccolo = new Piccolo(this.getCasillero(pos3));
-
-		goku.unirse(guerrerosZ);
-		gohan.unirse(guerrerosZ);
-		piccolo.unirse(guerrerosZ);
-	}
-
-	public void initDeEnemigos(Equipo enemigos) throws CasilleroOcupadoException {
-		//Creo los enemigos
-		Posicion pos1 = new Posicion(20,this.dimensionY);
-		Posicion pos2 = new Posicion(20,this.dimensionY-1);
-		Posicion pos3 = new Posicion(20,this.dimensionY-2);
-
-		Personaje cell = new Cell(this.getCasillero(pos1));
-		Personaje majinBoo = new MajinBoo(this.getCasillero(pos2));
-		Personaje freezer = new Freezer(this.getCasillero(pos3));
-
-		cell.unirse(enemigos);
-		majinBoo.unirse(enemigos);
-		freezer.unirse(enemigos);
-
-	}
 }

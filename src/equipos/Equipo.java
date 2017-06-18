@@ -35,4 +35,8 @@ public class Equipo {
     public boolean getTurno() {
         return this.suTurno;
     }
+
+    public String getNombre() {
+        return this.nombre;
+    }
 }

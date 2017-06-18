@@ -1,14 +1,22 @@
 package partida;
 
-import equipos.Equipo;
+import excepciones.personaje.NoPuedeMoverAEsaDistanciaException;
+import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
+import excepciones.tablero.CaminoInvalidoException;
 import excepciones.tablero.CasilleroOcupadoException;
 import excepciones.tablero.DimensionDeTableroInvalidoException;
 import org.junit.Assert;
 import org.junit.Test;
 import personaje.Gohan;
+import personaje.Goku;
 import personaje.MajinBoo;
 import personaje.Personaje;
+import tablero.Camino;
+import tablero.Casillero;
 import tablero.Posicion;
+import tablero.Tablero;
+
+import java.util.ArrayList;
 
 public class PartidaTest {
 
@@ -31,57 +39,48 @@ public class PartidaTest {
 
     @Test
     public void testCreoUnaPartidaConDosEquiposEntoncesEsElTurnoDeGuerrerosZ() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
-        Equipo guerreroZ = new Equipo("GuerrerosZ");
-        Equipo enemigos = new Equipo("Enemigos");
-        Partida partida = new Partida(guerreroZ,enemigos);
+        Partida partida = new Partida();
 
-        Assert.assertTrue(guerreroZ.getTurno());
-        Assert.assertFalse(enemigos.getTurno());
-
+        Assert.assertEquals("GuerrerosZ",partida.turnoActual().getNombre());
     }
 
     @Test
     public void testCreoUnaPartidaConDosEquiposPasoTurnoEntoncesEsElTurnoDeEnemigos() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
-        Equipo guerreroZ = new Equipo("GuerrerosZ");
-        Equipo enemigos = new Equipo("Enemigos");
-        Partida partida = new Partida(guerreroZ,enemigos);
-
+        Partida partida = new Partida();
         partida.pasar();
-        Assert.assertFalse(guerreroZ.getTurno());
-        Assert.assertTrue(enemigos.getTurno());
-    }
 
-    @Test
-    public void testCreoUnaPartidaConDosEquiposPidoElEquipoQueDebeJugarEntoncesEsElTurnoDelQueDebeJugar() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
-        Equipo guerreroZ = new Equipo("GuerrerosZ");
-        Equipo enemigos = new Equipo("Enemigos");
-        Partida partida = new Partida(guerreroZ,enemigos);
-
-        Equipo equipo = partida.turnoActual();
-        Assert.assertTrue(equipo.getTurno());
+        Assert.assertEquals("Enemigos",partida.turnoActual().getNombre());
     }
 
     @Test
     public void testCreoUnaPartidaConDosJugadoresYVerificoQueGohanEsteEnLaPosicionx2y1() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
-        Equipo guerreroZ = new Equipo("GuerrerosZ");
-        Equipo enemigos = new Equipo("Enemigos");
-        Partida partida = new Partida(guerreroZ,enemigos);
-
+        Partida partida = new Partida();
         Personaje personajeBuscado = partida.personajeEnPosicion(new Posicion(2,1));
+
         Assert.assertTrue(personajeBuscado.getClass() == Gohan.class);
 
     }
 
     @Test
     public void testCreoUnaPartidaConDosJugadoresYVerificoQueMajinBooEsteEnLaPosicionx20y19() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
-        Equipo guerreroZ = new Equipo("GuerrerosZ");
-        Equipo enemigos = new Equipo("Enemigos");
-        Partida partida = new Partida(guerreroZ,enemigos);
+        Partida partida = new Partida();
 
         Personaje personajeBuscado = partida.personajeEnPosicion(new Posicion(20,19));
         Assert.assertTrue(personajeBuscado.getClass() == MajinBoo.class);
 
     }
+    @Test
+    public void testCreoUnaPartidaYMuevoAGohanUnaPosicion() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException, CaminoInvalidoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException {
+        Partida partida = new Partida();
+        Tablero tablero = partida.getTablero();
+        ArrayList<Casillero> listaC = new ArrayList();
+        listaC.add(tablero.getCasillero(new Posicion(1,2)));
+        Camino camino = new Camino(listaC);
+        partida.moverEnCamino(new Posicion(1,1),camino);
+
+        Assert.assertTrue(Goku.class == partida.personajeEnPosicion(new Posicion(1,2)).getClass());
+    }
+
 
     /*@Test
     public void testCreoUnaPartidaYMuevoAGoku2HaciaAbajo() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {

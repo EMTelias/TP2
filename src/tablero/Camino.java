@@ -1,14 +1,14 @@
 package tablero;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import excepciones.personaje.NoPuedeMoverAEsaDistanciaException;
 import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
 import excepciones.tablero.CaminoInvalidoException;
 import excepciones.tablero.CasilleroOcupadoException;
 import personaje.Personaje;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class Camino {
 
@@ -34,7 +34,7 @@ public class Camino {
 				} catch (CasilleroOcupadoException e1) {
 					//Era su casillero origen, nunca lanza esta excepcion
 				}
-				throw new NoPuedeMoverCaminoObstruidoException();
+					throw new NoPuedeMoverCaminoObstruidoException();
 			}
 		}
 	}
