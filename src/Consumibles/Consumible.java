@@ -1,4 +1,9 @@
 package Consumibles;
 
-public class Consumible {
+import personaje.Personaje;
+
+public interface Consumible {
+
+	public void aplicarConsumibleA(Personaje unPersonaje);
+	
 }
