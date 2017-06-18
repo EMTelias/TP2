@@ -1,6 +1,6 @@
 package personaje;
 
-import equipo.Equipo;
+import equipos.Equipo;
 import excepciones.acciones.*;
 import excepciones.personaje.NoPuedeAtacarAEsaDistanciaException;
 import excepciones.personaje.NoPuedeMoverAEsaDistanciaException;

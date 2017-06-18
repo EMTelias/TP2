@@ -48,8 +48,7 @@ public abstract class Transformacion {
         if (camino.distancia() > this.velocidad ){
             throw new NoPuedeMoverAEsaDistanciaException();
         }
-        Casillero casilleroDestino = camino.recorrerCon(unPersonaje);
-        unPersonaje.setCasillero(casilleroDestino);
+        camino.recorrerCon(unPersonaje);
     }
 
     public int getVelocidad() {

@@ -1,4 +1,4 @@
-package equipo;
+package equipos;
 
 
 import personaje.Personaje;

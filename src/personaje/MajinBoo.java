@@ -15,8 +15,7 @@ public class MajinBoo extends Personaje {
     protected final int kiAtaqueEspecial = 30;
 
     public MajinBoo(Casillero unCasillero) throws CasilleroOcupadoException {
-        unCasillero.colocar(this);
-        casillero = unCasillero;
+    	this.colocarEnCasillero(unCasillero);
         transformacion = new NormalMajinBoo();
         vida = 300;
     }
