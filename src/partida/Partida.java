@@ -30,6 +30,14 @@ public class Partida {
     private static final int DIM_ANCHO = 15;
     private static final int AUMENTO_KI = 5;
 
+    Posicion POS_GOKU = new Posicion(0,0);
+    Posicion POS_GOHAN = new Posicion(0,7);
+    Posicion POS_PICCOLO = new Posicion(0,14);
+
+    Posicion POS_CELL = new Posicion(14,7);
+    Posicion POS_FREEZER = new Posicion(14,14);
+    Posicion POS_MAJIN = new Posicion(14,0);
+
     private Tablero tablero;
     private Equipo equipoGuerrerrosZ = new Equipo("GuerrerosZ");
     private Equipo equipoEnemigos = new Equipo("Enemigos");
@@ -135,13 +143,9 @@ public class Partida {
 
     private void initDeGuerrerosZ() throws CasilleroOcupadoException {
         //Creo los guerreros Z
-        Posicion pos1 = new Posicion(1,1);
-        Posicion pos2 = new Posicion(2,1);
-        Posicion pos3 = new Posicion(3,1);
-
-        Personaje goku = new Goku(this.tablero.getCasillero(pos1));
-        Personaje gohan = new Gohan(this.tablero.getCasillero(pos2));
-        Personaje piccolo = new Piccolo(this.tablero.getCasillero(pos3));
+        Personaje goku = new Goku(this.tablero.getCasillero(POS_GOKU));
+        Personaje gohan = new Gohan(this.tablero.getCasillero(POS_GOHAN));
+        Personaje piccolo = new Piccolo(this.tablero.getCasillero(POS_PICCOLO));
 
         goku.unirse(this.equipoGuerrerrosZ);
         gohan.unirse(this.equipoGuerrerrosZ);
@@ -150,13 +154,9 @@ public class Partida {
 
     private void initDeEnemigos() throws CasilleroOcupadoException {
         //Creo los enemigos
-        Posicion pos1 = new Posicion(DIM_ANCHO,this.DIM_ALTO);
-        Posicion pos2 = new Posicion(DIM_ANCHO,this.DIM_ALTO-1);
-        Posicion pos3 = new Posicion(DIM_ANCHO,this.DIM_ALTO-2);
-
-        Personaje cell = new Cell(this.tablero.getCasillero(pos1));
-        Personaje majinBoo = new MajinBoo(this.tablero.getCasillero(pos2));
-        Personaje freezer = new Freezer(this.tablero.getCasillero(pos3));
+        Personaje cell = new Cell(this.tablero.getCasillero(POS_CELL));
+        Personaje majinBoo = new MajinBoo(this.tablero.getCasillero(POS_MAJIN));
+        Personaje freezer = new Freezer(this.tablero.getCasillero(POS_FREEZER));
 
         cell.unirse(this.equipoEnemigos);
         majinBoo.unirse(this.equipoEnemigos);
