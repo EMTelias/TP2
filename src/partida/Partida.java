@@ -1,6 +1,7 @@
 package partida;
 
 import equipos.Equipo;
+import excepciones.JuegoTerminadoException;
 import excepciones.acciones.NoPuedeAtacarMismoEquipoException;
 import excepciones.acciones.YaAtacasteEsteTurnoException;
 import excepciones.acciones.YaMovisteEsteTurnoException;
@@ -18,6 +19,10 @@ import personaje.*;
 import tablero.Camino;
 import tablero.Posicion;
 import tablero.Tablero;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 
 public class Partida {
@@ -38,10 +43,22 @@ public class Partida {
         this.tablero = new Tablero(DIM_ANCHO,DIM_ALTO);
         this.initDeEnemigos();
         this.initDeGuerrerosZ();
-        this.turno = new Turno(equipoGuerrerrosZ,equipoEnemigos);
         this.estadoDePartida = true;
+        this.turno = new Turno(equipoGuerrerrosZ,equipoEnemigos);
 
     }
+
+    public void setearPrimerJugadorRandom(){
+        //Elijo un equipo al azar para que sea el primero en jugar.
+        //(este metodo NO puede ir en el constructor ya que haria random los tests ya creados)
+        List<Equipo> equipos = new ArrayList<Equipo>();
+        equipos.add(equipoGuerrerrosZ);
+        equipos.add(equipoEnemigos);
+        Equipo primerEquipo = equipos.remove(new Random().nextInt(equipos.size()));
+        Equipo segundoEquipo = equipos.remove(0);
+        this.turno = new Turno(primerEquipo,segundoEquipo);
+    }
+
     public void pasar() {
         Equipo equipoActivo = turno.getEquipoActivo();
         turno.pasar();
@@ -71,36 +88,38 @@ public class Partida {
         }
     }
 
+    private void revisarVictoria(){
+        if(turno.getEquipoEnEspera().getPersonajes().size() == 0){
+                throw new JuegoTerminadoException();
+            }
+    }
+
     public void atacarEnPosicion(Posicion posAtacante, Posicion posAtacado) throws NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException {
-        if(turno.yaAtaco()){
-            throw new YaAtacasteEsteTurnoException();
-        }
+        if(turno.yaAtaco()){ throw new YaAtacasteEsteTurnoException(); }
 
         Personaje atacante = this.personajeEnPosicion(posAtacante);
         Personaje atacado = this.personajeEnPosicion(posAtacado);
         atacante.atacarA(atacado);
 
         turno.atacar();
-        revisarFinDelTurno();
+        this.revisarVictoria();
+        this.revisarFinDelTurno();
     }
 
     public void ataqueEspecialEnPosicion(Posicion posAtacante, Posicion posAtacado) throws NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, KiInsuficienteException {
-        if(turno.yaAtaco()){
-            throw new YaAtacasteEsteTurnoException();
-        }
+        if(turno.yaAtaco()){ throw new YaAtacasteEsteTurnoException(); }
 
         Personaje atacante = this.personajeEnPosicion(posAtacante);
         Personaje atacado = this.personajeEnPosicion(posAtacado);
         atacante.ataqueEspecialA(atacado);
 
         turno.atacar();
-        revisarFinDelTurno();
+        this.revisarVictoria();
+        this.revisarFinDelTurno();
     }
 
     public void moverEnCamino(Posicion posPersonaje, Camino camino) throws NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, CaminoInvalidoException {
-        if(turno.yaMovio()){
-            throw new YaMovisteEsteTurnoException();
-        }
+        if(turno.yaMovio()){ throw new YaMovisteEsteTurnoException(); }
 
         Personaje personaje = this.personajeEnPosicion(posPersonaje);
         personaje.mover(camino);

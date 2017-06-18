@@ -1,5 +1,6 @@
 package partida;
 
+import excepciones.JuegoTerminadoException;
 import excepciones.acciones.NoPuedeAtacarMismoEquipoException;
 import excepciones.personaje.NoPuedeAtacarAEsaDistanciaException;
 import excepciones.personaje.NoPuedeMoverAEsaDistanciaException;
@@ -158,6 +159,28 @@ public class PartidaTest {
 
     }
 
+    @Test(expected = JuegoTerminadoException.class)
+    public void testEliminoA2EnemigosYGokuMataAlUltimoReciboGanasteException() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, DimensionDeTableroInvalidoException, CaminoInvalidoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException {
+        //Para arrancar el test muevo a goku hasta el 13,13
+        Partida partida = new Partida();
+        Tablero tablero = partida.getTablero();
+        ArrayList<Casillero> casilleros = new ArrayList<>();
+        for (int i = 2; i <= 13; i++) {
+            casilleros.add(tablero.getCasillero(new Posicion(i, i)));
+            partida.moverEnCamino(new Posicion(i - 1, i - 1), new Camino(casilleros));
+            partida.pasar();
+            partida.pasar();
+            casilleros.clear();
+        }
+
+        //Mato a los otros 2 enemigos y dejo a cell en 1 de vida(15,15)
+        partida.personajeEnPosicion(new Posicion(15, 15)).reducirVida(499);
+        partida.personajeEnPosicion(new Posicion(15, 14)).reducirVida(500);
+        partida.personajeEnPosicion(new Posicion(15, 13)).reducirVida(500);
+
+        partida.atacarEnPosicion(new Posicion(13, 13),new Posicion(15, 15));
+
+    }
 
     /*@Test
     public void testCreoUnaPartidaYMuevoAGoku2HaciaAbajo() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
@@ -168,4 +191,5 @@ public class PartidaTest {
         Assert.assertTrue(personajeBuscado.getClass() == MajinBoo.class);
 
     }*/
+
 }

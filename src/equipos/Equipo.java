@@ -51,4 +51,8 @@ public class Equipo {
             unPersonaje.aumentarKi(aumento);
         }
     }
+
+    public void eliminarPersonaje(Personaje unPersonaje) {
+        personajes.remove(unPersonaje);
+    }
 }

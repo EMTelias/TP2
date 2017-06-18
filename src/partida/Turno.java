@@ -25,6 +25,10 @@ public class Turno {
         return this.equipoEnMovimiento;
     }
 
+    public Equipo getEquipoEnEspera(){
+        return this.equipoEnEspera;
+    }
+
     public void pasar() {
         Equipo equipo = this.equipoEnMovimiento;
         this.equipoEnMovimiento = this.equipoEnEspera;
@@ -45,9 +49,7 @@ public class Turno {
         return movimientoYaEjecutado;
     }
 
-    public void atacar() {
-        ataqueYaEjecutado = true;
-    }
+    public void atacar() { ataqueYaEjecutado = true; }
 
     public void mover() {
         movimientoYaEjecutado = true;
