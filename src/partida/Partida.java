@@ -2,6 +2,8 @@ package partida;
 
 import equipos.Equipo;
 import excepciones.acciones.NoPuedeAtacarMismoEquipoException;
+import excepciones.acciones.YaAtacasteEsteTurnoException;
+import excepciones.acciones.YaMovisteEsteTurnoException;
 import excepciones.personaje.CasillaSinPersonajeException;
 import excepciones.personaje.NoPuedeAtacarAEsaDistanciaException;
 import excepciones.personaje.NoPuedeMoverAEsaDistanciaException;
@@ -70,7 +72,10 @@ public class Partida {
     }
 
     public void atacarEnPosicion(Posicion posAtacante, Posicion posAtacado) throws NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException {
-        turno.yaAtaco();
+        if(turno.yaAtaco()){
+            throw new YaAtacasteEsteTurnoException();
+        }
+
         Personaje atacante = this.personajeEnPosicion(posAtacante);
         Personaje atacado = this.personajeEnPosicion(posAtacado);
         atacante.atacarA(atacado);
@@ -80,6 +85,10 @@ public class Partida {
     }
 
     public void ataqueEspecialEnPosicion(Posicion posAtacante, Posicion posAtacado) throws NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, KiInsuficienteException {
+        if(turno.yaAtaco()){
+            throw new YaAtacasteEsteTurnoException();
+        }
+
         Personaje atacante = this.personajeEnPosicion(posAtacante);
         Personaje atacado = this.personajeEnPosicion(posAtacado);
         atacante.ataqueEspecialA(atacado);
@@ -89,6 +98,10 @@ public class Partida {
     }
 
     public void moverEnCamino(Posicion posPersonaje, Camino camino) throws NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, CaminoInvalidoException {
+        if(turno.yaMovio()){
+            throw new YaMovisteEsteTurnoException();
+        }
+
         Personaje personaje = this.personajeEnPosicion(posPersonaje);
         personaje.mover(camino);
 
