@@ -22,6 +22,7 @@ import Consumibles.Efecto;
 
 public abstract class Personaje {
 
+	protected int VIDA_MAX;
 	protected Casillero casillero;
 	protected int ki;
 	protected int vida;
@@ -63,7 +64,11 @@ public abstract class Personaje {
 	}
 
 	public void aumentarVida(int cantidad) {
-		this.vida += cantidad;
+		if ((vida + cantidad)> VIDA_MAX){ 
+			vida = VIDA_MAX;
+		}else{
+			vida += cantidad;
+		}
 	}
 
 	public void reducirVida(int cantidad){
