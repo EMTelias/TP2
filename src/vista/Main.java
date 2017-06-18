@@ -1,5 +1,6 @@
 package vista;
 
+import controlador.*;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Parent;
@@ -8,6 +9,10 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import modelo.partida.Partida;
+import modelo.personaje.Personaje;
+import modelo.tablero.Camino;
+import modelo.tablero.Posicion;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -25,6 +30,11 @@ public class Main extends Application {
 
     private String IMG_DIR = "img";
     private String IMG_EXT = ".png";
+    private Partida partida;
+    private Posicion posAtacante;
+    private Posicion posAtacado;
+    private Camino camino;
+
 
 
 
@@ -52,52 +62,66 @@ public class Main extends Application {
         Path path = Paths.get(IMG_DIR);
         String imageDirectory = path.toAbsolutePath().toUri().toString();
         Piece goku = new Piece(imageDirectory + "Goku" + IMG_EXT, 0,0);
-        Piece gohan = new Piece(imageDirectory + "Gohan" + IMG_EXT, 0,7);
-        Piece piccolo = new Piece(imageDirectory + "Piccolo" + IMG_EXT, 0,14);
-        Piece cell = new Piece(imageDirectory + "Cell" + IMG_EXT, 14,7);
-        Piece freezer = new Piece(imageDirectory + "Freezer" + IMG_EXT, 14,14);
-        Piece majinBoo = new Piece(imageDirectory + "MajinBoo" + IMG_EXT, 14,0);
+        Piece gohan = new Piece(imageDirectory + "Gohan" + IMG_EXT, 1,0);
+        Piece piccolo = new Piece(imageDirectory + "Piccolo" + IMG_EXT, 0,1);
+        Piece cell = new Piece(imageDirectory + "Cell" + IMG_EXT, 14,14);
+        Piece freezer = new Piece(imageDirectory + "Freezer" + IMG_EXT, 14,13);
+        Piece majinBoo = new Piece(imageDirectory + "MajinBoo" + IMG_EXT, 13,14);
 
         grid[0][0].setPiece(goku);
-        grid[0][7].setPiece(gohan);
-        grid[0][14].setPiece(piccolo);
-        grid[14][7].setPiece(cell);
-        grid[14][14].setPiece(freezer);
-        grid[14][0].setPiece(majinBoo);
+        grid[1][0].setPiece(gohan);
+        grid[0][1].setPiece(piccolo);
+        grid[14][14].setPiece(cell);
+        grid[14][13].setPiece(freezer);
+        grid[13][14].setPiece(majinBoo);
         pieceGroup.getChildren().addAll(goku, gohan, piccolo, cell, freezer, majinBoo);
     }
 
     private VBox addButtonsToVBox(VBox vbox) {
         int tamXboton = WIDTH - Tile.TILE_SIZE * X_TILES;
         int tamYboton = Tile.TILE_SIZE;
-        vbox.setPrefSize(tamXboton, 4 * tamYboton);
+        vbox.setPrefSize(tamXboton, 5 * tamYboton);
         vbox.setTranslateX(Tile.TILE_SIZE * X_TILES);
-        vbox.setTranslateY(Tile.TILE_SIZE * (Y_TILES - 4)); // los 4 botones a agregar
+        vbox.setTranslateY(Tile.TILE_SIZE * (Y_TILES - 5)); // los 5 botones a agregar
 
 
-        Button attackB = new Button("Ataque basico");
-        attackB.setStyle("-fx-font: 20 arial; -fx-base: #ee2211;");
-        attackB.setPrefSize(tamXboton,tamYboton);
-        attackB.setMinHeight(tamYboton);
-        Button attackS = new Button("Ataque especial");
-        attackS.setStyle("-fx-font: 20 arial; -fx-base: #ee2211;");
-        attackS.setPrefSize(tamXboton,tamYboton);
-        attackS.setMinHeight(tamYboton);
-        Button move = new Button("Mover");
-        move.setStyle("-fx-font: 20 arial; -fx-base: #ee2211;");
-        move.setPrefSize(tamXboton,tamYboton);
-        move.setMinHeight(tamYboton);
-        Button transform = new Button("Transformar");
-        transform.setStyle("-fx-font: 20 arial; -fx-base: #ee2211;");
-        transform.setPrefSize(tamXboton,tamYboton);
-        transform.setMinHeight(tamYboton);
+        Button pasar = new Button("Pasar turno");
+        pasar.setStyle("-fx-font: 20 arial; -fx-base: #ee2211;");
+        pasar.setPrefSize(tamXboton,tamYboton);
+        pasar.setMinHeight(tamYboton);
+        pasar.setOnMouseClicked(new PasarHandler(partida));
 
-        vbox.getChildren().addAll(attackB, attackS, move, transform);
+        Button ataqueB = new Button("Ataque basico");
+        ataqueB.setStyle("-fx-font: 20 arial; -fx-base: #ee2211;");
+        ataqueB.setPrefSize(tamXboton,tamYboton);
+        ataqueB.setMinHeight(tamYboton);
+        ataqueB.setOnMouseClicked(new AtaqueBasicoHandler(partida, posAtacante, posAtacado));
+
+        Button ataqueE = new Button("Ataque especial");
+        ataqueE.setStyle("-fx-font: 20 arial; -fx-base: #ee2211;");
+        ataqueE.setPrefSize(tamXboton,tamYboton);
+        ataqueE.setMinHeight(tamYboton);
+        ataqueE.setOnMouseClicked(new AtaqueEspecialHandler(partida, posAtacante, posAtacado));
+
+        Button mover = new Button("Mover");
+        mover.setStyle("-fx-font: 20 arial; -fx-base: #ee2211;");
+        mover.setPrefSize(tamXboton,tamYboton);
+        mover.setMinHeight(tamYboton);
+        mover.setOnMouseClicked(new MoverHandler(partida, posAtacante, camino));
+
+        Button transformar = new Button("Transformar");
+        transformar.setStyle("-fx-font: 20 arial; -fx-base: #ee2211;");
+        transformar.setPrefSize(tamXboton,tamYboton);
+        transformar.setMinHeight(tamYboton);
+        transformar.setOnMouseClicked(new TransformarHandler(partida, posAtacante));
+
+        vbox.getChildren().addAll(pasar, ataqueB, ataqueE, mover, transformar);
         return vbox;
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        partida = new Partida();
         scene = new Scene(createContent());
 
         primaryStage.setTitle("Dragon AlgoBall");

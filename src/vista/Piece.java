@@ -8,6 +8,7 @@ import javafx.scene.layout.StackPane;
 public class Piece extends StackPane {
 
     private double oldX, oldY;
+    protected boolean seleccionado = false;
 
 
     public double getOldX() {
@@ -30,8 +31,14 @@ public class Piece extends StackPane {
 
         getChildren().add(imageView);
 
-        setOnMousePressed(e -> {
-            // do something
+        setOnMouseClicked(e -> {
+            if(!seleccionado) {
+                seleccionado = true;
+                System.out.print("Me has seleccionado");
+                return;
+            }
+            seleccionado = false;
+            System.out.print("Me has deseleccionado");
         });
 
     }
