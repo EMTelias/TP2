@@ -19,6 +19,7 @@ import modelo.excepciones.tablero.DimensionDeTableroInvalidoException;
 import modelo.personaje.Freezer;
 import modelo.personaje.Goku;
 import modelo.personaje.Personaje;
+import modelo.personaje.Piccolo;
 import modelo.tablero.Camino;
 import modelo.tablero.Casillero;
 import modelo.tablero.Posicion;
@@ -164,7 +165,6 @@ public class ConsumibleTest {
 		casillerosCamino3.add(casillero113);
 		Camino camino3 = new Camino(casillerosCamino3);
 
-		
 		Personaje goku = new Goku(casilleroGoku);
 		Consumible nubeVoladora = new NubeVoladora();
 		goku.consumir(nubeVoladora);
@@ -174,10 +174,72 @@ public class ConsumibleTest {
 		goku.mover(camino2);
 		goku.pasarTurno();
 		goku.mover(camino3);
+	}
 	
+	@Test
+	public void testGokuCapturaLaNubeAlMoverseAlCasilleroQueLaContieneYMueve4PosicionesNoDevuelveExcepcion() throws CaminoInvalidoException, CasilleroOcupadoException, NoPuedeMoverCaminoObstruidoException, NoPuedeMoverAEsaDistanciaException{
+		Casillero casillero11 = new Casillero(new Posicion(1,1));
+		
+		Casillero casillero12 = new Casillero(new Posicion(1,2));
+		ArrayList<Casillero> casillerosCamino1 = new ArrayList<Casillero>();
+		casillerosCamino1.add(casillero12);
+		Camino caminoPrimerMovimiento = new Camino(casillerosCamino1);
+
+		Casillero casillero13 = new Casillero(new Posicion(1,3));
+		Casillero casillero14 = new Casillero(new Posicion(1,4));
+		Casillero casillero15 = new Casillero(new Posicion(1,5));
+		Casillero casillero16 = new Casillero(new Posicion(1,6));
+		ArrayList<Casillero> casillerosCamino2 = new ArrayList<Casillero>();
+		casillerosCamino2.add(casillero13);
+		casillerosCamino2.add(casillero14);
+		casillerosCamino2.add(casillero15);
+		casillerosCamino2.add(casillero16);
+		Camino caminoSegundoMovimientoDeGokuConNube = new Camino(casillerosCamino2);
+		
+		Consumible nubeVoladora = new NubeVoladora(casillero12);
+		Personaje goku = new Goku(casillero11);
+		
+		goku.mover(caminoPrimerMovimiento);
+		goku.mover(caminoSegundoMovimientoDeGokuConNube);
 	}
 	
 	
+	@Test (expected = NoPuedeMoverAEsaDistanciaException.class)
+	public void testGokuAlPosicionarseEnElCasilleroDeLaNubeVoladoraLaCapturaMueveYElSiguientePersonajeQuePasaPorEseCasilleroNoCapturaLaNubeYAlMoverDevuelveNoPuedeMoverAEsaDistanciaException() throws CaminoInvalidoException, CasilleroOcupadoException, NoPuedeMoverCaminoObstruidoException, NoPuedeMoverAEsaDistanciaException{
+		Casillero casillero11 = new Casillero(new Posicion(1,1));
+		Casillero casillero22 = new Casillero(new Posicion(2,2));
+		
+		Casillero casillero12 = new Casillero(new Posicion(1,2));
+		ArrayList<Casillero> casillerosCamino1 = new ArrayList<Casillero>();
+		casillerosCamino1.add(casillero12);
+		Camino caminoPrimerMovimiento = new Camino(casillerosCamino1);
+		
+		Casillero casillero13 = new Casillero(new Posicion(1,3));
+		Casillero casillero14 = new Casillero(new Posicion(1,4));
+		Casillero casillero15 = new Casillero(new Posicion(1,5));
+		Casillero casillero16 = new Casillero(new Posicion(1,6));
+		ArrayList<Casillero> casillerosCamino2 = new ArrayList<Casillero>();
+		casillerosCamino2.add(casillero13);
+		casillerosCamino2.add(casillero14);
+		casillerosCamino2.add(casillero15);
+		casillerosCamino2.add(casillero16);
+		Camino caminoSegundoMovimientoDeGokuConNube = new Camino(casillerosCamino2);
+		
+		ArrayList<Casillero> casillerosCamino3 = new ArrayList<Casillero>();
+		casillerosCamino3.add(casillero13);
+		casillerosCamino3.add(casillero14);
+		casillerosCamino3.add(casillero15);
+		Camino caminoSegundoMovimientoDePiccolo = new Camino(casillerosCamino3);
+		
+		Consumible nubeVoladora = new NubeVoladora(casillero12);
+		Personaje goku = new Goku(casillero11);
+		Personaje piccolo = new Piccolo(casillero22);
+		
+		goku.mover(caminoPrimerMovimiento);
+		goku.mover(caminoSegundoMovimientoDeGokuConNube);
+		
+		piccolo.mover(caminoSegundoMovimientoDePiccolo);
+	}
 	
 	
 	
