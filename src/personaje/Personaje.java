@@ -47,7 +47,7 @@ public abstract class Personaje {
 	}
 
 	public void aumentarKi(int aumento){
-		this.ki+=aumento;
+		this.ki+=transformacion.aumentarKi(aumento);
 	}
 
 	public void reducirKi (int reduccion) {
@@ -160,5 +160,6 @@ public abstract class Personaje {
 		if(this.esChocolate()){
 			transformacion = transformacion.revisarTransformacionChocolate();
 		}
+
 	}
 }

@@ -54,4 +54,7 @@ public class Chocolate extends Transformacion {
 
     @Override
     public boolean esChocolate(){return true;}
+
+    @Override
+    public int aumentarKi(int aumento){return 0;}
 }

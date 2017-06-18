@@ -88,4 +88,6 @@ public abstract class Transformacion {
     public Transformacion revisarTransformacionChocolate(){return null;}
 
     public boolean esChocolate(){return false;}
+
+    public int aumentarKi(int aumento){return aumento;}
 }

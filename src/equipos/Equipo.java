@@ -45,4 +45,10 @@ public class Equipo {
             unPersonaje.revisarTransformacionChocolate();
         }
     }
+
+    public void aumentarKi() {
+        for (Personaje unPersonaje : personajes) {
+            unPersonaje.aumentarKi(5);
+        }
+    }
 }

@@ -698,15 +698,13 @@ public class PersonajeTest {
 
 	@Test
 	public void testConviertoEnChocolateAGokuYEn2TurnosMiosSigueSiendoChocolate() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
-		Equipo guerreroZ = new Equipo("GuerrerosZ");
-		Equipo enemigos = new Equipo("Enemigos");
 		Partida partida = new Partida();
 
 		Personaje goku = partida.personajeEnPosicion(new Posicion(1,1));
 		goku.convertirseEnChocolate();
 		int turno=0;
 		for(int i=0;i<4;i++){
-			System.out.println("turno: "+turno+" - "+goku.transformacion);
+			//System.out.println("turno: "+turno+" - "+goku.transformacion);
 			partida.pasar();
 			turno++;
 		}
@@ -715,20 +713,72 @@ public class PersonajeTest {
 
 	@Test
 	public void testConviertoEnChocolateAGokuYEn3TurnosMiosDespierta() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
-		Equipo guerreroZ = new Equipo("GuerrerosZ");
-		Equipo enemigos = new Equipo("Enemigos");
 		Partida partida = new Partida();
 
 		Personaje goku = partida.personajeEnPosicion(new Posicion(1,1));
 		goku.convertirseEnChocolate();
 		int turno=0;
 		for(int i=0;i<6;i++){
-			System.out.println("turno: "+turno+" - "+goku.transformacion);
+			//System.out.println("turno: "+turno+" - "+goku.transformacion);
 			partida.pasar();
 			turno++;
 		}
 		Assert.assertTrue(goku.transformacion.getClass() == NormalGoku.class);
 	}
 
+	@Test
+	public void testMajinBooTransformaEnChocolateAGokuYPor3TurnosDeGokuEsChocolate() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException, NoHayProximaTransformacionException, NoPuedeTransformarException, CaminoInvalidoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, DimensionDeTableroInvalidoException {
+		Partida partida = new Partida();
+		partida.pasar();//Simulo estar en el turno de majinBoo
 
+		Personaje majinBoo = new MajinBoo(new Casillero(new Posicion(1, 1)));
+		Personaje goku = partida.personajeEnPosicion(new Posicion(1,1));
+
+		//System.out.println(goku.transformacion);
+
+		majinBoo.aumentarKi(40);
+		majinBoo.ataqueEspecialA(goku);
+
+		int turno = 0;
+		for(int i=0;i<7;i++){
+			//System.out.println("turno: "+turno+" - "+goku.transformacion);
+			partida.pasar();
+			turno++;
+		}
+		Assert.assertTrue(goku.transformacion.getClass() == NormalGoku.class);
+
+	}
+
+	@Test
+	public void testGokuCon20DeKiEn5TurnosDeElTendra45DeKi() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
+		Partida partida = new Partida();
+		Personaje goku = partida.personajeEnPosicion(new Posicion(1, 1));
+		goku.aumentarKi(20);
+		for (int i = 1; i <= 10; i++) {//Yo paso 5 veces, el enemigo pasa 5 veces.. (5 inicios de turno)
+			partida.pasar();
+		}
+		Assert.assertEquals(goku.ki,45);
+	}
+
+	@Test
+	public void testMajinBooTransformaEnChocolateAGokuQuienTiene50DeKiYRecienEnSuCuartoTurnoTendria55DeKi() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException, NoHayProximaTransformacionException, NoPuedeTransformarException, CaminoInvalidoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, DimensionDeTableroInvalidoException {
+		Partida partida = new Partida();
+		Personaje majinBoo = new MajinBoo(new Casillero(new Posicion(1, 1)));
+		Personaje goku = partida.personajeEnPosicion(new Posicion(1, 1));
+		goku.aumentarKi(50);
+		partida.pasar();//Ahora estoy en el turno de majinBoo..
+
+		majinBoo.aumentarKi(40);
+		majinBoo.ataqueEspecialA(goku);
+
+		//int turno = 1;
+		for (int i = 1; i < 8; i++) {
+			//System.out.println("turno: " + turno + " - " + goku.transformacion);
+			//System.out.println(goku.ki);
+			partida.pasar();
+			//turno++;
+		}
+		Assert.assertTrue(goku.ki == 55);
+
+	}
 }
