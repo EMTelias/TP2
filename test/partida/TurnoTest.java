@@ -8,6 +8,7 @@ import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
 import excepciones.tablero.CaminoInvalidoException;
 import excepciones.tablero.CasilleroOcupadoException;
 import excepciones.tablero.DimensionDeTableroInvalidoException;
+import excepciones.transformacion.KiInsuficienteException;
 import org.junit.Assert;
 import org.junit.Test;
 import personaje.Cell;
@@ -16,6 +17,7 @@ import personaje.Personaje;
 import tablero.Camino;
 import tablero.Casillero;
 import tablero.Posicion;
+import tablero.Tablero;
 
 import java.util.ArrayList;
 
@@ -40,22 +42,29 @@ public class TurnoTest {
     }
 
     @Test
-    public void testMuevoAGokuYAtacoACellYYaNoEsMasElTurnoDeLosGuerrerosZ() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException, NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, CaminoInvalidoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException {
+    public void testMuevoAGokuYAtacoACellYYaNoEsMasElTurnoDeLosGuerrerosZ() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException, NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, CaminoInvalidoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, KiInsuficienteException {
+        //Para arrancar el test muevo a goku hasta el 13,13
         Partida partida = new Partida();
-        Posicion posicion1 = new Posicion(1, 1);
-        Posicion posicion2 = new Posicion(1, 2);
-        Posicion posicion3 = new Posicion(1, 5);
-        Personaje cell = new Cell(new Casillero(posicion3));
-        partida.getTablero().colocar(cell,posicion3);
-
-        ArrayList<Casillero> listaC = new ArrayList<>();
-        listaC.add(partida.getTablero().getCasillero(new Posicion(1,2)));
-        Camino camino = new Camino(listaC);
+        Tablero tablero = partida.getTablero();
+        ArrayList<Casillero> casilleros = new ArrayList<>();
+        for(int i = 2; i <= 13; i++) {
+            casilleros.add(tablero.getCasillero(new Posicion(i,i)));
+            partida.moverEnCamino(new Posicion(i-1, i-1), new Camino(casilleros));
+            partida.pasar();
+            partida.pasar();
+            casilleros.clear();
+        }
 
         Assert.assertEquals("GuerrerosZ",partida.turnoActual().getNombre());
-        partida.moverEnCamino(posicion1,camino);
+
+        //Aca tengo a goku en el 13,13 y a cell en el 15,15
+        partida.atacarEnPosicion(new Posicion(13,13), new Posicion(15,15));
+
         Assert.assertEquals("GuerrerosZ",partida.turnoActual().getNombre());
-        partida.atacarEnPosicion(posicion2,posicion2);
+
+        casilleros.add(tablero.getCasillero(new Posicion(14,14)));
+        partida.moverEnCamino(new Posicion(13, 13), new Camino(casilleros));
+
         Assert.assertEquals("Enemigos",partida.turnoActual().getNombre());
 
     }
