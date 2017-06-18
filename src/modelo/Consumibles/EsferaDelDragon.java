@@ -1,10 +1,22 @@
 package modelo.Consumibles;
 
+import modelo.excepciones.tablero.CasilleroOcupadoException;
+import modelo.tablero.Casillero;
+
 public class EsferaDelDragon extends Efecto {
 
 	private int CANTIDAD_TURNOS_ACTIVO = 2;
-	private int cantidadDeTurnosActual = 0;
+	private int cantidadDeTurnosActual = 1;
+	private Casillero casillero;
 	
+	
+	public EsferaDelDragon(Casillero unCasillero) throws CasilleroOcupadoException {
+		unCasillero.colocar(this);
+		casillero = unCasillero;
+	}
+
+	public EsferaDelDragon() {} // solo para los test iniciales
+
 	@Override
 	public int aplicarEfectoVelocidad(int velocidad) {
 		return velocidad;
