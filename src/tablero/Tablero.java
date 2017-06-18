@@ -69,9 +69,9 @@ public class Tablero {
 		Personaje majinBoo = new MajinBoo(this.getCasillero(pos2));
 		Personaje freezer = new Freezer(this.getCasillero(pos3));
 
-		enemigos.agregarPersonaje(cell);
-		enemigos.agregarPersonaje(majinBoo);
-		enemigos.agregarPersonaje(freezer);
+		cell.unirse(enemigos);
+		majinBoo.unirse(enemigos);
+		freezer.unirse(enemigos);
 
 	}
 }

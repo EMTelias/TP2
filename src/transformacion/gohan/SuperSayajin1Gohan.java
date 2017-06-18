@@ -1,10 +1,9 @@
 package transformacion.gohan;
 
 
-import equipos.Equipo;
+import equipo.Equipo;
 import excepciones.transformacion.KiInsuficienteException;
 import excepciones.transformacion.NoPuedeTransformarException;
-import personaje.Gohan;
 import personaje.Goku;
 import personaje.Personaje;
 import personaje.Piccolo;

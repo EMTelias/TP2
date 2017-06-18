@@ -1,20 +1,17 @@
 package personaje;
 
-import Consumibles.Consumible;
-import Consumibles.EsferaDelDragon;
-import acciones.Ataque;
 import acciones.AtaqueEspecialHandler;
-import equipos.Equipo;
+import equipo.Equipo;
 import excepciones.acciones.NoPuedeAtacarMismoEquipoException;
 import excepciones.personaje.NoPuedeAtacarAEsaDistanciaException;
 import excepciones.personaje.NoPuedeMoverAEsaDistanciaException;
 import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
+import excepciones.tablero.CasilleroOcupadoException;
 import excepciones.transformacion.KiInsuficienteException;
 import excepciones.transformacion.NoHayProximaTransformacionException;
 import excepciones.transformacion.NoPuedeTransformarException;
 import tablero.Camino;
 import tablero.Casillero;
-import excepciones.tablero.CasilleroOcupadoException;
 import transformacion.Chocolate;
 import transformacion.Transformacion;
 
