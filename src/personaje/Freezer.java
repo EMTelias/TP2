@@ -18,6 +18,7 @@ public class Freezer extends Personaje {
     	this.colocarEnCasillero(unCasillero);
         transformacion = new NormalFreezer();
         vida = 400;
+        VIDA_MAX = 400;
     }
 
     @Override

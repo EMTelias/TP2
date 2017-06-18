@@ -22,6 +22,7 @@ public class Gohan extends Personaje {
     	this.colocarEnCasillero(unCasillero);
         transformacion = new NormalGohan();
         vida = 300;
+        VIDA_MAX = 300;
     }
 
     @Override

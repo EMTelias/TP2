@@ -19,6 +19,7 @@ public class Cell extends Personaje {
     	this.colocarEnCasillero(unCasillero);
         transformacion = new NormalCell();
         vida = 500;
+        VIDA_MAX = 500;
     }
 
     @Override

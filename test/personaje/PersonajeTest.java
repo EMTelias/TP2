@@ -515,6 +515,7 @@ public class PersonajeTest {
 		Personaje cell = new Cell(new Casillero(new Posicion(1, 1)));
 		Personaje piccolo = new Piccolo(new Casillero(new Posicion(2, 2)));
 		cell.aumentarKi(5);
+		cell.reducirVida(100);
 		int vidaPreviaCell = cell.getVida();
 		cell.ataqueEspecialA(piccolo);
 

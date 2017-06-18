@@ -18,6 +18,7 @@ public class MajinBoo extends Personaje {
     	this.colocarEnCasillero(unCasillero);
         transformacion = new NormalMajinBoo();
         vida = 300;
+        VIDA_MAX = 300;
     }
 
     @Override

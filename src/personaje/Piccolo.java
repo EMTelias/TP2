@@ -15,13 +15,13 @@ import java.util.HashMap;
 public class Piccolo extends Personaje {
 
     protected final int kiAtaqueEspecial = 10;
-    protected final int vidaMaxima = 500;
     protected final double multMinVidaParaAyudaGohan = 0.3;
 
     public Piccolo(Casillero unCasillero) throws CasilleroOcupadoException {
     	this.colocarEnCasillero(unCasillero);
         transformacion = new NormalPiccolo();
-        vida = vidaMaxima;
+        vida = 500;
+        VIDA_MAX = 500;
     }
 
     @Override
@@ -63,7 +63,7 @@ public class Piccolo extends Personaje {
     }*/
 
     public boolean necesitaAyudaDeGohan() {
-        return this.getVida() < (vidaMaxima*multMinVidaParaAyudaGohan);
+        return this.getVida() < (VIDA_MAX*multMinVidaParaAyudaGohan);
     }
 
 }
