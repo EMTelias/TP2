@@ -17,6 +17,7 @@ import partida.Partida;
 import tablero.Camino;
 import tablero.Casillero;
 import tablero.Posicion;
+import tablero.Tablero;
 import transformacion.Chocolate;
 import transformacion.cell.PerfectoCell;
 import transformacion.cell.SemiPerfectoCell;
@@ -779,6 +780,28 @@ public class PersonajeTest {
 			//turno++;
 		}
 		Assert.assertTrue(goku.ki == 55);
+
+	}
+
+	@Test
+	public void testGokuAtacaACellCon1DeVidaMatandoloYAhoraNoHayNadieEnEseCasillero() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, DimensionDeTableroInvalidoException, CaminoInvalidoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException {
+		//Para arrancar el test muevo a goku hasta el 13,13
+		Partida partida = new Partida();
+		Tablero tablero = partida.getTablero();
+		ArrayList<Casillero> casilleros = new ArrayList<>();
+		for(int i = 2; i <= 13; i++) {
+			casilleros.add(tablero.getCasillero(new Posicion(i,i)));
+			partida.moverEnCamino(new Posicion(i-1, i-1), new Camino(casilleros));
+			partida.pasar();
+			partida.pasar();
+			casilleros.clear();
+		}
+
+		//Aca tengo a goku en el 13,13 y a cell en el 15,15
+		partida.personajeEnPosicion(new Posicion(15,15)).reducirVida(499);//Lo dejo en 1
+		Assert.assertTrue(!partida.getTablero().estaVacioEn(new Posicion(15,15)));
+		partida.atacarEnPosicion(new Posicion(13,13), new Posicion(15,15));//Lo mato
+		Assert.assertTrue(partida.getTablero().estaVacioEn(new Posicion(15,15)));
 
 	}
 }

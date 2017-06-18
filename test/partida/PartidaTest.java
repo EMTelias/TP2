@@ -179,7 +179,7 @@ public class PartidaTest {
         partida.personajeEnPosicion(new Posicion(15, 13)).reducirVida(500);
 
         partida.atacarEnPosicion(new Posicion(13, 13),new Posicion(15, 15));
-
+ 
     }
 
     /*@Test
