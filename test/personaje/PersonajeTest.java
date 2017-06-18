@@ -700,7 +700,7 @@ public class PersonajeTest {
 	public void testConviertoEnChocolateAGokuYEn2TurnosMiosSigueSiendoChocolate() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
 		Equipo guerreroZ = new Equipo("GuerrerosZ");
 		Equipo enemigos = new Equipo("Enemigos");
-		Partida partida = new Partida(guerreroZ,enemigos);
+		Partida partida = new Partida();
 
 		Personaje goku = partida.personajeEnPosicion(new Posicion(1,1));
 		goku.convertirseEnChocolate();
@@ -717,7 +717,7 @@ public class PersonajeTest {
 	public void testConviertoEnChocolateAGokuYEn3TurnosMiosDespierta() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
 		Equipo guerreroZ = new Equipo("GuerrerosZ");
 		Equipo enemigos = new Equipo("Enemigos");
-		Partida partida = new Partida(guerreroZ,enemigos);
+		Partida partida = new Partida();
 
 		Personaje goku = partida.personajeEnPosicion(new Posicion(1,1));
 		goku.convertirseEnChocolate();
