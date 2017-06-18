@@ -1,6 +1,8 @@
 package modelo.partida;
 
 import modelo.personaje.equipos.Equipo;
+import modelo.Consumibles.GeneradorDeConsumibles;
+import modelo.Consumibles.GeneradorDeConsumiblesSinActividad;
 import modelo.excepciones.JuegoTerminadoException;
 import modelo.excepciones.acciones.NoPuedeAtacarMismoEquipoException;
 import modelo.excepciones.acciones.YaAtacasteEsteTurnoException;
@@ -34,7 +36,9 @@ public class Partida {
     private Equipo equipoGuerrerrosZ = new Equipo("GuerrerosZ");
     private Equipo equipoEnemigos = new Equipo("Enemigos");
     private boolean estadoDePartida;
-
+    private GeneradorDeConsumibles generadorDeConsumibles;
+    
+    
     private Turno turno;
 
     protected static Posicion POS_I_GOKU = new Posicion(1,1);
@@ -52,7 +56,8 @@ public class Partida {
         this.initDeGuerrerosZ();
         this.estadoDePartida = true;
         this.turno = new Turno(equipoGuerrerrosZ,equipoEnemigos);
-
+        this.generadorDeConsumibles = new GeneradorDeConsumiblesSinActividad();
+        
     }
 
     public void setearPrimerJugadorRandom(){
@@ -170,5 +175,9 @@ public class Partida {
 
     }
 
+    public void setGeneradorDeConsumibles(GeneradorDeConsumibles unGeneradorDeConsumibles){
+    	this.generadorDeConsumibles = unGeneradorDeConsumibles;
+    }
+    
 }
 
