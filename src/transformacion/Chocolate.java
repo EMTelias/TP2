@@ -57,4 +57,6 @@ public class Chocolate extends Transformacion {
 
     @Override
     public int aumentarKi(int aumento){return 0;}
+
+    public void pasarTurno(){}
 }

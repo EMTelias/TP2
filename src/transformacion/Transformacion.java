@@ -90,4 +90,9 @@ public abstract class Transformacion {
     public boolean esChocolate(){return false;}
 
     public int aumentarKi(int aumento){return aumento;}
+
+	public void pasarTurno() {
+		efecto = efecto.pasarTurno();
+		
+	}
 }

@@ -46,13 +46,16 @@ public class Equipo {
         }
     }
 
-    public void aumentarKi(int aumento) {
-        for (Personaje unPersonaje : personajes) {
-            unPersonaje.aumentarKi(aumento);
-        }
-    }
-
     public void eliminarPersonaje(Personaje unPersonaje) {
         personajes.remove(unPersonaje);
     }
+
+	public void pasarTurno() {
+		for (Personaje unPersonaje : personajes) {
+            unPersonaje.pasarTurno();
+        }
+        this.revisarTransformadosEnChocolate();
+
+		
+	}
 }

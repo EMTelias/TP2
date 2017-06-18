@@ -12,4 +12,9 @@ public class SinEfectoEspecial extends Efecto {
 		return ataque;
 	}
 
+	@Override
+	public Efecto pasarTurno() {
+		return this;
+	}
+
 }

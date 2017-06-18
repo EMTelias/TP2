@@ -172,4 +172,10 @@ public abstract class Personaje {
 		}
 
 	}
+
+	public void pasarTurno() {
+		this.aumentarKi(5);
+		transformacion.pasarTurno();
+		
+	}
 }

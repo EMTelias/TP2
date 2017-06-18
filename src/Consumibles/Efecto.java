@@ -15,4 +15,6 @@ public abstract class Efecto implements Consumible{
 
 	public abstract int aplicarEfectoVelocidad(int velocidad);
 	public abstract double aplicarEfectoAtaque(int ataque);
+
+	public abstract Efecto pasarTurno();
 }

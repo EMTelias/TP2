@@ -62,8 +62,7 @@ public class Partida {
     public void pasar() {
         Equipo equipoActivo = turno.getEquipoActivo();
         turno.pasar();
-        equipoActivo.aumentarKi(AUMENTO_KI);
-        equipoActivo.revisarTransformadosEnChocolate();
+        equipoActivo.pasarTurno();
     }
 
     public Equipo turnoActual() {
