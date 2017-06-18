@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import excepciones.personaje.NoPuedeMoverAEsaDistanciaException;
 import excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
 import excepciones.tablero.CaminoInvalidoException;
 import excepciones.tablero.CasilleroOcupadoException;
@@ -17,10 +18,6 @@ public class Camino {
 		if (casilleros.isEmpty()) throw new CaminoInvalidoException();
 		casillerosDelCamino = new ArrayList<Casillero>();
 		casillerosDelCamino.addAll(casilleros);
-	}
-
-	public int distancia() {
-		return casillerosDelCamino.size();
 	}
 
 	public void recorrerCon(Personaje unPersonaje) throws NoPuedeMoverCaminoObstruidoException {
@@ -40,6 +37,10 @@ public class Camino {
 				throw new NoPuedeMoverCaminoObstruidoException();
 			}
 		}
+	}
+
+	public void siDistanciaEsMayor(int velocidad, Class<NoPuedeMoverAEsaDistanciaException> excepcion) throws InstantiationException, IllegalAccessException, NoPuedeMoverAEsaDistanciaException {
+		if (casillerosDelCamino.size() > velocidad ) throw excepcion.newInstance();
 	}
 	
 }
