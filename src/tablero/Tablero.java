@@ -1,7 +1,7 @@
 package tablero;
 
 
-import equipo.Equipo;
+import equipos.Equipo;
 import excepciones.tablero.CasilleroOcupadoException;
 import excepciones.tablero.DimensionDeTableroInvalidoException;
 import personaje.*;

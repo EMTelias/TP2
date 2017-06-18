@@ -1,6 +1,6 @@
 package partida;
 
-import equipo.Equipo;
+import equipos.Equipo;
 import excepciones.acciones.NoPuedeAtacarMismoEquipoException;
 import excepciones.personaje.CasillaSinPersonajeException;
 import excepciones.personaje.NoPuedeAtacarAEsaDistanciaException;

@@ -1,7 +1,7 @@
 package transformacion.gohan;
 
 
-import equipo.Equipo;
+import equipos.Equipo;
 import excepciones.transformacion.KiInsuficienteException;
 import excepciones.transformacion.NoPuedeTransformarException;
 import personaje.Goku;

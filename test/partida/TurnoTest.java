@@ -1,6 +1,6 @@
 package partida;
 
-import equipo.Equipo;
+import equipos.Equipo;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

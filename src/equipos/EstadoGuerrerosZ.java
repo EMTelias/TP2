@@ -1,4 +1,5 @@
-/*package equipo;
+package equipos;
+/*
 
 import excepciones.tablero.CasilleroOcupadoException;
 import personaje.Gohan;

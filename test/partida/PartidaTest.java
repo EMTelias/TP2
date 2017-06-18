@@ -1,6 +1,6 @@
 package partida;
 
-import equipo.Equipo;
+import equipos.Equipo;
 import excepciones.tablero.CasilleroOcupadoException;
 import excepciones.tablero.DimensionDeTableroInvalidoException;
 import org.junit.Assert;

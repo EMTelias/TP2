@@ -1,6 +1,6 @@
 package partida;
 
-import equipo.Equipo;
+import equipos.Equipo;
 
 public class Turno {
     private Equipo equipoEnMovimiento;
