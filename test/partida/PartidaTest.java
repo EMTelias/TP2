@@ -8,6 +8,8 @@ import excepciones.tablero.CaminoInvalidoException;
 import excepciones.tablero.CasilleroOcupadoException;
 import excepciones.tablero.DimensionDeTableroInvalidoException;
 import excepciones.transformacion.KiInsuficienteException;
+import excepciones.transformacion.NoHayProximaTransformacionException;
+import excepciones.transformacion.NoPuedeTransformarException;
 import org.junit.Assert;
 import org.junit.Test;
 import personaje.Gohan;
@@ -18,6 +20,7 @@ import tablero.Camino;
 import tablero.Casillero;
 import tablero.Posicion;
 import tablero.Tablero;
+import transformacion.goku.KaioKenGoku;
 
 import java.util.ArrayList;
 
@@ -65,13 +68,22 @@ public class PartidaTest {
     }
 
     @Test
-    public void testCreoUnaPartidaConDosJugadoresYVerificoQueMajinBooEsteEnLaPosicionx20y19() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
+    public void testCreoUnaPartidaConDosJugadoresYVerificoQueMajinBooEsteEnLaPosicionx15y14() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
         Partida partida = new Partida();
 
         Personaje personajeBuscado = partida.personajeEnPosicion(new Posicion(15,14));
         Assert.assertTrue(personajeBuscado.getClass() == MajinBoo.class);
 
     }
+
+    @Test
+    public void testCreoUnaPartidaYPasoUnaVezEntoncesElKiAumenta5Unidades() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
+        Partida partida = new Partida();
+        partida.pasar();
+        Personaje goku = partida.getTablero().getCasillero(new Posicion(1,1)).getPersonaje();
+        Assert.assertEquals(5, goku.getKi());
+    }
+
     @Test
     public void testCreoUnaPartidaYMuevoAGohanUnaPosicion() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException, CaminoInvalidoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException {
         Partida partida = new Partida();
@@ -119,6 +131,30 @@ public class PartidaTest {
         //goku usa ataque especial a cell y le genera 20*1.5 de danio
         Personaje cell = tablero.getCasillero(new Posicion(15,15)).getPersonaje();
         Assert.assertEquals(470, cell.getVida());
+
+    }
+
+    @Test
+    public void testCreoUnaPartidaYTransformoAGokuLuegoDe5TurnosEntoncesSuVelocidadAumenta1() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException, NoPuedeTransformarException, NoHayProximaTransformacionException, KiInsuficienteException {
+        Partida partida = new Partida();
+        for(int i = 1; i <=4; i++) {
+            partida.pasar(); // paso mi turno
+            partida.pasar(); // mi oponente pasa su turno
+        }
+        Personaje goku = partida.getTablero().getCasillero(new Posicion(1,1)).getPersonaje();
+        int velocidadPrevia = goku.getVelocidad();
+        partida.transformarPersonaje(new Posicion(1,1));
+        Assert.assertEquals(1, goku.getVelocidad() - velocidadPrevia);
+    }
+
+    @Test(expected = KiInsuficienteException.class)
+    public void testCreoUnaPartidaYTransformoAGokuLuegoDe3TurnosLanzaException() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException, NoPuedeTransformarException, NoHayProximaTransformacionException, KiInsuficienteException {
+        Partida partida = new Partida();
+        for(int i = 1; i <=2; i++) {
+            partida.pasar(); // paso mi turno
+            partida.pasar(); // mi oponente pasa su turno
+        }
+        partida.transformarPersonaje(new Posicion(1,1));
 
     }
 
