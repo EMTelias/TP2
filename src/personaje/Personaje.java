@@ -17,6 +17,9 @@ import transformacion.Transformacion;
 
 import java.util.HashMap;
 
+import Consumibles.Consumible;
+import Consumibles.Efecto;
+
 public abstract class Personaje {
 
 	protected Casillero casillero;
@@ -138,6 +141,15 @@ public abstract class Personaje {
 
 	public Casillero getCasillero() {
 		return casillero;
+	}
+
+	public void consumir(Consumible unConsumible) {
+		unConsumible.aplicarConsumibleA(this);
+	}
+
+	public void aplicarEfecto(Efecto unEfecto) {
+		transformacion.aplicarEfecto(unEfecto);
+
 	}
 
 	private boolean esChocolate(){

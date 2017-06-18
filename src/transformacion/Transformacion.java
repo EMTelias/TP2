@@ -1,6 +1,8 @@
 package transformacion;
 
 
+import Consumibles.Efecto;
+import Consumibles.SinEfectoEspecial;
 import acciones.Ataque;
 import acciones.AtaqueEspecialHandler;
 import excepciones.acciones.NoPuedeAtacarMismoEquipoException;
@@ -19,6 +21,7 @@ public abstract class Transformacion {
     protected int poderDePelea;
     protected Transformacion proximaTransformacion;
     protected int kiNecesarioTransformar;
+    protected Efecto efecto;
 
     public Transformacion(int poderDePelea, int distanciaAtaque, int velocidad, Transformacion proxTransformacion, int kiTransformar) {
         this.velocidad = velocidad;
@@ -26,7 +29,8 @@ public abstract class Transformacion {
         this.poderDePelea = poderDePelea;
         this.proximaTransformacion = proxTransformacion;
         this.kiNecesarioTransformar = kiTransformar;
-    }
+        this.efecto = new SinEfectoEspecial();
+   }
 
     protected Transformacion() {
     }
@@ -45,7 +49,7 @@ public abstract class Transformacion {
 
     public void mover(Personaje unPersonaje, Camino camino) throws NoPuedeMoverCaminoObstruidoException, NoPuedeMoverAEsaDistanciaException {
     	try {
-			camino.siDistanciaEsMayor( this.velocidad, NoPuedeMoverAEsaDistanciaException.class );
+			camino.siDistanciaEsMayor( efecto.aplicarEfectoVelocidad(velocidad), NoPuedeMoverAEsaDistanciaException.class );
 		} catch (InstantiationException | IllegalAccessException e) {}
 		
         camino.recorrerCon(unPersonaje);
@@ -64,7 +68,7 @@ public abstract class Transformacion {
     }
 
     public void atacarA(Personaje personajeAtacante, Personaje personajeAtacado) throws NoPuedeAtacarAEsaDistanciaException {
-        Ataque ataque = new Ataque(personajeAtacante, personajeAtacado, 1);
+        Ataque ataque = new Ataque(personajeAtacante, personajeAtacado, efecto.aplicarEfectoAtaque(1));
         ataque.execute();
     }
 
@@ -76,6 +80,10 @@ public abstract class Transformacion {
         AtaqueEspecialHandler handler = personajeAtacante.getAtaqueEspecialHandlerContra(personajeAtacado);
         handler.ataqueEspecialA(personajeAtacado);
     }
+
+	public void aplicarEfecto(Efecto unEfecto) {
+		efecto = unEfecto;
+	}
 
     public Transformacion revisarTransformacionChocolate(){return null;}
 

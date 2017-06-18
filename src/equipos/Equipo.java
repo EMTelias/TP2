@@ -36,6 +36,10 @@ public class Equipo {
         return this.suTurno;
     }
 
+    public String getNombre() {
+        return this.nombre;
+    }
+
     public void revisarTransformadosEnChocolate() {
         for (Personaje unPersonaje : personajes) {
             unPersonaje.revisarTransformacionChocolate();
