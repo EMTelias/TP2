@@ -29,7 +29,7 @@ public class VistaPersonaje extends BorderPane{
         imageView.setSmooth(true);
         imageView.setImage(imagen);
         imageView.setOnMouseClicked(e-> {
-            seleccionarHandler.seleccionarPersonaje(new Posicion(x+1, y+1));
+            seleccionarHandler.seleccionarPersonaje(new Posicion(x, y));
             if (seleccionado) {
                 imageView.setEffect(null);
                 seleccionado = false;

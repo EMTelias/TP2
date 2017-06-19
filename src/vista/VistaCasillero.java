@@ -29,7 +29,7 @@ public class VistaCasillero extends Pane {
         border.setStroke(Color.GRAY);
         border.setOpacity(0.9);
         border.setOnMouseClicked(e -> {
-            seleccionarHandler.seleccionarCasillero(new Posicion(x+1, y+1));
+            seleccionarHandler.seleccionarCasillero(new Posicion(x, y));
             if (seleccionado) {
                 reestablecerCasillero();
                 return;
