@@ -2,7 +2,11 @@ package controlador.eventos;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import modelo.Consumibles.GeneradorDeConsumibles;
+import modelo.Consumibles.GeneradorDeConsumiblesRandom;
 import modelo.partida.Partida;
+import modelo.tablero.Posicion;
+import vista.TileConsumible;
 import vista.VistaTablero;
 
 public class BotonPasarHandler implements EventHandler<ActionEvent> {
@@ -29,6 +33,15 @@ public class BotonPasarHandler implements EventHandler<ActionEvent> {
             e.printStackTrace();
         }*/
         partida.pasar();
+
+        //genero posible consumible random
+        GeneradorDeConsumiblesRandom generadorConsmibles = new GeneradorDeConsumiblesRandom();
+        Posicion posicionGenerada = generadorConsmibles.generarConsumibleEn(partida.getTablero(),partida.getTablero().getDimensionX(),partida.getTablero().getDimensionY());
+
+        //Si efectivamente se creo:
+        //if(posicionGenerada != null){ new TileConsumible(imageDirectory + "Consumible" + IMG_EXT, 0,0,seleccionarHandler);}
+
+
         vistaTablero.actualizarVista();
     }
 }

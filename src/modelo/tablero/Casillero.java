@@ -14,6 +14,7 @@ public class Casillero {
 	public Casillero(Posicion unaPosicion) {
 		posicion = unaPosicion;
 		personaje = null;
+		consumible = null;
 	}
 	
 	public boolean estaVacio() {
@@ -50,5 +51,6 @@ public class Casillero {
 		return posicion;
 	}
 
+	public boolean tieneConsumible(){ return (consumible != null); }
 
 }

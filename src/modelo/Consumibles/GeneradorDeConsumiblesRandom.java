@@ -10,31 +10,34 @@ import modelo.tablero.Tablero;
 public class GeneradorDeConsumiblesRandom implements GeneradorDeConsumibles {
 
 	@Override
-	public void generarConsumibleEn(Tablero tablero, int dimensionMaximaX, int dimensionMaximaY) {
+	public Posicion generarConsumibleEn(Tablero tablero, int dimensionMaximaX, int dimensionMaximaY) {
 		Random unRandom = new Random();
 		
-		if (unRandom.nextDouble() > 0.25 ) return; // 25 porciento de chance que salga un consumible en un turno
-		
+		if (unRandom.nextDouble() > 0.25 ) return null; // 25 porciento de chance que salga un consumible en un turno
+		Posicion posicionAColocar = this.generarPosicionRandom(dimensionMaximaX,dimensionMaximaY, unRandom);
+
+
 		switch ((int)(unRandom.nextDouble() * 2 + 0)){
 			case 0:
-		        this.colocarNubeVoladora(tablero,dimensionMaximaX,dimensionMaximaY,unRandom);
+		        this.colocarNubeVoladora(tablero,posicionAColocar);
 				break;
 		 
 		    case 1:
-		    	this.colocarSemillaDelErmitanio(tablero,dimensionMaximaX,dimensionMaximaY,unRandom);
+		    	this.colocarSemillaDelErmitanio(tablero,posicionAColocar);
 		    	break;
 		
 		    case 2:
-		    	this.colocarEsferaDelDragon(tablero,dimensionMaximaX,dimensionMaximaY,unRandom);
+		    	this.colocarEsferaDelDragon(tablero,posicionAColocar);
 		        break;
 		}
+
+		return posicionAColocar;
 	}
 
-	private void colocarNubeVoladora(Tablero tablero, int dimensionMaximaX, int dimensionMaximaY, Random unRandom){
+	private void colocarNubeVoladora(Tablero tablero, Posicion unaPosicion){
 		Boolean pudoColocar = false;
 		while (!pudoColocar){
-			Posicion posicionAColocar = this.generarPosicionRandom(dimensionMaximaX,dimensionMaximaY, unRandom);
-			Casillero casilleroAColocar = tablero.getCasillero(posicionAColocar);
+			Casillero casilleroAColocar = tablero.getCasillero(unaPosicion);
 			try {
 				new NubeVoladora(casilleroAColocar);
 				pudoColocar = true;
@@ -44,11 +47,10 @@ public class GeneradorDeConsumiblesRandom implements GeneradorDeConsumibles {
 		}		
 	}
 	
-	private void colocarSemillaDelErmitanio(Tablero tablero, int dimensionMaximaX, int dimensionMaximaY, Random unRandom){
+	private void colocarSemillaDelErmitanio(Tablero tablero, Posicion unaPosicion){
 		Boolean pudoColocar = false;
 		while (!pudoColocar){
-			Posicion posicionAColocar = this.generarPosicionRandom(dimensionMaximaX,dimensionMaximaY, unRandom);
-			Casillero casilleroAColocar = tablero.getCasillero(posicionAColocar);
+			Casillero casilleroAColocar = tablero.getCasillero(unaPosicion);
 			try {
 				new SemillaDelErmitanio(casilleroAColocar);
 				pudoColocar = true;
@@ -58,11 +60,10 @@ public class GeneradorDeConsumiblesRandom implements GeneradorDeConsumibles {
 		}		
 	}
 	
-	private void colocarEsferaDelDragon(Tablero tablero, int dimensionMaximaX, int dimensionMaximaY, Random unRandom){
+	private void colocarEsferaDelDragon(Tablero tablero, Posicion unaPosicion){
 		Boolean pudoColocar = false;
 		while (!pudoColocar){
-			Posicion posicionAColocar = this.generarPosicionRandom(dimensionMaximaX,dimensionMaximaY, unRandom);
-			Casillero casilleroAColocar = tablero.getCasillero(posicionAColocar);
+			Casillero casilleroAColocar = tablero.getCasillero(unaPosicion);
 			try {
 				new EsferaDelDragon(casilleroAColocar);
 				pudoColocar = true;

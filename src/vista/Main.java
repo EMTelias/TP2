@@ -17,6 +17,7 @@ import modelo.excepciones.tablero.CaminoInvalidoException;
 import modelo.partida.Partida;
 import modelo.personaje.Personaje;
 import modelo.tablero.Camino;
+import modelo.tablero.Casillero;
 import modelo.tablero.Posicion;
 
 import java.nio.file.Path;
@@ -155,13 +156,14 @@ public class Main extends Application {
                 Posicion posicionPersonaje = seleccionarHandler.getPosicionPersonajeSeleccionado1();
                 Personaje personaje = partida.personajeEnPosicion(posicionPersonaje);
 
-
                 try {
 
                     System.out.println(personaje.getCasillero());
                     Camino camino = seleccionarHandler.getCaminoSeleccionado();
                     partida.moverEnCamino(posicionPersonaje, camino);
+                    seleccionarHandler.getCaminoSeleccionado().borrarTilesConsumibles();
                     //mover.setOnMouseClicked(new MoverHandler(partida, posicionPersonaje, camino));
+                    //this.limpiarConsumiblesEnCamino(seleccionarHandler.getCaminoSeleccionado());
 
                     int x = personaje.getCasillero().getPosicion().getPosicionX();
                     int y = personaje.getCasillero().getPosicion().getPosicionY();
@@ -182,6 +184,16 @@ public class Main extends Application {
                 }
 
             }
+
+            private void limpiarConsumiblesEnCamino(Camino caminoSeleccionado) {
+                for (Casillero casillero : caminoSeleccionado.obtenerCasilleros())
+                    if (casillero.tieneConsumible()) { //Lo borro de la view
+                        int x = casillero.getPosicion().getPosicionX()-1;
+                        int y = casillero.getPosicion().getPosicionY()-1;
+                        System.out.println(x+","+y);
+                    }
+            }
+
         });
 
 
