@@ -119,6 +119,7 @@ public class Main extends Application {
                 ataqueB.setOnMouseClicked(new AtaqueBasicoHandler(partida, posicionAtacante, posicionDefensor));
                 System.out.println(atacante.getClass() + " ataca a: " + defensor.getClass());
                 System.out.println("Vida del defensor: " + defensor.getVida());
+                seleccionarHandler.deseleccionarPersonajes();
             }
         });
 
@@ -139,6 +140,7 @@ public class Main extends Application {
                 new AtaqueEspecialHandler(partida, posicionAtacante, posicionDefensor);
                 System.out.println(atacante.getClass() + " ataque especial a: " + defensor.getClass());
                 System.out.println("Vida del defensor: " + defensor.getVida());
+                seleccionarHandler.deseleccionarPersonajes();
             }
         });
 
@@ -162,15 +164,14 @@ public class Main extends Application {
                     partida.moverEnCamino(posicionPersonaje, camino);
 
                     int x = personaje.getCasillero().getPosicion().getPosicionX();
-                    System.out.println(x);
                     int y = personaje.getCasillero().getPosicion().getPosicionY();
-                    System.out.println(y);
+                    System.out.println("posicion en el tablero: "+x+","+y);
 
+                    seleccionarHandler.deseleccionarPersonajes();
                     seleccionarHandler.deseleccionarTodosLosCasilleros();
 
                     //Reajusto la imagen de la pieza que se movio:
                     seleccionarHandler.getPiezaAMover().move(x-1,y-1);
-
 
                 } catch (NoPuedeMoverAEsaDistanciaException e1) {
                     e1.printStackTrace();

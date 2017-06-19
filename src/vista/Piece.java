@@ -25,7 +25,6 @@ public class Piece extends StackPane {
     }
 
     public Piece(String imgDir, int x, int y,SeleccionarHandler seleccionarHandler) {
-
         xCoord=x;
         yCoord=y;
         seleccionar = seleccionarHandler;
@@ -40,7 +39,8 @@ public class Piece extends StackPane {
         getChildren().add(imageView);
 
         setOnMouseClicked(e -> {
-            seleccionar.seleccionarPersonaje(new Posicion(xCoord+1,yCoord+1));
+            System.out.println(xCoord+","+yCoord);
+            seleccionar.seleccionarPersonaje(new Posicion(xCoord+1,yCoord+1));//<-aca rompe
             seleccionar.setPiezaAMover(this);
             return;
         });
@@ -48,6 +48,8 @@ public class Piece extends StackPane {
     }
 
     public void move(int x, int y) {
+        xCoord=x;
+        yCoord=y;
         oldX = x * Tile.TILE_SIZE;
         oldY = y * Tile.TILE_SIZE;
         relocate(oldX, oldY);

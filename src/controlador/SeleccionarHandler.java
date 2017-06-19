@@ -58,8 +58,7 @@ public class SeleccionarHandler {
         if(this.posicionPersonaje1NoSeleccionada()){ posicionPersonajeSeleccionado1 = posicion;System.out.println("Personaje Seleccionado: "+partida.personajeEnPosicion(posicion));return;}
         if(this.posicionPersonaje2NoSeleccionada()){ posicionPersonajeSeleccionado2 = posicion;System.out.println("Personaje Seleccionado: "+partida.personajeEnPosicion(posicion));return;}
         if(this.yaTengo2PosicionesDePersonajesSeleccionadas()){
-            posicionPersonajeSeleccionado1 = posicionPersonajeSeleccionado2;
-            posicionPersonajeSeleccionado2 = posicion;
+            posicionPersonajeSeleccionado1 = posicion;
             System.out.println("Personaje Seleccionado: "+partida.personajeEnPosicion(posicion));
             return;
         }
@@ -91,5 +90,10 @@ public class SeleccionarHandler {
 
     public void deseleccionarTodosLosCasilleros() {
         casillerosSeleccionados.clear();
+    }
+
+    public void deseleccionarPersonajes() {
+        posicionPersonajeSeleccionado1 = null;
+        posicionPersonajeSeleccionado2 = null;
     }
 }
