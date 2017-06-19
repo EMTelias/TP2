@@ -1,6 +1,7 @@
 package controlador;
 
 import modelo.excepciones.controlador.NoSePuedeSeleccionarMasDeDosPersonajesException;
+import modelo.excepciones.personaje.NoSePuedeSeleccionarDosPersonajesDelMismoEquipo;
 import modelo.excepciones.personaje.NoSeSeleccionoNingunPersonajeException;
 import modelo.excepciones.tablero.CaminoInvalidoException;
 import modelo.partida.Partida;
@@ -53,13 +54,17 @@ public class SeleccionarHandler {
     }
 
     public void seleccionarPersonaje(Posicion posicion){
-
+        if( posicionPersonajeSeleccionado1 == null ){
+            posicionPersonajeSeleccionado1 = posicion;
+        }else if( partida.personajeEnPosicion(posicionPersonajeSeleccionado1).getEquipo() == partida.personajeEnPosicion(posicion).getEquipo()){
+            throw new NoSePuedeSeleccionarDosPersonajesDelMismoEquipo();
+        }else{
+            posicionPersonajeSeleccionado2 = posicion;
+        }
         if (colaPosiciones.size() == 2) {
             throw new NoSePuedeSeleccionarMasDeDosPersonajesException();
         }
         colaPosiciones.addLast(posicion);
-        if ( posicionPersonajeSeleccionado1 == null ){ posicionPersonajeSeleccionado1 = posicion; }
-        else { posicionPersonajeSeleccionado2 = posicion; }
     }
 
     public Posicion getPosicionPersonajeSeleccionado() {
