@@ -24,7 +24,7 @@ public class BotonTransformarHandler implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        Posicion posPersonaje = seleccionarHandler.getPosicionPersonajeSeleccionado1();
+        Posicion posPersonaje = seleccionarHandler.getPosicionPersonajeSeleccionado();
         try {
             partida.transformarPersonaje(posPersonaje);
         } catch (NoPuedeTransformarException e) {
@@ -34,6 +34,7 @@ public class BotonTransformarHandler implements EventHandler<ActionEvent> {
         } catch (NoHayProximaTransformacionException e) {
             e.printStackTrace();
         }
+        seleccionarHandler.limpiar();
         vistaTablero.actualizarVista();
     }
 }

@@ -25,7 +25,7 @@ public class BotonMoverHandler implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        Posicion posPersonaje = seleccionarHandler.getPosicionPersonajeSeleccionado1();
+        Posicion posPersonaje = seleccionarHandler.getPosicionPersonajeSeleccionado();
         try {
             Camino camino = seleccionarHandler.getCaminoSeleccionado();
             partida.moverEnCamino(posPersonaje, camino);
@@ -36,6 +36,7 @@ public class BotonMoverHandler implements EventHandler<ActionEvent> {
         } catch (NoPuedeMoverCaminoObstruidoException e) {
             e.printStackTrace();
         }
+        seleccionarHandler.limpiar();
         vistaTablero.actualizarVista();
     }
 }

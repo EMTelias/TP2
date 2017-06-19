@@ -1,5 +1,6 @@
 package controlador;
 
+import modelo.excepciones.controlador.NoSePuedeSeleccionarMasDeDosPersonajesException;
 import modelo.excepciones.tablero.CaminoInvalidoException;
 import modelo.partida.Partida;
 import modelo.tablero.Camino;
@@ -8,11 +9,13 @@ import modelo.tablero.Posicion;
 import vista.Piece;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class SeleccionarHandler {
     private Posicion posicionPersonajeSeleccionado1;
     private Posicion posicionPersonajeSeleccionado2;
+    private LinkedList<Posicion> colaPosiciones;
     private List<Casillero> casillerosSeleccionados;
     private Partida partida;
     private Piece piezaAMover;
@@ -22,6 +25,7 @@ public class SeleccionarHandler {
         posicionPersonajeSeleccionado2=null;
         casillerosSeleccionados = new ArrayList<>();
         partida = unaPartida;
+        colaPosiciones = new LinkedList<>();
     }
 
     private boolean yaTengo2PosicionesDePersonajesSeleccionadas(){
@@ -46,6 +50,10 @@ public class SeleccionarHandler {
     }
 
     public void seleccionarPersonaje(Posicion posicion){
+        if (colaPosiciones.size() == 2) {
+            throw new NoSePuedeSeleccionarMasDeDosPersonajesException();
+        }
+        colaPosiciones.addLast(posicion);
         //System.out.println("posicion clickeada: "+posicion.getPosicionX()+","+posicion.getPosicionY());
         //System.out.println("posicion 1: "+posicionPersonajeSeleccionado1);
         //System.out.println("posicion 2: "+posicionPersonajeSeleccionado2);
@@ -55,17 +63,27 @@ public class SeleccionarHandler {
         //if (posicion == posicionPersonajeSeleccionado2) { posicionPersonajeSeleccionado2 = null; System.out.println("Deseleccionando Personaje 2");return;}
 
         //Lleno personaje1 y luego personaje2, segun esten vacios.. si los 2 estan llenos reemplazo el primero
-        if(this.posicionPersonaje1NoSeleccionada()){ posicionPersonajeSeleccionado1 = posicion;System.out.println("Personaje Seleccionado: "+partida.personajeEnPosicion(posicion));return;}
+        /*if(this.posicionPersonaje1NoSeleccionada()){ posicionPersonajeSeleccionado1 = posicion;System.out.println("Personaje Seleccionado: "+partida.personajeEnPosicion(posicion));return;}
         if(this.posicionPersonaje2NoSeleccionada()){ posicionPersonajeSeleccionado2 = posicion;System.out.println("Personaje Seleccionado: "+partida.personajeEnPosicion(posicion));return;}
         if(this.yaTengo2PosicionesDePersonajesSeleccionadas()){
             posicionPersonajeSeleccionado1 = posicion;
             System.out.println("Personaje Seleccionado: "+partida.personajeEnPosicion(posicion));
             return;
-        }
+        }*/
 
 
 
     }
+
+    public Posicion getPosicionPersonajeSeleccionado() {
+        return colaPosiciones.getFirst();
+    }
+
+    public void limpiar() {
+        colaPosiciones.clear();
+        casillerosSeleccionados.clear();
+    }
+
 
     public Posicion getPosicionPersonajeSeleccionado1() {
         return posicionPersonajeSeleccionado1;

@@ -42,5 +42,4 @@ public class Posicion {
 	public Posicion restar(Posicion otraPosicion) {
 		return new Posicion(this.posicionX-otraPosicion.posicionX, this.posicionY -otraPosicion.posicionY);
 	}
-	
 }

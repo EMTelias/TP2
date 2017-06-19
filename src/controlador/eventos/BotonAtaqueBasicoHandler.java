@@ -23,8 +23,8 @@ public class BotonAtaqueBasicoHandler implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        Posicion posAtacante = seleccionarHandler.getPosicionPersonajeSeleccionado1();
-        Posicion posAtacado = seleccionarHandler.getPosicionPersonajeSeleccionado2();
+        Posicion posAtacante = seleccionarHandler.getPosicionPersonajeSeleccionado();
+        Posicion posAtacado = seleccionarHandler.getPosicionPersonajeSeleccionado();
         try {
             partida.atacarEnPosicion(posAtacante, posAtacado);
         } catch (NoPuedeAtacarMismoEquipoException e) {
@@ -32,6 +32,7 @@ public class BotonAtaqueBasicoHandler implements EventHandler<ActionEvent> {
         } catch (NoPuedeAtacarAEsaDistanciaException e) {
             e.printStackTrace();
         }
+        seleccionarHandler.limpiar();
         vistaTablero.actualizarVista();
     }
 }

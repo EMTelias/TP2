@@ -5,6 +5,7 @@ import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import modelo.excepciones.controlador.NoSePuedeSeleccionarMasDeDosPersonajesException;
 import modelo.personaje.Personaje;
 import modelo.tablero.Posicion;
 
@@ -29,7 +30,11 @@ public class VistaPersonaje extends BorderPane{
         imageView.setSmooth(true);
         imageView.setImage(imagen);
         imageView.setOnMouseClicked(e-> {
-            seleccionarHandler.seleccionarPersonaje(new Posicion(x, y));
+            try {
+                seleccionarHandler.seleccionarPersonaje(new Posicion(x, y));
+            } catch (NoSePuedeSeleccionarMasDeDosPersonajesException ex) {
+                return;
+            }
             if (seleccionado) {
                 imageView.setEffect(null);
                 seleccionado = false;

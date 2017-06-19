@@ -24,8 +24,8 @@ public class BotonAtaqueEspecialHandler implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        Posicion posAtacante = seleccionarHandler.getPosicionPersonajeSeleccionado1();
-        Posicion posAtacado = seleccionarHandler.getPosicionPersonajeSeleccionado2();
+        Posicion posAtacante = seleccionarHandler.getPosicionPersonajeSeleccionado();
+        Posicion posAtacado = seleccionarHandler.getPosicionPersonajeSeleccionado();
         try {
             partida.ataqueEspecialEnPosicion(posAtacante, posAtacado);
         } catch (NoPuedeAtacarMismoEquipoException e) {
@@ -35,6 +35,7 @@ public class BotonAtaqueEspecialHandler implements EventHandler<ActionEvent> {
         } catch (KiInsuficienteException e) {
             e.printStackTrace();
         }
+        seleccionarHandler.limpiar();
         vistaTablero.actualizarVista();
     }
 }
