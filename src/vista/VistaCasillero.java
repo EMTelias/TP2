@@ -6,6 +6,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import modelo.excepciones.personaje.NoSeSeleccionoNingunPersonajeException;
 import modelo.tablero.Casillero;
 import modelo.tablero.Posicion;
 
@@ -29,13 +30,17 @@ public class VistaCasillero extends Pane {
         border.setStroke(Color.GRAY);
         border.setOpacity(0.9);
         border.setOnMouseClicked(e -> {
-            seleccionarHandler.seleccionarCasillero(new Posicion(x, y));
-            if (seleccionado) {
-                reestablecerCasillero();
-                return;
+            try {
+                seleccionarHandler.seleccionarCasillero(new Posicion(x, y));
+                if (seleccionado) {
+                    reestablecerCasillero();
+                    return;
+                }
+                border.setFill(Color.DARKSEAGREEN);
+                seleccionado = true;
+            } catch (NoSeSeleccionoNingunPersonajeException ex){
+                ex.printStackTrace();
             }
-            border.setFill(Color.DARKSEAGREEN);
-            seleccionado = true;
         });
         this.getChildren().add(border);
         this.agregarPersonaje(casillero);
