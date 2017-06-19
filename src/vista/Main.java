@@ -136,8 +136,7 @@ public class Main extends Application {
                 Posicion posicionDefensor = seleccionarHandler.getPosicionPersonajeSeleccionado2();
                 Personaje atacante = partida.personajeEnPosicion(posicionAtacante);
                 Personaje defensor = partida.personajeEnPosicion(posicionDefensor);
-
-                new AtaqueEspecialHandler(partida, posicionAtacante, posicionDefensor);
+                ataqueE.setOnMouseClicked(new AtaqueEspecialHandler(partida, posicionAtacante, posicionDefensor));
                 System.out.println(atacante.getClass() + " ataque especial a: " + defensor.getClass());
                 System.out.println("Vida del defensor: " + defensor.getVida());
                 seleccionarHandler.deseleccionarPersonajes();
@@ -162,6 +161,7 @@ public class Main extends Application {
                     System.out.println(personaje.getCasillero());
                     Camino camino = seleccionarHandler.getCaminoSeleccionado();
                     partida.moverEnCamino(posicionPersonaje, camino);
+                    //mover.setOnMouseClicked(new MoverHandler(partida, posicionPersonaje, camino));
 
                     int x = personaje.getCasillero().getPosicion().getPosicionX();
                     int y = personaje.getCasillero().getPosicion().getPosicionY();
@@ -190,7 +190,18 @@ public class Main extends Application {
         transformar.setStyle("-fx-font: 20 arial; -fx-base: #ee2211;");
         transformar.setPrefSize(tamXboton,tamYboton);
         transformar.setMinHeight(tamYboton);
-        //transformar.setOnMouseClicked(new TransformarHandler(partida, posAtacante));
+
+        transformar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                Posicion posicionPersonaje = seleccionarHandler.getPosicionPersonajeSeleccionado1();
+                Personaje personaje = partida.personajeEnPosicion(posicionPersonaje);
+
+                transformar.setOnMouseClicked(new TransformarHandler(partida, posicionPersonaje));
+                System.out.println(personaje);
+            }
+
+        });
 
 
 
