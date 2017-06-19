@@ -43,7 +43,7 @@ public class SeleccionarHandler {
     }
 
     public void seleccionarCasillero(Posicion posicion){
-        if ( posicionPersonajeSeleccionado1 == null ){ throw new NoSeSeleccionoNingunPersonajeException(); }
+        if ( colaPosiciones.size() == 0 ){ throw new NoSeSeleccionoNingunPersonajeException(); }
         else{
             Casillero casillero = partida.getTablero().getCasillero(posicion);
 
@@ -54,15 +54,14 @@ public class SeleccionarHandler {
     }
 
     public void seleccionarPersonaje(Posicion posicion){
-        if( posicionPersonajeSeleccionado1 == null ){
-            posicionPersonajeSeleccionado1 = posicion;
-        }else if( partida.personajeEnPosicion(posicionPersonajeSeleccionado1).getEquipo() == partida.personajeEnPosicion(posicion).getEquipo()){
-            throw new NoSePuedeSeleccionarDosPersonajesDelMismoEquipo();
-        }else{
-            posicionPersonajeSeleccionado2 = posicion;
-        }
         if (colaPosiciones.size() == 2) {
             throw new NoSePuedeSeleccionarMasDeDosPersonajesException();
+        }else if ( colaPosiciones.size() == 1 ){
+            Posicion p = colaPosiciones.getFirst();
+            colaPosiciones.addFirst(p);
+            if (partida.personajeEnPosicion(p).getEquipo() == partida.personajeEnPosicion(posicion).getEquipo()){
+                throw new NoSePuedeSeleccionarDosPersonajesDelMismoEquipo();
+            }
         }
         colaPosiciones.addLast(posicion);
     }
@@ -72,6 +71,8 @@ public class SeleccionarHandler {
     }
 
     public void limpiar() {
+        posicionPersonajeSeleccionado1 = null;
+        posicionPersonajeSeleccionado2 = null;
         colaPosiciones.clear();
         casillerosSeleccionados.clear();
     }
@@ -105,5 +106,12 @@ public class SeleccionarHandler {
     public void deseleccionarPersonajes() {
         posicionPersonajeSeleccionado1 = null;
         posicionPersonajeSeleccionado2 = null;
+    }
+    public void deseleccionarPersonaje(Posicion posicion){
+        LinkedList<Posicion> cola_aux = new LinkedList<Posicion>();
+        while (colaPosiciones.size() != 0){
+            Posicion p = colaPosiciones.removeFirst();
+            if(!p.esIgual(posicion)){cola_aux.addLast(p);}
+        }
     }
 }

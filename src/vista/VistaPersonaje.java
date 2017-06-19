@@ -32,19 +32,23 @@ public class VistaPersonaje extends BorderPane{
         imageView.setImage(imagen);
         imageView.setOnMouseClicked(e-> {
             try {
-                seleccionarHandler.seleccionarPersonaje(new Posicion(x, y));
                 if (seleccionado) {
+                    seleccionarHandler.deseleccionarPersonaje(new Posicion(x,y));
                     imageView.setEffect(null);
                     seleccionado = false;
                     return;
+                }else{
+                    seleccionarHandler.seleccionarPersonaje(new Posicion(x, y));
                 }
                 imageView.setEffect(new Glow(0.8));
                 seleccionado = true;
+
             } catch (NoSePuedeSeleccionarMasDeDosPersonajesException e1) {
                 e1.printStackTrace();
             } catch (NoSePuedeSeleccionarDosPersonajesDelMismoEquipo e2){
                 e2.printStackTrace();
             }
+
         });
         //contenedor.getChildren().add(imageView);
         this.getChildren().add(imageView);
