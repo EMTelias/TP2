@@ -44,4 +44,11 @@ public class Tablero {
 	}
 
 
+    public int getDimensionX() {
+        return dimensionX;
+    }
+
+	public int getDimensionY() {
+		return dimensionY;
+	}
 }
