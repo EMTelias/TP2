@@ -11,6 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import modelo.excepciones.personaje.NoPuedeMoverAEsaDistanciaException;
+import modelo.excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
 import modelo.excepciones.tablero.CaminoInvalidoException;
 import modelo.partida.Partida;
 import modelo.personaje.Personaje;
@@ -151,20 +153,32 @@ public class Main extends Application {
             public void handle(ActionEvent e) {
                 Posicion posicionPersonaje = seleccionarHandler.getPosicionPersonajeSeleccionado1();
                 Personaje personaje = partida.personajeEnPosicion(posicionPersonaje);
-                Camino camino;
 
-                //Veo que efectivamente en esa posicion esta el personaje
-                System.out.println(partida.personajeEnPosicion(posicionPersonaje));
 
                 try {
-                    camino = seleccionarHandler.getCaminoSeleccionado();
-                    new MoverHandler(partida, posicionPersonaje, camino);
+
+                    System.out.println(personaje.getCasillero());
+                    Camino camino = seleccionarHandler.getCaminoSeleccionado();
+                    partida.moverEnCamino(posicionPersonaje, camino);
+
+                    int x = personaje.getCasillero().getPosicion().getPosicionX();
+                    System.out.println(x);
+                    int y = personaje.getCasillero().getPosicion().getPosicionY();
+                    System.out.println(y);
+
+                    seleccionarHandler.deseleccionarTodosLosCasilleros();
+
+                    //Reajusto la imagen de la pieza que se movio:
+                    seleccionarHandler.getPiezaAMover().move(x-1,y-1);
+
+
+                } catch (NoPuedeMoverAEsaDistanciaException e1) {
+                    e1.printStackTrace();
+                } catch (NoPuedeMoverCaminoObstruidoException e1) {
+                    e1.printStackTrace();
                 } catch (CaminoInvalidoException e1) {
                     e1.printStackTrace();
                 }
-
-                //Aca deberia decir que esta vacio
-                System.out.println(partida.personajeEnPosicion(posicionPersonaje));
 
             }
         });

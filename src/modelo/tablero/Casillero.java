@@ -46,5 +46,9 @@ public class Casillero {
 		consumible = unConsumible;
 	}
 
+	public Posicion getPosicion(){
+		return posicion;
+	}
+
 
 }

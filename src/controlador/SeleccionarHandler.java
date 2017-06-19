@@ -5,6 +5,7 @@ import modelo.partida.Partida;
 import modelo.tablero.Camino;
 import modelo.tablero.Casillero;
 import modelo.tablero.Posicion;
+import vista.Piece;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ public class SeleccionarHandler {
     private Posicion posicionPersonajeSeleccionado2;
     private List<Casillero> casillerosSeleccionados;
     private Partida partida;
+    private Piece piezaAMover;
 
     public SeleccionarHandler(Partida unaPartida){
         posicionPersonajeSeleccionado1=null;
@@ -53,12 +55,12 @@ public class SeleccionarHandler {
         //if (posicion == posicionPersonajeSeleccionado2) { posicionPersonajeSeleccionado2 = null; System.out.println("Deseleccionando Personaje 2");return;}
 
         //Lleno personaje1 y luego personaje2, segun esten vacios.. si los 2 estan llenos reemplazo el primero
-        if(this.posicionPersonaje1NoSeleccionada()){ posicionPersonajeSeleccionado1 = posicion;System.out.println("Personaje Seleccionado");return;}
-        if(this.posicionPersonaje2NoSeleccionada()){ posicionPersonajeSeleccionado2 = posicion;System.out.println("Personaje Seleccionado");return;}
+        if(this.posicionPersonaje1NoSeleccionada()){ posicionPersonajeSeleccionado1 = posicion;System.out.println("Personaje Seleccionado: "+partida.personajeEnPosicion(posicion));return;}
+        if(this.posicionPersonaje2NoSeleccionada()){ posicionPersonajeSeleccionado2 = posicion;System.out.println("Personaje Seleccionado: "+partida.personajeEnPosicion(posicion));return;}
         if(this.yaTengo2PosicionesDePersonajesSeleccionadas()){
             posicionPersonajeSeleccionado1 = posicionPersonajeSeleccionado2;
             posicionPersonajeSeleccionado2 = posicion;
-            System.out.println("Personaje Seleccionado");
+            System.out.println("Personaje Seleccionado: "+partida.personajeEnPosicion(posicion));
             return;
         }
 
@@ -79,4 +81,15 @@ public class SeleccionarHandler {
     }
 
 
+    public void setPiezaAMover(Piece piece) {
+        piezaAMover = piece;
+    }
+
+    public Piece getPiezaAMover() {
+        return piezaAMover;
+    }
+
+    public void deseleccionarTodosLosCasilleros() {
+        casillerosSeleccionados.clear();
+    }
 }

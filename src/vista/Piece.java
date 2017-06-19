@@ -41,6 +41,7 @@ public class Piece extends StackPane {
 
         setOnMouseClicked(e -> {
             seleccionar.seleccionarPersonaje(new Posicion(xCoord+1,yCoord+1));
+            seleccionar.setPiezaAMover(this);
             return;
         });
 
