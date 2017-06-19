@@ -1,6 +1,7 @@
 package controlador;
 
 import modelo.excepciones.tablero.CaminoInvalidoException;
+import modelo.partida.Partida;
 import modelo.tablero.Camino;
 import modelo.tablero.Casillero;
 import modelo.tablero.Posicion;
@@ -12,11 +13,13 @@ public class SeleccionarHandler {
     private Posicion posicionPersonajeSeleccionado1;
     private Posicion posicionPersonajeSeleccionado2;
     private List<Casillero> casillerosSeleccionados;
+    private Partida partida;
 
-    public SeleccionarHandler(){
+    public SeleccionarHandler(Partida unaPartida){
         posicionPersonajeSeleccionado1=null;
         posicionPersonajeSeleccionado2=null;
         casillerosSeleccionados = new ArrayList<>();
+        partida = unaPartida;
     }
 
     private boolean yaTengo2PosicionesDePersonajesSeleccionadas(){
@@ -31,8 +34,16 @@ public class SeleccionarHandler {
         return(posicionPersonajeSeleccionado2 == null);
     }
 
+    public void seleccionarCasillero(Posicion posicion){
+        Casillero casillero = partida.getTablero().getCasillero(posicion);
+        //System.out.println(casillerosSeleccionados.size());
 
-    public void seleccionar(Posicion posicion){
+        //Si ya lo tenia seleccionado:
+        if(casillerosSeleccionados.contains(casillero)) { casillerosSeleccionados.remove(casillero); return;}
+        casillerosSeleccionados.add(casillero);
+    }
+
+    public void seleccionarPersonaje(Posicion posicion){
         //System.out.println("posicion clickeada: "+posicion.getPosicionX()+","+posicion.getPosicionY());
         //System.out.println("posicion 1: "+posicionPersonajeSeleccionado1);
         //System.out.println("posicion 2: "+posicionPersonajeSeleccionado2);

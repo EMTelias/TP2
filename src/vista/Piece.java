@@ -40,7 +40,7 @@ public class Piece extends StackPane {
         getChildren().add(imageView);
 
         setOnMouseClicked(e -> {
-            seleccionar.seleccionar(new Posicion(xCoord+1,yCoord+1));
+            seleccionar.seleccionarPersonaje(new Posicion(xCoord+1,yCoord+1));
             return;
         });
 

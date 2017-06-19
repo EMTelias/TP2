@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import modelo.excepciones.tablero.CaminoInvalidoException;
 import modelo.partida.Partida;
 import modelo.personaje.Personaje;
 import modelo.tablero.Camino;
@@ -39,7 +40,7 @@ public class Main extends Application {
 
 
     private Parent createContent() {
-        seleccionarHandler = new SeleccionarHandler();
+        seleccionarHandler = new SeleccionarHandler(partida);
         Pane root = new Pane();
         root.setPrefSize(WIDTH,HEIGHT);
         root.getChildren().addAll(tileGroup, pieceGroup);
@@ -139,24 +140,32 @@ public class Main extends Application {
             }
         });
 
-        //Estan en proceso...
         //=====BOTON DE MOVER=============
         Button mover = new Button("Mover");
         mover.setStyle("-fx-font: 20 arial; -fx-base: #ee2211;");
         mover.setPrefSize(tamXboton,tamYboton);
         mover.setMinHeight(tamYboton);
 
-        //mover.setOnMouseClicked(new MoverHandler(partida, posAtacante, camino));
-
         mover.setOnAction(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
+            @Override
+            public void handle(ActionEvent e) {
                 Posicion posicionPersonaje = seleccionarHandler.getPosicionPersonajeSeleccionado1();
                 Personaje personaje = partida.personajeEnPosicion(posicionPersonaje);
+                Camino camino;
 
-                /*new MoverHandler(partida, posAtacante, camino)
-                System.out.println(partida);
-                System.out.println(posAtacante);
-                System.out.println(camino);*/
+                //Veo que efectivamente en esa posicion esta el personaje
+                System.out.println(partida.personajeEnPosicion(posicionPersonaje));
+
+                try {
+                    camino = seleccionarHandler.getCaminoSeleccionado();
+                    new MoverHandler(partida, posicionPersonaje, camino);
+                } catch (CaminoInvalidoException e1) {
+                    e1.printStackTrace();
+                }
+
+                //Aca deberia decir que esta vacio
+                System.out.println(partida.personajeEnPosicion(posicionPersonaje));
+
             }
         });
 
@@ -169,7 +178,7 @@ public class Main extends Application {
         //transformar.setOnMouseClicked(new TransformarHandler(partida, posAtacante));
 
 
-        
+
         vbox.getChildren().addAll(pasar, ataqueB, ataqueE, mover, transformar);
         return vbox;
     }
