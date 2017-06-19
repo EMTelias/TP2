@@ -1,6 +1,7 @@
 package vista;
 
 
+import controlador.SeleccionarHandler;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -9,6 +10,8 @@ public class Tile extends Rectangle {
     protected static final int TILE_SIZE = 40;
     private Piece piece;
     private boolean pressed = false;
+    private SeleccionarHandler seleccionarHandler;
+
 
     public boolean hasPiece() {
         return piece != null;
@@ -22,7 +25,7 @@ public class Tile extends Rectangle {
         this.piece = piece;
     }
 
-    public Tile(int x, int y) {
+    public Tile(int x, int y,SeleccionarHandler seleccionarHandler) {
         this.x = x;
         this.y = y;
         setWidth(TILE_SIZE);

@@ -2,6 +2,8 @@ package vista;
 
 import controlador.*;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -30,22 +32,21 @@ public class Main extends Application {
 
     private String IMG_DIR = "img";
     private String IMG_EXT = ".png";
-    private Partida partida;
-    private Posicion posAtacante;
-    private Posicion posAtacado;
-    private Camino camino;
 
+    private Partida partida;
+    private SeleccionarHandler seleccionarHandler;
 
 
 
     private Parent createContent() {
+        seleccionarHandler = new SeleccionarHandler();
         Pane root = new Pane();
         root.setPrefSize(WIDTH,HEIGHT);
         root.getChildren().addAll(tileGroup, pieceGroup);
 
         for (int y = 0; y < Y_TILES; y++) {
             for (int x = 0; x < X_TILES; x++) {
-                Tile tile = new Tile(x, y);
+                Tile tile = new Tile(x, y, seleccionarHandler);
                 grid[x][y] = tile;
                 tileGroup.getChildren().add(tile);
             }
@@ -59,14 +60,15 @@ public class Main extends Application {
     }
 
     private void addFightersToGrid() {
+
         Path path = Paths.get(IMG_DIR);
         String imageDirectory = path.toAbsolutePath().toUri().toString();
-        Piece goku = new Piece(imageDirectory + "Goku" + IMG_EXT, 0,0);
-        Piece gohan = new Piece(imageDirectory + "Gohan" + IMG_EXT, 1,0);
-        Piece piccolo = new Piece(imageDirectory + "Piccolo" + IMG_EXT, 0,1);
-        Piece cell = new Piece(imageDirectory + "Cell" + IMG_EXT, 14,14);
-        Piece freezer = new Piece(imageDirectory + "Freezer" + IMG_EXT, 14,13);
-        Piece majinBoo = new Piece(imageDirectory + "MajinBoo" + IMG_EXT, 13,14);
+        Piece goku = new Piece(imageDirectory + "Goku" + IMG_EXT, 0,0,seleccionarHandler);
+        Piece gohan = new Piece(imageDirectory + "Gohan" + IMG_EXT, 1,0,seleccionarHandler);
+        Piece piccolo = new Piece(imageDirectory + "Piccolo" + IMG_EXT, 0,1,seleccionarHandler);
+        Piece cell = new Piece(imageDirectory + "Cell" + IMG_EXT, 14,14,seleccionarHandler);
+        Piece freezer = new Piece(imageDirectory + "Freezer" + IMG_EXT, 14,13,seleccionarHandler);
+        Piece majinBoo = new Piece(imageDirectory + "MajinBoo" + IMG_EXT, 13,14,seleccionarHandler);
 
         grid[0][0].setPiece(goku);
         grid[1][0].setPiece(gohan);
@@ -87,34 +89,87 @@ public class Main extends Application {
 
         Button pasar = new Button("Pasar turno");
         pasar.setStyle("-fx-font: 20 arial; -fx-base: #ee2211;");
-        pasar.setPrefSize(tamXboton,tamYboton);
+        pasar.setPrefSize(tamXboton, tamYboton);
         pasar.setMinHeight(tamYboton);
         pasar.setOnMouseClicked(new PasarHandler(partida));
 
+        pasar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                System.out.println("Comienza el turno de los " + partida.turnoActual().getNombre());
+            }
+        });
+
+        //=====BOTON DE ATAQUE=============
         Button ataqueB = new Button("Ataque basico");
         ataqueB.setStyle("-fx-font: 20 arial; -fx-base: #ee2211;");
-        ataqueB.setPrefSize(tamXboton,tamYboton);
+        ataqueB.setPrefSize(tamXboton, tamYboton);
         ataqueB.setMinHeight(tamYboton);
-        ataqueB.setOnMouseClicked(new AtaqueBasicoHandler(partida, posAtacante, posAtacado));
+        ataqueB.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                Posicion posicionAtacante = seleccionarHandler.getPosicionPersonajeSeleccionado1();
+                Posicion posicionDefensor = seleccionarHandler.getPosicionPersonajeSeleccionado2();
+                Personaje atacante = partida.personajeEnPosicion(posicionAtacante);
+                Personaje defensor = partida.personajeEnPosicion(posicionDefensor);
 
+                ataqueB.setOnMouseClicked(new AtaqueBasicoHandler(partida, posicionAtacante, posicionDefensor));
+                System.out.println(atacante.getClass() + " ataca a: " + defensor.getClass());
+                System.out.println("Vida del defensor: " + defensor.getVida());
+            }
+        });
+
+        //=====BOTON DE ATAQUE ESPECIAL=============
         Button ataqueE = new Button("Ataque especial");
         ataqueE.setStyle("-fx-font: 20 arial; -fx-base: #ee2211;");
-        ataqueE.setPrefSize(tamXboton,tamYboton);
+        ataqueE.setPrefSize(tamXboton, tamYboton);
         ataqueE.setMinHeight(tamYboton);
-        ataqueE.setOnMouseClicked(new AtaqueEspecialHandler(partida, posAtacante, posAtacado));
+        //ataqueE.setOnMouseClicked(new AtaqueEspecialHandler(partida, posAtacante, posAtacado));
+        ataqueE.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                Posicion posicionAtacante = seleccionarHandler.getPosicionPersonajeSeleccionado1();
+                Posicion posicionDefensor = seleccionarHandler.getPosicionPersonajeSeleccionado2();
+                Personaje atacante = partida.personajeEnPosicion(posicionAtacante);
+                Personaje defensor = partida.personajeEnPosicion(posicionDefensor);
 
+                new AtaqueEspecialHandler(partida, posicionAtacante, posicionDefensor);
+                System.out.println(atacante.getClass() + " ataque especial a: " + defensor.getClass());
+                System.out.println("Vida del defensor: " + defensor.getVida());
+            }
+        });
+
+        //Estan en proceso...
+        //=====BOTON DE MOVER=============
         Button mover = new Button("Mover");
         mover.setStyle("-fx-font: 20 arial; -fx-base: #ee2211;");
         mover.setPrefSize(tamXboton,tamYboton);
         mover.setMinHeight(tamYboton);
-        mover.setOnMouseClicked(new MoverHandler(partida, posAtacante, camino));
 
+        //mover.setOnMouseClicked(new MoverHandler(partida, posAtacante, camino));
+
+        mover.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                Posicion posicionPersonaje = seleccionarHandler.getPosicionPersonajeSeleccionado1();
+                Personaje personaje = partida.personajeEnPosicion(posicionPersonaje);
+
+                /*new MoverHandler(partida, posAtacante, camino)
+                System.out.println(partida);
+                System.out.println(posAtacante);
+                System.out.println(camino);*/
+            }
+        });
+
+
+        //=====BOTON DE TRANSFORMAR=============
         Button transformar = new Button("Transformar");
         transformar.setStyle("-fx-font: 20 arial; -fx-base: #ee2211;");
         transformar.setPrefSize(tamXboton,tamYboton);
         transformar.setMinHeight(tamYboton);
-        transformar.setOnMouseClicked(new TransformarHandler(partida, posAtacante));
+        //transformar.setOnMouseClicked(new TransformarHandler(partida, posAtacante));
 
+
+        
         vbox.getChildren().addAll(pasar, ataqueB, ataqueE, mover, transformar);
         return vbox;
     }
