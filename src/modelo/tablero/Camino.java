@@ -42,15 +42,5 @@ public class Camino {
 	public void siDistanciaEsMayor(int velocidad, Class<NoPuedeMoverAEsaDistanciaException> excepcion) throws InstantiationException, IllegalAccessException, NoPuedeMoverAEsaDistanciaException {
 		if (casillerosDelCamino.size() > velocidad ) throw excepcion.newInstance();
 	}
-
-	public void borrarTilesConsumibles() {
-		for (Casillero unCasillero: casillerosDelCamino){
-			if( unCasillero.tieneConsumible()){
-		}
-	}
+	
 }
-
-	public List<Casillero> obtenerCasilleros() {
-		return casillerosDelCamino;
-	}
-	}
