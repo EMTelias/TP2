@@ -2,6 +2,7 @@ package controlador.eventos;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Label;
 import modelo.partida.Partida;
 import vista.VistaTablero;
 
@@ -9,10 +10,12 @@ public class BotonPasarHandler implements EventHandler<ActionEvent> {
 
     private final Partida partida;
     private final VistaTablero vistaTablero;
+    private Label consola;
 
-    public BotonPasarHandler(Partida partida, VistaTablero vistaTablero) {
+    public BotonPasarHandler(Partida partida, VistaTablero vistaTablero, Label unaConsola) {
         this.partida = partida;
         this.vistaTablero = vistaTablero;
+        this.consola = unaConsola;
     }
 
     @Override
@@ -28,7 +31,8 @@ public class BotonPasarHandler implements EventHandler<ActionEvent> {
         } catch (CaminoInvalidoException e) {
             e.printStackTrace();
         }*/
-        partida.pasar();
+    	consola.setText("");
+    	partida.pasar();
         vistaTablero.actualizarVista();
     }
 }

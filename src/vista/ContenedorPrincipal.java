@@ -16,11 +16,12 @@ import controlador.eventos.*;
 
 public class ContenedorPrincipal extends BorderPane {
 
-    BarraDeMenu menuBar;
-    VistaTablero vistaTablero;
-    GridPane gridCentral;
-    GridPane contenedorCentral;
-
+    private BarraDeMenu menuBar;
+    private VistaTablero vistaTablero;
+    private GridPane gridCentral;
+    private GridPane contenedorCentral;
+    private Label consola;
+    
     public ContenedorPrincipal(Stage stage, Partida partida, SeleccionarHandler seleccionarHandler) {
         this.setMenu(stage);
         this.setCentro(partida, seleccionarHandler);
@@ -33,31 +34,31 @@ public class ContenedorPrincipal extends BorderPane {
         Button botonMover = new Button();
         botonMover.setText("Mover");
         botonMover.setStyle("-fx-font: 16 arial; -fx-base: #ee2211;");
-        BotonMoverHandler botonMoverHandler = new BotonMoverHandler(vistaTablero, partida, seleccionarHandler);
+        BotonMoverHandler botonMoverHandler = new BotonMoverHandler(vistaTablero, partida, seleccionarHandler,consola);
         botonMover.setOnAction(botonMoverHandler);
 
         Button botonAtaqueBasico = new Button();
         botonAtaqueBasico.setText("Ataque basico");
         botonAtaqueBasico.setStyle("-fx-font: 16 arial; -fx-base: #ee2211;");
-        BotonAtaqueBasicoHandler botonAtaqueBasicoHandler = new BotonAtaqueBasicoHandler(vistaTablero, partida, seleccionarHandler);
+        BotonAtaqueBasicoHandler botonAtaqueBasicoHandler = new BotonAtaqueBasicoHandler(vistaTablero, partida, seleccionarHandler,consola);
         botonAtaqueBasico.setOnAction(botonAtaqueBasicoHandler);
 
         Button botonAtaqueEspecial = new Button();
         botonAtaqueEspecial.setText("Ataque especial");
         botonAtaqueEspecial.setStyle("-fx-font: 16 arial; -fx-base: #ee2211;");
-        BotonAtaqueEspecialHandler botonAtaqueEspecialHandler = new BotonAtaqueEspecialHandler(vistaTablero, partida, seleccionarHandler);
+        BotonAtaqueEspecialHandler botonAtaqueEspecialHandler = new BotonAtaqueEspecialHandler(vistaTablero, partida, seleccionarHandler,consola);
         botonAtaqueEspecial.setOnAction(botonAtaqueEspecialHandler);
 
         Button botonTransformar = new Button();
         botonTransformar.setText("Transformar");
         botonTransformar.setStyle("-fx-font: 16 arial; -fx-base: #ee2211;");
-        BotonTransformarHandler botonTransformarHandler = new BotonTransformarHandler(vistaTablero, partida, seleccionarHandler);
+        BotonTransformarHandler botonTransformarHandler = new BotonTransformarHandler(vistaTablero, partida, seleccionarHandler,consola);
         botonTransformar.setOnAction(botonTransformarHandler);
 
         Button botonPasar = new Button();
         botonPasar.setText("Pasar");
         botonPasar.setStyle("-fx-font: 16 arial; -fx-base: #ee2211;");
-        BotonPasarHandler botonPasarHandler = new BotonPasarHandler(partida, vistaTablero);
+        BotonPasarHandler botonPasarHandler = new BotonPasarHandler(partida, vistaTablero,consola);
         botonPasar.setOnAction(botonPasarHandler);
 
         VBox contenedorVertical = new VBox(botonMover, botonAtaqueBasico, botonAtaqueEspecial, botonTransformar, botonPasar);
@@ -91,14 +92,12 @@ public class ContenedorPrincipal extends BorderPane {
     }
 
     private void setConsola() {
+        consola = new Label();
+        consola.setText("");
+        consola.setFont(Font.font("courier new", FontWeight.SEMI_BOLD, 14));
+        consola.setTextFill(Color.WHITE);
 
-        // TODO cambiar por el modelo de Consola...
-        Label etiqueta = new Label();
-        etiqueta.setText("consola...");
-        etiqueta.setFont(Font.font("courier new", FontWeight.SEMI_BOLD, 14));
-        etiqueta.setTextFill(Color.WHITE);
-
-        VBox contenedorConsola = new VBox(etiqueta);
+        VBox contenedorConsola = new VBox(consola);
         contenedorConsola.setSpacing(10);
         contenedorConsola.setPadding(new Insets(15));
         contenedorConsola.setStyle("-fx-background-color: black;");

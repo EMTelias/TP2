@@ -3,6 +3,7 @@ package controlador.eventos;
 import controlador.SeleccionarHandler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Label;
 import modelo.excepciones.transformacion.KiInsuficienteException;
 import modelo.excepciones.transformacion.NoHayProximaTransformacionException;
 import modelo.excepciones.transformacion.NoPuedeTransformarException;
@@ -15,11 +16,13 @@ public class BotonTransformarHandler implements EventHandler<ActionEvent> {
     private final Partida partida;
     private final VistaTablero vistaTablero;
     private final SeleccionarHandler seleccionarHandler;
+    private Label consola;
 
-    public BotonTransformarHandler(VistaTablero vistaTablero, Partida partida, SeleccionarHandler seleccionarHandler) {
+    public BotonTransformarHandler(VistaTablero vistaTablero, Partida partida, SeleccionarHandler seleccionarHandler, Label unaConsola) {
         this.partida = partida;
         this.vistaTablero = vistaTablero;
         this.seleccionarHandler = seleccionarHandler;
+        this.consola = unaConsola;
     }
 
     @Override
