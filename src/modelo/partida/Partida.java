@@ -75,6 +75,7 @@ public class Partida {
         Equipo equipoActivo = turno.getEquipoActivo();
         turno.pasar();
         equipoActivo.pasarTurno();
+        generadorDeConsumibles.generarConsumibleEn(tablero, DIM_ALTO, DIM_ANCHO);
     }
 
     public Equipo turnoActual() {

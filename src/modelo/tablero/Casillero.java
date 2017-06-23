@@ -51,4 +51,7 @@ public class Casillero {
 	}
 
 
+    public Consumible getConsumible() {
+        return consumible;
+    }
 }

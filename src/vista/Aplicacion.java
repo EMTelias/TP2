@@ -4,6 +4,8 @@ import controlador.SeleccionarHandler;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import modelo.Consumibles.GeneradorDeConsumiblesRandom;
+import modelo.Consumibles.GeneradorDeConsumiblesSinActividad;
 import modelo.excepciones.tablero.CasilleroOcupadoException;
 import modelo.excepciones.tablero.DimensionDeTableroInvalidoException;
 import modelo.partida.Partida;
@@ -43,7 +45,9 @@ public class Aplicacion extends Application {
     }
 
     private Partida crearModelo() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
+        //GeneradorDeConsumiblesRandom generador = new GeneradorDeConsumiblesRandom();
         Partida partida = new Partida();
+        //partida.setGeneradorDeConsumibles(generador);
         return partida;
     }
 }

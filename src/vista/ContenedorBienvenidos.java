@@ -31,18 +31,18 @@ public class ContenedorBienvenidos extends VBox {
         this.setAlignment(Pos.CENTER);
         this.setSpacing(20);
         this.setPadding(new Insets(25));
-        Image imagen = new Image("file:src/vista/imagenes/textura.png");
-        BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        Image imagen = new Image("file:src/vista/imagenes/fondo.jpg");
+        BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         this.setBackground(new Background(imagenDeFondo));
 
         Button botonEntrar = new Button();
         botonEntrar.setText("Entrar");
 
         Label etiqueta = new Label();
-        etiqueta.setFont(Font.font("Tahoma", FontWeight.BOLD, 18));
+        etiqueta.setFont(Font.font("Tahoma", FontWeight.BOLD, 48));
 
-        etiqueta.setText("Bienvenidos a la aplicación MVC con JAVA FX de algoritmos y programación III. Haga click en entrar");
-        etiqueta.setTextFill(Color.web("#66A7C5"));
+        etiqueta.setText("Bienvenidos a Dragon AlgoBall");
+        etiqueta.setTextFill(Color.web("#000000"));
 
         BotonEntrarEventHandler botonEntrarHandler = new BotonEntrarEventHandler(stage, proximaEscena);
         botonEntrar.setOnAction(botonEntrarHandler);

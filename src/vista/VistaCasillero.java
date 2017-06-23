@@ -14,6 +14,7 @@ public class VistaCasillero extends Pane {
     private final Casillero casillero;
     private final SeleccionarHandler seleccionarHandler;
     private VistaPersonaje personaje;
+    private VistaConsumible consumible;
     protected static final int TAM_CASILLERO = 40;
     private boolean seleccionado = false;
     private int x;
@@ -54,6 +55,16 @@ public class VistaCasillero extends Pane {
         }
         personaje = new VistaPersonaje(casillero.getPersonaje(), x, y, seleccionarHandler);
         this.getChildren().add(personaje);
+    }
+
+    private void agregarConsumible(Casillero casillero) {
+        this.getChildren().remove(consumible);
+        if (casillero.getConsumible() == null) {
+            consumible = null;
+            return;
+        }
+        consumible = new VistaConsumible(casillero.getConsumible(), x, y, seleccionarHandler);
+        this.getChildren().add(consumible);
     }
 
     private void reestablecerCasillero() {

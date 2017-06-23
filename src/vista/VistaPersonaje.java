@@ -45,12 +45,11 @@ public class VistaPersonaje extends BorderPane{
 
             } catch (NoSePuedeSeleccionarMasDeDosPersonajesException e1) {
                 e1.printStackTrace();
-            } catch (NoSePuedeSeleccionarDosPersonajesDelMismoEquipo e2){
+            }/* catch (NoSePuedeSeleccionarDosPersonajesDelMismoEquipo e2){
                 e2.printStackTrace();
-            }
+            }*/
 
         });
-        //contenedor.getChildren().add(imageView);
         this.getChildren().add(imageView);
     }
 }
