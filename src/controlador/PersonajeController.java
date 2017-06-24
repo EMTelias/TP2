@@ -2,6 +2,7 @@ package controlador;
 
 
 import modelo.excepciones.controlador.NoSePuedeSeleccionarMasDeDosPersonajesException;
+import modelo.excepciones.personaje.NoEsSuTurnoException;
 import modelo.personaje.Personaje;
 
 import java.util.LinkedList;
@@ -19,6 +20,11 @@ public class PersonajeController {
             colaPersonajes.remove(unPersonaje);
             return;
         }
+
+        if(unPersonaje.getEquipo().esSuTurno()==false){
+            throw new NoEsSuTurnoException();
+        }
+
         if (colaPersonajes.size() == 2) {
             throw new NoSePuedeSeleccionarMasDeDosPersonajesException();
         }

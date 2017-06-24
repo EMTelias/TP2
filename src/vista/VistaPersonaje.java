@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import modelo.excepciones.controlador.NoSePuedeSeleccionarMasDeDosPersonajesException;
+import modelo.excepciones.personaje.NoEsSuTurnoException;
 import modelo.excepciones.personaje.NoSePuedeSeleccionarDosPersonajesDelMismoEquipo;
 import modelo.personaje.Personaje;
 import modelo.tablero.Posicion;

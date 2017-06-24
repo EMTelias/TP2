@@ -32,7 +32,7 @@ public class Equipo {
         this.suTurno = esSuTurno;
     }
 
-    public boolean getTurno() {
+    public boolean esSuTurno() {
         return this.suTurno;
     }
 
@@ -55,7 +55,6 @@ public class Equipo {
             unPersonaje.pasarTurno();
         }
         this.revisarTransformadosEnChocolate();
-
 		
 	}
 }
