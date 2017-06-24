@@ -62,7 +62,7 @@ public class ContenedorPrincipal extends BorderPane {
         BotonPasarHandler botonPasarHandler = new BotonPasarHandler(partida, vistaTablero,consola);
         botonPasar.setOnAction(botonPasarHandler);
 
-        VBox contenedorVertical = new VBox(botonMover, botonAtaqueBasico, botonAtaqueEspecial, botonTransformar, botonPasar);
+        VBox contenedorVertical = new VBox(botonMover, botonAtaqueBasico, botonAtaqueEspecial, botonTransformar, botonPasar, new VistaInfo());
         contenedorVertical.setSpacing(10);
         contenedorVertical.setPadding(new Insets(15));
 
