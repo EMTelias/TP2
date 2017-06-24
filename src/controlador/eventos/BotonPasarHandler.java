@@ -12,7 +12,7 @@ public class BotonPasarHandler implements EventHandler<ActionEvent> {
     private final VistaTablero vistaTablero;
     private Label consola;
 
-    public BotonPasarHandler(Partida partida, VistaTablero vistaTablero, Label unaConsola) {
+    public BotonPasarHandler(Partida partida, VistaTablero vistaTablero,  Label unaConsola) {
         this.partida = partida;
         this.vistaTablero = vistaTablero;
         this.consola = unaConsola;

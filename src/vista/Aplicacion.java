@@ -49,9 +49,9 @@ public class Aplicacion extends Application {
     }
 
     private Partida crearModelo() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
-        //GeneradorDeConsumiblesRandom generador = new GeneradorDeConsumiblesRandom();
+        GeneradorDeConsumiblesRandom generador = new GeneradorDeConsumiblesRandom();
         Partida partida = new Partida();
-        //partida.setGeneradorDeConsumibles(generador);
+        partida.setGeneradorDeConsumibles(generador);
         return partida;
     }
 }

@@ -54,6 +54,7 @@ public class VistaCasillero extends Pane {
         });
         this.getChildren().add(border);
         this.agregarPersonaje(casillero);
+        this.agregarConsumible(casillero);
     }
 
     private void agregarPersonaje(Casillero casillero) {
