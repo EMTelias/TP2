@@ -105,7 +105,7 @@ public class ConsumibleTest {
 	}
 	
 	@Test
-	public void testGokuConsumeEsferaDelDragonYHace25DeDanioPor2TurnosEnElTerceroProduce20() throws CasilleroOcupadoException, NoPuedeAtacarAEsaDistanciaException, NoPuedeAtacarMismoEquipoException{
+	public void testGokuConsumeEsferaDelDragonPasaDeTurnoYHace25DeDanioPor2TurnosEnElTerceroProduce20() throws CasilleroOcupadoException, NoPuedeAtacarAEsaDistanciaException, NoPuedeAtacarMismoEquipoException{
 		// vida de freezer = 400
 		// dos ataques con esfera de goku = 50 danio (25 cada uno)
 		//tercer ataque sin esfera = 20 danio
@@ -129,7 +129,7 @@ public class ConsumibleTest {
 	}
 	
 	@Test (expected = NoPuedeMoverAEsaDistanciaException.class)
-	public void testGokuConsumeNubeVoladoraPor2TurnosPuedeMover4PosicionesLaTerceraVezQueQuiereMover4PosicionesDevuelveNoPuedeMoverAEsaDistanciaException() throws CaminoInvalidoException, CasilleroOcupadoException, NoPuedeMoverCaminoObstruidoException, NoPuedeMoverAEsaDistanciaException{
+	public void testGokuConsumeNubeVoladoraPasaDeTurnoYPorLosProximos2TurnosPuedeMover4PosicionesLaTerceraVezQueQuiereMover4PosicionesDevuelveNoPuedeMoverAEsaDistanciaException() throws CaminoInvalidoException, CasilleroOcupadoException, NoPuedeMoverCaminoObstruidoException, NoPuedeMoverAEsaDistanciaException{
 		Casillero casilleroGoku = new Casillero(new Posicion(1,1));
 		
 		Casillero casillero12 = new Casillero(new Posicion(1,2));
@@ -168,6 +168,7 @@ public class ConsumibleTest {
 		Personaje goku = new Goku(casilleroGoku);
 		Consumible nubeVoladora = new NubeVoladora();
 		goku.consumir(nubeVoladora);
+		goku.pasarTurno();
 		
 		goku.mover(camino1);
 		goku.pasarTurno();

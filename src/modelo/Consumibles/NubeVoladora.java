@@ -6,7 +6,7 @@ import modelo.tablero.Casillero;
 public class NubeVoladora extends Efecto {
 
 	private int CANTIDAD_TURNOS_ACTIVO = 2;
-	private int cantidadDeTurnosActual = 1;
+	private int cantidadDeTurnosActual = 0;
 	private Casillero casillero;
 	
 	public NubeVoladora(Casillero unCasillero) throws CasilleroOcupadoException {
