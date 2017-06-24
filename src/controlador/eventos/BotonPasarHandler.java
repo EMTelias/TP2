@@ -31,8 +31,8 @@ public class BotonPasarHandler implements EventHandler<ActionEvent> {
         } catch (CaminoInvalidoException e) {
             e.printStackTrace();
         }*/
-    	consola.setText("");
     	partida.pasar();
+        consola.setText("Comienza el turno de los "+ partida.turnoActual().getNombre());
         vistaTablero.actualizarVista();
     }
 }

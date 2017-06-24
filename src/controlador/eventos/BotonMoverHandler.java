@@ -10,6 +10,8 @@ import modelo.excepciones.acciones.YaMovisteEsteTurnoException;
 import modelo.excepciones.personaje.NoPuedeMoverAEsaDistanciaException;
 import modelo.excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
 import modelo.excepciones.tablero.CaminoInvalidoException;
+import modelo.excepciones.tablero.CasilleroNoContiguoException;
+import modelo.excepciones.tablero.HuecoEntreCaminoYPersonajeException;
 import modelo.partida.Partida;
 import modelo.personaje.Personaje;
 import modelo.tablero.Camino;
@@ -53,6 +55,7 @@ public class BotonMoverHandler implements EventHandler<ActionEvent> {
         try {
             Camino camino = caminoController.obtenerCamino();
             partida.mover(unPersonaje, camino);
+
         } catch (CaminoInvalidoException e) {
             consola.setText("Seleccione un camino valido!");
         } catch (NoPuedeMoverAEsaDistanciaException e) {
@@ -61,6 +64,8 @@ public class BotonMoverHandler implements EventHandler<ActionEvent> {
             consola.setText("Camino obstruido no se puede recorrer");
         } catch (YaMovisteEsteTurnoException e) {
             consola.setText(unPersonaje.getEquipo().getNombre() + " ya movio este turno!");
+        } catch (HuecoEntreCaminoYPersonajeException e){
+            consola.setText("El personaje y el camino deben ser contiguos!");
         }
         personajeController.limpiar();
         caminoController.limpiar();
