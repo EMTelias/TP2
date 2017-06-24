@@ -1,5 +1,6 @@
 package modelo.partida;
 
+import modelo.excepciones.tablero.*;
 import modelo.personaje.equipos.Equipo;
 import modelo.Consumibles.GeneradorDeConsumibles;
 import modelo.Consumibles.GeneradorDeConsumiblesSinActividad;
@@ -11,9 +12,6 @@ import modelo.excepciones.personaje.CasillaSinPersonajeException;
 import modelo.excepciones.personaje.NoPuedeAtacarAEsaDistanciaException;
 import modelo.excepciones.personaje.NoPuedeMoverAEsaDistanciaException;
 import modelo.excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
-import modelo.excepciones.tablero.CaminoInvalidoException;
-import modelo.excepciones.tablero.CasilleroOcupadoException;
-import modelo.excepciones.tablero.DimensionDeTableroInvalidoException;
 import modelo.excepciones.transformacion.KiInsuficienteException;
 import modelo.excepciones.transformacion.NoHayProximaTransformacionException;
 import modelo.excepciones.transformacion.NoPuedeTransformarException;
@@ -162,6 +160,7 @@ public class Partida {
 
     public void mover(Personaje personaje, Camino camino) throws NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, CaminoInvalidoException {
         if(turno.yaMovio()){ throw new YaMovisteEsteTurnoException(); }
+        if(camino.getPrimerCasillero().distanciaHasta(personaje.getCasillero())>1){ throw new HuecoEntreCaminoYPersonajeException(); }
 
         personaje.mover(camino);
 

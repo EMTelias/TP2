@@ -42,5 +42,8 @@ public class Camino {
 	public void siDistanciaEsMayor(int velocidad, Class<NoPuedeMoverAEsaDistanciaException> excepcion) throws InstantiationException, IllegalAccessException, NoPuedeMoverAEsaDistanciaException {
 		if (casillerosDelCamino.size() > velocidad ) throw excepcion.newInstance();
 	}
-	
+
+	public Casillero getPrimerCasillero() {
+		return casillerosDelCamino.get(0);
+	}
 }
