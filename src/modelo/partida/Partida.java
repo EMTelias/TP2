@@ -118,11 +118,31 @@ public class Partida {
         this.revisarFinDelTurno();
     }
 
+    public void ataqueBasico(Personaje atacante, Personaje atacado) throws NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException {
+        if(turno.yaAtaco()){ throw new YaAtacasteEsteTurnoException(); }
+
+        atacante.atacarA(atacado);
+
+        turno.atacar();
+        this.revisarVictoria();
+        this.revisarFinDelTurno();
+    }
+
     public void ataqueEspecialEnPosicion(Posicion posAtacante, Posicion posAtacado) throws NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, KiInsuficienteException {
         if(turno.yaAtaco()){ throw new YaAtacasteEsteTurnoException(); }
 
         Personaje atacante = this.personajeEnPosicion(posAtacante);
         Personaje atacado = this.personajeEnPosicion(posAtacado);
+        atacante.ataqueEspecialA(atacado);
+
+        turno.atacar();
+        this.revisarVictoria();
+        this.revisarFinDelTurno();
+    }
+
+    public void ataqueEspecial(Personaje atacante, Personaje atacado) throws NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, KiInsuficienteException {
+        if(turno.yaAtaco()){ throw new YaAtacasteEsteTurnoException(); }
+
         atacante.ataqueEspecialA(atacado);
 
         turno.atacar();
@@ -140,8 +160,21 @@ public class Partida {
         revisarFinDelTurno();
     }
 
+    public void mover(Personaje personaje, Camino camino) throws NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, CaminoInvalidoException {
+        if(turno.yaMovio()){ throw new YaMovisteEsteTurnoException(); }
+
+        personaje.mover(camino);
+
+        turno.mover();
+        revisarFinDelTurno();
+    }
+
     public void transformarPersonaje(Posicion posPersonaje) throws NoPuedeTransformarException, KiInsuficienteException, NoHayProximaTransformacionException {
         Personaje personaje = this.personajeEnPosicion(posPersonaje);
+        personaje.transformar();
+    }
+
+    public void transformar(Personaje personaje) throws NoPuedeTransformarException, KiInsuficienteException, NoHayProximaTransformacionException {
         personaje.transformar();
     }
 

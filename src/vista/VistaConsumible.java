@@ -1,9 +1,11 @@
 package vista;
 
+import controlador.CaminoController;
 import controlador.SeleccionarHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import modelo.Consumibles.Consumible;
 import modelo.excepciones.controlador.NoSePuedeSeleccionarMasDeDosPersonajesException;
 import modelo.tablero.Posicion;
@@ -12,16 +14,17 @@ import modelo.tablero.Posicion;
 public class VistaConsumible extends BorderPane {
 
     private final Consumible consumible;
-    private final int x;
-    private final int y;
-    private String imgDir = "vista/imagenes/";
-    private String imgExt = ".png";
+    private final VistaCasillero vistaCasillero;
+    private final CaminoController caminoController;
 
-    public VistaConsumible(Consumible unConsumible, int x, int y, SeleccionarHandler seleccionarHandler) {
+
+    public VistaConsumible(Consumible unConsumible, VistaCasillero vistaCasillero, CaminoController caminoController) {
         this.consumible = unConsumible;
-        this.x = x;
-        this.y = y;
-        System.out.println("hola");
+        this.vistaCasillero = vistaCasillero;
+        this.caminoController = caminoController;
+        //System.out.println("hola");
+        String imgDir = "vista/imagenes/";
+        String imgExt = ".png";
         Image imagen = new Image(imgDir + unConsumible.getClass().getSimpleName() + imgExt);
         ImageView imageView = new ImageView();
         imageView.toFront();
@@ -30,12 +33,19 @@ public class VistaConsumible extends BorderPane {
         imageView.setSmooth(true);
         imageView.setImage(imagen);
         imageView.setOnMouseClicked(e-> {
-            try {
+            caminoController.seleccionarCasillero(vistaCasillero.getCasillero());
+            if (vistaCasillero.seleccionado) {
+                vistaCasillero.reestablecerCasillero();
+                return;
+            }
+            vistaCasillero.border.setFill(Color.DARKSEAGREEN);
+            vistaCasillero.seleccionado = true;
+            /*try {
                 seleccionarHandler.seleccionarCasillero(new Posicion(x, y));
 
             } catch (NoSePuedeSeleccionarMasDeDosPersonajesException e1) {
                 e1.printStackTrace();
-            }
+            }*/
 
         });
         this.getChildren().add(imageView);

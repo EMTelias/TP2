@@ -1,13 +1,17 @@
 package controlador.eventos;
 
+import controlador.CaminoController;
+import controlador.PersonajeController;
 import controlador.SeleccionarHandler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
+import modelo.excepciones.acciones.YaMovisteEsteTurnoException;
 import modelo.excepciones.personaje.NoPuedeMoverAEsaDistanciaException;
 import modelo.excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
 import modelo.excepciones.tablero.CaminoInvalidoException;
 import modelo.partida.Partida;
+import modelo.personaje.Personaje;
 import modelo.tablero.Camino;
 import modelo.tablero.Posicion;
 import vista.VistaTablero;
@@ -16,19 +20,23 @@ public class BotonMoverHandler implements EventHandler<ActionEvent> {
 
     private final VistaTablero vistaTablero;
     private final Partida partida;
-    private final SeleccionarHandler seleccionarHandler;
+    private final CaminoController caminoController;
+    private final PersonajeController personajeController;
+    //private final SeleccionarHandler seleccionarHandler;
     private Label consola;
     
-    public BotonMoverHandler(VistaTablero vistaTablero, Partida partida, SeleccionarHandler seleccionarHandler, Label unaConsola) {
+    public BotonMoverHandler(VistaTablero vistaTablero, Partida partida, CaminoController caminoController, PersonajeController personajeController, Label unaConsola) {
         this.vistaTablero = vistaTablero;
         this.partida = partida;
-        this.seleccionarHandler = seleccionarHandler;
+        //this.seleccionarHandler = seleccionarHandler;
+        this.caminoController = caminoController;
+        this.personajeController = personajeController;
         this.consola = unaConsola;
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        consola.setText("");
+        /*consola.setText("");
     	Posicion posPersonaje = seleccionarHandler.getPosicionPersonajeSeleccionado();
         try {
             Camino camino = seleccionarHandler.getCaminoSeleccionado();
@@ -40,7 +48,22 @@ public class BotonMoverHandler implements EventHandler<ActionEvent> {
         } catch (NoPuedeMoverCaminoObstruidoException e) {
             consola.setText("No se puede mover, el camino se encuentra obstruido");
         }
-        seleccionarHandler.limpiar();
+        seleccionarHandler.limpiar();*/
+        Personaje unPersonaje = personajeController.obtenerPersonaje();
+        try {
+            Camino camino = caminoController.obtenerCamino();
+            partida.mover(unPersonaje, camino);
+        } catch (CaminoInvalidoException e) {
+            consola.setText("Seleccione un camino valido!");
+        } catch (NoPuedeMoverAEsaDistanciaException e) {
+            consola.setText( unPersonaje.getClass().getSimpleName() + " no puede mover esa distancia.");
+        } catch (NoPuedeMoverCaminoObstruidoException e) {
+            consola.setText("Camino obstruido no se puede recorrer");
+        } catch (YaMovisteEsteTurnoException e) {
+            consola.setText(unPersonaje.getEquipo().getNombre() + " ya movio este turno!");
+        }
+        personajeController.limpiar();
+        caminoController.limpiar();
         vistaTablero.actualizarVista();
     }
 }

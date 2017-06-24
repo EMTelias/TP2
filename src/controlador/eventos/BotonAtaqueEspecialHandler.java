@@ -1,5 +1,7 @@
 package controlador.eventos;
 
+import controlador.CaminoController;
+import controlador.PersonajeController;
 import controlador.SeleccionarHandler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -8,6 +10,7 @@ import modelo.excepciones.acciones.NoPuedeAtacarMismoEquipoException;
 import modelo.excepciones.personaje.NoPuedeAtacarAEsaDistanciaException;
 import modelo.excepciones.transformacion.KiInsuficienteException;
 import modelo.partida.Partida;
+import modelo.personaje.Personaje;
 import modelo.tablero.Posicion;
 import vista.VistaTablero;
 
@@ -15,19 +18,23 @@ public class BotonAtaqueEspecialHandler implements EventHandler<ActionEvent> {
 
     private final Partida partida;
     private final VistaTablero vistaTablero;
-    private final SeleccionarHandler seleccionarHandler;
+    //private final SeleccionarHandler seleccionarHandler;
+    private final PersonajeController personajeController;
+    private final CaminoController caminoController;
     private Label consola;
     
-    public BotonAtaqueEspecialHandler(VistaTablero vistaTablero, Partida partida, SeleccionarHandler seleccionarHandler, Label unaConsola) {
+    public BotonAtaqueEspecialHandler(VistaTablero vistaTablero, Partida partida, CaminoController caminoController, PersonajeController personajeController, Label unaConsola) {
         this.partida = partida;
         this.vistaTablero = vistaTablero;
-        this.seleccionarHandler = seleccionarHandler;
+        //this.seleccionarHandler = seleccionarHandler;
+        this.caminoController = caminoController;
+        this.personajeController = personajeController;
         this.consola = unaConsola;
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
-    	consola.setText("");
+    	/*consola.setText("");
         Posicion posAtacante = seleccionarHandler.getPosicionPersonajeSeleccionado();
         Posicion posAtacado = seleccionarHandler.getPosicionPersonajeSeleccionado();
         try {
@@ -39,7 +46,20 @@ public class BotonAtaqueEspecialHandler implements EventHandler<ActionEvent> {
         } catch (KiInsuficienteException e) {
         	consola.setText("No tiene Ki suficiente");
         }
-        seleccionarHandler.limpiar();
+        seleccionarHandler.limpiar();*/
+        Personaje atacante = personajeController.obtenerPersonaje();
+        Personaje atacado = personajeController.obtenerPersonaje();
+        try {
+            partida.ataqueEspecial(atacante, atacado);
+        } catch (NoPuedeAtacarMismoEquipoException e) {
+            consola.setText(atacante.getClass().getSimpleName() + " no puede atacar a su amigo " + atacado.getClass().getSimpleName() + "!");
+        } catch (NoPuedeAtacarAEsaDistanciaException e) {
+            consola.setText(atacante.getClass().getSimpleName() + " no puede atacar a esa distancia.");
+        } catch (KiInsuficienteException e) {
+            consola.setText(atacante.getClass().getSimpleName() + " no posee ki suficiente.");
+        }
+        personajeController.limpiar();
+        caminoController.limpiar();
         vistaTablero.actualizarVista();
     }
 }

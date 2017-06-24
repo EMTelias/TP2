@@ -1,5 +1,7 @@
 package vista;
 
+import controlador.CaminoController;
+import controlador.PersonajeController;
 import controlador.SeleccionarHandler;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -23,9 +25,11 @@ public class Aplicacion extends Application {
         stage.setTitle("Dragon AlgoBall");
 
         Partida partida = crearModelo();
-        SeleccionarHandler seleccionarHandler = new SeleccionarHandler(partida);
+        //SeleccionarHandler seleccionarHandler = new SeleccionarHandler(partida);
+        CaminoController caminoController = new CaminoController();
+        PersonajeController personajeController = new PersonajeController();
 
-        ContenedorPrincipal contenedorPrincipal = new ContenedorPrincipal(stage, partida, seleccionarHandler);
+        ContenedorPrincipal contenedorPrincipal = new ContenedorPrincipal(stage, partida, caminoController, personajeController);
         Scene escenaJuego = new Scene(contenedorPrincipal, 800, 600);
 
         AplicacionOnKeyPressEventHandler AplicacionOnKeyPressEventHandler = new AplicacionOnKeyPressEventHandler(stage, contenedorPrincipal.getBarraDeMenu());

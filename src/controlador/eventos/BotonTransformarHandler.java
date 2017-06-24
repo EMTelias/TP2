@@ -1,5 +1,7 @@
 package controlador.eventos;
 
+import controlador.CaminoController;
+import controlador.PersonajeController;
 import controlador.SeleccionarHandler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -8,6 +10,7 @@ import modelo.excepciones.transformacion.KiInsuficienteException;
 import modelo.excepciones.transformacion.NoHayProximaTransformacionException;
 import modelo.excepciones.transformacion.NoPuedeTransformarException;
 import modelo.partida.Partida;
+import modelo.personaje.Personaje;
 import modelo.tablero.Posicion;
 import vista.VistaTablero;
 
@@ -15,19 +18,23 @@ public class BotonTransformarHandler implements EventHandler<ActionEvent> {
 
     private final Partida partida;
     private final VistaTablero vistaTablero;
-    private final SeleccionarHandler seleccionarHandler;
+    //private final SeleccionarHandler seleccionarHandler;
+    private final PersonajeController personajeController;
+    private final CaminoController caminoController;
     private Label consola;
 
-    public BotonTransformarHandler(VistaTablero vistaTablero, Partida partida, SeleccionarHandler seleccionarHandler, Label unaConsola) {
+    public BotonTransformarHandler(VistaTablero vistaTablero, Partida partida, CaminoController caminoController, PersonajeController personajeController, Label unaConsola) {
         this.partida = partida;
         this.vistaTablero = vistaTablero;
-        this.seleccionarHandler = seleccionarHandler;
+        //this.seleccionarHandler = seleccionarHandler;
+        this.caminoController = caminoController;
+        this.personajeController = personajeController;
         this.consola = unaConsola;
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        Posicion posPersonaje = seleccionarHandler.getPosicionPersonajeSeleccionado();
+        /*Posicion posPersonaje = seleccionarHandler.getPosicionPersonajeSeleccionado();
         try {
             partida.transformarPersonaje(posPersonaje);
         } catch (NoPuedeTransformarException e) {
@@ -37,7 +44,19 @@ public class BotonTransformarHandler implements EventHandler<ActionEvent> {
         } catch (NoHayProximaTransformacionException e) {
             e.printStackTrace();
         }
-        seleccionarHandler.limpiar();
+        seleccionarHandler.limpiar();*/
+        Personaje unPersonaje = personajeController.obtenerPersonaje();
+        try {
+            partida.transformar(unPersonaje);
+        } catch (NoPuedeTransformarException e) {
+            consola.setText("No se cumplen condiciones de transformacion!");
+        } catch (KiInsuficienteException e) {
+            consola.setText(unPersonaje.getClass().getSimpleName() + " no posee ki suficiente!");
+        } catch (NoHayProximaTransformacionException e) {
+            consola.setText(unPersonaje.getClass().getSimpleName() + " esta en su ultima transformacion!");
+        }
+        personajeController.limpiar();
+        caminoController.limpiar();
         vistaTablero.actualizarVista();
     }
 }

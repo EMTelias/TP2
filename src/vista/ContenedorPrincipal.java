@@ -1,5 +1,7 @@
 package vista;
 
+import controlador.CaminoController;
+import controlador.PersonajeController;
 import controlador.SeleccionarHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -18,41 +20,40 @@ public class ContenedorPrincipal extends BorderPane {
 
     private BarraDeMenu menuBar;
     private VistaTablero vistaTablero;
-    private GridPane gridCentral;
     private GridPane contenedorCentral;
     private Label consola;
     
-    public ContenedorPrincipal(Stage stage, Partida partida, SeleccionarHandler seleccionarHandler) {
+    public ContenedorPrincipal(Stage stage, Partida partida, CaminoController caminoController, PersonajeController personajeController) {
         this.setMenu(stage);
-        this.setCentro(partida, seleccionarHandler);
+        this.setCentro(partida, caminoController, personajeController);
         this.setConsola();
-        this.setBotonera(partida, seleccionarHandler);
+        this.setBotonera(partida, caminoController, personajeController);
     }
 
-    private void setBotonera(Partida partida, SeleccionarHandler seleccionarHandler) {
+    private void setBotonera(Partida partida, CaminoController caminoController, PersonajeController personajeController) {
 
         Button botonMover = new Button();
         botonMover.setText("Mover");
         botonMover.setStyle("-fx-font: 16 arial; -fx-base: #ee2211;");
-        BotonMoverHandler botonMoverHandler = new BotonMoverHandler(vistaTablero, partida, seleccionarHandler,consola);
+        BotonMoverHandler botonMoverHandler = new BotonMoverHandler(vistaTablero, partida, caminoController, personajeController,consola);
         botonMover.setOnAction(botonMoverHandler);
 
         Button botonAtaqueBasico = new Button();
         botonAtaqueBasico.setText("Ataque basico");
         botonAtaqueBasico.setStyle("-fx-font: 16 arial; -fx-base: #ee2211;");
-        BotonAtaqueBasicoHandler botonAtaqueBasicoHandler = new BotonAtaqueBasicoHandler(vistaTablero, partida, seleccionarHandler,consola);
+        BotonAtaqueBasicoHandler botonAtaqueBasicoHandler = new BotonAtaqueBasicoHandler(vistaTablero, partida, caminoController, personajeController, consola);
         botonAtaqueBasico.setOnAction(botonAtaqueBasicoHandler);
 
         Button botonAtaqueEspecial = new Button();
         botonAtaqueEspecial.setText("Ataque especial");
         botonAtaqueEspecial.setStyle("-fx-font: 16 arial; -fx-base: #ee2211;");
-        BotonAtaqueEspecialHandler botonAtaqueEspecialHandler = new BotonAtaqueEspecialHandler(vistaTablero, partida, seleccionarHandler,consola);
+        BotonAtaqueEspecialHandler botonAtaqueEspecialHandler = new BotonAtaqueEspecialHandler(vistaTablero, partida, caminoController, personajeController, consola);
         botonAtaqueEspecial.setOnAction(botonAtaqueEspecialHandler);
 
         Button botonTransformar = new Button();
         botonTransformar.setText("Transformar");
         botonTransformar.setStyle("-fx-font: 16 arial; -fx-base: #ee2211;");
-        BotonTransformarHandler botonTransformarHandler = new BotonTransformarHandler(vistaTablero, partida, seleccionarHandler,consola);
+        BotonTransformarHandler botonTransformarHandler = new BotonTransformarHandler(vistaTablero, partida, caminoController, personajeController, consola);
         botonTransformar.setOnAction(botonTransformarHandler);
 
         Button botonPasar = new Button();
@@ -74,11 +75,10 @@ public class ContenedorPrincipal extends BorderPane {
         this.setTop(menuBar);
     }
 
-    private void setCentro(Partida partida, SeleccionarHandler seleccionarHandler) {
+    private void setCentro(Partida partida, CaminoController caminoController, PersonajeController personajeController) {
 
 
-        vistaTablero = new VistaTablero(partida, seleccionarHandler);
-        //vistaRobot.dibujar();
+        vistaTablero = new VistaTablero(partida, caminoController, personajeController);
 
         contenedorCentral = vistaTablero;
         contenedorCentral.setAlignment(Pos.CENTER);

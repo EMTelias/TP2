@@ -1,5 +1,6 @@
 package vista;
 
+import controlador.PersonajeController;
 import controlador.SeleccionarHandler;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
@@ -13,16 +14,12 @@ import modelo.tablero.Posicion;
 public class VistaPersonaje extends BorderPane{
 
     private final Personaje personaje;
-    private final int x;
-    private final int y;
-    private String imgDir = "vista/imagenes/";
-    private String imgExt = ".png";
     private boolean seleccionado = false;
 
-    public VistaPersonaje(Personaje unPersonaje, int x, int y, SeleccionarHandler seleccionarHandler) {
+    public VistaPersonaje(Personaje unPersonaje, PersonajeController personajeController) {
         this.personaje = unPersonaje;
-        this.x = x;
-        this.y = y;
+        String imgDir = "vista/imagenes/";
+        String imgExt = ".png";
         Image imagen = new Image(imgDir + unPersonaje.getClass().getSimpleName() + imgExt);
         ImageView imageView = new ImageView();
         imageView.toFront();
@@ -32,14 +29,15 @@ public class VistaPersonaje extends BorderPane{
         imageView.setImage(imagen);
         imageView.setOnMouseClicked(e-> {
             try {
+                personajeController.seleccionarPersonaje(personaje);
                 if (seleccionado) {
-                    seleccionarHandler.deseleccionarPersonaje(new Posicion(x,y));
+                    //seleccionarHandler.deseleccionarPersonaje(new Posicion(x,y));
                     imageView.setEffect(null);
                     seleccionado = false;
                     return;
-                }else{
+                }/*else{
                     seleccionarHandler.seleccionarPersonaje(new Posicion(x, y));
-                }
+                }*/
                 imageView.setEffect(new Glow(0.8));
                 seleccionado = true;
 
