@@ -80,6 +80,7 @@ public class BotonMoverHandler implements EventHandler<ActionEvent> {
             info.setMovimientos("0");
         } else {
             consola.setText("Comienza el turno de los " + partida.turnoActual().getNombre());
+            info.setTurno(partida.turnoActual().getNombre());
             info.setDefault();
         }
         vistaTablero.actualizarVista();

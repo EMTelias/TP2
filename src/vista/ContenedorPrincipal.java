@@ -63,7 +63,7 @@ public class ContenedorPrincipal extends BorderPane {
         Button botonPasar = new Button();
         botonPasar.setText("Pasar");
         botonPasar.setStyle("-fx-font: 16 arial; -fx-base: #ee2211;");
-        BotonPasarHandler botonPasarHandler = new BotonPasarHandler(partida, vistaTablero, info, consola);
+        BotonPasarHandler botonPasarHandler = new BotonPasarHandler(partida, vistaTablero, caminoController, personajeController, info, consola);
         botonPasar.setOnAction(botonPasarHandler);
 
         VBox contenedorVertical = new VBox(botonMover, botonAtaqueBasico, botonAtaqueEspecial, botonTransformar, botonPasar, info);

@@ -58,6 +58,7 @@ public class BotonTransformarHandler implements EventHandler<ActionEvent> {
         }
         personajeController.limpiar();
         caminoController.limpiar();
+        info.setDefault();
         vistaTablero.actualizarVista();
     }
 }

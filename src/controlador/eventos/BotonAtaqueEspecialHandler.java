@@ -67,6 +67,7 @@ public class BotonAtaqueEspecialHandler implements EventHandler<ActionEvent> {
             info.setAtaques("0");
         } else {
             consola.setText("Comienza el turno de los " + partida.turnoActual().getNombre());
+            info.setTurno(partida.turnoActual().getNombre());
             info.setDefault();
         }
         vistaTablero.actualizarVista();

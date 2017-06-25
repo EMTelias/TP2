@@ -1,5 +1,7 @@
 package controlador.eventos;
 
+import controlador.CaminoController;
+import controlador.PersonajeController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
@@ -12,11 +14,15 @@ public class BotonPasarHandler implements EventHandler<ActionEvent> {
     private final Partida partida;
     private final VistaTablero vistaTablero;
     private final VistaInfo info;
+    private final CaminoController caminoController;
+    private final PersonajeController personajeController;
     private Label consola;
 
-    public BotonPasarHandler(Partida partida, VistaTablero vistaTablero, VistaInfo info, Label unaConsola) {
+    public BotonPasarHandler(Partida partida, VistaTablero vistaTablero, CaminoController caminoController, PersonajeController personajeController, VistaInfo info, Label unaConsola) {
         this.partida = partida;
         this.vistaTablero = vistaTablero;
+        this.caminoController = caminoController;
+        this.personajeController = personajeController;
         this.info = info;
         this.consola = unaConsola;
     }
@@ -38,6 +44,9 @@ public class BotonPasarHandler implements EventHandler<ActionEvent> {
         consola.setText("Comienza el turno de los " + partida.turnoActual().getNombre());
         info.setTurno(partida.turnoActual().getNombre());
         info.setDefault();
+        // Por si quedan personajes o casilleros seleccionados, al pasar de turno se limpian
+        personajeController.limpiar();
+        caminoController.limpiar();
         vistaTablero.actualizarVista();
     }
 }
