@@ -67,7 +67,7 @@ public class BotonMoverHandler implements EventHandler<ActionEvent> {
         } catch (NoPuedeMoverCaminoObstruidoException e) {
             consola.setText("Camino obstruido no se puede recorrer");
         } catch (YaMovisteEsteTurnoException e) {
-            consola.setText(unPersonaje.getEquipo().getNombre() + " ya movio este turno!");
+            consola.setText("El equipo de " + unPersonaje.getEquipo().getNombre() + " ya movio este turno!");
         } catch (HuecoEntreCaminoYPersonajeException e){
             consola.setText("El personaje y el camino deben ser contiguos!");
         } catch (NoEsSuTurnoException e){
@@ -76,13 +76,15 @@ public class BotonMoverHandler implements EventHandler<ActionEvent> {
 
         personajeController.limpiar();
         caminoController.limpiar();
-        if (equipoJugando.getNombre() == partida.turnoActual().getNombre()) {
+
+        if (equipoJugando.getNombre().equals(partida.turnoActual().getNombre())) {
             info.setMovimientos("0");
         } else {
             consola.setText("Comienza el turno de los " + partida.turnoActual().getNombre());
             info.setTurno(partida.turnoActual().getNombre());
-            info.setDefault();
+            info.setAccionesDefault();
         }
+        info.setStatsDefault();
         vistaTablero.actualizarVista();
     }
 }

@@ -49,7 +49,8 @@ public class VistaInfo extends VBox{
         distanciaAtaque.getChildren().addAll(distAtaqueText, distAtaqueActualText);
         Text velocidadText = new Text("Velocidad: ");
         velocidad.getChildren().addAll(velocidadText, velocidadActualText);
-        setDefault();
+        setStatsDefault();
+        setAccionesDefault();
         this.getChildren().addAll(turnos, ataques, movimientos, imagen, vida, ki, poderPelea, distanciaAtaque, velocidad);
 
     }
@@ -63,15 +64,18 @@ public class VistaInfo extends VBox{
         imageView.setImage(imagen);
     }
 
-    public void setDefault() {
-        setAtaques("1");
-        setMovimientos("1");
+    public void setStatsDefault() {
         setImagenDefault();
         setVidaActual("--");
         setKiActual("--");
         setDistanciaAtaqueActual("--");
         setPoderPeleaActual("--");
         setVelocidadActual("--");
+    }
+
+    public void setAccionesDefault() {
+        setAtaques("1");
+        setMovimientos("1");
     }
 
     public void setTurno(String turnoText) {

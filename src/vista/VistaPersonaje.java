@@ -70,6 +70,6 @@ public class VistaPersonaje extends BorderPane{
                 return;
             }
         }
-        info.setDefault();
+        info.setStatsDefault();
     }
 }

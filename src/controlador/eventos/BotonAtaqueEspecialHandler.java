@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import modelo.excepciones.acciones.NoPuedeAtacarMismoEquipoException;
+import modelo.excepciones.acciones.YaAtacasteEsteTurnoException;
 import modelo.excepciones.personaje.NoPuedeAtacarAEsaDistanciaException;
 import modelo.excepciones.transformacion.KiInsuficienteException;
 import modelo.partida.Partida;
@@ -60,16 +61,20 @@ public class BotonAtaqueEspecialHandler implements EventHandler<ActionEvent> {
             consola.setText(atacante.getClass().getSimpleName() + " no puede atacar a esa distancia.");
         } catch (KiInsuficienteException e) {
             consola.setText(atacante.getClass().getSimpleName() + " no posee ki suficiente.");
+        } catch (YaAtacasteEsteTurnoException e) {
+            consola.setText("El equipo de " + atacante.getClass().getSimpleName() + " ya ataco este turno!");
         }
+
         personajeController.limpiar();
         caminoController.limpiar();
-        if (equipoJugando.getNombre() == partida.turnoActual().getNombre()) {
+        if (equipoJugando.getNombre().equals(partida.turnoActual().getNombre())) {
             info.setAtaques("0");
         } else {
             consola.setText("Comienza el turno de los " + partida.turnoActual().getNombre());
             info.setTurno(partida.turnoActual().getNombre());
-            info.setDefault();
+            info.setAccionesDefault();
         }
+        info.setStatsDefault();
         vistaTablero.actualizarVista();
     }
 }

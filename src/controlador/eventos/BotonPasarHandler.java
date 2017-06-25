@@ -43,7 +43,8 @@ public class BotonPasarHandler implements EventHandler<ActionEvent> {
     	partida.pasar();
         consola.setText("Comienza el turno de los " + partida.turnoActual().getNombre());
         info.setTurno(partida.turnoActual().getNombre());
-        info.setDefault();
+        info.setStatsDefault();
+        info.setAccionesDefault();
         // Por si quedan personajes o casilleros seleccionados, al pasar de turno se limpian
         personajeController.limpiar();
         caminoController.limpiar();
