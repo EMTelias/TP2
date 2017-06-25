@@ -372,6 +372,23 @@ public class PersonajeTest {
 		Assert.assertEquals(ProtectorPiccolo.class, piccolo.transformacion.getClass());
 	}
 
+	@Test
+	public void testPiccoloSeTransformaAProtectorConGohanMuerto() throws CasilleroOcupadoException, NoPuedeTransformarException, KiInsuficienteException, NoHayProximaTransformacionException {
+		Personaje piccolo = new Piccolo(new Casillero(new Posicion(2, 1)));
+		Personaje gohan = new Gohan(new Casillero(new Posicion(3, 1)));
+
+		Equipo guerreros = new Equipo("Guerreros Z");
+		gohan.unirse(guerreros);
+		piccolo.unirse(guerreros);
+
+		gohan.reducirVida(350);
+
+		piccolo.aumentarKi(20);
+		piccolo.transformar();
+		piccolo.transformar();
+		Assert.assertEquals(ProtectorPiccolo.class, piccolo.transformacion.getClass());
+	}
+
 	@Test(expected = NoPuedeTransformarException.class)
 	public void testPiccoloSeIntentaTransformarAProtectorSinCumplirseCondicionLanzaException() throws CasilleroOcupadoException, NoPuedeTransformarException, KiInsuficienteException, NoHayProximaTransformacionException {
 		Personaje piccolo = new Piccolo(new Casillero(new Posicion(2, 1)));
@@ -414,6 +431,26 @@ public class PersonajeTest {
 
 		piccolo.reducirVida(400);
 		goku.reducirVida(400);
+
+		gohan.aumentarKi(40);
+		gohan.transformar();
+		gohan.transformar();
+		Assert.assertEquals(SuperSayajin2Gohan.class, gohan.transformacion.getClass());
+	}
+
+	@Test
+	public void testGohanSeTransformaEnSS2ConPiccoloYGokuMuertos() throws CasilleroOcupadoException, NoPuedeTransformarException, KiInsuficienteException, NoHayProximaTransformacionException {
+		Personaje goku = new Goku(new Casillero(new Posicion(1, 1)));
+		Personaje piccolo = new Piccolo(new Casillero(new Posicion(2, 1)));
+		Personaje gohan = new Gohan(new Casillero(new Posicion(3, 1)));
+
+		Equipo guerreros = new Equipo("Guerreros Z");
+		goku.unirse(guerreros);
+		gohan.unirse(guerreros);
+		piccolo.unirse(guerreros);
+
+		piccolo.reducirVida(500);
+		goku.reducirVida(550);
 
 		gohan.aumentarKi(40);
 		gohan.transformar();
@@ -737,11 +774,9 @@ public class PersonajeTest {
 
 		Personaje goku = partida.personajeEnPosicion(new Posicion(1,1));
 		goku.convertirseEnChocolate();
-		int turno=0;
+
 		for(int i=0;i<4;i++){
-			//System.out.println("turno: "+turno+" - "+goku.modelo.personaje.transformacion);
 			partida.pasar();
-			turno++;
 		}
 		Assert.assertTrue(goku.transformacion.getClass() == Chocolate.class);
 	}
