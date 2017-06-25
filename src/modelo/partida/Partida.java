@@ -96,9 +96,16 @@ public class Partida {
     }
 
     private void revisarVictoria(){
-        if(turno.getEquipoEnEspera().getPersonajes().size() == 0){
-                throw new JuegoTerminadoException();
-            }
+        // supongo que estan todos muertos
+        Boolean todosMuertos = true;
+        ArrayList<Personaje> personajes = turno.getEquipoEnEspera().getPersonajes();
+        for (Personaje personaje : personajes) {
+            // si el personaje esta muerto, T and F = F. Si alguno es F, ya no se lanza excepcion luego
+            todosMuertos &= personaje.estaMuerto();
+        }
+        if (todosMuertos) {
+            throw new JuegoTerminadoException();
+        }
     }
 
     public void atacarEnPosicion(Posicion posAtacante, Posicion posAtacado) throws NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException {

@@ -72,12 +72,16 @@ public abstract class Personaje {
 	}
 
 	public void reducirVida(int cantidad){
-		this.vida-=cantidad;
+		this.vida -= cantidad;
 
 		if(vida <= 0){
-			equipo.eliminarPersonaje(this);
+			this.vida = 0;
 			casillero.vaciar();
 		}
+	}
+
+	public boolean estaMuerto() {
+		return vida == 0;
 	}
 
 	public int getVida() {

@@ -752,11 +752,8 @@ public class PersonajeTest {
 
 		Personaje goku = partida.personajeEnPosicion(new Posicion(1,1));
 		goku.convertirseEnChocolate();
-		int turno=0;
 		for(int i=0;i<6;i++){
-			//System.out.println("turno: "+turno+" - "+goku.modelo.personaje.transformacion);
 			partida.pasar();
-			turno++;
 		}
 		Assert.assertTrue(goku.transformacion.getClass() == NormalGoku.class);
 	}
@@ -769,16 +766,11 @@ public class PersonajeTest {
 		Personaje majinBoo = new MajinBoo(new Casillero(new Posicion(1, 1)));
 		Personaje goku = partida.personajeEnPosicion(new Posicion(1,1));
 
-		//System.out.println(goku.modelo.personaje.transformacion);
-
 		majinBoo.aumentarKi(40);
 		majinBoo.ataqueEspecialA(goku);
 
-		int turno = 0;
 		for(int i=0;i<7;i++){
-			//System.out.println("turno: "+turno+" - "+goku.modelo.personaje.transformacion);
 			partida.pasar();
-			turno++;
 		}
 		Assert.assertTrue(goku.transformacion.getClass() == NormalGoku.class);
 
@@ -834,4 +826,71 @@ public class PersonajeTest {
 		Assert.assertTrue(partida.getTablero().estaVacioEn(new Posicion(15,15)));
 
 	}
+
+	// Test vida
+
+	@Test
+	public void testGokuSeInstanciaCon500DeVida() throws CasilleroOcupadoException {
+		Personaje goku = new Goku(new Casillero(new Posicion(1,1)));
+
+		Assert.assertEquals(500, goku.getVida());
+
+	}
+
+	@Test
+	public void testGohanSeInstanciaCon300DeVida() throws CasilleroOcupadoException {
+		Personaje gohan = new Gohan(new Casillero(new Posicion(1,1)));
+
+		Assert.assertEquals(300, gohan.getVida());
+
+	}
+
+	@Test
+	public void testPiccoloSeInstanciaCon500DeVida() throws CasilleroOcupadoException {
+		Personaje piccolo = new Piccolo(new Casillero(new Posicion(1,1)));
+
+		Assert.assertEquals(500, piccolo.getVida());
+
+	}
+
+	@Test
+	public void testCellSeInstanciaCon500DeVida() throws CasilleroOcupadoException {
+		Personaje cell = new Cell(new Casillero(new Posicion(1,1)));
+
+		Assert.assertEquals(500, cell.getVida());
+
+	}
+
+	@Test
+	public void testFreezerSeInstanciaCon400DeVida() throws CasilleroOcupadoException {
+		Personaje freezer = new Freezer(new Casillero(new Posicion(1,1)));
+
+		Assert.assertEquals(400, freezer.getVida());
+
+	}
+
+	@Test
+	public void testMajinBooSeInstanciaCon300DeVida() throws CasilleroOcupadoException {
+		Personaje majinBoo = new MajinBoo(new Casillero(new Posicion(1,1)));
+
+		Assert.assertEquals(300, majinBoo.getVida());
+
+	}
+
+	@Test
+	public void testGokuPierdeTodaSuVidaEntoncesEstaMuerto() throws CasilleroOcupadoException {
+		Personaje goku = new Goku(new Casillero(new Posicion(1,1)));
+		goku.reducirVida(500);
+
+		Assert.assertTrue(goku.estaMuerto());
+	}
+
+	@Test
+	public void testGokuPierdeTodaMasDeLoQueTieneDeVidaEntoncesEstaMuerto() throws CasilleroOcupadoException {
+		Personaje goku = new Goku(new Casillero(new Posicion(1,1)));
+		goku.reducirVida(600);
+
+		Assert.assertTrue(goku.estaMuerto());
+	}
+
 }
