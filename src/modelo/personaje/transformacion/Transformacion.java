@@ -55,7 +55,7 @@ public abstract class Transformacion {
     }
 
     public int getVelocidad() {
-        return this.velocidad;
+        return efecto.aplicarEfectoVelocidad(this.velocidad);
     }
 
     public int getPoderDePelea() {

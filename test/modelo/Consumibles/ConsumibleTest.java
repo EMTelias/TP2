@@ -241,6 +241,17 @@ public class ConsumibleTest {
 		
 		piccolo.mover(caminoSegundoMovimientoDePiccolo);
 	}
+
+	@Test
+	public void testFreezerConsumeNubeVoladoraEntoncesSuVelocidadSeDuplica() throws CasilleroOcupadoException {
+		Casillero casillero = new Casillero(new Posicion(1,1));
+		Personaje freezer = new Freezer(casillero);
+		Consumible nubeVoladora = new NubeVoladora();
+		int velocidadPrevia = freezer.getVelocidad();
+		freezer.consumir(nubeVoladora);
+
+		Assert.assertEquals(velocidadPrevia*2, freezer.getVelocidad());
+	}
 	
 	
 	
