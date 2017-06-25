@@ -56,6 +56,7 @@ public class VistaPersonaje extends BorderPane{
 
     private void modificarPanelInfo() {
         Personaje primerPersonaje = personajeController.verPrimerPersonaje();
+        Personaje segundoPersonaje = personajeController.verSegundoPersonaje();
         if (primerPersonaje == personaje) {
             info.setImagen(personaje.getClass().getSimpleName());
             info.setVidaActual(Integer.toString(personaje.getVida()));
@@ -64,6 +65,10 @@ public class VistaPersonaje extends BorderPane{
             info.setPoderPeleaActual(Integer.toString(personaje.getPoderDePelea()));
             info.setVelocidadActual(Integer.toString(personaje.getVelocidad()));
             return;
+        } else {
+            if (segundoPersonaje == personaje) {
+                return;
+            }
         }
         info.setDefault();
     }

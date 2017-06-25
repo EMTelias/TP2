@@ -24,11 +24,11 @@ public class PersonajeController {
         if (colaPersonajes.size() == 2) {
             throw new NoSePuedeSeleccionarMasDeDosPersonajesException();
         }
-        colaPersonajes.addLast(unPersonaje);
+        colaPersonajes.add(unPersonaje);
     }
 
     public Personaje obtenerPersonaje() {
-        return colaPersonajes.getFirst();
+        return colaPersonajes.removeFirst();
     }
 
     public void limpiar() {
@@ -37,5 +37,9 @@ public class PersonajeController {
 
     public Personaje verPrimerPersonaje() {
         return colaPersonajes.peekFirst();
+    }
+
+    public Personaje verSegundoPersonaje() {
+        return colaPersonajes.peekLast();
     }
 }
