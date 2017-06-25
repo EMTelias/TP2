@@ -150,7 +150,7 @@ public class PersonajeTest {
 	}
 
 
-	//Tests de modelo.personaje.transformacion por ki de los personajes
+	//Tests de transformacion por ki de los personajes
 
 	@Test
 	public void testCreoUnGokuNormalYLoTransformoEnKaioKenGokuEntoncesSuKiDisminuye20() throws CasilleroOcupadoException, NoHayProximaTransformacionException, KiInsuficienteException, NoPuedeTransformarException {
@@ -275,6 +275,39 @@ public class PersonajeTest {
 		goku.atacarA(freezer); //24 es mayor a 20 entonces el saca 24
 
 		Assert.assertEquals(376, freezer.getVida());
+	}
+
+	@Test
+	public void testGokuAtacaAGohanPeroNingunoPerteneceAUnEquipoEntoncesLeInflijeDanio() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException {
+		// poder pelea goku = 20 //// poder de pelea gohan = 15. Danio -> 20. Vida gohan = 300-20 = 280
+		Personaje goku = new Goku(new Casillero(new Posicion(1,1)));
+		Personaje gohan = new Gohan(new Casillero(new Posicion(2,1)));
+		goku.atacarA(gohan);
+
+		Assert.assertEquals(280,gohan.getVida());
+	}
+
+	@Test
+	public void testGokuAtacaAGohanPeroGohanNoPerteneceAlEquipoDeGokuEntoncesLeInflijeDanio() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException {
+		// poder pelea goku = 20 //// poder de pelea gohan = 15. Danio -> 20. Vida gohan = 300-20 = 280
+		Personaje goku = new Goku(new Casillero(new Posicion(1,1)));
+		Personaje gohan = new Gohan(new Casillero(new Posicion(2,1)));
+		Equipo guerreros = new Equipo("Guerreros Z");
+		goku.unirse(guerreros);
+		goku.atacarA(gohan);
+
+		Assert.assertEquals(280,gohan.getVida());
+	}
+
+	@Test (expected = NoPuedeAtacarMismoEquipoException.class)
+	public void testGokuAtacaAGohanPeroGohanPerteneceAlMismoEquipoEntoncesLanzaException() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException {
+		Personaje goku = new Goku(new Casillero(new Posicion(1,1)));
+		Personaje gohan = new Gohan(new Casillero(new Posicion(2,1)));
+		Equipo guerreros = new Equipo("Guerreros Z");
+		goku.unirse(guerreros);
+		gohan.unirse(guerreros);
+		goku.atacarA(gohan);
+
 	}
 
 	// Tests de transformaciones especiales
@@ -759,7 +792,7 @@ public class PersonajeTest {
 		for (int i = 1; i <= 10; i++) {//Yo paso 5 veces, el enemigo pasa 5 veces.. (5 inicios de turno)
 			partida.pasar();
 		}
-		Assert.assertEquals(goku.ki,45);
+		Assert.assertEquals(goku.getKi(),45);
 	}
 
 	@Test
@@ -773,14 +806,10 @@ public class PersonajeTest {
 		majinBoo.aumentarKi(40);
 		majinBoo.ataqueEspecialA(goku);
 
-		//int turno = 1;
 		for (int i = 1; i < 8; i++) {
-			//System.out.println("turno: " + turno + " - " + goku.modelo.personaje.transformacion);
-			//System.out.println(goku.ki);
 			partida.pasar();
-			//turno++;
 		}
-		Assert.assertTrue(goku.ki == 55);
+		Assert.assertTrue(goku.getKi() == 55);
 
 	}
 

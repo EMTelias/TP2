@@ -90,11 +90,11 @@ public abstract class Personaje {
 
 
 	public void atacarA(Personaje otroPersonaje) throws NoPuedeAtacarAEsaDistanciaException, NoPuedeAtacarMismoEquipoException {
+		// JLS 15.23 - Solo se evalua la derecha si se cumple lo de la izquierda
+		if ( (equipo != null) && equipo.esMiembro(otroPersonaje) ) {
+			throw new NoPuedeAtacarMismoEquipoException();
+		}
 		transformacion.atacarA(this,otroPersonaje);
-		/*
-		Ataque ataque = new Ataque(this, otroPersonaje, 1);
-		ataque.execute();
-		*/
 	}
 
 	public AtaqueEspecialHandler getAtaqueEspecialHandlerContra(Personaje unPersonaje){
