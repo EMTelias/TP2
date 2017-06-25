@@ -15,16 +15,16 @@ public class GeneradorDeConsumiblesRandom implements GeneradorDeConsumibles {
 		
 		if (unRandom.nextDouble() > 0.25 ) return; // 25 porciento de chance que salga un consumible en un turno
 		
-		switch ((int)(unRandom.nextDouble() * 2 + 0)){
-			case 0:
+		switch ((int)(unRandom.nextDouble() * 3 + 1)){
+			case 1:
 		        this.colocarNubeVoladora(tablero,dimensionMaximaX,dimensionMaximaY,unRandom);
 				break;
 		 
-		    case 1:
+		    case 2:
 		    	this.colocarSemillaDelErmitanio(tablero,dimensionMaximaX,dimensionMaximaY,unRandom);
 		    	break;
 		
-		    case 2:
+		    case 3:
 		    	this.colocarEsferaDelDragon(tablero,dimensionMaximaX,dimensionMaximaY,unRandom);
 		        break;
 		}
