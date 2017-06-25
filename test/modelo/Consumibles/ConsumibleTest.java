@@ -2,6 +2,9 @@ package modelo.Consumibles;
 
 import java.util.ArrayList;
 
+import modelo.excepciones.transformacion.KiInsuficienteException;
+import modelo.excepciones.transformacion.NoHayProximaTransformacionException;
+import modelo.excepciones.transformacion.NoPuedeTransformarException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -251,6 +254,20 @@ public class ConsumibleTest {
 		freezer.consumir(nubeVoladora);
 
 		Assert.assertEquals(velocidadPrevia*2, freezer.getVelocidad());
+	}
+
+	@Test
+	public void testFreezerConsumeNubeVoladoraLuegoSeTransformaDosVecesEntoncesElEfectoContinuaActivo() throws CasilleroOcupadoException, NoPuedeTransformarException, KiInsuficienteException, NoHayProximaTransformacionException {
+		Casillero casillero = new Casillero(new Posicion(1,1));
+		Personaje freezer = new Freezer(casillero);
+		Consumible nubeVoladora = new NubeVoladora();
+		freezer.aumentarKi(70);
+		freezer.consumir(nubeVoladora);
+		freezer.transformar();
+		freezer.transformar();
+		// al transformarse luego de consumir, el efecto debe continuar
+
+		Assert.assertEquals(12, freezer.getVelocidad());
 	}
 	
 	

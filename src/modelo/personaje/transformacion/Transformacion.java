@@ -43,6 +43,7 @@ public abstract class Transformacion {
         }
 
         unPersonaje.reducirKi(this.kiNecesarioTransformar);
+        this.proximaTransformacion.aplicarEfecto(efecto);
         return this.proximaTransformacion;
     }
 
