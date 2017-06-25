@@ -4,17 +4,20 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import modelo.partida.Partida;
+import vista.VistaInfo;
 import vista.VistaTablero;
 
 public class BotonPasarHandler implements EventHandler<ActionEvent> {
 
     private final Partida partida;
     private final VistaTablero vistaTablero;
+    private final VistaInfo info;
     private Label consola;
 
-    public BotonPasarHandler(Partida partida, VistaTablero vistaTablero,  Label unaConsola) {
+    public BotonPasarHandler(Partida partida, VistaTablero vistaTablero, VistaInfo info, Label unaConsola) {
         this.partida = partida;
         this.vistaTablero = vistaTablero;
+        this.info = info;
         this.consola = unaConsola;
     }
 
@@ -32,7 +35,9 @@ public class BotonPasarHandler implements EventHandler<ActionEvent> {
             e.printStackTrace();
         }*/
     	partida.pasar();
-        consola.setText("Comienza el turno de los "+ partida.turnoActual().getNombre());
+        consola.setText("Comienza el turno de los " + partida.turnoActual().getNombre());
+        info.setTurno(partida.turnoActual().getNombre());
+        info.setDefault();
         vistaTablero.actualizarVista();
     }
 }

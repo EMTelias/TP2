@@ -11,24 +11,26 @@ import modelo.excepciones.personaje.NoPuedeAtacarAEsaDistanciaException;
 import modelo.excepciones.transformacion.KiInsuficienteException;
 import modelo.partida.Partida;
 import modelo.personaje.Personaje;
+import modelo.personaje.equipos.Equipo;
 import modelo.tablero.Posicion;
+import vista.VistaInfo;
 import vista.VistaTablero;
 
 public class BotonAtaqueEspecialHandler implements EventHandler<ActionEvent> {
 
     private final Partida partida;
     private final VistaTablero vistaTablero;
-    //private final SeleccionarHandler seleccionarHandler;
     private final PersonajeController personajeController;
     private final CaminoController caminoController;
+    private final VistaInfo info;
     private Label consola;
     
-    public BotonAtaqueEspecialHandler(VistaTablero vistaTablero, Partida partida, CaminoController caminoController, PersonajeController personajeController, Label unaConsola) {
+    public BotonAtaqueEspecialHandler(VistaTablero vistaTablero, Partida partida, CaminoController caminoController, PersonajeController personajeController, VistaInfo info, Label unaConsola) {
         this.partida = partida;
         this.vistaTablero = vistaTablero;
-        //this.seleccionarHandler = seleccionarHandler;
         this.caminoController = caminoController;
         this.personajeController = personajeController;
+        this.info = info;
         this.consola = unaConsola;
     }
 
@@ -47,6 +49,7 @@ public class BotonAtaqueEspecialHandler implements EventHandler<ActionEvent> {
         	consola.setText("No tiene Ki suficiente");
         }
         seleccionarHandler.limpiar();*/
+    	Equipo equipoJugando = partida.turnoActual();
         Personaje atacante = personajeController.obtenerPersonaje();
         Personaje atacado = personajeController.obtenerPersonaje();
         try {
@@ -60,6 +63,12 @@ public class BotonAtaqueEspecialHandler implements EventHandler<ActionEvent> {
         }
         personajeController.limpiar();
         caminoController.limpiar();
+        if (equipoJugando.getNombre() == partida.turnoActual().getNombre()) {
+            info.setAtaques("0");
+        } else {
+            consola.setText("Comienza el turno de los " + partida.turnoActual().getNombre());
+            info.setDefault();
+        }
         vistaTablero.actualizarVista();
     }
 }

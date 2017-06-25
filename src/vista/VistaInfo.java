@@ -64,9 +64,8 @@ public class VistaInfo extends VBox{
     }
 
     public void setDefault() {
-        setTurno("--");
-        setAtaques("--");
-        setMovimientos("--");
+        setAtaques("1");
+        setMovimientos("1");
         setImagenDefault();
         setVidaActual("--");
         setKiActual("--");

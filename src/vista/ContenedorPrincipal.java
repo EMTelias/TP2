@@ -25,6 +25,9 @@ public class ContenedorPrincipal extends BorderPane {
     
     public ContenedorPrincipal(Stage stage, Partida partida, CaminoController caminoController, PersonajeController personajeController) {
         VistaInfo info = new VistaInfo();
+        info.setTurno(partida.turnoActual().getNombre());
+        info.setAtaques("1");
+        info.setMovimientos("1");
         this.setMenu(stage);
         this.setCentro(partida, caminoController, personajeController, info);
         this.setConsola();
@@ -36,31 +39,31 @@ public class ContenedorPrincipal extends BorderPane {
         Button botonMover = new Button();
         botonMover.setText("Mover");
         botonMover.setStyle("-fx-font: 16 arial; -fx-base: #ee2211;");
-        BotonMoverHandler botonMoverHandler = new BotonMoverHandler(vistaTablero, partida, caminoController, personajeController,consola);
+        BotonMoverHandler botonMoverHandler = new BotonMoverHandler(vistaTablero, partida, caminoController, personajeController, info, consola);
         botonMover.setOnAction(botonMoverHandler);
 
         Button botonAtaqueBasico = new Button();
         botonAtaqueBasico.setText("Ataque basico");
         botonAtaqueBasico.setStyle("-fx-font: 16 arial; -fx-base: #ee2211;");
-        BotonAtaqueBasicoHandler botonAtaqueBasicoHandler = new BotonAtaqueBasicoHandler(vistaTablero, partida, caminoController, personajeController, consola);
+        BotonAtaqueBasicoHandler botonAtaqueBasicoHandler = new BotonAtaqueBasicoHandler(vistaTablero, partida, caminoController, personajeController, info, consola);
         botonAtaqueBasico.setOnAction(botonAtaqueBasicoHandler);
 
         Button botonAtaqueEspecial = new Button();
         botonAtaqueEspecial.setText("Ataque especial");
         botonAtaqueEspecial.setStyle("-fx-font: 16 arial; -fx-base: #ee2211;");
-        BotonAtaqueEspecialHandler botonAtaqueEspecialHandler = new BotonAtaqueEspecialHandler(vistaTablero, partida, caminoController, personajeController, consola);
+        BotonAtaqueEspecialHandler botonAtaqueEspecialHandler = new BotonAtaqueEspecialHandler(vistaTablero, partida, caminoController, personajeController, info, consola);
         botonAtaqueEspecial.setOnAction(botonAtaqueEspecialHandler);
 
         Button botonTransformar = new Button();
         botonTransformar.setText("Transformar");
         botonTransformar.setStyle("-fx-font: 16 arial; -fx-base: #ee2211;");
-        BotonTransformarHandler botonTransformarHandler = new BotonTransformarHandler(vistaTablero, partida, caminoController, personajeController, consola);
+        BotonTransformarHandler botonTransformarHandler = new BotonTransformarHandler(vistaTablero, partida, caminoController, personajeController, info, consola);
         botonTransformar.setOnAction(botonTransformarHandler);
 
         Button botonPasar = new Button();
         botonPasar.setText("Pasar");
         botonPasar.setStyle("-fx-font: 16 arial; -fx-base: #ee2211;");
-        BotonPasarHandler botonPasarHandler = new BotonPasarHandler(partida, vistaTablero,consola);
+        BotonPasarHandler botonPasarHandler = new BotonPasarHandler(partida, vistaTablero, info, consola);
         botonPasar.setOnAction(botonPasarHandler);
 
         VBox contenedorVertical = new VBox(botonMover, botonAtaqueBasico, botonAtaqueEspecial, botonTransformar, botonPasar, info);

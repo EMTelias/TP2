@@ -15,8 +15,10 @@ import modelo.excepciones.tablero.CasilleroNoContiguoException;
 import modelo.excepciones.tablero.HuecoEntreCaminoYPersonajeException;
 import modelo.partida.Partida;
 import modelo.personaje.Personaje;
+import modelo.personaje.equipos.Equipo;
 import modelo.tablero.Camino;
 import modelo.tablero.Posicion;
+import vista.VistaInfo;
 import vista.VistaTablero;
 
 public class BotonMoverHandler implements EventHandler<ActionEvent> {
@@ -25,15 +27,15 @@ public class BotonMoverHandler implements EventHandler<ActionEvent> {
     private final Partida partida;
     private final CaminoController caminoController;
     private final PersonajeController personajeController;
-    //private final SeleccionarHandler seleccionarHandler;
+    private final VistaInfo info;
     private Label consola;
     
-    public BotonMoverHandler(VistaTablero vistaTablero, Partida partida, CaminoController caminoController, PersonajeController personajeController, Label unaConsola) {
+    public BotonMoverHandler(VistaTablero vistaTablero, Partida partida, CaminoController caminoController, PersonajeController personajeController, VistaInfo info, Label unaConsola) {
         this.vistaTablero = vistaTablero;
         this.partida = partida;
-        //this.seleccionarHandler = seleccionarHandler;
         this.caminoController = caminoController;
         this.personajeController = personajeController;
+        this.info = info;
         this.consola = unaConsola;
     }
 
@@ -52,6 +54,7 @@ public class BotonMoverHandler implements EventHandler<ActionEvent> {
             consola.setText("No se puede mover, el camino se encuentra obstruido");
         }
         seleccionarHandler.limpiar();*/
+        Equipo equipoJugando = partida.turnoActual();
         Personaje unPersonaje = personajeController.obtenerPersonaje();
         try {
             Camino camino = caminoController.obtenerCamino();
@@ -73,6 +76,12 @@ public class BotonMoverHandler implements EventHandler<ActionEvent> {
 
         personajeController.limpiar();
         caminoController.limpiar();
+        if (equipoJugando.getNombre() == partida.turnoActual().getNombre()) {
+            info.setMovimientos("0");
+        } else {
+            consola.setText("Comienza el turno de los " + partida.turnoActual().getNombre());
+            info.setDefault();
+        }
         vistaTablero.actualizarVista();
     }
 }
