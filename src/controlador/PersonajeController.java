@@ -38,4 +38,8 @@ public class PersonajeController {
     public void limpiar() {
         colaPersonajes.clear();
     }
+
+    public Personaje verPrimerPersonaje() {
+        return colaPersonajes.peekFirst();
+    }
 }

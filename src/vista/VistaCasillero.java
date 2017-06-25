@@ -17,17 +17,18 @@ public class VistaCasillero extends Pane {
     //private final SeleccionarHandler seleccionarHandler;
     private final CaminoController caminoController;
     private final PersonajeController personajeController;
+    private final VistaInfo info;
     private VistaPersonaje personaje;
     private VistaConsumible consumible;
     protected static final int TAM_CASILLERO = 40;
     protected boolean seleccionado = false;
     protected Rectangle border = new Rectangle(TAM_CASILLERO,TAM_CASILLERO);
 
-    public VistaCasillero(Casillero casillero, CaminoController caminoController, PersonajeController personajeController) {
+    public VistaCasillero(Casillero casillero, CaminoController caminoController, PersonajeController personajeController, VistaInfo info) {
         this.casillero = casillero;
         this.caminoController = caminoController;
         this.personajeController = personajeController;
-        //this.seleccionarHandler = seleccionarHandler;
+        this.info = info;
         border.toBack();
         border.setFill(Color.LIGHTGRAY);
         border.setStroke(Color.GRAY);
@@ -63,7 +64,7 @@ public class VistaCasillero extends Pane {
             personaje = null;
             return;
         }
-        personaje = new VistaPersonaje(casillero.getPersonaje(), personajeController);
+        personaje = new VistaPersonaje(casillero.getPersonaje(), personajeController, info);
         this.getChildren().add(personaje);
     }
 

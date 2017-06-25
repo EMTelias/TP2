@@ -24,13 +24,14 @@ public class ContenedorPrincipal extends BorderPane {
     private Label consola;
     
     public ContenedorPrincipal(Stage stage, Partida partida, CaminoController caminoController, PersonajeController personajeController) {
+        VistaInfo info = new VistaInfo();
         this.setMenu(stage);
-        this.setCentro(partida, caminoController, personajeController);
+        this.setCentro(partida, caminoController, personajeController, info);
         this.setConsola();
-        this.setBotonera(partida, caminoController, personajeController);
+        this.setBotonera(partida, caminoController, personajeController, info);
     }
 
-    private void setBotonera(Partida partida, CaminoController caminoController, PersonajeController personajeController) {
+    private void setBotonera(Partida partida, CaminoController caminoController, PersonajeController personajeController, VistaInfo info) {
 
         Button botonMover = new Button();
         botonMover.setText("Mover");
@@ -62,7 +63,7 @@ public class ContenedorPrincipal extends BorderPane {
         BotonPasarHandler botonPasarHandler = new BotonPasarHandler(partida, vistaTablero,consola);
         botonPasar.setOnAction(botonPasarHandler);
 
-        VBox contenedorVertical = new VBox(botonMover, botonAtaqueBasico, botonAtaqueEspecial, botonTransformar, botonPasar, new VistaInfo());
+        VBox contenedorVertical = new VBox(botonMover, botonAtaqueBasico, botonAtaqueEspecial, botonTransformar, botonPasar, info);
         contenedorVertical.setSpacing(10);
         contenedorVertical.setPadding(new Insets(15));
 
@@ -75,10 +76,10 @@ public class ContenedorPrincipal extends BorderPane {
         this.setTop(menuBar);
     }
 
-    private void setCentro(Partida partida, CaminoController caminoController, PersonajeController personajeController) {
+    private void setCentro(Partida partida, CaminoController caminoController, PersonajeController personajeController, VistaInfo info) {
 
 
-        vistaTablero = new VistaTablero(partida, caminoController, personajeController);
+        vistaTablero = new VistaTablero(partida, caminoController, personajeController, info);
 
         contenedorCentral = vistaTablero;
         contenedorCentral.setAlignment(Pos.CENTER);

@@ -6,9 +6,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-/**
- * Created by jalt on 24/06/17.
- */
+
 public class VistaInfo extends VBox{
 
     private HBox turnos = new HBox();
@@ -17,12 +15,18 @@ public class VistaInfo extends VBox{
     private HBox imagen = new HBox();
     private HBox vida = new HBox();
     private HBox ki = new HBox();
+    private HBox distanciaAtaque = new HBox();
+    private HBox poderPelea = new HBox();
+    private HBox velocidad = new HBox();
     private ImageView imageView = new ImageView();
     private Text turnoActualText = new Text();
     private Text ataquesRestText = new Text();
     private Text movRestText = new Text();
     private Text vidaActualText = new Text();
     private Text kiActualText = new Text();
+    private Text distAtaqueActualText = new Text();
+    private Text poderPeleaActualText = new Text();
+    private Text velocidadActualText = new Text();
     private String imgDir = "vista/imagenes/";
     private String imgExt = ".png";
 
@@ -39,8 +43,14 @@ public class VistaInfo extends VBox{
         vida.getChildren().addAll(vidaText, vidaActualText);
         Text kiText = new Text("Ki actual: ");
         ki.getChildren().addAll(kiText, kiActualText);
+        Text poderPeleaText = new Text("Poder de pelea: ");
+        poderPelea.getChildren().addAll(poderPeleaText, poderPeleaActualText);
+        Text distAtaqueText = new Text("Distancia de ataque: ");
+        distanciaAtaque.getChildren().addAll(distAtaqueText, distAtaqueActualText);
+        Text velocidadText = new Text("Velocidad: ");
+        velocidad.getChildren().addAll(velocidadText, velocidadActualText);
         setDefault();
-        this.getChildren().addAll(turnos, ataques, movimientos, imagen, vida, ki);
+        this.getChildren().addAll(turnos, ataques, movimientos, imagen, vida, ki, poderPelea, distanciaAtaque, velocidad);
 
     }
 
@@ -60,6 +70,9 @@ public class VistaInfo extends VBox{
         setImagenDefault();
         setVidaActual("--");
         setKiActual("--");
+        setDistanciaAtaqueActual("--");
+        setPoderPeleaActual("--");
+        setVelocidadActual("--");
     }
 
     public void setTurno(String turnoText) {
@@ -80,6 +93,18 @@ public class VistaInfo extends VBox{
 
     public void setKiActual(String kiActual) {
         kiActualText.setText(kiActual);
+    }
+
+    public void setPoderPeleaActual(String poderPeleaActual) {
+        poderPeleaActualText.setText(poderPeleaActual);
+    }
+
+    public void setDistanciaAtaqueActual(String distanciaAtaqueActual) {
+        distAtaqueActualText.setText(distanciaAtaqueActual);
+    }
+
+    public void setVelocidadActual(String velocidadActual) {
+        velocidadActualText.setText(velocidadActual);
     }
 
     public void setImagen(String nombreImagen) {

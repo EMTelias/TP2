@@ -12,16 +12,17 @@ public class VistaTablero extends GridPane {
     //private final SeleccionarHandler seleccionarHandler;
     private final CaminoController caminoController;
     private final PersonajeController personajeController;
+    private final VistaInfo info;
     private VistaCasillero[][] tablero;
     private Partida partida;
     private int X_CASILLEROS;
     private int Y_CASILLEROS;
 
-    public VistaTablero(Partida partida, CaminoController caminoController, PersonajeController personajeController) {
+    public VistaTablero(Partida partida, CaminoController caminoController, PersonajeController personajeController, VistaInfo info) {
         this.partida = partida;
         this.caminoController = caminoController;
         this.personajeController = personajeController;
-        //this.seleccionarHandler = seleccionarHandler;
+        this.info = info;
         this.X_CASILLEROS = partida.getTablero().getDimensionX();
         this.Y_CASILLEROS = partida.getTablero().getDimensionY();
         this.tablero = new VistaCasillero[X_CASILLEROS][Y_CASILLEROS];
@@ -32,7 +33,7 @@ public class VistaTablero extends GridPane {
         for (int y = 0; y < Y_CASILLEROS; y++) {
             for (int x = 0; x < X_CASILLEROS; x++) {
                 Casillero casillero = partida.getTablero().getCasillero(new Posicion(x+1,y+1));
-                tablero[x][y] = new VistaCasillero(casillero, caminoController, personajeController);
+                tablero[x][y] = new VistaCasillero(casillero, caminoController, personajeController, info);
                 this.add(tablero[x][y], x,y);
             }
         }

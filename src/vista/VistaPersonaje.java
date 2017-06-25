@@ -15,10 +15,14 @@ import modelo.tablero.Posicion;
 public class VistaPersonaje extends BorderPane{
 
     private final Personaje personaje;
+    private final PersonajeController personajeController;
+    private final VistaInfo info;
     private boolean seleccionado = false;
 
-    public VistaPersonaje(Personaje unPersonaje, PersonajeController personajeController) {
+    public VistaPersonaje(Personaje unPersonaje, PersonajeController personajeController, VistaInfo info) {
         this.personaje = unPersonaje;
+        this.personajeController = personajeController;
+        this.info = info;
         String imgDir = "vista/imagenes/";
         String imgExt = ".png";
         Image imagen = new Image(imgDir + unPersonaje.getClass().getSimpleName() + imgExt);
@@ -31,14 +35,12 @@ public class VistaPersonaje extends BorderPane{
         imageView.setOnMouseClicked(e-> {
             try {
                 personajeController.seleccionarPersonaje(personaje);
+                modificarPanelInfo();
                 if (seleccionado) {
-                    //seleccionarHandler.deseleccionarPersonaje(new Posicion(x,y));
                     imageView.setEffect(null);
                     seleccionado = false;
                     return;
-                }/*else{
-                    seleccionarHandler.seleccionarPersonaje(new Posicion(x, y));
-                }*/
+                }
                 imageView.setEffect(new Glow(0.8));
                 seleccionado = true;
 
@@ -50,5 +52,19 @@ public class VistaPersonaje extends BorderPane{
 
         });
         this.getChildren().add(imageView);
+    }
+
+    private void modificarPanelInfo() {
+        Personaje primerPersonaje = personajeController.verPrimerPersonaje();
+        if (primerPersonaje == personaje) {
+            info.setImagen(personaje.getClass().getSimpleName());
+            info.setVidaActual(Integer.toString(personaje.getVida()));
+            info.setKiActual(Integer.toString(personaje.getKi()));
+            info.setDistanciaAtaqueActual(Integer.toString(personaje.getDistanciaAtaque()));
+            info.setPoderPeleaActual(Integer.toString(personaje.getPoderDePelea()));
+            info.setVelocidadActual(Integer.toString(personaje.getVelocidad()));
+            return;
+        }
+        info.setDefault();
     }
 }
