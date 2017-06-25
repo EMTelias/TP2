@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import modelo.excepciones.acciones.YaMovisteEsteTurnoException;
+import modelo.excepciones.personaje.NoEsSuTurnoException;
 import modelo.excepciones.personaje.NoPuedeMoverAEsaDistanciaException;
 import modelo.excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
 import modelo.excepciones.tablero.CaminoInvalidoException;
@@ -66,7 +67,10 @@ public class BotonMoverHandler implements EventHandler<ActionEvent> {
             consola.setText(unPersonaje.getEquipo().getNombre() + " ya movio este turno!");
         } catch (HuecoEntreCaminoYPersonajeException e){
             consola.setText("El personaje y el camino deben ser contiguos!");
+        } catch (NoEsSuTurnoException e){
+            consola.setText("No es el turno de este personaje.");
         }
+
         personajeController.limpiar();
         caminoController.limpiar();
         vistaTablero.actualizarVista();

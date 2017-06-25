@@ -21,10 +21,6 @@ public class PersonajeController {
             return;
         }
 
-        if(unPersonaje.getEquipo().esSuTurno()==false){
-            throw new NoEsSuTurnoException();
-        }
-
         if (colaPersonajes.size() == 2) {
             throw new NoSePuedeSeleccionarMasDeDosPersonajesException();
         }
