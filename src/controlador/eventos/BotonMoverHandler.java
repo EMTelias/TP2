@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import modelo.excepciones.JuegoTerminadoException;
+import modelo.excepciones.acciones.NoPuedeMoverseSiendoChocolateException;
 import modelo.excepciones.acciones.YaMovisteEsteTurnoException;
 import modelo.excepciones.personaje.NoEsSuTurnoException;
 import modelo.excepciones.personaje.NoPuedeMoverAEsaDistanciaException;
@@ -45,19 +46,6 @@ public class BotonMoverHandler implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        /*consola.setText("");
-    	Posicion posPersonaje = seleccionarHandler.getPosicionPersonajeSeleccionado();
-        try {
-            Camino camino = seleccionarHandler.getCaminoSeleccionado();
-            partida.moverEnCamino(posPersonaje, camino);
-        } catch (CaminoInvalidoException e) {
-            e.printStackTrace();
-        } catch (NoPuedeMoverAEsaDistanciaException e) {
-            consola.setText("No se puede mover a esa distancia." );;
-        } catch (NoPuedeMoverCaminoObstruidoException e) {
-            consola.setText("No se puede mover, el camino se encuentra obstruido");
-        }
-        seleccionarHandler.limpiar();*/
         Equipo equipoJugando = partida.turnoActual();
         Personaje unPersonaje = personajeController.obtenerPersonaje();
         try {
@@ -76,6 +64,8 @@ public class BotonMoverHandler implements EventHandler<ActionEvent> {
             consola.setText("El personaje y el camino deben ser contiguos!");
         } catch (NoEsSuTurnoException e){
             consola.setText("No es el turno de este personaje.");
+        } catch (NoPuedeMoverseSiendoChocolateException e) {
+            consola.setText(unPersonaje.getClass().getSimpleName() + " no puede mover este turno. Es chocolate.");
         } catch (JuegoTerminadoException e) {
             consola.setText("El equipo de los " + equipoJugando.getNombre() + " ha juntado 7 esferas del dragon. FELICITACIONES!");
             new VentanaJuegoTerminado(app);

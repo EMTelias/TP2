@@ -122,7 +122,12 @@ public class Partida {
     }
 
     public void ataqueBasico(Personaje atacante, Personaje atacado) throws NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException {
-        if(turno.yaAtaco()){ throw new YaAtacasteEsteTurnoException(); }
+        if(turno.yaAtaco()){
+            throw new YaAtacasteEsteTurnoException();
+        }
+        if(!esElTurnoDe(atacante)) {
+            throw new NoEsSuTurnoException();
+        }
 
         atacante.atacarA(atacado);
 
@@ -132,7 +137,7 @@ public class Partida {
     }
 
     public void ataqueEspecialEnPosicion(Posicion posAtacante, Posicion posAtacado) throws NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, KiInsuficienteException {
-        if(turno.yaAtaco()){ throw new YaAtacasteEsteTurnoException(); }
+        if(turno.yaAtaco()){throw new YaAtacasteEsteTurnoException(); }
 
         Personaje atacante = this.personajeEnPosicion(posAtacante);
         Personaje atacado = this.personajeEnPosicion(posAtacado);
@@ -144,7 +149,12 @@ public class Partida {
     }
 
     public void ataqueEspecial(Personaje atacante, Personaje atacado) throws NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, KiInsuficienteException {
-        if(turno.yaAtaco()){ throw new YaAtacasteEsteTurnoException(); }
+        if(turno.yaAtaco()){
+            throw new YaAtacasteEsteTurnoException();
+        }
+        if(!esElTurnoDe(atacante)) {
+            throw new NoEsSuTurnoException();
+        }
 
         atacante.ataqueEspecialA(atacado);
 
@@ -165,9 +175,15 @@ public class Partida {
     }
 
     public void mover(Personaje personaje, Camino camino) throws NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, CaminoInvalidoException {
-        if(turno.yaMovio()){ throw new YaMovisteEsteTurnoException(); }
-        if(camino.getPrimerCasillero().distanciaHasta(personaje.getCasillero())>1){ throw new HuecoEntreCaminoYPersonajeException(); }
-        if(personaje.getEquipo().esSuTurno()==false){ throw new NoEsSuTurnoException(); }
+        if(turno.yaMovio()) {
+            throw new YaMovisteEsteTurnoException();
+        }
+        if(camino.getPrimerCasillero().distanciaHasta(personaje.getCasillero())>1) {
+            throw new HuecoEntreCaminoYPersonajeException();
+        }
+        if(!esElTurnoDe(personaje)) {
+            throw new NoEsSuTurnoException();
+        }
         personaje.mover(camino);
 
         turno.mover();
@@ -181,14 +197,17 @@ public class Partida {
     }
 
     public void transformar(Personaje personaje) throws NoPuedeTransformarException, KiInsuficienteException, NoHayProximaTransformacionException {
+        if(!esElTurnoDe(personaje)) {
+            throw new NoEsSuTurnoException();
+        }
         personaje.transformar();
     }
 
+    private boolean esElTurnoDe(Personaje unPersonaje) {
+        return unPersonaje.getEquipo().esSuTurno();
+    }
+
     private void initDeGuerrerosZ() throws CasilleroOcupadoException {
-        //Creo los guerreros Z
-        /*Posicion pos1 = new Posicion(1,1);
-        Posicion pos2 = new Posicion(2,1);
-        Posicion pos3 = new Posicion(3,1);*/
 
         Personaje goku = new Goku(this.tablero.getCasillero(POS_I_GOKU));
         Personaje gohan = new Gohan(this.tablero.getCasillero(POS_I_GOHAN));
@@ -200,10 +219,6 @@ public class Partida {
     }
 
     private void initDeEnemigos() throws CasilleroOcupadoException {
-        //Creo los enemigos
-        /*Posicion pos1 = new Posicion(DIM_ANCHO,this.DIM_ALTO);
-        Posicion pos2 = new Posicion(DIM_ANCHO,this.DIM_ALTO-1);
-        Posicion pos3 = new Posicion(DIM_ANCHO,this.DIM_ALTO-2);*/
 
         Personaje cell = new Cell(this.tablero.getCasillero(POS_I_CELL));
         Personaje majinBoo = new MajinBoo(this.tablero.getCasillero(POS_I_MAJINBOO));

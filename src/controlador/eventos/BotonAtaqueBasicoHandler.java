@@ -8,7 +8,9 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import modelo.excepciones.JuegoTerminadoException;
 import modelo.excepciones.acciones.NoPuedeAtacarMismoEquipoException;
+import modelo.excepciones.acciones.NoPuedeAtacarSiendoChocolateException;
 import modelo.excepciones.acciones.YaAtacasteEsteTurnoException;
+import modelo.excepciones.personaje.NoEsSuTurnoException;
 import modelo.excepciones.personaje.NoPuedeAtacarAEsaDistanciaException;
 import modelo.partida.Partida;
 import modelo.personaje.Personaje;
@@ -40,17 +42,6 @@ public class BotonAtaqueBasicoHandler implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-    	/*consola.setText("");
-        Posicion posAtacante = seleccionarHandler.getPosicionPersonajeSeleccionado();
-        Posicion posAtacado = seleccionarHandler.getPosicionPersonajeSeleccionado();
-        try {
-            partida.atacarEnPosicion(posAtacante, posAtacado);
-        } catch (NoPuedeAtacarMismoEquipoException e) {
-        	consola.setText("No puede atacar a miembro del mismo equipo.");
-        } catch (NoPuedeAtacarAEsaDistanciaException e) {
-        	consola.setText("No puede atacar a esa distancia.");
-        }
-        seleccionarHandler.limpiar();*/
         Equipo equipoJugando = partida.turnoActual();
         Personaje atacante = personajeController.obtenerPersonaje();
         Personaje atacado = personajeController.obtenerPersonaje();
@@ -64,6 +55,10 @@ public class BotonAtaqueBasicoHandler implements EventHandler<ActionEvent> {
             consola.setText(atacante.getClass().getSimpleName() + " no puede atacar a su amigo " + atacado.getClass().getSimpleName() + "!");
         } catch (NoPuedeAtacarAEsaDistanciaException e) {
             consola.setText(atacante.getClass().getSimpleName() + " no puede atacar a esa distancia.");
+        } catch (NoPuedeAtacarSiendoChocolateException e) {
+            consola.setText(atacante.getClass().getSimpleName() + " no puede atacar este turno. Es chocolate.");
+        } catch (NoEsSuTurnoException e){
+            consola.setText("No es el turno de este personaje.");
         } catch (YaAtacasteEsteTurnoException e) {
             consola.setText("El equipo de " + atacante.getClass().getSimpleName() + " ya ataco este turno!");
         } catch (JuegoTerminadoException e) {

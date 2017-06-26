@@ -8,7 +8,10 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import modelo.excepciones.JuegoTerminadoException;
 import modelo.excepciones.acciones.NoPuedeAtacarMismoEquipoException;
+import modelo.excepciones.acciones.NoPuedeMoverseSiendoChocolateException;
+import modelo.excepciones.acciones.NoPuedeUsarAtaqueEspecialSiendoChocolateException;
 import modelo.excepciones.acciones.YaAtacasteEsteTurnoException;
+import modelo.excepciones.personaje.NoEsSuTurnoException;
 import modelo.excepciones.personaje.NoPuedeAtacarAEsaDistanciaException;
 import modelo.excepciones.transformacion.KiInsuficienteException;
 import modelo.partida.Partida;
@@ -41,19 +44,6 @@ public class BotonAtaqueEspecialHandler implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-    	/*consola.setText("");
-        Posicion posAtacante = seleccionarHandler.getPosicionPersonajeSeleccionado();
-        Posicion posAtacado = seleccionarHandler.getPosicionPersonajeSeleccionado();
-        try {
-            partida.ataqueEspecialEnPosicion(posAtacante, posAtacado);
-        } catch (NoPuedeAtacarMismoEquipoException e) {
-        	consola.setText("No puede atacar a miembro del mismo equipo.");
-        } catch (NoPuedeAtacarAEsaDistanciaException e) {
-        	consola.setText("No puede atacar a esa distancia.");
-        } catch (KiInsuficienteException e) {
-        	consola.setText("No tiene Ki suficiente");
-        }
-        seleccionarHandler.limpiar();*/
     	Equipo equipoJugando = partida.turnoActual();
         Personaje atacante = personajeController.obtenerPersonaje();
         Personaje atacado = personajeController.obtenerPersonaje();
@@ -63,6 +53,10 @@ public class BotonAtaqueEspecialHandler implements EventHandler<ActionEvent> {
             consola.setText(atacante.getClass().getSimpleName() + " no puede atacar a su amigo " + atacado.getClass().getSimpleName() + "!");
         } catch (NoPuedeAtacarAEsaDistanciaException e) {
             consola.setText(atacante.getClass().getSimpleName() + " no puede atacar a esa distancia.");
+        } catch (NoPuedeUsarAtaqueEspecialSiendoChocolateException e) {
+            consola.setText(atacante.getClass().getSimpleName() + " no puede usar ataque especial este turno. Es chocolate.");
+        } catch (NoEsSuTurnoException e){
+            consola.setText("No es el turno de este personaje.");
         } catch (KiInsuficienteException e) {
             consola.setText(atacante.getClass().getSimpleName() + " no posee ki suficiente.");
         } catch (YaAtacasteEsteTurnoException e) {

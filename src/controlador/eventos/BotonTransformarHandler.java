@@ -6,6 +6,8 @@ import controlador.SeleccionarHandler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
+import modelo.excepciones.acciones.NoPuedeTransformarseSiendoChocolateException;
+import modelo.excepciones.personaje.NoEsSuTurnoException;
 import modelo.excepciones.transformacion.KiInsuficienteException;
 import modelo.excepciones.transformacion.NoHayProximaTransformacionException;
 import modelo.excepciones.transformacion.NoPuedeTransformarException;
@@ -35,17 +37,6 @@ public class BotonTransformarHandler implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        /*Posicion posPersonaje = seleccionarHandler.getPosicionPersonajeSeleccionado();
-        try {
-            partida.transformarPersonaje(posPersonaje);
-        } catch (NoPuedeTransformarException e) {
-            e.printStackTrace();
-        } catch (KiInsuficienteException e) {
-            e.printStackTrace();
-        } catch (NoHayProximaTransformacionException e) {
-            e.printStackTrace();
-        }
-        seleccionarHandler.limpiar();*/
         Personaje unPersonaje = personajeController.obtenerPersonaje();
         try {
             partida.transformar(unPersonaje);
@@ -55,6 +46,10 @@ public class BotonTransformarHandler implements EventHandler<ActionEvent> {
             consola.setText(unPersonaje.getClass().getSimpleName() + " no posee ki suficiente!");
         } catch (NoHayProximaTransformacionException e) {
             consola.setText(unPersonaje.getClass().getSimpleName() + " esta en su ultima transformacion!");
+        } catch (NoPuedeTransformarseSiendoChocolateException e) {
+            consola.setText(unPersonaje.getClass().getSimpleName() + " no puede transformar este turno. Es chocolate.");
+        } catch (NoEsSuTurnoException e){
+            consola.setText("No es el turno de este personaje.");
         }
         personajeController.limpiar();
         caminoController.limpiar();
