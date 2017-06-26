@@ -2,7 +2,7 @@ package vista;
 
 import controlador.CaminoController;
 import controlador.PersonajeController;
-import controlador.SeleccionarHandler;
+import controlador.eventos.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -13,8 +13,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import modelo.Consumibles.GeneradorDeConsumiblesRandom;
+import modelo.excepciones.tablero.CasilleroOcupadoException;
+import modelo.excepciones.tablero.DimensionDeTableroInvalidoException;
 import modelo.partida.Partida;
-import controlador.eventos.*;
 
 public class ContenedorPrincipal extends BorderPane {
 
@@ -23,7 +25,12 @@ public class ContenedorPrincipal extends BorderPane {
     private GridPane contenedorCentral;
     private Label consola;
     
-    public ContenedorPrincipal(Stage stage, Partida partida, CaminoController caminoController, PersonajeController personajeController) {
+    public ContenedorPrincipal(Stage stage) throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
+
+        Partida partida = crearModelo();
+        CaminoController caminoController = new CaminoController();
+        PersonajeController personajeController = new PersonajeController();
+
         VistaInfo info = new VistaInfo();
         info.setTurno(partida.turnoActual().getNombre());
         info.setAtaques("1");
@@ -113,4 +120,10 @@ public class ContenedorPrincipal extends BorderPane {
         return menuBar;
     }
 
+    private Partida crearModelo() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
+        GeneradorDeConsumiblesRandom generador = new GeneradorDeConsumiblesRandom();
+        Partida partida = new Partida();
+        partida.setGeneradorDeConsumibles(generador);
+        return partida;
+    }
 }

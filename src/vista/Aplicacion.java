@@ -1,17 +1,9 @@
 package vista;
 
-import controlador.CaminoController;
-import controlador.PersonajeController;
-import controlador.SeleccionarHandler;
+import controlador.eventos.AplicacionOnKeyPressEventHandler;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import modelo.Consumibles.GeneradorDeConsumiblesRandom;
-import modelo.Consumibles.GeneradorDeConsumiblesSinActividad;
-import modelo.excepciones.tablero.CasilleroOcupadoException;
-import modelo.excepciones.tablero.DimensionDeTableroInvalidoException;
-import modelo.partida.Partida;
-import controlador.eventos.AplicacionOnKeyPressEventHandler;
 
 public class Aplicacion extends Application {
 
@@ -24,12 +16,7 @@ public class Aplicacion extends Application {
 
         stage.setTitle("Dragon AlgoBall");
 
-        Partida partida = crearModelo();
-        //SeleccionarHandler seleccionarHandler = new SeleccionarHandler(partida);
-        CaminoController caminoController = new CaminoController();
-        PersonajeController personajeController = new PersonajeController();
-
-        ContenedorPrincipal contenedorPrincipal = new ContenedorPrincipal(stage, partida, caminoController, personajeController);
+        ContenedorPrincipal contenedorPrincipal = new ContenedorPrincipal(stage);
         Scene escenaJuego = new Scene(contenedorPrincipal, 800, 600);
 
         AplicacionOnKeyPressEventHandler AplicacionOnKeyPressEventHandler = new AplicacionOnKeyPressEventHandler(stage, contenedorPrincipal.getBarraDeMenu());
@@ -46,12 +33,5 @@ public class Aplicacion extends Application {
 
         stage.show();
 
-    }
-
-    private Partida crearModelo() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
-        GeneradorDeConsumiblesRandom generador = new GeneradorDeConsumiblesRandom();
-        Partida partida = new Partida();
-        partida.setGeneradorDeConsumibles(generador);
-        return partida;
     }
 }
