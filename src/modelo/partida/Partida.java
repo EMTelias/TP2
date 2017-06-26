@@ -103,9 +103,10 @@ public class Partida {
             // si el personaje esta muerto, T and F = F. Si alguno es F, ya no se lanza excepcion luego
             todosMuertos &= personaje.estaMuerto();
         }
-        if (todosMuertos) {
+        if (todosMuertos || (turno.getEquipoActivo().tieneEsferasNecesariasParaGanar())) {
             throw new JuegoTerminadoException();
         }
+
     }
 
     public void atacarEnPosicion(Posicion posAtacante, Posicion posAtacado) throws NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException {
@@ -159,6 +160,7 @@ public class Partida {
         personaje.mover(camino);
 
         turno.mover();
+        revisarVictoria();
         revisarFinDelTurno();
     }
 
@@ -169,6 +171,7 @@ public class Partida {
         personaje.mover(camino);
 
         turno.mover();
+        revisarVictoria();
         revisarFinDelTurno();
     }
 

@@ -182,4 +182,10 @@ public abstract class Personaje {
 		transformacion.pasarTurno();
 		
 	}
+
+	public void sumarEsferaASuEquipo(){
+    	if(this.equipo!=null) {
+			equipo.sumarEsfera();
+		}
+	}
 }

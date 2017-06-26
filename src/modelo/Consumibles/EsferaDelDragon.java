@@ -1,6 +1,7 @@
 package modelo.Consumibles;
 
 import modelo.excepciones.tablero.CasilleroOcupadoException;
+import modelo.personaje.Personaje;
 import modelo.tablero.Casillero;
 
 public class EsferaDelDragon extends Efecto {
@@ -35,5 +36,11 @@ public class EsferaDelDragon extends Efecto {
 			cantidadDeTurnosActual = cantidadDeTurnosActual+1;
 			return this;
 		}
+	}
+
+	@Override
+	public void aplicarConsumibleA(Personaje unPersonaje) {
+		this.aplicarEfectoA(unPersonaje);
+        unPersonaje.sumarEsferaASuEquipo();
 	}
 }
