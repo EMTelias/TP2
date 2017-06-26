@@ -808,7 +808,7 @@ public class PersonajeTest {
 		Partida partida = new Partida();
 		partida.pasar();//Simulo estar en el turno de majinBoo
 
-		Personaje majinBoo = new MajinBoo(new Casillero(new Posicion(1, 1)));
+		Personaje majinBoo = new MajinBoo(new Casillero(new Posicion(3, 1)));
 		Personaje goku = partida.personajeEnPosicion(new Posicion(1,1));
 
 		majinBoo.aumentarKi(40);
@@ -835,7 +835,7 @@ public class PersonajeTest {
 	@Test
 	public void testMajinBooTransformaEnChocolateAGokuQuienTiene50DeKiYRecienEnSuCuartoTurnoTendria55DeKi() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException, NoHayProximaTransformacionException, NoPuedeTransformarException, CaminoInvalidoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, DimensionDeTableroInvalidoException {
 		Partida partida = new Partida();
-		Personaje majinBoo = new MajinBoo(new Casillero(new Posicion(1, 1)));
+		Personaje majinBoo = new MajinBoo(new Casillero(new Posicion(3, 1)));
 		Personaje goku = partida.personajeEnPosicion(new Posicion(1, 1));
 		goku.aumentarKi(50);
 		partida.pasar();//Ahora estoy en el turno de majinBoo..
@@ -856,18 +856,20 @@ public class PersonajeTest {
 		Partida partida = new Partida();
 		Tablero tablero = partida.getTablero();
 		ArrayList<Casillero> casilleros = new ArrayList<>();
+		Personaje goku = partida.personajeEnPosicion(new Posicion(1,1));
+		Personaje cell = partida.personajeEnPosicion(new Posicion(15,15));
 		for(int i = 2; i <= 13; i++) {
 			casilleros.add(tablero.getCasillero(new Posicion(i,i)));
-			partida.moverEnCamino(new Posicion(i-1, i-1), new Camino(casilleros));
+			partida.mover(goku, new Camino(casilleros));
 			partida.pasar();
 			partida.pasar();
 			casilleros.clear();
 		}
 
 		//Aca tengo a goku en el 13,13 y a cell en el 15,15
-		partida.personajeEnPosicion(new Posicion(15,15)).reducirVida(499);//Lo dejo en 1
-		Assert.assertTrue(!partida.getTablero().estaVacioEn(new Posicion(15,15)));
-		partida.atacarEnPosicion(new Posicion(13,13), new Posicion(15,15));//Lo mato
+		cell.reducirVida(499);//Lo dejo en 1
+		Assert.assertFalse(partida.getTablero().estaVacioEn(new Posicion(15,15)));
+		partida.ataqueBasico(goku, cell);//Lo mato
 		Assert.assertTrue(partida.getTablero().estaVacioEn(new Posicion(15,15)));
 
 	}

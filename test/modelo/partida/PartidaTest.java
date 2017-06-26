@@ -74,10 +74,11 @@ public class PartidaTest {
         Tablero tablero = partida.getTablero();
         ArrayList<Casillero> listaC = new ArrayList<>();
         // Goku esta en Posicion(1,1). Lo muevo a Posicion(2,2)
+        Personaje goku = partida.personajeEnPosicion(Partida.POS_I_GOKU);
         Posicion nuevaPosGoku = new Posicion(2,2);
         listaC.add(tablero.getCasillero(nuevaPosGoku));
         Camino camino = new Camino(listaC);
-        partida.moverEnCamino(Partida.POS_I_GOKU,camino);
+        partida.mover(goku,camino);
 
         Assert.assertTrue(Goku.class == partida.personajeEnPosicion(nuevaPosGoku).getClass());
     }
@@ -88,17 +89,17 @@ public class PartidaTest {
         Tablero tablero = partida.getTablero();
         ArrayList<Casillero> casilleros = new ArrayList<>();
         // Goku se mueve en forma diagonal hasta Pos(13,13) si DIM modelo.tablero es 15x15
+        Personaje goku = partida.personajeEnPosicion(Partida.POS_I_GOKU);
+        Personaje cell = partida.personajeEnPosicion(Partida.POS_I_CELL);
         for(int i = 2; i <= (Partida.DIM_ALTO-2); i++) {
             casilleros.add(tablero.getCasillero(new Posicion(i,i)));
-            partida.moverEnCamino(new Posicion(i-1, i-1), new Camino(casilleros));
+            partida.mover(goku, new Camino(casilleros));
             partida.pasar();
             partida.pasar();
             casilleros.clear();
         }
-        Posicion nuevaPosGoku = new Posicion(Partida.DIM_ANCHO - 2,Partida.DIM_ALTO - 2);
-        partida.atacarEnPosicion(nuevaPosGoku, Partida.POS_I_CELL);
+        partida.ataqueBasico(goku, cell);
         //goku ataca a cell y le genera 20 de danio
-        Personaje cell = tablero.getCasillero(Partida.POS_I_CELL).getPersonaje();
         Assert.assertEquals(480, cell.getVida());
 
     }
@@ -109,17 +110,17 @@ public class PartidaTest {
         Tablero tablero = partida.getTablero();
         ArrayList<Casillero> casilleros = new ArrayList<>();
         // Goku se mueve en forma diagonal hasta Pos(13,13) si DIM modelo.tablero es 15x15
+        Personaje goku = partida.personajeEnPosicion(Partida.POS_I_GOKU);
+        Personaje cell = partida.personajeEnPosicion(Partida.POS_I_CELL);
         for(int i = 2; i <= (Partida.DIM_ALTO-2); i++) {
             casilleros.add(tablero.getCasillero(new Posicion(i,i)));
-            partida.moverEnCamino(new Posicion(i-1, i-1), new Camino(casilleros));
+            partida.mover(goku, new Camino(casilleros));
             partida.pasar();
             partida.pasar();
             casilleros.clear();
         }
-        Posicion nuevaPosGoku = new Posicion(Partida.DIM_ANCHO - 2,Partida.DIM_ALTO - 2);
-        partida.ataqueEspecialEnPosicion(nuevaPosGoku, Partida.POS_I_CELL);
+        partida.ataqueEspecial(goku, cell);
         //goku usa ataque especial a cell y le genera 20*1.5 de danio
-        Personaje cell = tablero.getCasillero(Partida.POS_I_CELL).getPersonaje();
         Assert.assertEquals(470, cell.getVida());
 
     }
@@ -131,9 +132,9 @@ public class PartidaTest {
             partida.pasar(); // paso mi turno
             partida.pasar(); // mi oponente pasa su turno
         }
-        Personaje goku = partida.getTablero().getCasillero(Partida.POS_I_GOKU).getPersonaje();
+        Personaje goku = partida.personajeEnPosicion(Partida.POS_I_GOKU);
         int velocidadPrevia = goku.getVelocidad();
-        partida.transformarPersonaje(Partida.POS_I_GOKU);
+        partida.transformar(goku);
         Assert.assertEquals(1, goku.getVelocidad() - velocidadPrevia);
     }
 
@@ -144,7 +145,8 @@ public class PartidaTest {
             partida.pasar(); // paso mi turno
             partida.pasar(); // mi oponente pasa su turno
         }
-        partida.transformarPersonaje(Partida.POS_I_GOKU);
+        Personaje goku = partida.personajeEnPosicion(Partida.POS_I_GOKU);
+        partida.transformar(goku);
 
     }
 
@@ -155,20 +157,21 @@ public class PartidaTest {
         Tablero tablero = partida.getTablero();
         ArrayList<Casillero> casilleros = new ArrayList<>();
         // Goku se mueve en forma diagonal hasta Pos(13,13) si DIM modelo.tablero es 15x15
+        Personaje goku = partida.personajeEnPosicion(Partida.POS_I_GOKU);
+        Personaje cell = partida.personajeEnPosicion(Partida.POS_I_CELL);
         for(int i = 2; i <= (Partida.DIM_ALTO-2); i++) {
             casilleros.add(tablero.getCasillero(new Posicion(i, i)));
-            partida.moverEnCamino(new Posicion(i - 1, i - 1), new Camino(casilleros));
+            partida.mover(goku, new Camino(casilleros));
             partida.pasar();
             partida.pasar();
             casilleros.clear();
         }
-        Posicion nuevaPosGoku = new Posicion(Partida.DIM_ANCHO - 2,Partida.DIM_ALTO - 2);
         //Mato a los otros 2 enemigos y dejo a cell en 1 de vida(15,15)
         partida.personajeEnPosicion(Partida.POS_I_CELL).reducirVida(499);
         partida.personajeEnPosicion(Partida.POS_I_MAJINBOO).reducirVida(300);
         partida.personajeEnPosicion(Partida.POS_I_FREEZER).reducirVida(400);
 
-        partida.atacarEnPosicion(nuevaPosGoku, Partida.POS_I_CELL);
+        partida.ataqueBasico(goku, cell);
  
     }
 
