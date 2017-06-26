@@ -54,4 +54,12 @@ public class Turno {
     public void mover() {
         movimientoYaEjecutado = true;
     }
+
+    public int getAtaquesRestantes() {
+        return ataqueYaEjecutado? 0 : 1;
+    }
+
+    public int getMovimientosRestantes() {
+        return movimientoYaEjecutado? 0 : 1;
+    }
 }

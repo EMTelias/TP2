@@ -69,7 +69,7 @@ public class BotonAtaqueBasicoHandler implements EventHandler<ActionEvent> {
         personajeController.limpiar();
         caminoController.limpiar();
         if (equipoJugando.getNombre().equals(partida.turnoActual().getNombre())) {
-            info.setAtaques("0");
+            info.setAtaques(Integer.toString(partida.ataquesRestantes()));
         } else {
             consola.setText("Comienza el turno de los " + partida.turnoActual().getNombre());
             info.setTurno(partida.turnoActual().getNombre());

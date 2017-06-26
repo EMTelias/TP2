@@ -110,4 +110,32 @@ public class TurnoTest {
         partida.mover(goku, new Camino(casilleros));
 
     }
+
+    @Test
+    public void testCreoUnTurnoYAtacoEntoncesAtaquesRestantesEs0() {
+        Turno turno = new Turno(new Equipo("equipo 1"), new Equipo("equipo2"));
+        turno.atacar();
+        Assert.assertEquals(0, turno.getAtaquesRestantes());
+    }
+
+    @Test
+    public void testCreoUnTurnoYNoAtacoEntoncesAtaquesRestantesEs1() {
+        Turno turno = new Turno(new Equipo("equipo 1"), new Equipo("equipo2"));
+
+        Assert.assertEquals(1, turno.getAtaquesRestantes());
+    }
+
+    @Test
+    public void testCreoUnTurnoYMuevoEntoncesMovimientosRestantesEs0() {
+        Turno turno = new Turno(new Equipo("equipo 1"), new Equipo("equipo2"));
+        turno.mover();
+        Assert.assertEquals(0, turno.getMovimientosRestantes());
+    }
+
+    @Test
+    public void testCreoUnTurnoYNoMuevoEntoncesMovimientosRestantesEs1() {
+        Turno turno = new Turno(new Equipo("equipo 1"), new Equipo("equipo2"));
+
+        Assert.assertEquals(1, turno.getMovimientosRestantes());
+    }
 }

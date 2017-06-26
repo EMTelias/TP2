@@ -75,7 +75,7 @@ public class BotonMoverHandler implements EventHandler<ActionEvent> {
         caminoController.limpiar();
 
         if (equipoJugando.getNombre().equals(partida.turnoActual().getNombre())) {
-            info.setMovimientos("0");
+            info.setMovimientos(Integer.toString(partida.movimientosRestantes()));
         } else {
             consola.setText("Comienza el turno de los " + partida.turnoActual().getNombre());
             info.setTurno(partida.turnoActual().getNombre());

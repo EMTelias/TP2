@@ -108,6 +108,14 @@ public class Partida {
 
     }
 
+    public int ataquesRestantes() {
+        return turno.getAtaquesRestantes();
+    }
+
+    public int movimientosRestantes() {
+        return turno.getMovimientosRestantes();
+    }
+
 
     public void ataqueBasico(Personaje atacante, Personaje atacado) throws NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException {
         if(turno.yaAtaco()){
