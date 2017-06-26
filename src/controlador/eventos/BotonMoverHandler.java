@@ -59,11 +59,11 @@ public class BotonMoverHandler implements EventHandler<ActionEvent> {
         } catch (NoPuedeMoverCaminoObstruidoException e) {
             consola.setText("Camino obstruido no se puede recorrer");
         } catch (YaMovisteEsteTurnoException e) {
-            consola.setText("El equipo de " + unPersonaje.getEquipo().getNombre() + " ya movio este turno!");
+            consola.setText("El equipo de " + unPersonaje.getClass().getSimpleName() + " ya movio este turno!");
         } catch (HuecoEntreCaminoYPersonajeException e){
             consola.setText("El personaje y el camino deben ser contiguos!");
         } catch (NoEsSuTurnoException e){
-            consola.setText("No es el turno de este personaje.");
+            consola.setText("No es el turno de " + unPersonaje.getClass().getSimpleName());
         } catch (NoPuedeMoverseSiendoChocolateException e) {
             consola.setText(unPersonaje.getClass().getSimpleName() + " no puede mover este turno. Es chocolate.");
         } catch (JuegoTerminadoException e) {

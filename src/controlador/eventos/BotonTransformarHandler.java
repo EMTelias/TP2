@@ -40,6 +40,7 @@ public class BotonTransformarHandler implements EventHandler<ActionEvent> {
         Personaje unPersonaje = personajeController.obtenerPersonaje();
         try {
             partida.transformar(unPersonaje);
+            consola.setText( unPersonaje.getClass().getSimpleName() + " se ha transformado!");
         } catch (NoPuedeTransformarException e) {
             consola.setText("No se cumplen condiciones de transformacion!");
         } catch (KiInsuficienteException e) {
