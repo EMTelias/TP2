@@ -1,10 +1,6 @@
 package modelo.excepciones.tablero;
 
-public class CasilleroOcupadoException extends Exception {
+public class CasilleroOcupadoException extends RuntimeException {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 }

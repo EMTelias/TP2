@@ -3,18 +3,13 @@ package vista;
 
 import controlador.CaminoController;
 import controlador.PersonajeController;
-import controlador.SeleccionarHandler;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import modelo.excepciones.personaje.NoSeSeleccionoNingunPersonajeException;
 import modelo.tablero.Casillero;
-import modelo.tablero.Posicion;
 
 public class VistaCasillero extends Pane {
     private final Casillero casillero;
-    //private final SeleccionarHandler seleccionarHandler;
     private final CaminoController caminoController;
     private final PersonajeController personajeController;
     private final VistaInfo info;
@@ -41,17 +36,7 @@ public class VistaCasillero extends Pane {
             }
             border.setFill(Color.DARKSEAGREEN);
             seleccionado = true;
-            /*try {
-                seleccionarHandler.seleccionarCasillero(new Posicion(x, y));
-                if (seleccionado) {
-                    reestablecerCasillero();
-                    return;
-                }
-                border.setFill(Color.DARKSEAGREEN);
-                seleccionado = true;
-            } catch (NoSeSeleccionoNingunPersonajeException ex){
-                ex.printStackTrace();
-            }*/
+
         });
         this.getChildren().add(border);
         this.agregarPersonaje(casillero);
@@ -59,7 +44,7 @@ public class VistaCasillero extends Pane {
     }
 
     private void agregarPersonaje(Casillero casillero) {
-        //this.getChildren().remove(personaje);
+
         if (casillero.getPersonaje() == null) {
             personaje = null;
             return;
@@ -69,7 +54,6 @@ public class VistaCasillero extends Pane {
     }
 
     private void agregarConsumible(Casillero casillero) {
-        //this.getChildren().remove(consumible);
         if (casillero.getConsumible() == null) {
             consumible = null;
             return;

@@ -14,7 +14,7 @@ public class Tablero {
 	private int dimensionY;
 	
 	
-	public Tablero(int dimensionX, int dimensionY) throws DimensionDeTableroInvalidoException {
+	public Tablero(int dimensionX, int dimensionY) {
 		if ((dimensionX <= 0) || (dimensionY <= 0) ) throw new DimensionDeTableroInvalidoException();
 		tablero = new HashMap<Posicion,Casillero>();
 				
@@ -34,10 +34,6 @@ public class Tablero {
 		return casillero.estaVacio();
 	}
 
-	public void colocar(Personaje goku, Posicion posicion) throws CasilleroOcupadoException {
-		Casillero casillero = tablero.get(posicion);
-		casillero.colocar(goku);
-	}
 
 	public Casillero getCasillero(Posicion posicion) {
 		return tablero.get(posicion);

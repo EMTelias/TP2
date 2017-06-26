@@ -1,10 +1,6 @@
 package modelo.excepciones.tablero;
 
-public class CaminoInvalidoException extends Exception {
+public class CaminoInvalidoException extends RuntimeException {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 }

@@ -1,10 +1,6 @@
 package modelo.excepciones.personaje;
 
-public class NoPuedeMoverCaminoObstruidoException extends Exception {
+public class NoPuedeMoverCaminoObstruidoException extends RuntimeException {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 }

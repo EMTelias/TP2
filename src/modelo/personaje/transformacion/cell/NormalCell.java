@@ -11,7 +11,7 @@ public class NormalCell extends Transformacion{
     protected static final int distanciaAtaque = 3;
     protected static final int velocidad = 2;
     protected static final Transformacion proximaTransformacion = new SemiPerfectoCell();
-    protected static final int kiNecesarioTransformar = 0; //necesita absorber, implementar luego
+    protected static final int kiNecesarioTransformar = 0;
     protected static final int cantidadAbsorberTransformar = 4;
 
     public NormalCell() {
@@ -19,7 +19,7 @@ public class NormalCell extends Transformacion{
     }
 
     @Override
-    public Transformacion transformar(Personaje unPersonaje) throws NoPuedeTransformarException {
+    public Transformacion transformar(Personaje unPersonaje)  {
         if (!cumpleRequisitoTransformacion( (Cell) unPersonaje )) {
             throw new NoPuedeTransformarException();
         }

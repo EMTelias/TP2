@@ -15,7 +15,7 @@ public class Cell extends Personaje {
     protected int absorber = 0;
     protected final int kiAtaqueEspecial = 5;
 
-    public Cell(Casillero unCasillero) throws CasilleroOcupadoException {
+    public Cell(Casillero unCasillero) {
     	this.colocarEnCasillero(unCasillero);
         transformacion = new NormalCell();
         vida = 500;
@@ -32,11 +32,11 @@ public class Cell extends Personaje {
         ataqueEspecialMap.put(MajinBoo.class, (x) -> ataqueEspecialAAmigo(x));
     }
 
-    private void ataqueEspecialAAmigo(Personaje otroPersonaje) throws NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, KiInsuficienteException {
+    private void ataqueEspecialAAmigo(Personaje otroPersonaje) {
         throw new NoPuedeAtacarMismoEquipoException();
     }
 
-    private void ataqueEspecialAOponente(Personaje otroPersonaje) throws NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, KiInsuficienteException {
+    private void ataqueEspecialAOponente(Personaje otroPersonaje) {
         if (!tieneSuficienteKi(kiAtaqueEspecial)) {
             throw new KiInsuficienteException();
         }

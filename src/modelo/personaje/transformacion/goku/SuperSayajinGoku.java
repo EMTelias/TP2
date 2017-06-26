@@ -16,7 +16,7 @@ public class SuperSayajinGoku extends Transformacion {
     }
 
     @Override
-    public Transformacion transformar(Personaje unPersonaje) throws NoHayProximaTransformacionException {
+    public Transformacion transformar(Personaje unPersonaje) {
         throw new NoHayProximaTransformacionException();
     }
 }

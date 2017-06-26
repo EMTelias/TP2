@@ -19,7 +19,7 @@ public class Ataque implements Command{
     }
 
     @Override
-    public void execute() throws NoPuedeAtacarAEsaDistanciaException{
+    public void execute() {
         this.verificarPoderDePelea();
         this.verificarDistancias();
         int damage = this.obtenerDanioFinal();
@@ -32,7 +32,7 @@ public class Ataque implements Command{
         }
     }
 
-    private void verificarDistancias() throws NoPuedeAtacarAEsaDistanciaException {
+    private void verificarDistancias() {
         if (this.atacante.distanciaA(this.atacado) > this.atacante.getDistanciaAtaque()) {
             throw new NoPuedeAtacarAEsaDistanciaException();
         }

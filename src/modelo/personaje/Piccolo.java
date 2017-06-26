@@ -15,7 +15,7 @@ public class Piccolo extends Personaje {
     protected final int kiAtaqueEspecial = 10;
     protected final double multMinVidaParaAyudaGohan = 0.3;
 
-    public Piccolo(Casillero unCasillero) throws CasilleroOcupadoException {
+    public Piccolo(Casillero unCasillero) {
     	this.colocarEnCasillero(unCasillero);
         transformacion = new NormalPiccolo();
         vida = 500;
@@ -32,11 +32,11 @@ public class Piccolo extends Personaje {
         ataqueEspecialMap.put(MajinBoo.class, (x) -> ataqueEspecialAOponente(x));
     }
 
-    private void ataqueEspecialAAmigo(Personaje otroPersonaje) throws NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, KiInsuficienteException {
+    private void ataqueEspecialAAmigo(Personaje otroPersonaje) {
         throw new NoPuedeAtacarMismoEquipoException();
     }
 
-    private void ataqueEspecialAOponente(Personaje otroPersonaje) throws NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, KiInsuficienteException {
+    private void ataqueEspecialAOponente(Personaje otroPersonaje) {
         if (!tieneSuficienteKi(kiAtaqueEspecial)) {
             throw new KiInsuficienteException();
         }
@@ -45,20 +45,6 @@ public class Piccolo extends Personaje {
         reducirKi(kiAtaqueEspecial);
 
     }
-    /*public void transformar(EstadoGuerrerosZ estado) throws NoPuedeTransformarException, NoHayProximaTransformacionException, KiInsuficienteException {
-        if (estado.puedeTransformar(this)){
-            this.modelo.personaje.transformacion = modelo.personaje.transformacion.transformar(this);
-        }else{
-            throw new NoPuedeTransformarException();
-        }
-    }
-    public boolean primeraTransformacion() {
-        if (this.modelo.personaje.transformacion.getClass() == NormalPiccolo.class) {
-            return true;
-        } else {
-            return false;
-        }
-    }*/
 
     public boolean necesitaAyudaDeGohan() {
         return this.getVida() < (VIDA_MAX*multMinVidaParaAyudaGohan);

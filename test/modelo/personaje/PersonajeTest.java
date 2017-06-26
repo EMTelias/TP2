@@ -34,7 +34,7 @@ public class PersonajeTest {
 
 	// --------- Tests de movimiento ----------------
 	@Test
-	public void testGokuEnModoNormalSeMueve2CasillerosEnUnCaminoDespejadoNoDevuelveExcepcion() throws DimensionDeTableroInvalidoException, CasilleroOcupadoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, CaminoInvalidoException {
+	public void testGokuEnModoNormalSeMueve2CasillerosEnUnCaminoDespejadoNoDevuelveExcepcion() {
 		Casillero casillero1 = new Casillero(new Posicion(1, 1));
 		Casillero casillero2 = new Casillero(new Posicion(1, 2));
 		Casillero casillero3 = new Casillero(new Posicion(1, 3));
@@ -52,7 +52,7 @@ public class PersonajeTest {
 	}
 
 	@Test(expected = NoPuedeMoverAEsaDistanciaException.class)
-	public void testGokuEnModoNormalSeMueve3CasillerosExcediendoVelocidadDevuelveNoPuedeMoverAEsaDistanciaException() throws DimensionDeTableroInvalidoException, CasilleroOcupadoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, CaminoInvalidoException {
+	public void testGokuEnModoNormalSeMueve3CasillerosExcediendoVelocidadDevuelveNoPuedeMoverAEsaDistanciaException() {
 		Casillero casillero1 = new Casillero(new Posicion(1, 1));
 		Casillero casillero2 = new Casillero(new Posicion(1, 2));
 		Casillero casillero3 = new Casillero(new Posicion(1, 3));
@@ -70,7 +70,7 @@ public class PersonajeTest {
 	}
 
 	@Test
-	public void testGokuEnModoKaioKenSeMueve3CasillerosEnUnCaminoDespejadoNoDevuelveExcepcion() throws CasilleroOcupadoException, CaminoInvalidoException, NoPuedeMoverCaminoObstruidoException, NoPuedeMoverAEsaDistanciaException, NoHayProximaTransformacionException, KiInsuficienteException, NoPuedeTransformarException {
+	public void testGokuEnModoKaioKenSeMueve3CasillerosEnUnCaminoDespejadoNoDevuelveExcepcion() {
 		Casillero casillero1 = new Casillero(new Posicion(1, 1));
 		Casillero casillero2 = new Casillero(new Posicion(1, 2));
 		Casillero casillero3 = new Casillero(new Posicion(1, 3));
@@ -92,7 +92,7 @@ public class PersonajeTest {
 	}
 
 	@Test(expected = NoPuedeMoverAEsaDistanciaException.class)
-	public void testGokuEnModoKaioKenSeMueve4CasillerosExcediendoVelocidadDevuelveNoPuedeMoverAEsaDistanciaException() throws CasilleroOcupadoException, CaminoInvalidoException, NoHayProximaTransformacionException, KiInsuficienteException, NoPuedeTransformarException, NoPuedeMoverCaminoObstruidoException, NoPuedeMoverAEsaDistanciaException {
+	public void testGokuEnModoKaioKenSeMueve4CasillerosExcediendoVelocidadDevuelveNoPuedeMoverAEsaDistanciaException() {
 		Casillero casillero1 = new Casillero(new Posicion(1, 1));
 		Casillero casillero2 = new Casillero(new Posicion(1, 2));
 		Casillero casillero3 = new Casillero(new Posicion(1, 3));
@@ -116,7 +116,7 @@ public class PersonajeTest {
 	}
 
 	@Test(expected = NoPuedeMoverCaminoObstruidoException.class)
-	public void testGokuEnModoNormalQuiereMoverPeroEstaGohanEnMedioDelCaminoDevuelveNoPuedeMoverCaminoObstruidoException() throws CasilleroOcupadoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, CaminoInvalidoException {
+	public void testGokuEnModoNormalQuiereMoverPeroEstaGohanEnMedioDelCaminoDevuelveNoPuedeMoverCaminoObstruidoException() {
 		Casillero casillero1 = new Casillero(new Posicion(1, 1));
 		Casillero casillero2 = new Casillero(new Posicion(1, 2));
 		Casillero casillero3 = new Casillero(new Posicion(1, 3));
@@ -133,7 +133,7 @@ public class PersonajeTest {
 	}
 
 	@Test(expected = NoPuedeMoverCaminoObstruidoException.class)
-	public void testGokuEnModoNormalEnElCasilleroDestinoEstaGohanDevuelveNoPuedeMoverCaminoObstruidoException() throws CasilleroOcupadoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, CaminoInvalidoException {
+	public void testGokuEnModoNormalEnElCasilleroDestinoEstaGohanDevuelveNoPuedeMoverCaminoObstruidoException() {
 		Casillero casillero1 = new Casillero(new Posicion(1, 1));
 		Casillero casillero2 = new Casillero(new Posicion(1, 2));
 		Casillero casillero3 = new Casillero(new Posicion(1, 3));
@@ -153,7 +153,7 @@ public class PersonajeTest {
 	//Tests de transformacion por ki de los personajes
 
 	@Test
-	public void testCreoUnGokuNormalYLoTransformoEnKaioKenGokuEntoncesSuKiDisminuye20() throws CasilleroOcupadoException, NoHayProximaTransformacionException, KiInsuficienteException, NoPuedeTransformarException {
+	public void testCreoUnGokuNormalYLoTransformoEnKaioKenGokuEntoncesSuKiDisminuye20() {
 		Personaje goku = new Goku(new Casillero(new Posicion(1, 1)));
 		goku.aumentarKi(20);
 
@@ -162,7 +162,7 @@ public class PersonajeTest {
 	}
 
 	@Test
-	public void testCreoUnGokuNormalYLoTransformoEnKaioKenGokuEntoncesSuTransformacionEsKaioKenGoku() throws CasilleroOcupadoException, NoHayProximaTransformacionException, KiInsuficienteException, NoPuedeTransformarException {
+	public void testCreoUnGokuNormalYLoTransformoEnKaioKenGokuEntoncesSuTransformacionEsKaioKenGoku() {
 		Goku goku = new Goku(new Casillero(new Posicion(1, 1)));
 		goku.aumentarKi(20);
 
@@ -171,20 +171,20 @@ public class PersonajeTest {
 	}
 
 	@Test(expected = KiInsuficienteException.class)
-	public void testCreoUnGokuNormalYLoTransformoEnKaioKenGokuSinKiSuficienteEntoncesLanzaNoPuedeTransformarKiInsuficiente() throws NoHayProximaTransformacionException, CasilleroOcupadoException, KiInsuficienteException, NoPuedeTransformarException {
+	public void testCreoUnGokuNormalYLoTransformoEnKaioKenGokuSinKiSuficienteEntoncesLanzaNoPuedeTransformarKiInsuficiente() {
 		Personaje goku = new Goku(new Casillero(new Posicion(1, 1)));
 		goku.transformar();
 	}
 
 	@Test(expected = KiInsuficienteException.class)
-	public void testCreoUnGohanNormalYLoTransformoEnSuperSayajinGohanSinKiSuficienteEntoncesLanzaNoPuedeTransformarKiInsuficiente() throws NoHayProximaTransformacionException, CasilleroOcupadoException, KiInsuficienteException, NoPuedeTransformarException {
+	public void testCreoUnGohanNormalYLoTransformoEnSuperSayajinGohanSinKiSuficienteEntoncesLanzaNoPuedeTransformarKiInsuficiente() {
 		Personaje gohan = new Gohan(new Casillero(new Posicion(1, 1)));
 		gohan.transformar();
 	}
 
 
 	@Test(expected = NoHayProximaTransformacionException.class)
-	public void testCreoUnGokuSuperSayajinYLoTransformoSinTenerProximaTransformacionEntoncesLanzaNoHayProximaTransformacion() throws CasilleroOcupadoException, NoHayProximaTransformacionException, KiInsuficienteException, NoPuedeTransformarException {
+	public void testCreoUnGokuSuperSayajinYLoTransformoSinTenerProximaTransformacionEntoncesLanzaNoHayProximaTransformacion() {
 		Personaje goku = new Goku(new Casillero(new Posicion(1, 1)));
 		goku.transformacion = new SuperSayajinGoku();
 		goku.transformar();
@@ -192,14 +192,14 @@ public class PersonajeTest {
 
 
 	@Test(expected = NoHayProximaTransformacionException.class)
-	public void testCreoUnGohanSuperSayajin2YLoTransformoSinTenerProximaTransformacionEntoncesLanzaNoHayProximaTransformacion() throws CasilleroOcupadoException, NoHayProximaTransformacionException, KiInsuficienteException, NoPuedeTransformarException {
+	public void testCreoUnGohanSuperSayajin2YLoTransformoSinTenerProximaTransformacionEntoncesLanzaNoHayProximaTransformacion() {
 		Personaje gohan = new Gohan(new Casillero(new Posicion(1, 1)));
 		gohan.transformacion = new SuperSayajin2Gohan();
 		gohan.transformar();
 	}
 
 	@Test
-	public void testTransformoAGokuCon80DeKiYSuKiTieneQueBajarA60() throws NoHayProximaTransformacionException, CasilleroOcupadoException, KiInsuficienteException, NoPuedeTransformarException {
+	public void testTransformoAGokuCon80DeKiYSuKiTieneQueBajarA60() {
 		Personaje goku = new Goku(new Casillero(new Posicion(1, 1)));
 		goku.aumentarKi(80);
 		goku.transformar();
@@ -208,7 +208,7 @@ public class PersonajeTest {
 
 
 	@Test
-	public void testTransformoAGokuNormal2VecesYVerificoQueSuKiPaseDe100A30() throws CasilleroOcupadoException, NoHayProximaTransformacionException, KiInsuficienteException, NoPuedeTransformarException {
+	public void testTransformoAGokuNormal2VecesYVerificoQueSuKiPaseDe100A30() {
 		Personaje goku = new Goku(new Casillero(new Posicion(1, 1)));
 		goku.aumentarKi(100);
 		goku.transformar();
@@ -217,7 +217,7 @@ public class PersonajeTest {
 	}
 
 	@Test
-	public void testTransformoAGokuNormal2VecesYVerificoQueSuTransformacionSeaSuperSayajinGoku() throws CasilleroOcupadoException, NoHayProximaTransformacionException, KiInsuficienteException, NoPuedeTransformarException {
+	public void testTransformoAGokuNormal2VecesYVerificoQueSuTransformacionSeaSuperSayajinGoku() {
 		Personaje goku = new Goku(new Casillero(new Posicion(1, 1)));
 		goku.aumentarKi(100);
 		goku.transformar();
@@ -226,7 +226,7 @@ public class PersonajeTest {
 	}
 
 	@Test (expected = NoHayProximaTransformacionException.class)
-	public void testTransformoAFreezerNormal3VecesDeberiaLanzarNoHayProximaTransformacionException() throws CasilleroOcupadoException, NoPuedeTransformarException, KiInsuficienteException, NoHayProximaTransformacionException {
+	public void testTransformoAFreezerNormal3VecesDeberiaLanzarNoHayProximaTransformacionException() {
 		Personaje freezer = new Freezer(new Casillero(new Posicion(1,1)));
 		freezer.aumentarKi(70);
 		freezer.transformar();
@@ -237,7 +237,7 @@ public class PersonajeTest {
 
 	// Tests de ataques basicos entre personajes
 	@Test
-	public void testGokuNormalAtacaConElAtaqueBasicoAFreezerNormalYLeDejaLaVidaEn380() throws NoPuedeAtacarAEsaDistanciaException, CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException {
+	public void testGokuNormalAtacaConElAtaqueBasicoAFreezerNormalYLeDejaLaVidaEn380() {
 		Personaje goku = new Goku(new Casillero(new Posicion(2, 2)));
 		Personaje freezer = new Freezer(new Casillero(new Posicion(2, 3)));
 
@@ -248,7 +248,7 @@ public class PersonajeTest {
 
 
 	@Test
-	public void testGokuNormalAtacaConElAtaqueBasicoAFreezerSegundaFormaYLeDejaLaVidaEn380() throws NoPuedeAtacarAEsaDistanciaException, CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException {
+	public void testGokuNormalAtacaConElAtaqueBasicoAFreezerSegundaFormaYLeDejaLaVidaEn380() {
 		Personaje goku = new Goku(new Casillero(new Posicion(2, 2)));
 		Personaje freezer = new Freezer(new Casillero(new Posicion(2, 3)));
 		freezer.transformacion = new SegundaFormaFreezer();
@@ -259,7 +259,7 @@ public class PersonajeTest {
 	}
 
 	@Test(expected = NoPuedeAtacarAEsaDistanciaException.class)
-	public void testGokuNormalAtacaAFreezerNormalEstandoADistancia3LanzaNoPuedeAtacarAEsaDistanciaException() throws NoPuedeAtacarAEsaDistanciaException, CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException {
+	public void testGokuNormalAtacaAFreezerNormalEstandoADistancia3LanzaNoPuedeAtacarAEsaDistanciaException() {
 		Personaje goku = new Goku(new Casillero(new Posicion(2, 2)));
 		Personaje freezer = new Freezer(new Casillero(new Posicion(2, 5)));
 		goku.atacarA(freezer);
@@ -267,7 +267,7 @@ public class PersonajeTest {
 	}
 
 	@Test
-	public void testColocoAGohanSS2En33YFreezerNormalEn66YHaceAtaqueBasicoDejandoloEn300() throws NoPuedeAtacarAEsaDistanciaException, CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException {
+	public void testColocoAGohanSS2En33YFreezerNormalEn66YHaceAtaqueBasicoDejandoloEn300() {
 		// Poder de pelea de Gohan SS2: 100. Poder de pelea de Freezer normal: 20.
 		Personaje gohan = new Gohan(new Casillero(new Posicion(3, 3)));
 		Personaje freezer = new Freezer(new Casillero(new Posicion(6, 6)));
@@ -278,7 +278,7 @@ public class PersonajeTest {
 	}
 
 	@Test
-	public void testGokuTieneMenosDel30PorcientoDeVidaEntoncesSuDanioAumenta20Porciento() throws CasilleroOcupadoException, NoPuedeAtacarAEsaDistanciaException, NoPuedeAtacarMismoEquipoException {
+	public void testGokuTieneMenosDel30PorcientoDeVidaEntoncesSuDanioAumenta20Porciento() {
 		Personaje goku = new Goku(new Casillero(new Posicion(1, 1))); //danio 20
 		Personaje freezer = new Freezer(new Casillero(new Posicion(2, 2))); //danio 20
 		goku.reducirVida(400); //baja mas de 30 porciento entonces su danio es 20*1.2 -> 24
@@ -288,7 +288,7 @@ public class PersonajeTest {
 	}
 
 	@Test
-	public void testGokuAtacaAGohanPeroNingunoPerteneceAUnEquipoEntoncesLeInflijeDanio() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException {
+	public void testGokuAtacaAGohanPeroNingunoPerteneceAUnEquipoEntoncesLeInflijeDanio() {
 		// poder pelea goku = 20 //// poder de pelea gohan = 15. Danio -> 20. Vida gohan = 300-20 = 280
 		Personaje goku = new Goku(new Casillero(new Posicion(1,1)));
 		Personaje gohan = new Gohan(new Casillero(new Posicion(2,1)));
@@ -298,7 +298,7 @@ public class PersonajeTest {
 	}
 
 	@Test
-	public void testGokuAtacaAGohanPeroGohanNoPerteneceAlEquipoDeGokuEntoncesLeInflijeDanio() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException {
+	public void testGokuAtacaAGohanPeroGohanNoPerteneceAlEquipoDeGokuEntoncesLeInflijeDanio() {
 		// poder pelea goku = 20 //// poder de pelea gohan = 15. Danio -> 20. Vida gohan = 300-20 = 280
 		Personaje goku = new Goku(new Casillero(new Posicion(1,1)));
 		Personaje gohan = new Gohan(new Casillero(new Posicion(2,1)));
@@ -310,7 +310,7 @@ public class PersonajeTest {
 	}
 
 	@Test (expected = NoPuedeAtacarMismoEquipoException.class)
-	public void testGokuAtacaAGohanPeroGohanPerteneceAlMismoEquipoEntoncesLanzaException() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException {
+	public void testGokuAtacaAGohanPeroGohanPerteneceAlMismoEquipoEntoncesLanzaException() {
 		Personaje goku = new Goku(new Casillero(new Posicion(1,1)));
 		Personaje gohan = new Gohan(new Casillero(new Posicion(2,1)));
 		Equipo guerreros = new Equipo("Guerreros Z");
@@ -325,7 +325,7 @@ public class PersonajeTest {
 	// Cell
 
 	@Test(expected = NoPuedeTransformarException.class)
-	public void testCellIntentaTransformarseSinAbsorber() throws CasilleroOcupadoException, KiInsuficienteException, NoHayProximaTransformacionException, NoPuedeTransformarException {
+	public void testCellIntentaTransformarseSinAbsorber() {
 		// Poder de pelea de Cell Normal = 20. Poder de pelea Piccolo = 20. Danio 20. Vida Cell aumenta 20.
 		Personaje cell = new Cell(new Casillero(new Posicion(1, 1)));
 
@@ -334,7 +334,7 @@ public class PersonajeTest {
 	}
 
 	@Test
-	public void testCellIntentaTransformarseEnSemiPerfectoAbsorbiendoPreviamente() throws CasilleroOcupadoException, KiInsuficienteException, NoHayProximaTransformacionException, NoPuedeTransformarException, NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException {
+	public void testCellIntentaTransformarseEnSemiPerfectoAbsorbiendoPreviamente() {
 		// Poder de pelea de Cell Normal = 20. Poder de pelea Piccolo = 20. Danio 20. Vida Cell aumenta 20.
 		Personaje cell = new Cell(new Casillero(new Posicion(1, 1)));
 		Personaje goku = new Goku(new Casillero(new Posicion(3, 1)));
@@ -349,7 +349,7 @@ public class PersonajeTest {
 	}
 
 	@Test
-	public void testCellIntentaTransformarseEnPerfectoAbsorbiendoPreviamente() throws CasilleroOcupadoException, KiInsuficienteException, NoHayProximaTransformacionException, NoPuedeTransformarException, NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException {
+	public void testCellIntentaTransformarseEnPerfectoAbsorbiendoPreviamente() {
 		// Poder de pelea de Cell Normal = 20. Poder de pelea Piccolo = 20. Danio 20. Vida Cell aumenta 20.
 		Personaje cell = new Cell(new Casillero(new Posicion(1, 1)));
 		Personaje goku = new Goku(new Casillero(new Posicion(3, 1)));
@@ -366,7 +366,7 @@ public class PersonajeTest {
 
 	// Piccolo
 	@Test
-	public void testPiccoloSeTransformaAProtectorConVidaDeGohanMenorAUnVeintePorCiento() throws CasilleroOcupadoException, NoPuedeTransformarException, KiInsuficienteException, NoHayProximaTransformacionException {
+	public void testPiccoloSeTransformaAProtectorConVidaDeGohanMenorAUnVeintePorCiento() {
 		Personaje piccolo = new Piccolo(new Casillero(new Posicion(2, 1)));
 		Personaje gohan = new Gohan(new Casillero(new Posicion(3, 1)));
 
@@ -383,7 +383,7 @@ public class PersonajeTest {
 	}
 
 	@Test
-	public void testPiccoloSeTransformaAProtectorConGohanMuerto() throws CasilleroOcupadoException, NoPuedeTransformarException, KiInsuficienteException, NoHayProximaTransformacionException {
+	public void testPiccoloSeTransformaAProtectorConGohanMuerto() {
 		Personaje piccolo = new Piccolo(new Casillero(new Posicion(2, 1)));
 		Personaje gohan = new Gohan(new Casillero(new Posicion(3, 1)));
 
@@ -400,7 +400,7 @@ public class PersonajeTest {
 	}
 
 	@Test(expected = NoPuedeTransformarException.class)
-	public void testPiccoloSeIntentaTransformarAProtectorSinCumplirseCondicionLanzaException() throws CasilleroOcupadoException, NoPuedeTransformarException, KiInsuficienteException, NoHayProximaTransformacionException {
+	public void testPiccoloSeIntentaTransformarAProtectorSinCumplirseCondicionLanzaException() {
 		Personaje piccolo = new Piccolo(new Casillero(new Posicion(2, 1)));
 		Personaje gohan = new Gohan(new Casillero(new Posicion(3, 1)));
 
@@ -414,7 +414,7 @@ public class PersonajeTest {
 	}
 
 	@Test(expected = NoPuedeTransformarException.class)
-	public void testPiccoloSeIntentaTransformarAProtectorPeroNoEstaEnElMismoEquipoQueGohanLanzaException() throws CasilleroOcupadoException, NoPuedeTransformarException, KiInsuficienteException, NoHayProximaTransformacionException {
+	public void testPiccoloSeIntentaTransformarAProtectorPeroNoEstaEnElMismoEquipoQueGohanLanzaException() {
 		Personaje piccolo = new Piccolo(new Casillero(new Posicion(2, 1)));
 		Personaje gohan = new Gohan(new Casillero(new Posicion(3, 1)));
 
@@ -429,7 +429,7 @@ public class PersonajeTest {
 
 	// Gohan
 	@Test
-	public void testGohanSeTransformaEnSS2ConVidaDePiccoloYGokuMenorAUnTreintaPorCiento() throws CasilleroOcupadoException, NoPuedeTransformarException, KiInsuficienteException, NoHayProximaTransformacionException {
+	public void testGohanSeTransformaEnSS2ConVidaDePiccoloYGokuMenorAUnTreintaPorCiento() {
 		Personaje goku = new Goku(new Casillero(new Posicion(1, 1)));
 		Personaje piccolo = new Piccolo(new Casillero(new Posicion(2, 1)));
 		Personaje gohan = new Gohan(new Casillero(new Posicion(3, 1)));
@@ -449,7 +449,7 @@ public class PersonajeTest {
 	}
 
 	@Test
-	public void testGohanSeTransformaEnSS2ConPiccoloYGokuMuertos() throws CasilleroOcupadoException, NoPuedeTransformarException, KiInsuficienteException, NoHayProximaTransformacionException {
+	public void testGohanSeTransformaEnSS2ConPiccoloYGokuMuertos() {
 		Personaje goku = new Goku(new Casillero(new Posicion(1, 1)));
 		Personaje piccolo = new Piccolo(new Casillero(new Posicion(2, 1)));
 		Personaje gohan = new Gohan(new Casillero(new Posicion(3, 1)));
@@ -469,7 +469,7 @@ public class PersonajeTest {
 	}
 
 	@Test(expected = KiInsuficienteException.class)
-	public void testGohanIntentaTransformarEnSS2SinKiSuficienteLanzaException() throws CasilleroOcupadoException, NoPuedeTransformarException, KiInsuficienteException, NoHayProximaTransformacionException {
+	public void testGohanIntentaTransformarEnSS2SinKiSuficienteLanzaException() {
 		Personaje goku = new Goku(new Casillero(new Posicion(1, 1)));
 		Personaje piccolo = new Piccolo(new Casillero(new Posicion(2, 1)));
 		Personaje gohan = new Gohan(new Casillero(new Posicion(3, 1)));
@@ -488,7 +488,7 @@ public class PersonajeTest {
 	}
 
 	@Test(expected = NoPuedeTransformarException.class)
-	public void testGohanSeIntentaTransformarEnSS2SinCumplirseNingunaCondicionLanzaException() throws CasilleroOcupadoException, NoPuedeTransformarException, KiInsuficienteException, NoHayProximaTransformacionException {
+	public void testGohanSeIntentaTransformarEnSS2SinCumplirseNingunaCondicionLanzaException() {
 		Personaje goku = new Goku(new Casillero(new Posicion(1, 1)));
 		Personaje piccolo = new Piccolo(new Casillero(new Posicion(2, 1)));
 		Personaje gohan = new Gohan(new Casillero(new Posicion(3, 1)));
@@ -504,7 +504,7 @@ public class PersonajeTest {
 	}
 
 	@Test(expected = NoPuedeTransformarException.class)
-	public void testGohanSeIntentaTransformarEnSS2CumpliendoSoloUnaCondicionLanzaException() throws CasilleroOcupadoException, NoPuedeTransformarException, KiInsuficienteException, NoHayProximaTransformacionException {
+	public void testGohanSeIntentaTransformarEnSS2CumpliendoSoloUnaCondicionLanzaException() {
 		Personaje goku = new Goku(new Casillero(new Posicion(1, 1)));
 		Personaje piccolo = new Piccolo(new Casillero(new Posicion(2, 1)));
 		Personaje gohan = new Gohan(new Casillero(new Posicion(3, 1)));
@@ -522,7 +522,7 @@ public class PersonajeTest {
 	}
 
 	@Test(expected = NoPuedeTransformarException.class)
-	public void testGohanSeIntentaTransformarEnSS2CumpliendoLasCondicionesPeroNoEstanEnMismoEquipoLanzaException() throws CasilleroOcupadoException, NoPuedeTransformarException, KiInsuficienteException, NoHayProximaTransformacionException {
+	public void testGohanSeIntentaTransformarEnSS2CumpliendoLasCondicionesPeroNoEstanEnMismoEquipoLanzaException() {
 		Personaje goku = new Goku(new Casillero(new Posicion(1, 1)));
 		Personaje piccolo = new Piccolo(new Casillero(new Posicion(2, 1)));
 		Personaje gohan = new Gohan(new Casillero(new Posicion(3, 1)));
@@ -540,7 +540,7 @@ public class PersonajeTest {
 	// Tests ataques especiales
 
 	@Test(expected = NoPuedeAtacarMismoEquipoException.class)
-	public void testGokuNormalHaceAtaqueEspecialASuEquipoDebeLanzarNoPuedeAtacarMismoEquipoException() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException {
+	public void testGokuNormalHaceAtaqueEspecialASuEquipoDebeLanzarNoPuedeAtacarMismoEquipoException() {
 		Personaje goku = new Goku(new Casillero(new Posicion(1, 1)));
 		Personaje gohan = new Gohan(new Casillero(new Posicion(2, 2)));
 
@@ -548,7 +548,7 @@ public class PersonajeTest {
 	}
 
 	@Test(expected = NoPuedeAtacarAEsaDistanciaException.class)
-	public void testGokuNormalHaceAtaqueEspecialAFreezerADistancia3DebeLanzarNoPuedeAtacarAEsaDistanciaException() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException {
+	public void testGokuNormalHaceAtaqueEspecialAFreezerADistancia3DebeLanzarNoPuedeAtacarAEsaDistanciaException() {
 		Personaje goku = new Goku(new Casillero(new Posicion(1, 1)));
 		Personaje freezer = new Freezer(new Casillero(new Posicion(4, 1)));
 		goku.aumentarKi(20);
@@ -556,7 +556,7 @@ public class PersonajeTest {
 	}
 
 	@Test
-	public void testGokuNormalHaceAtaqueEspecialAFreezerNormalLeDebeSacar30DeVidaDejandoloEn370() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException {
+	public void testGokuNormalHaceAtaqueEspecialAFreezerNormalLeDebeSacar30DeVidaDejandoloEn370() {
 		//Poder ataque goku= 20 .. Poder ataque freezer 20. Ataque especial hace 50% mas danio que 20 --> 30
 		Personaje goku = new Goku(new Casillero(new Posicion(1, 1)));
 		Personaje freezer = new Freezer(new Casillero(new Posicion(3, 1)));
@@ -567,7 +567,7 @@ public class PersonajeTest {
 	}
 
 	@Test
-	public void testGokuNormalHaceAtaqueEspecialAMajinBooNormalLeDebeSacar24DeVidaDejandoloEn276() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException {
+	public void testGokuNormalHaceAtaqueEspecialAMajinBooNormalLeDebeSacar24DeVidaDejandoloEn276() {
 		//Poder ataque goku= 20 .. Poder ataque majin boo 30.(-20% danio) Ataque especial hace 50% mas danio que 20*0.8=16 --> 24
 		Personaje goku = new Goku(new Casillero(new Posicion(1, 1)));
 		Personaje majinBoo = new MajinBoo(new Casillero(new Posicion(3, 1)));
@@ -578,7 +578,7 @@ public class PersonajeTest {
 	}
 
 	@Test
-	public void testFreezerSegundaFormaHaceAtaqueEspecialAPiccoloNormalLeDebeSacar24DeVidaDejandoloEn276() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException, NoHayProximaTransformacionException, NoPuedeTransformarException {
+	public void testFreezerSegundaFormaHaceAtaqueEspecialAPiccoloNormalLeDebeSacar24DeVidaDejandoloEn276() {
 		//Poder ataque freezer 2daforma= 40 .. Poder ataque piccolo 20. Ataque especial hace 50% mas danio que 40 --> 60
 		Personaje freezer = new Freezer(new Casillero(new Posicion(1, 1)));
 		Personaje piccolo = new Piccolo(new Casillero(new Posicion(3, 1)));
@@ -590,7 +590,7 @@ public class PersonajeTest {
 	}
 
 	@Test
-	public void testCellRealizaAtaqueEspecialAbsorberYSuVidaSeIncrementaLaMismaCantidadDeVidaQuePerdioElAtacado() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException {
+	public void testCellRealizaAtaqueEspecialAbsorberYSuVidaSeIncrementaLaMismaCantidadDeVidaQuePerdioElAtacado() {
 		// Poder de pelea de Cell Normal = 20. Poder de pelea Piccolo = 20. Danio 20. Vida Cell aumenta 20.
 		Personaje cell = new Cell(new Casillero(new Posicion(1, 1)));
 		Personaje piccolo = new Piccolo(new Casillero(new Posicion(2, 2)));
@@ -603,7 +603,7 @@ public class PersonajeTest {
 	}
 
 	@Test
-	public void testMajinBooHaceAtaqueEspecialAPiccoloNormalYLoTransformaEnChocolate() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException, NoHayProximaTransformacionException, NoPuedeTransformarException {
+	public void testMajinBooHaceAtaqueEspecialAPiccoloNormalYLoTransformaEnChocolate() {
 		//Poder ataque freezer 2daforma= 40 .. Poder ataque piccolo 20. Ataque especial hace 50% mas danio que 40 --> 60
 		Personaje majinBoo = new MajinBoo(new Casillero(new Posicion(1, 1)));
 		Personaje piccolo = new Piccolo(new Casillero(new Posicion(3, 1)));
@@ -614,7 +614,7 @@ public class PersonajeTest {
 	}
 
 	@Test(expected = NoPuedeMoverseSiendoChocolateException.class)
-	public void testMajinBooHaceAtaqueEspecialAGokuNormalYLoTransformaEnChocolateEntoncesGokuNoSePuedeMover() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException, NoHayProximaTransformacionException, NoPuedeTransformarException, CaminoInvalidoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException {
+	public void testMajinBooHaceAtaqueEspecialAGokuNormalYLoTransformaEnChocolateEntoncesGokuNoSePuedeMover() {
 		//Poder ataque freezer 2daforma= 40 .. Poder ataque piccolo 20. Ataque especial hace 50% mas danio que 40 --> 60
 		Casillero casillero31 = new Casillero(new Posicion(3, 1));
 		Personaje majinBoo = new MajinBoo(new Casillero(new Posicion(1, 1)));
@@ -631,7 +631,7 @@ public class PersonajeTest {
 	}
 
 	@Test(expected = NoPuedeAtacarSiendoChocolateException.class)
-	public void testMajinBooHaceAtaqueEspecialAGohanNormalYLoTransformaEnChocolateEntoncesGohanNoPuedeAtacar() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException, NoHayProximaTransformacionException, NoPuedeTransformarException, CaminoInvalidoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException {
+	public void testMajinBooHaceAtaqueEspecialAGohanNormalYLoTransformaEnChocolateEntoncesGohanNoPuedeAtacar() {
 		Personaje majinBoo = new MajinBoo(new Casillero(new Posicion(1, 1)));
 		Personaje gohan = new Gohan(new Casillero(new Posicion(3, 1)));
 		majinBoo.aumentarKi(40);
@@ -641,7 +641,7 @@ public class PersonajeTest {
 	}
 
 	@Test(expected = NoPuedeUsarAtaqueEspecialSiendoChocolateException.class)
-	public void testMajinBooHaceAtaqueEspecialAGohanNormalYLoTransformaEnChocolateEntoncesGohanNoPuedeUsarAtaqueEspecial() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException, NoHayProximaTransformacionException, NoPuedeTransformarException, CaminoInvalidoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException {
+	public void testMajinBooHaceAtaqueEspecialAGohanNormalYLoTransformaEnChocolateEntoncesGohanNoPuedeUsarAtaqueEspecial() {
 		Personaje majinBoo = new MajinBoo(new Casillero(new Posicion(1, 1)));
 		Personaje gohan = new Gohan(new Casillero(new Posicion(3, 1)));
 		majinBoo.aumentarKi(40);
@@ -651,7 +651,7 @@ public class PersonajeTest {
 	}
 
 	@Test(expected = NoPuedeTransformarseSiendoChocolateException.class)
-	public void testMajinBooHaceAtaqueEspecialAGohanNormalYLoTransformaEnChocolateEntoncesGohanNoPuedeTransformarse() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException, NoHayProximaTransformacionException, NoPuedeTransformarException, CaminoInvalidoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException {
+	public void testMajinBooHaceAtaqueEspecialAGohanNormalYLoTransformaEnChocolateEntoncesGohanNoPuedeTransformarse() {
 		Personaje majinBoo = new MajinBoo(new Casillero(new Posicion(1, 1)));
 		Personaje gohan = new Gohan(new Casillero(new Posicion(3, 1)));
 		majinBoo.aumentarKi(40);
@@ -661,7 +661,7 @@ public class PersonajeTest {
 	}
 
 	@Test(expected = NoPuedeAtacarMismoEquipoException.class)
-	public void testFreezerNormalHaceAtaqueEspecialASuEquipoDebeLanzarNoPuedeAtacarMismoEquipoException() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException {
+	public void testFreezerNormalHaceAtaqueEspecialASuEquipoDebeLanzarNoPuedeAtacarMismoEquipoException() {
 		Personaje freezer = new Freezer(new Casillero(new Posicion(1, 1)));
 		Personaje cell = new Cell(new Casillero(new Posicion(2, 2)));
 
@@ -670,14 +670,14 @@ public class PersonajeTest {
 
 
 	@Test(expected = KiInsuficienteException.class)
-	public void testGokuNormalHaceAtaqueEspecialSinKiSuficienteLanzaKiInsuficienteException() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException {
+	public void testGokuNormalHaceAtaqueEspecialSinKiSuficienteLanzaKiInsuficienteException() {
 		Personaje goku = new Goku(new Casillero(new Posicion(1,1)));
 		Personaje freezer = new Freezer(new Casillero(new Posicion(1,2)));
 		goku.ataqueEspecialA(freezer);
 	}
 
 	@Test(expected = KiInsuficienteException.class)
-	public void testGohanNormalHaceAtaqueEspecialSinKiSuficienteLanzaKiInsuficienteException() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException {
+	public void testGohanNormalHaceAtaqueEspecialSinKiSuficienteLanzaKiInsuficienteException() {
 		Personaje gohan = new Gohan(new Casillero(new Posicion(1,1)));
 		Personaje freezer = new Freezer(new Casillero(new Posicion(1,2)));
 
@@ -686,7 +686,7 @@ public class PersonajeTest {
 	}
 
 	@Test(expected = KiInsuficienteException.class)
-	public void testPiccoloNormalHaceAtaqueEspecialSinKiSuficienteLanzaKiInsuficienteException() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException {
+	public void testPiccoloNormalHaceAtaqueEspecialSinKiSuficienteLanzaKiInsuficienteException() {
 		Personaje piccolo = new Piccolo(new Casillero(new Posicion(1,1)));
 		Personaje freezer = new Freezer(new Casillero(new Posicion(1,2)));
 
@@ -694,7 +694,7 @@ public class PersonajeTest {
 	}
 
 	@Test(expected = KiInsuficienteException.class)
-	public void testCellNormalHaceAtaqueEspecialSinKiSuficienteLanzaKiInsuficienteException() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException {
+	public void testCellNormalHaceAtaqueEspecialSinKiSuficienteLanzaKiInsuficienteException() {
 		Personaje piccolo = new Piccolo(new Casillero(new Posicion(1,1)));
 		Personaje cell = new Cell(new Casillero(new Posicion(1,2)));
 
@@ -702,7 +702,7 @@ public class PersonajeTest {
 	}
 
 	@Test(expected = KiInsuficienteException.class)
-	public void testFreezerNormalHaceAtaqueEspecialSinKiSuficienteLanzaKiInsuficienteException() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException {
+	public void testFreezerNormalHaceAtaqueEspecialSinKiSuficienteLanzaKiInsuficienteException() {
 		Personaje piccolo = new Piccolo(new Casillero(new Posicion(1,1)));
 		Personaje freezer = new Freezer(new Casillero(new Posicion(1,2)));
 
@@ -710,7 +710,7 @@ public class PersonajeTest {
 	}
 
 	@Test(expected = KiInsuficienteException.class)
-	public void testMajinBooNormalHaceAtaqueEspecialSinKiSuficienteLanzaKiInsuficienteException() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException {
+	public void testMajinBooNormalHaceAtaqueEspecialSinKiSuficienteLanzaKiInsuficienteException() {
 		Personaje piccolo = new Piccolo(new Casillero(new Posicion(1,1)));
 		Personaje majinBoo = new MajinBoo(new Casillero(new Posicion(1,2)));
 
@@ -718,7 +718,7 @@ public class PersonajeTest {
 	}
 
 	@Test(expected = NoPuedeAtacarMismoEquipoException.class)
-	public void testGokuNormalHaceAtaqueEspecialAGohanPeroSonDelMismoEquipoDebeLanzarException() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException {
+	public void testGokuNormalHaceAtaqueEspecialAGohanPeroSonDelMismoEquipoDebeLanzarException() {
 		Personaje goku = new Goku(new Casillero(new Posicion(1,1)));
 		Personaje gohan = new Gohan(new Casillero(new Posicion(1,2)));
 
@@ -726,7 +726,7 @@ public class PersonajeTest {
 	}
 
 	@Test(expected = NoPuedeAtacarSiendoChocolateException.class)
-	public void testConviertoAGokuEnChocolateYAtacaRecibiendoExcepcion() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException {
+	public void testConviertoAGokuEnChocolateYAtacaRecibiendoExcepcion() {
 		Personaje goku = new Goku(new Casillero(new Posicion(1,1)));
 		Personaje gohan = new Gohan(new Casillero(new Posicion(1,1)));
 		goku.convertirseEnChocolate();
@@ -734,14 +734,14 @@ public class PersonajeTest {
 	}
 
 	@Test
-	public void testConviertoAGokuEnChocolateYRevisoQueSeTransformo() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException {
+	public void testConviertoAGokuEnChocolateYRevisoQueSeTransformo() {
 		Personaje goku = new Goku(new Casillero(new Posicion(1,1)));
 		goku.convertirseEnChocolate();
 		Assert.assertTrue(goku.transformacion.getClass() == Chocolate.class);
 	}
 
 	@Test
-	public void testConviertoAGokuEnChocolateLuegoLoDeConviertoYRevisoQueSuTransformacionEstaBien() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException {
+	public void testConviertoAGokuEnChocolateLuegoLoDeConviertoYRevisoQueSuTransformacionEstaBien() {
 		Personaje goku = new Goku(new Casillero(new Posicion(1,1)));
 		Personaje gohan = new Gohan(new Casillero(new Posicion(1,1)));
 		goku.convertirseEnChocolate();
@@ -750,7 +750,7 @@ public class PersonajeTest {
 	}
 
 	@Test(expected = NoPuedeUsarAtaqueEspecialSiendoChocolateException.class)
-	public void testConviertoAGokuEnChocolaYUsaAtaqueEspecialACellRecibeExcepcion() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, KiInsuficienteException {
+	public void testConviertoAGokuEnChocolaYUsaAtaqueEspecialACellRecibeExcepcion() {
 		Personaje goku = new Goku(new Casillero(new Posicion(1,1)));
 		Personaje cell = new Cell(new Casillero(new Posicion(1,1)));
 		goku.convertirseEnChocolate();
@@ -758,14 +758,14 @@ public class PersonajeTest {
 	}
 
 	@Test(expected = NoPuedeTransformarseSiendoChocolateException.class)
-	public void testConviertoAGokuEnChocolateYloTransformoReciboExcepcion() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, KiInsuficienteException, NoHayProximaTransformacionException, NoPuedeTransformarException {
+	public void testConviertoAGokuEnChocolateYloTransformoReciboExcepcion() {
 		Personaje goku = new Goku(new Casillero(new Posicion(1,1)));
 		goku.convertirseEnChocolate();
 		goku.transformar();
 	}
 
 	@Test(expected = NoPuedeMoverseSiendoChocolateException.class)
-	public void testConviertoAGokuEnChocolateYLoMuevoReciboExcepcion() throws CaminoInvalidoException, CasilleroOcupadoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, NoPuedeTransformarException, KiInsuficienteException, NoHayProximaTransformacionException {
+	public void testConviertoAGokuEnChocolateYLoMuevoReciboExcepcion() {
 		Personaje goku = new Goku(new Casillero(new Posicion(1,1)));
 		goku.convertirseEnChocolate();
 		Casillero casillero1 = new Casillero(new Posicion(2, 1));
@@ -779,7 +779,7 @@ public class PersonajeTest {
 	}
 
 	@Test
-	public void testConviertoEnChocolateAGokuYEn2TurnosMiosSigueSiendoChocolate() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
+	public void testConviertoEnChocolateAGokuYEn2TurnosMiosSigueSiendoChocolate() {
 		Partida partida = new Partida();
 
 		Personaje goku = partida.personajeEnPosicion(new Posicion(1,1));
@@ -792,7 +792,7 @@ public class PersonajeTest {
 	}
 
 	@Test
-	public void testConviertoEnChocolateAGokuYEn3TurnosMiosDespierta() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
+	public void testConviertoEnChocolateAGokuYEn3TurnosMiosDespierta() {
 		Partida partida = new Partida();
 
 		Personaje goku = partida.personajeEnPosicion(new Posicion(1,1));
@@ -804,7 +804,7 @@ public class PersonajeTest {
 	}
 
 	@Test
-	public void testMajinBooTransformaEnChocolateAGokuYPor3TurnosDeGokuEsChocolate() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException, NoHayProximaTransformacionException, NoPuedeTransformarException, CaminoInvalidoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, DimensionDeTableroInvalidoException {
+	public void testMajinBooTransformaEnChocolateAGokuYPor3TurnosDeGokuEsChocolate() {
 		Partida partida = new Partida();
 		partida.pasar();//Simulo estar en el turno de majinBoo
 
@@ -822,7 +822,7 @@ public class PersonajeTest {
 	}
 
 	@Test
-	public void testGokuCon20DeKiEn5TurnosDeElTendra45DeKi() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
+	public void testGokuCon20DeKiEn5TurnosDeElTendra45DeKi() {
 		Partida partida = new Partida();
 		Personaje goku = partida.personajeEnPosicion(new Posicion(1, 1));
 		goku.aumentarKi(20);
@@ -833,7 +833,7 @@ public class PersonajeTest {
 	}
 
 	@Test
-	public void testMajinBooTransformaEnChocolateAGokuQuienTiene50DeKiYRecienEnSuCuartoTurnoTendria55DeKi() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException, NoHayProximaTransformacionException, NoPuedeTransformarException, CaminoInvalidoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, DimensionDeTableroInvalidoException {
+	public void testMajinBooTransformaEnChocolateAGokuQuienTiene50DeKiYRecienEnSuCuartoTurnoTendria55DeKi() {
 		Partida partida = new Partida();
 		Personaje majinBoo = new MajinBoo(new Casillero(new Posicion(3, 1)));
 		Personaje goku = partida.personajeEnPosicion(new Posicion(1, 1));
@@ -851,7 +851,7 @@ public class PersonajeTest {
 	}
 
 	@Test
-	public void testGokuAtacaACellCon1DeVidaMatandoloYAhoraNoHayNadieEnEseCasillero() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, DimensionDeTableroInvalidoException, CaminoInvalidoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException {
+	public void testGokuAtacaACellCon1DeVidaMatandoloYAhoraNoHayNadieEnEseCasillero() {
 		//Para arrancar el test muevo a goku hasta el 13,13
 		Partida partida = new Partida();
 		Tablero tablero = partida.getTablero();

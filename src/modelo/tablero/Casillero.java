@@ -20,7 +20,7 @@ public class Casillero {
 		return ( personaje == null );
 	}
 
-	public void colocar(Personaje unPersonaje) throws CasilleroOcupadoException {
+	public void colocar(Personaje unPersonaje) {
 		if (personaje != null) throw new CasilleroOcupadoException();
 		if (consumible != null) {
 			unPersonaje.consumir(consumible);
@@ -41,7 +41,7 @@ public class Casillero {
 		return personaje;
 	}
 
-	public void colocar(Consumible unConsumible) throws CasilleroOcupadoException {
+	public void colocar(Consumible unConsumible) {
 		if ((personaje != null)||(consumible != null)) throw new CasilleroOcupadoException();
 		consumible = unConsumible;
 	}

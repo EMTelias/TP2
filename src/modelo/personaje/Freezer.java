@@ -14,7 +14,7 @@ public class Freezer extends Personaje {
 
     protected final int kiAtaqueEspecial = 20;
 
-    public Freezer(Casillero unCasillero) throws CasilleroOcupadoException {
+    public Freezer(Casillero unCasillero) {
     	this.colocarEnCasillero(unCasillero);
         transformacion = new NormalFreezer();
         vida = 400;
@@ -31,11 +31,11 @@ public class Freezer extends Personaje {
         ataqueEspecialMap.put(MajinBoo.class, (x) -> ataqueEspecialAAmigo(x));
     }
 
-    private void ataqueEspecialAAmigo(Personaje otroPersonaje) throws NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, KiInsuficienteException {
+    private void ataqueEspecialAAmigo(Personaje otroPersonaje) {
         throw new NoPuedeAtacarMismoEquipoException();
     }
 
-    private void ataqueEspecialAOponente(Personaje otroPersonaje) throws NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, KiInsuficienteException {
+    private void ataqueEspecialAOponente(Personaje otroPersonaje) {
         if (!tieneSuficienteKi(kiAtaqueEspecial)) {
             throw new KiInsuficienteException();
         }

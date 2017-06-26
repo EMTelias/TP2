@@ -1,5 +1,5 @@
 package modelo.excepciones.transformacion;
 
 
-public class NoPuedeTransformarException extends Exception {
+public class NoPuedeTransformarException extends RuntimeException {
 }

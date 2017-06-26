@@ -13,7 +13,7 @@ public class MajinBoo extends Personaje {
 
     protected final int kiAtaqueEspecial = 30;
 
-    public MajinBoo(Casillero unCasillero) throws CasilleroOcupadoException {
+    public MajinBoo(Casillero unCasillero) {
     	this.colocarEnCasillero(unCasillero);
         transformacion = new NormalMajinBoo();
         vida = 300;
@@ -30,11 +30,11 @@ public class MajinBoo extends Personaje {
         ataqueEspecialMap.put(Freezer.class, (x) -> ataqueEspecialAAmigo(x));
     }
 
-    private void ataqueEspecialAAmigo(Personaje otroPersonaje) throws NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, KiInsuficienteException {
+    private void ataqueEspecialAAmigo(Personaje otroPersonaje) {
         throw new NoPuedeAtacarMismoEquipoException();
     }
 
-    private void ataqueEspecialAOponente(Personaje otroPersonaje) throws NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, KiInsuficienteException {
+    private void ataqueEspecialAOponente(Personaje otroPersonaje) {
         if (!tieneSuficienteKi(kiAtaqueEspecial)) {
             throw new KiInsuficienteException();
         }

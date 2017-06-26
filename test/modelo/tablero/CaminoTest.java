@@ -11,13 +11,13 @@ import modelo.excepciones.tablero.CaminoInvalidoException;
 public class CaminoTest {
 
 	@Test (expected = CaminoInvalidoException.class)
-	public void testCreoCaminoCon0CasillerosDevuelveCaminoInvalidoException() throws CaminoInvalidoException{
+	public void testCreoCaminoCon0CasillerosDevuelveCaminoInvalidoException() {
 		List<Casillero> casilleros = new ArrayList<Casillero>();
 		new Camino(casilleros);
 	}
 
 	@Test
-	public void testCreoCaminoCon3CasillerosYElPrimerCasilleroEsElPrimeroQueAgregue() throws CaminoInvalidoException {
+	public void testCreoCaminoCon3CasillerosYElPrimerCasilleroEsElPrimeroQueAgregue() {
 		List<Casillero> casilleros = new ArrayList<Casillero>();
 		Casillero primerCasillero = new Casillero(new Posicion(0,0));
 		casilleros.add(primerCasillero);

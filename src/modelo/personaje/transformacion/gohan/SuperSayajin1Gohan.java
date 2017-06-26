@@ -22,7 +22,7 @@ public class SuperSayajin1Gohan extends Transformacion{
         super(poderDePelea, distanciaAtaque, velocidad, proximaTransformacion, kiNecesarioTransformar);
     }
 
-    public Transformacion transformar(Personaje personaje) throws NoPuedeTransformarException, KiInsuficienteException {
+    public Transformacion transformar(Personaje personaje) {
         if (!this.puedeTransformar(personaje)) {
             throw new NoPuedeTransformarException();
         }

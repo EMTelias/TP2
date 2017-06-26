@@ -1,5 +1,5 @@
 package modelo.excepciones.transformacion;
 
 
-public class KiInsuficienteException extends Exception {
+public class KiInsuficienteException extends RuntimeException {
 }

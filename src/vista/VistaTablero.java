@@ -2,14 +2,12 @@ package vista;
 
 import controlador.CaminoController;
 import controlador.PersonajeController;
-import controlador.SeleccionarHandler;
 import javafx.scene.layout.GridPane;
 import modelo.partida.Partida;
 import modelo.tablero.Casillero;
 import modelo.tablero.Posicion;
 
 public class VistaTablero extends GridPane {
-    //private final SeleccionarHandler seleccionarHandler;
     private final CaminoController caminoController;
     private final PersonajeController personajeController;
     private final VistaInfo info;

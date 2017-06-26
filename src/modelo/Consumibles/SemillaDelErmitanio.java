@@ -9,7 +9,7 @@ public class SemillaDelErmitanio implements Consumible {
 	static private int VIDA_REGENERADA = 100;
 	private Casillero casillero;
 	
-	public SemillaDelErmitanio(Casillero unCasillero) throws CasilleroOcupadoException {
+	public SemillaDelErmitanio(Casillero unCasillero) {
 		unCasillero.colocar(this);
 		casillero = unCasillero;
 	}

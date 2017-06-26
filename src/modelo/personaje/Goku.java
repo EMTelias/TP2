@@ -15,7 +15,7 @@ public class Goku extends Personaje {
 	protected final int kiAtaqueEspecial = 20;
 	private final double multMinVidaParaAyudaGohan = 0.3;
 
-	public Goku(Casillero unCasillero) throws CasilleroOcupadoException{
+	public Goku(Casillero unCasillero) {
 		this.colocarEnCasillero(unCasillero);
 		transformacion = new NormalGoku();
 		vida = 500;
@@ -32,11 +32,11 @@ public class Goku extends Personaje {
 		ataqueEspecialMap.put(MajinBoo.class, (x) -> ataqueEspecialAOponente(x));
 	}
 
-	private void ataqueEspecialAAmigo(Personaje otroPersonaje) throws NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, KiInsuficienteException {
+	private void ataqueEspecialAAmigo(Personaje otroPersonaje) {
 		throw new NoPuedeAtacarMismoEquipoException();
 	}
 
-	private void ataqueEspecialAOponente(Personaje otroPersonaje) throws NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, KiInsuficienteException {
+	private void ataqueEspecialAOponente(Personaje otroPersonaje) {
 		if (!tieneSuficienteKi(kiAtaqueEspecial)) {
 			throw new KiInsuficienteException();
 		}

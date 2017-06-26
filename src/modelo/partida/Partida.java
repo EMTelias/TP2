@@ -43,7 +43,7 @@ public class Partida {
     protected static Posicion POS_I_MAJINBOO = new Posicion(DIM_ANCHO-1,DIM_ALTO);
 
 
-    public Partida() throws DimensionDeTableroInvalidoException, CasilleroOcupadoException {
+    public Partida() {
 
         this.tablero = new Tablero(DIM_ANCHO,DIM_ALTO);
         this.initDeEnemigos();
@@ -83,7 +83,7 @@ public class Partida {
     public Personaje personajeEnPosicion(Posicion posicion) {
        Personaje p =  tablero.getCasillero(posicion).getPersonaje();
        if (p == null){
-           throw new CasillaSinPersonajeException();
+           throw new CasilleroSinPersonajeException();
        }
        return p;
     }
@@ -117,7 +117,7 @@ public class Partida {
     }
 
 
-    public void ataqueBasico(Personaje atacante, Personaje atacado) throws NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException {
+    public void ataqueBasico(Personaje atacante, Personaje atacado) {
         if(turno.yaAtaco()){
             throw new YaAtacasteEsteTurnoException();
         }

@@ -1,6 +1,5 @@
 package modelo.Consumibles;
 
-import modelo.excepciones.tablero.CasilleroOcupadoException;
 import modelo.personaje.Personaje;
 import modelo.tablero.Casillero;
 
@@ -11,7 +10,7 @@ public class EsferaDelDragon extends Efecto {
 	private Casillero casillero;
 	
 	
-	public EsferaDelDragon(Casillero unCasillero) throws CasilleroOcupadoException {
+	public EsferaDelDragon(Casillero unCasillero) {
 		unCasillero.colocar(this);
 		casillero = unCasillero;
 	}

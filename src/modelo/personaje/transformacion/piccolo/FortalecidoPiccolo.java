@@ -22,7 +22,7 @@ public class FortalecidoPiccolo extends Transformacion{
     }
 
 
-    public Transformacion transformar(Personaje personaje) throws NoPuedeTransformarException {
+    public Transformacion transformar(Personaje personaje) {
         if (!this.puedeTransformar(personaje)) {
             throw new NoPuedeTransformarException();
         }

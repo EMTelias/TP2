@@ -42,7 +42,7 @@ public class TurnoTest {
     }
 
     @Test
-    public void testMuevoAGokuYAtacoACellYYaNoEsMasElTurnoDeLosGuerrerosZ() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException, NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, CaminoInvalidoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, KiInsuficienteException {
+    public void testMuevoAGokuYAtacoACellYYaNoEsMasElTurnoDeLosGuerrerosZ() {
         //Para arrancar el test muevo a goku hasta el 13,13
         Partida partida = new Partida();
         Tablero tablero = partida.getTablero();
@@ -72,7 +72,7 @@ public class TurnoTest {
     }
 
     @Test(expected = YaAtacasteEsteTurnoException.class)
-    public void testAtaco2vecesEnElMismoTurnoACellYReciboYaAtacasteEsteTurnoException() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException, NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, CaminoInvalidoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, KiInsuficienteException {
+    public void testAtaco2vecesEnElMismoTurnoACellYReciboYaAtacasteEsteTurnoException() {
         //Para arrancar el test muevo a goku hasta el 13,13
         Partida partida = new Partida();
         Tablero tablero = partida.getTablero();
@@ -93,7 +93,7 @@ public class TurnoTest {
     }
 
     @Test(expected = YaMovisteEsteTurnoException.class)
-    public void testMuevo2vecesAGokuEnElMismoTurnoYReciboYaMovisteEsteTurnoException() throws CasilleroOcupadoException, DimensionDeTableroInvalidoException, NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, CaminoInvalidoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException, KiInsuficienteException {
+    public void testMuevo2vecesAGokuEnElMismoTurnoYReciboYaMovisteEsteTurnoException() {
         //Para arrancar el test muevo a goku hasta el 13,13
         Partida partida = new Partida();
         Tablero tablero = partida.getTablero();

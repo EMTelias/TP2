@@ -9,7 +9,7 @@ public class NubeVoladora extends Efecto {
 	private int cantidadDeTurnosActual = 0;
 	private Casillero casillero;
 	
-	public NubeVoladora(Casillero unCasillero) throws CasilleroOcupadoException {
+	public NubeVoladora(Casillero unCasillero) {
 		unCasillero.colocar(this);
 		casillero = unCasillero;
 	}

@@ -35,7 +35,7 @@ public abstract class Transformacion {
     }
 
 
-    public Transformacion transformar(Personaje unPersonaje) throws NoHayProximaTransformacionException, NoPuedeTransformarException, KiInsuficienteException {
+    public Transformacion transformar(Personaje unPersonaje) {
         int kiActual = unPersonaje.getKi();
 
         if (kiActual < this.kiNecesarioTransformar) {
@@ -47,7 +47,7 @@ public abstract class Transformacion {
         return this.proximaTransformacion;
     }
 
-    public void mover(Personaje unPersonaje, Camino camino) throws NoPuedeMoverCaminoObstruidoException, NoPuedeMoverAEsaDistanciaException {
+    public void mover(Personaje unPersonaje, Camino camino) {
     	try {
 			camino.siDistanciaEsMayor( efecto.aplicarEfectoVelocidad(velocidad), NoPuedeMoverAEsaDistanciaException.class );
 		} catch (InstantiationException | IllegalAccessException e) {}
@@ -67,7 +67,7 @@ public abstract class Transformacion {
         return this.distanciaAtaque;
     }
 
-    public void atacarA(Personaje personajeAtacante, Personaje personajeAtacado) throws NoPuedeAtacarAEsaDistanciaException {
+    public void atacarA(Personaje personajeAtacante, Personaje personajeAtacado) {
         Ataque ataque = new Ataque(personajeAtacante, personajeAtacado, efecto.aplicarEfectoAtaque(1));
         ataque.execute();
     }
@@ -76,7 +76,7 @@ public abstract class Transformacion {
         return null;
     }
 
-    public void ataqueEspecialA(Personaje personajeAtacante, Personaje personajeAtacado) throws NoPuedeAtacarMismoEquipoException, KiInsuficienteException, NoPuedeAtacarAEsaDistanciaException {
+    public void ataqueEspecialA(Personaje personajeAtacante, Personaje personajeAtacado) {
         AtaqueEspecialHandler handler = personajeAtacante.getAtaqueEspecialHandlerContra(personajeAtacado);
         handler.ataqueEspecialA(personajeAtacado);
     }

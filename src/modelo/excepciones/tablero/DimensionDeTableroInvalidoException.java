@@ -1,10 +1,6 @@
 package modelo.excepciones.tablero;
 
-public class DimensionDeTableroInvalidoException extends Exception {
+public class DimensionDeTableroInvalidoException extends RuntimeException {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 }

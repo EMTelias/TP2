@@ -2,6 +2,7 @@ package modelo.partida;
 
 import modelo.excepciones.JuegoTerminadoException;
 import modelo.excepciones.acciones.NoPuedeAtacarMismoEquipoException;
+import modelo.excepciones.personaje.CasilleroSinPersonajeException;
 import modelo.excepciones.personaje.NoPuedeAtacarAEsaDistanciaException;
 import modelo.excepciones.personaje.NoPuedeMoverAEsaDistanciaException;
 import modelo.excepciones.personaje.NoPuedeMoverCaminoObstruidoException;
@@ -151,7 +152,7 @@ public class PartidaTest {
     }
 
     @Test(expected = JuegoTerminadoException.class)
-    public void testEliminoA2EnemigosYGokuMataAlUltimoReciboGanasteException() throws CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, DimensionDeTableroInvalidoException, CaminoInvalidoException, NoPuedeMoverAEsaDistanciaException, NoPuedeMoverCaminoObstruidoException {
+    public void testEliminoA2EnemigosYGokuMataAlUltimoReciboGanasteException() {
         //Para arrancar el test muevo a goku hasta el 13,13
         Partida partida = new Partida();
         Tablero tablero = partida.getTablero();
@@ -173,6 +174,12 @@ public class PartidaTest {
 
         partida.ataqueBasico(goku, cell);
  
+    }
+
+    @Test (expected = CasilleroSinPersonajeException.class)
+    public void testCreoPartidaYBuscoPersonajeEnCasilleroSinPersonajeLanzaExcepcion() {
+        Partida partida = new Partida();
+        partida.personajeEnPosicion(new Posicion(5,5));
     }
 
 }

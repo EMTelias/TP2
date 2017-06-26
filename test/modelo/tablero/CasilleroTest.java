@@ -17,14 +17,14 @@ public class CasilleroTest {
 	}
 
 	@Test
-	public void testCreoAGokuEnUnCasilleroEstaVacioDevuelveFalse() throws CasilleroOcupadoException{
+	public void testCreoAGokuEnUnCasilleroEstaVacioDevuelveFalse() {
 		Casillero casillero = new Casillero(new Posicion(1,1));
 		Personaje goku = new Goku(casillero);
 		Assert.assertFalse(casillero.estaVacio());
 	}
 	
 	@Test(expected = CasilleroOcupadoException.class)
-	public void testSeCreanGokuYGohanEnElMismoCasilleroDevuelveCasilleroOcupadoException() throws CasilleroOcupadoException{
+	public void testSeCreanGokuYGohanEnElMismoCasilleroDevuelveCasilleroOcupadoException() {
 		Casillero casillero = new Casillero(new Posicion(1,1));
 		Personaje goku = new Goku(casillero);
 		Personaje gohan = new Gohan(casillero);

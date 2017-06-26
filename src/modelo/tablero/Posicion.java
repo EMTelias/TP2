@@ -39,17 +39,7 @@ public class Posicion {
 		return posicionY;
 	}
 
-	public Posicion restar(Posicion otraPosicion) {
-		return new Posicion(this.posicionX-otraPosicion.posicionX, this.posicionY -otraPosicion.posicionY);
-	}
 
-    public boolean esIgual(Posicion posicion) {
-	 	if (this.posicionX == posicion.posicionX && this.posicionY == posicion.posicionY){
-	 	    return true;
-        }else{
-	 	    return false;
-        }
-    }
 }
 
 

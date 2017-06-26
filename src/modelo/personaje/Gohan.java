@@ -16,7 +16,7 @@ public class Gohan extends Personaje {
 	protected final int vidaMaxima = 300;
 	protected final double multMinVidaParaAyudaPiccolo = 0.2;
 
-    public Gohan(Casillero unCasillero) throws CasilleroOcupadoException{
+    public Gohan(Casillero unCasillero) {
     	this.colocarEnCasillero(unCasillero);
         transformacion = new NormalGohan();
         vida = 300;
@@ -33,11 +33,11 @@ public class Gohan extends Personaje {
         ataqueEspecialMap.put(MajinBoo.class, (x) -> ataqueEspecialAOponente(x));
     }
 
-    private void ataqueEspecialAAmigo(Personaje otroPersonaje) throws NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, KiInsuficienteException {
+    private void ataqueEspecialAAmigo(Personaje otroPersonaje) {
         throw new NoPuedeAtacarMismoEquipoException();
     }
 
-    private void ataqueEspecialAOponente(Personaje otroPersonaje) throws NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, KiInsuficienteException {
+    private void ataqueEspecialAOponente(Personaje otroPersonaje) {
         if (!tieneSuficienteKi(kiAtaqueEspecial)) {
             throw new KiInsuficienteException();
         }
@@ -45,17 +45,6 @@ public class Gohan extends Personaje {
         ataque.execute();
         reducirKi(kiAtaqueEspecial);
     }
-    /*public void transformar(EstadoGuerrerosZ estado) throws NoPuedeTransformarException, NoHayProximaTransformacionException, KiInsuficienteException {
-        if (estado.puedeTransformar(this)){
-            this.modelo.personaje.transformacion = modelo.personaje.transformacion.transformar(this);
-        }else{
-            throw new NoPuedeTransformarException();
-        }
-    }
-    public boolean primeraTransformacion(){
-        if (this.modelo.personaje.transformacion.getClass() == NormalGohan.class){ return true; }
-        else { return false; }
-    }*/
 
     public boolean necesitaAyudaDePiccolo() {
         return this.getVida() < (vidaMaxima*multMinVidaParaAyudaPiccolo);

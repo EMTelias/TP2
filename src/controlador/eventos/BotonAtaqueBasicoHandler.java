@@ -2,7 +2,6 @@ package controlador.eventos;
 
 import controlador.CaminoController;
 import controlador.PersonajeController;
-import controlador.SeleccionarHandler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
@@ -15,7 +14,6 @@ import modelo.excepciones.personaje.NoPuedeAtacarAEsaDistanciaException;
 import modelo.partida.Partida;
 import modelo.personaje.Personaje;
 import modelo.personaje.equipos.Equipo;
-import modelo.tablero.Posicion;
 import vista.Aplicacion;
 import vista.VistaInfo;
 import vista.VistaTablero;

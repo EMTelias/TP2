@@ -1,10 +1,6 @@
 package modelo.excepciones.personaje;
 
-public class NoPuedeMoverAEsaDistanciaException extends Exception {
+public class NoPuedeMoverAEsaDistanciaException extends RuntimeException {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 }

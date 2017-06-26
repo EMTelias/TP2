@@ -44,7 +44,7 @@ public abstract class Personaje {
 	}
 
 
-	public void transformar() throws NoHayProximaTransformacionException, KiInsuficienteException, NoPuedeTransformarException {
+	public void transformar() {
 		this.transformacion = transformacion.transformar(this);
 	}
 
@@ -94,7 +94,7 @@ public abstract class Personaje {
 	}
 
 
-	public void atacarA(Personaje otroPersonaje) throws NoPuedeAtacarAEsaDistanciaException, NoPuedeAtacarMismoEquipoException {
+	public void atacarA(Personaje otroPersonaje) {
 		// JLS 15.23 - Solo se evalua la derecha si se cumple lo de la izquierda
 		if ( (equipo != null) && equipo.esMiembro(otroPersonaje) ) {
 			throw new NoPuedeAtacarMismoEquipoException();
@@ -106,12 +106,9 @@ public abstract class Personaje {
 		return this.ataqueEspecialMap.get(unPersonaje.getClass());
 	}
 
-	public void ataqueEspecialA(Personaje otroPersonaje) throws NoPuedeAtacarMismoEquipoException, NoPuedeAtacarAEsaDistanciaException, KiInsuficienteException {
+	public void ataqueEspecialA(Personaje otroPersonaje) {
 		transformacion.ataqueEspecialA(this,otroPersonaje);
-		/*
-		AtaqueEspecialHandler handler = this.ataqueEspecialMap.get(otroPersonaje.getClass());
-		handler.ataqueEspecialA(otroPersonaje);
-		*/
+
 	}
 
 	public int getVelocidad() {
@@ -127,7 +124,7 @@ public abstract class Personaje {
 	}
 
 
-	public void mover(Camino camino) throws NoPuedeMoverCaminoObstruidoException, NoPuedeMoverAEsaDistanciaException {
+	public void mover(Camino camino) {
 		transformacion.mover(this,camino);
 	}
 
@@ -149,7 +146,7 @@ public abstract class Personaje {
 		casillero = null;
 	}
 	
-	public void colocarEnCasillero(Casillero unCasillero) throws CasilleroOcupadoException{
+	public void colocarEnCasillero(Casillero unCasillero) {
 		casillero = unCasillero;
 		casillero.colocar(this);
 	}

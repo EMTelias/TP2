@@ -1,16 +1,12 @@
 package vista;
 
 import controlador.PersonajeController;
-import controlador.SeleccionarHandler;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import modelo.excepciones.controlador.NoSePuedeSeleccionarMasDeDosPersonajesException;
-import modelo.excepciones.personaje.NoEsSuTurnoException;
-import modelo.excepciones.personaje.NoSePuedeSeleccionarDosPersonajesDelMismoEquipo;
 import modelo.personaje.Personaje;
-import modelo.tablero.Posicion;
 
 public class VistaPersonaje extends BorderPane{
 
@@ -46,9 +42,7 @@ public class VistaPersonaje extends BorderPane{
 
             } catch (NoSePuedeSeleccionarMasDeDosPersonajesException e1) {
                 e1.printStackTrace();
-            }/* catch (NoSePuedeSeleccionarDosPersonajesDelMismoEquipo e2){
-                e2.printStackTrace();
-            }*/
+            }
 
         });
         this.getChildren().add(imageView);

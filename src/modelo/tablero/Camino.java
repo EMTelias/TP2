@@ -14,13 +14,13 @@ public class Camino {
 
 	List<Casillero> casillerosDelCamino;
 	
-	public Camino(List<Casillero> casilleros) throws CaminoInvalidoException{
+	public Camino(List<Casillero> casilleros) {
 		if (casilleros.isEmpty()) throw new CaminoInvalidoException();
 		casillerosDelCamino = new ArrayList<Casillero>();
 		casillerosDelCamino.addAll(casilleros);
 	}
 
-	public void recorrerCon(Personaje unPersonaje) throws NoPuedeMoverCaminoObstruidoException {
+	public void recorrerCon(Personaje unPersonaje) {
 		Casillero casilleroOrigen = unPersonaje.getCasillero();
 		Iterator<Casillero> iterator = casillerosDelCamino.iterator();
 		while (iterator.hasNext()){
@@ -39,7 +39,7 @@ public class Camino {
 		}
 	}
 
-	public void siDistanciaEsMayor(int velocidad, Class<NoPuedeMoverAEsaDistanciaException> excepcion) throws InstantiationException, IllegalAccessException, NoPuedeMoverAEsaDistanciaException {
+	public void siDistanciaEsMayor(int velocidad, Class<NoPuedeMoverAEsaDistanciaException> excepcion) throws InstantiationException, IllegalAccessException{
 		if (casillerosDelCamino.size() > velocidad ) throw excepcion.newInstance();
 	}
 
