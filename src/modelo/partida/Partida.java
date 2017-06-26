@@ -25,7 +25,6 @@ import java.util.Random;
 public class Partida {
     protected static final int DIM_ALTO = 15;
     protected static final int DIM_ANCHO = 15;
-    private static final int AUMENTO_KI = 5;
 
     private Tablero tablero;
     private Equipo equipoGuerrerrosZ = new Equipo("GuerrerosZ");

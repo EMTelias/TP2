@@ -23,6 +23,7 @@ import modelo.Consumibles.Efecto;
 public abstract class Personaje {
 
 	protected int VIDA_MAX;
+	protected final int AUMENTO_KI = 5;
 	protected Casillero casillero;
 	protected int ki;
 	protected int vida;
@@ -178,7 +179,7 @@ public abstract class Personaje {
 	}
 
 	public void pasarTurno() {
-		this.aumentarKi(5);
+		this.aumentarKi(AUMENTO_KI);
 		transformacion.pasarTurno();
 		
 	}

@@ -20,7 +20,6 @@ public class Equipo {
 
     public void sumarEsfera(){
         cantidadDeEsferas++;
-        System.out.println(cantidadDeEsferas);
     }
 
     public boolean tieneEsferasNecesariasParaGanar(){
