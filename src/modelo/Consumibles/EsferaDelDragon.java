@@ -41,6 +41,6 @@ public class EsferaDelDragon extends Efecto {
 	@Override
 	public void aplicarConsumibleA(Personaje unPersonaje) {
 		this.aplicarEfectoA(unPersonaje);
-		unPersonaje.getEquipo().sumarEsfera();
+        unPersonaje.sumarEsferaASuEquipo();
 	}
 }
