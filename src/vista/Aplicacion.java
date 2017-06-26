@@ -17,6 +17,21 @@ public class Aplicacion extends Application {
     public void start(final Stage stage) throws Exception {
 
         this.stage = stage;
+        empezarJuego();
+        stage.show();
+
+    }
+
+    public void cerrar() {
+        stage.close();
+    }
+
+    public void reiniciar() throws Exception {
+        empezarJuego();
+        stage.show();
+    }
+
+    public void empezarJuego() throws Exception{
         stage.setTitle("Dragon AlgoBall");
 
         ContenedorPrincipal contenedorPrincipal = new ContenedorPrincipal(stage, this);
@@ -28,17 +43,9 @@ public class Aplicacion extends Application {
         ContenedorBienvenidos contenedorBienvenidos = new ContenedorBienvenidos(stage, escenaJuego);
         Scene escenaBienvenidos = new Scene(contenedorBienvenidos, 800, 600);
 
-        // add handler to this:
-        // stage.setOnCloseRequest()
 
         stage.setScene(escenaBienvenidos);
         stage.setFullScreen(true);
 
-        stage.show();
-
-    }
-
-    public void cerrar() {
-        stage.close();
     }
 }

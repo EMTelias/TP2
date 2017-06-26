@@ -1,10 +1,7 @@
 package controlador.eventos;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.stage.Stage;
 import vista.Aplicacion;
 
 import java.util.Optional;
@@ -29,7 +26,11 @@ public class VentanaJuegoTerminado {
         if (result.get() == salir){
             app.cerrar();
         } else if (result.get() == reiniciar) {
-            //app.reiniciar();
+            try {
+                app.reiniciar();
+            } catch(Exception e) {
+
+            }
         }
     }
 }
