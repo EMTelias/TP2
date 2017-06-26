@@ -25,7 +25,7 @@ public class ContenedorPrincipal extends BorderPane {
     private GridPane contenedorCentral;
     private Label consola;
     
-    public ContenedorPrincipal(Stage stage) throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
+    public ContenedorPrincipal(Stage stage, Aplicacion app) throws CasilleroOcupadoException, DimensionDeTableroInvalidoException {
 
         Partida partida = crearModelo();
         CaminoController caminoController = new CaminoController();
@@ -38,10 +38,10 @@ public class ContenedorPrincipal extends BorderPane {
         this.setMenu(stage);
         this.setCentro(partida, caminoController, personajeController, info);
         this.setConsola();
-        this.setBotonera(partida, caminoController, personajeController, info);
+        this.setBotonera(app, partida, caminoController, personajeController, info);
     }
 
-    private void setBotonera(Partida partida, CaminoController caminoController, PersonajeController personajeController, VistaInfo info) {
+    private void setBotonera(Aplicacion app, Partida partida, CaminoController caminoController, PersonajeController personajeController, VistaInfo info) {
 
         Button botonMover = new Button();
         botonMover.setText("Mover");
@@ -52,13 +52,13 @@ public class ContenedorPrincipal extends BorderPane {
         Button botonAtaqueBasico = new Button();
         botonAtaqueBasico.setText("Ataque basico");
         botonAtaqueBasico.setStyle("-fx-font: 16 arial; -fx-base: #ee2211;");
-        BotonAtaqueBasicoHandler botonAtaqueBasicoHandler = new BotonAtaqueBasicoHandler(vistaTablero, partida, caminoController, personajeController, info, consola);
+        BotonAtaqueBasicoHandler botonAtaqueBasicoHandler = new BotonAtaqueBasicoHandler(app, vistaTablero, partida, caminoController, personajeController, info, consola);
         botonAtaqueBasico.setOnAction(botonAtaqueBasicoHandler);
 
         Button botonAtaqueEspecial = new Button();
         botonAtaqueEspecial.setText("Ataque especial");
         botonAtaqueEspecial.setStyle("-fx-font: 16 arial; -fx-base: #ee2211;");
-        BotonAtaqueEspecialHandler botonAtaqueEspecialHandler = new BotonAtaqueEspecialHandler(vistaTablero, partida, caminoController, personajeController, info, consola);
+        BotonAtaqueEspecialHandler botonAtaqueEspecialHandler = new BotonAtaqueEspecialHandler(app, vistaTablero, partida, caminoController, personajeController, info, consola);
         botonAtaqueEspecial.setOnAction(botonAtaqueEspecialHandler);
 
         Button botonTransformar = new Button();

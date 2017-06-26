@@ -6,6 +6,7 @@ import controlador.SeleccionarHandler;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
+import modelo.excepciones.JuegoTerminadoException;
 import modelo.excepciones.acciones.NoPuedeAtacarMismoEquipoException;
 import modelo.excepciones.acciones.YaAtacasteEsteTurnoException;
 import modelo.excepciones.personaje.NoPuedeAtacarAEsaDistanciaException;
@@ -13,6 +14,7 @@ import modelo.partida.Partida;
 import modelo.personaje.Personaje;
 import modelo.personaje.equipos.Equipo;
 import modelo.tablero.Posicion;
+import vista.Aplicacion;
 import vista.VistaInfo;
 import vista.VistaTablero;
 
@@ -23,9 +25,11 @@ public class BotonAtaqueBasicoHandler implements EventHandler<ActionEvent> {
     private final PersonajeController personajeController;
     private final CaminoController caminoController;
     private final VistaInfo info;
+    private final Aplicacion app;
     private Label consola;
 
-    public BotonAtaqueBasicoHandler(VistaTablero vistaTablero, Partida partida, CaminoController caminoController, PersonajeController personajeController, VistaInfo info, Label unaConsola) {
+    public BotonAtaqueBasicoHandler(Aplicacion app, VistaTablero vistaTablero, Partida partida, CaminoController caminoController, PersonajeController personajeController, VistaInfo info, Label unaConsola) {
+        this.app = app;
         this.partida = partida;
         this.vistaTablero = vistaTablero;
         this.caminoController = caminoController;
@@ -62,6 +66,9 @@ public class BotonAtaqueBasicoHandler implements EventHandler<ActionEvent> {
             consola.setText(atacante.getClass().getSimpleName() + " no puede atacar a esa distancia.");
         } catch (YaAtacasteEsteTurnoException e) {
             consola.setText("El equipo de " + atacante.getClass().getSimpleName() + " ya ataco este turno!");
+        } catch (JuegoTerminadoException e) {
+            consola.setText("Ha ganado el equipo de los " + equipoJugando.getNombre() + ". FELICITACIONES!");
+            new VentanaJuegoTerminado(app);
         }
 
         personajeController.limpiar();
