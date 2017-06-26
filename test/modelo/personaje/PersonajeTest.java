@@ -225,6 +225,16 @@ public class PersonajeTest {
 		Assert.assertTrue(goku.transformacion.getClass() == SuperSayajinGoku.class);
 	}
 
+	@Test (expected = NoHayProximaTransformacionException.class)
+	public void testTransformoAFreezerNormal3VecesDeberiaLanzarNoHayProximaTransformacionException() throws CasilleroOcupadoException, NoPuedeTransformarException, KiInsuficienteException, NoHayProximaTransformacionException {
+		Personaje freezer = new Freezer(new Casillero(new Posicion(1,1)));
+		freezer.aumentarKi(70);
+		freezer.transformar();
+		freezer.transformar();
+		freezer.transformar();
+
+	}
+
 	// Tests de ataques basicos entre personajes
 	@Test
 	public void testGokuNormalAtacaConElAtaqueBasicoAFreezerNormalYLeDejaLaVidaEn380() throws NoPuedeAtacarAEsaDistanciaException, CasilleroOcupadoException, NoPuedeAtacarMismoEquipoException {
