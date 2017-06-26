@@ -57,8 +57,8 @@ public class BotonAtaqueBasicoHandler implements EventHandler<ActionEvent> {
         try {
             int vidaPreviaDefensor = atacado.getVida();
             partida.ataqueBasico(atacante, atacado);
-            int dañoTotal = vidaPreviaDefensor-atacado.getVida();
-            consola.setText(atacante.getClass().getSimpleName()+" ataca a "+atacado.getClass().getSimpleName()+" dejandolo en "+atacado.getVida()+" (-"+dañoTotal+")");
+            int danioTotal = vidaPreviaDefensor-atacado.getVida();
+            consola.setText(atacante.getClass().getSimpleName()+" ataca a "+atacado.getClass().getSimpleName()+" dejandolo en "+atacado.getVida()+" (-"+danioTotal+")");
 
         } catch (NoPuedeAtacarMismoEquipoException e) {
             consola.setText(atacante.getClass().getSimpleName() + " no puede atacar a su amigo " + atacado.getClass().getSimpleName() + "!");
