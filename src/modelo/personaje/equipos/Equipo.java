@@ -9,13 +9,24 @@ public class Equipo {
     private final String nombre;
     private ArrayList<Personaje> personajes;
     protected boolean suTurno;
+    private int cantidadDeEsferas;
 
 
     public Equipo(String nombre) {
         this.nombre = nombre;
         this.personajes = new ArrayList<Personaje>();
+        cantidadDeEsferas = 0;
     }
-    
+
+    public void sumarEsfera(){
+        cantidadDeEsferas++;
+        System.out.println(cantidadDeEsferas);
+    }
+
+    public boolean tieneEsferasNecesariasParaGanar(){
+        return (cantidadDeEsferas>=7);
+    }
+
     public void agregarPersonaje(Personaje unPersonaje) {
         this.personajes.add(unPersonaje);
     }
