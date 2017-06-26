@@ -46,7 +46,7 @@ public class ContenedorPrincipal extends BorderPane {
         Button botonMover = new Button();
         botonMover.setText("Mover");
         botonMover.setStyle("-fx-font: 16 arial; -fx-base: #ee2211;");
-        BotonMoverHandler botonMoverHandler = new BotonMoverHandler(vistaTablero, partida, caminoController, personajeController, info, consola);
+        BotonMoverHandler botonMoverHandler = new BotonMoverHandler(app, vistaTablero, partida, caminoController, personajeController, info, consola);
         botonMover.setOnAction(botonMoverHandler);
 
         Button botonAtaqueBasico = new Button();
